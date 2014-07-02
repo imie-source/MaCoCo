@@ -37,7 +37,7 @@ public class CoursCursus implements Serializable {
 	@Column(name="coc_type", length=25)
 	private String cocType;
 	
-	@Column(name="coc_commentaires", length=500)
+	@Column(name="coc_commentaires")
 	private String cocCommentaires;
 
 	//bi-directional many-to-one association to ModuleCursus
@@ -154,6 +154,14 @@ public class CoursCursus implements Serializable {
 		RCourscursusSavoir.setCoursCursus(null);
 
 		return RCourscursusSavoir;
+	}
+
+	public String getCocCommentaires() {
+		return cocCommentaires;
+	}
+
+	public void setCocCommentaires(String cocCommentaires) {
+		this.cocCommentaires = cocCommentaires;
 	}
 
 }

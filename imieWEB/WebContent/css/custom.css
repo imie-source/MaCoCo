@@ -1,0 +1,29 @@
+.cours-target {
+    border: 1px solid #FF0000;
+    cursor: default;
+    font-size: small;
+    margin: 5px;
+    padding: 5px;
+}
+
+.savoir-source:hover {
+    background-color: #EFEFEF;
+    cursor: pointer;
+}
+
+.savoir-over {
+    background-color: #EFEFEF;
+    cursor: pointer;
+}
+
+/*
+.savoir-label{
+	width: 50%;
+	float: left;
+}
+*/
+
+.savoir-name
+{
+	width: 100%;
+}

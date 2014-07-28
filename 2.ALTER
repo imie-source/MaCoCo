@@ -1,0 +1,76 @@
+ALTER TABLE r_courscursus_savoir DROP CONSTRAINT fk_r_courscursus_savoir_coc_id;
+
+ALTER TABLE r_courscursus_savoir
+  ADD CONSTRAINT fk_r_courscursus_savoir_coc_id FOREIGN KEY (coc_id)
+      REFERENCES cours_cursus (coc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+ALTER TABLE cours_cursus DROP CONSTRAINT fk_cours_cursus_moc_id;
+
+ALTER TABLE cours_cursus
+  ADD CONSTRAINT fk_cours_cursus_moc_id FOREIGN KEY (moc_id)
+      REFERENCES module_cursus (moc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE module_cursus DROP CONSTRAINT fk_module_cursus_ufc_id;
+
+ALTER TABLE module_cursus
+  ADD CONSTRAINT fk_module_cursus_ufc_id FOREIGN KEY (ufc_id)
+      REFERENCES unite_formation_cursus (ufc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+ ALTER TABLE unite_formation_cursus DROP CONSTRAINT fk_unite_formation_cursus_cur_id;
+
+ALTER TABLE unite_formation_cursus
+  ADD CONSTRAINT fk_unite_formation_cursus_cur_id FOREIGN KEY (cur_id)
+      REFERENCES cursus (cur_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE r_courscursus_savoir
+  ADD CONSTRAINT fk_r_courscursus_savoir_coc_id FOREIGN KEY (coc_id)
+      REFERENCES cours_cursus (coc_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE r_courscursus_savoir DROP CONSTRAINT fk_r_courscursus_savoir_sav_id;
+
+ALTER TABLE r_courscursus_savoir
+  ADD CONSTRAINT fk_r_courscursus_savoir_sav_id FOREIGN KEY (sav_id)
+      REFERENCES savoir (sav_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE savoir DROP CONSTRAINT fk_savoir_com_id;
+
+ALTER TABLE savoir
+  ADD CONSTRAINT fk_savoir_com_id FOREIGN KEY (com_id)
+      REFERENCES competence_pro (com_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE competence_pro DROP CONSTRAINT fk_competence_pro_act_id;
+
+ALTER TABLE competence_pro
+  ADD CONSTRAINT fk_competence_pro_act_id FOREIGN KEY (act_id)
+      REFERENCES activite_type (act_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+ALTER TABLE activite_type DROP CONSTRAINT fk_activite_type_ref_id;
+
+ALTER TABLE activite_type
+  ADD CONSTRAINT fk_activite_type_ref_id FOREIGN KEY (ref_id)
+      REFERENCES referentiel (ref_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+
+
+
+
+
+ALTER TABLE cours_cursus DROP COLUMN coc_duree;
+
+ALTER TABLE cours_cursus
+   ADD COLUMN coc_duree integer;
+

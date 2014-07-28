@@ -8,18 +8,6 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
 		         {name: 'cursus'}, 	
 		         {name: 'children', mapping: 'moduleCursuses'}
 		     ],
-		     
-    belongsTo: [
-                {
-                	name: 'cursus',
-                	instanceName: 'cursus',
-                	model: 'ExtJsMVC.model.cursus.CursusModel',
-                	getterName:'getCursus',
-                	setterName:'setCursus',
-                	associationKey: 'cursus',
-                	foreignKey: 'cursus'
-                }
-               ],
 
 		     
 	childType : 'ExtJsMVC.model.cursus.ModuleCursusModel',
@@ -42,6 +30,7 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
                     data.parentId = undefined;
                     data.children = undefined;
                     data.text = undefined;
+                    data.moduleCursuses = undefined;
                     return data;
                 },
                 scope: this

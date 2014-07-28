@@ -18,15 +18,18 @@
         		
         		views : 
            		[
-           			'savoir.RefArbre',
+           			'referentiel.ArbreReferentiel',
            			'cursus.CursusArbre',
            			'cursus.CursusArbre2',
-           			'cursus.DetailCursus'
            		],
 
         		controllers : 
         		[
-        			'SavoirController',
+        			'ReferentielController',
+        			'referentiel.DetailReferentiel',
+        			'referentiel.DetailActiviteType',
+        			'referentiel.DetailCompetencePro',
+        			'referentiel.DetailSavoir',
         			'CursusController',
         			'cursus.DetailCursus',
         			'cursus.DetailUniteFormation',
@@ -72,7 +75,7 @@
 									},
 
 				                    { 
-				                        xtype : 'savoir-Tree' ,
+				                        xtype : 'arbre-Referentiel' ,
 				                        flex  : 1,
 				                    },
 									
@@ -87,18 +90,18 @@
 		                         flex  : 2,
 		                       	 items :
 		                       	 [
-		                       	  	{
-		                       	    	xtype : 'cursus-DetailCursus' 
-		                       	  	}
+// 		                       	  	{
+// 		                       	    	xtype : 'cursus-DetailCursus' 
+// 		                       	  	}
 		                       	 ]
 		                     },
 
 
 		                     
 		                     { 
-		                         xtype : 'savoir-Tree' ,
-		                         margin : '0 0 0 10',
-		                         flex  : 1
+// 		                         xtype : 'savoir-Tree' ,
+// 		                         margin : '0 0 0 10',
+// 		                         flex  : 1
 		                     }
 
 		            	]	

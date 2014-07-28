@@ -41,8 +41,6 @@ public class UniteFormationCursusServlet
 		
 		ArrayList<UniteFormationCursus> response = new ArrayList<UniteFormationCursus>();
 		response.add(uf);
-		
-
 	    return Response.ok(response).build();
 	}
 
@@ -51,8 +49,9 @@ public class UniteFormationCursusServlet
 	public Response add(UniteFormationCursus uf) 
 	{
 		uniteFormationCursusService.create(uf);
-		
-	    return Response.ok().build();
+		ArrayList<UniteFormationCursus> response = new ArrayList<UniteFormationCursus>();
+		response.add(uf);
+	    return Response.ok(response).build();
 	}
 	
 	@PUT

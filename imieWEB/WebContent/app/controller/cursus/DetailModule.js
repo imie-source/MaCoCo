@@ -43,7 +43,6 @@ Ext.define('ExtJsMVC.controller.cursus.DetailModule',
 		detailView.getRecord().data.mocIntitule = detailView.getComponent('detailModuleNom').getValue();
 		
 		detailView.updateRecord();
-		
 		detailView.getRecord().save();
 	},
 	
@@ -64,10 +63,10 @@ Ext.define('ExtJsMVC.controller.cursus.DetailModule',
 		
 		var moduleData = recordModule.getData({persist: true});
 		
-		//Nettoyage des data du cursus (présence des champs propres à l'arbre)
+		//Nettoyage des data du module (présence des champs propres à l'arbre)
         cleanTreeFields(moduleData);
 
-		//Ajout du cursus pour maintenir la relation
+		//Ajout du module pour maintenir la relation
 		newDetailView.getRecord().set('moduleCursus', moduleData);
 	}
 	

@@ -10,18 +10,21 @@ Ext.define('ExtJsMVC.view.cursus.DetailUniteFormation', {
     [
         {
         	itemId: 'detailUniteFormationNom',
-            xtype : 'textfield',
+            xtype : 'textareafield',
             name : 'text',
-            fieldLabel : 'Nom'
+           fieldLabel : 'Nom',
+           width : 500,
         },
         {
-            xtype : 'textfield',
+            xtype : 'textareafield',
             name : 'ufcObjectifs',
-            fieldLabel : 'Objectifs'
+            fieldLabel : 'Objectifs',
+            width : 500,
+            height : 100
         },
         {
             xtype : 'button',
-            text : 'Valider',
+            text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {

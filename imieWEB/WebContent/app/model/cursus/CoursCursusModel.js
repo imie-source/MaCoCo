@@ -10,8 +10,11 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
 	          {name: 'cocEvaluation'},
 	          {name: 'cocCommentaires'},
 	          {name: 'moduleCursus'},
+	          {name: 'savoirs'},
 	          {name : 'leaf',  type : 'boolean', defaultValue : true}
 	         ],
+	         
+	hasMany: {model: 'ExtJsMVC.model.referentiel.Savoir', name: 'savoirs'},
 
 	proxy: 
 	{
@@ -30,6 +33,7 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
                     data.parentId = undefined;
                     data.children = undefined;
                     data.text = undefined;
+                    data.savoirs = undefined;
                     return data;
                 },
                 scope: this

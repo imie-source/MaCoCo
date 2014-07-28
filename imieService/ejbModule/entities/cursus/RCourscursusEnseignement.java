@@ -1,6 +1,7 @@
 package entities.cursus;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 

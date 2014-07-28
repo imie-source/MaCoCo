@@ -72,9 +72,6 @@ public class ModuleCursusServlet
 	public Response remove(ModuleCursus module)
 	{
 		moduleCursusService.delete(module);
-		
-		System.out.println(module.getMocId());
-		
 		return Response.ok().build();
 	}	
 }

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
+import entities.referentiel.Savoir;
 
 /**
  * Session Bean implementation class CoursCursusService
@@ -32,13 +33,18 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 	public CoursCursus findById(Integer id) 
 	{
 		CoursCursus result = em.find(CoursCursus.class, id);
+		
+		for (@SuppressWarnings("unused") Savoir savoir : result.getSavoirs()) 
+		{
+			//Initialisation
+		}
+		
 		return result;
 	}
 
 	@Override
 	public CoursCursus update(CoursCursus coursCursus) 
 	{
-		coursCursus = em.merge(coursCursus);
 		return em.merge(coursCursus);
 	}
 

@@ -4,6 +4,10 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	
 	models : 
 	[
+	 	'referentiel.Referentiel',
+	 	'referentiel.ActiviteType',
+	 	'referentiel.CompetencePro',
+	 	'referentiel.Savoir',
 		'cursus.CursusModel',
 		'cursus.UniteFormationCursusModel',
 		'cursus.ModuleCursusModel',
@@ -26,6 +30,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	[
 		'CursusStore',
 		'UniteFormationStore',
+		'Referentiel'
 	],
 	
 	
@@ -50,10 +55,13 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	
 	
 	
+	
+	
+	
 
 	chargeSecondArbre : function(grid, record)
 	{
-		
+		console.log(record);
 		
 		var cursusModel = this.getCursusCursusModelModel();
 		
@@ -62,22 +70,41 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		var storeUniteFormations = arbre2.getStore();
 		
 		
+		var storeReferentiel = this.getReferentielStore();
+		var referentielModel = this.getReferentielReferentielModel();
 		
 		
 		
-		var cursusTree = cursusModel.load(record.get('curId'),
+		//GET du referentiel concerné
+		var arboReferentiel = referentielModel.load(record.get('refId'),
 		{
+		 // Arborescence complete du referentiel récupérée	
 		  success: function(record, operation) 
 		  {
-		      storeUniteFormations.removeAll();
-		      storeUniteFormations.loadData(record.data.children);
+			  storeReferentiel.removeAll();
+			  storeReferentiel.setRoot(record);
+//			  storeReferentiel.getRoot().expand();
 		  }
 		});
 		
 		
 		
-		//Ajout formulaire cursus
-		//TODO separer le chargement formulaire
+		//GET du cursus concerné
+		var cursusTree = cursusModel.load(record.get('curId'),
+		{
+		 // Arborescence complete du cursus récupérée	
+		  success: function(record, operation) 
+		  {
+		      storeUniteFormations.removeAll();
+//		      storeUniteFormations.loadData(record.data.children);
+		      storeUniteFormations.setRoot(record);
+//		      storeUniteFormations.getRoot().expand();
+		  }
+		});
+		
+		
+		
+
 		var modelName = record.entityName;
 		var switchview = this.getSwitchView();
 		
@@ -132,7 +159,6 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			    				    	uniteFormationRowId = uniteFormationRowId.slice(sliceIndex+1,uniteFormationRowId.length);
 			    				    	
 			    				    	//suppression de l'element
-
 			    				    	uniteFormationModel.load(uniteFormationRowId,
 			    				    	{
 			    						  scope: this,
@@ -150,12 +176,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				});
 				
 				
-				console.log('cursusTree');
-				console.log(cursusTree.data.children);
-				
-				
 				//Ajout des elements "enfants" au panel
-//				panelTemplate.setData(record.get('uniteFormationCursuses'));
+				panelTemplate.setData(cursusTree.get('uniteFormationCursuses'));
 				//Ajout du panel
 				switchview.add(panelTemplate);
 		       
@@ -174,15 +196,20 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	//Chargement des formulaires associés aux éléments
 	chargeFormulaire : function(grid, record)
 	{
+		console.log('record');
+		console.log(record);
 		
     	var moduleCursusModel = this.getCursusModuleCursusModelModel();
 		var coursCursusModel = this.getCursusCoursCursusModelModel();
+		var cursusModel = this.getCursusCursusModelModel();
 		
 		var modelName = record.entityName;
 		var switchview = this.getSwitchView();
 		var arbre2 = this.getArbre2();
 		var storeUniteFormations = arbre2.getStore();
-	    
+		
+		
+		
 		
 		//Clic sur une unité de formation
 		switch(modelName) 
@@ -193,7 +220,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		       console.log('Affichage Unite formation');
 		       
 		       //Nettoyage de la vue centrale
-		       if(switchview)
+		       if(switchview.getChildEls())
 	    	   {
 		    	   switchview.removeAll();
 	    	   }
@@ -204,15 +231,20 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		       var detailView = Ext.ComponentQuery.query('form')[0];
 		
 		        //Chargement de l'unité de formation dans le formulaire
-				var uniteFormationModel = this.getCursusUniteFormationCursusModelModel();
-				uniteFormationModel.load(record.get('ufcId'),
+		       var recordIncomplet = record;
+		       
+		       var uniteFormationModel = this.getCursusUniteFormationCursusModelModel();
+		       uniteFormationModel.load(record.get('ufcId'),
 				{
 				  scope: this,
 				  callback: function(record, operation) 
 				  {
-					  detailView.loadRecord(record);
+					  recordIncomplet.data.cursus = record.data.cursus;
 				  }
 				});
+
+				detailView.loadRecord(recordIncomplet);
+		       
 
 				//Preparation du panel pour les elements "enfants"
 				var panelTemplateTest = Ext.create('Ext.panel.Panel', {
@@ -255,9 +287,23 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			    						  scope: this,
 			    						  callback: function(record, operation) 
 			    						  {
-			    							  record.set('children', null);
-			    							  console.log(record);
+//			    							  record.set('children', null);
+//			    							  console.log(record);
 			    							  record.erase();
+			    							  
+			    							//Retrait du panel
+			    							switchview.remove(panelTemplateTest);
+			    							
+			    							var cursusTree = cursusModel.load(storeUniteFormations.getRoot().get('curId'),
+	    									{
+	    									 // Arborescence complete du cursus récupérée	
+	    									  success: function(record, operation) 
+	    									  {
+	    									      storeUniteFormations.removeAll();
+	    									      storeUniteFormations.setRoot(record);
+	    									      arbre2.expandPath(recordPath);
+	    									  }
+	    									});
 			    						  }
 			    				    	});
 			    				    }
@@ -285,7 +331,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		    
 		       console.log('Affichage Module');
 		       
-		       if(switchview)
+		       if(switchview.getChildEls())
 	    	   {
 		    	   switchview.removeAll();
 	    	   }
@@ -293,19 +339,24 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		       
 		       var detailView = Ext.ComponentQuery.query('form')[0];
 		       
+		       //Chargement du module dans le formulaire
+		       var recordIncomplet = record;
+		       var recordPath = record.getPath();
 		       
-		        //Chargement du module dans le formulaire
 				var moduleCursusModel = this.getCursusModuleCursusModelModel();
 				moduleCursusModel.load(record.get('mocId'),
 				{
 				  scope: this,
 				  callback: function(record, operation) 
 				  {
-					  detailView.loadRecord(record);
+					  recordIncomplet.data.uniteFormationCursus = record.data.uniteFormationCursus;
 				  }
 				});
 
-				
+				console.log(recordIncomplet);
+				detailView.loadRecord(recordIncomplet);
+		       
+
 				//Preparation du panel pour les elements "enfants"
 				var panelTemplate = Ext.create('Ext.panel.Panel', {
 				    title: 'Cours du module',
@@ -340,15 +391,28 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			    				    	coursRowId = coursRowId.slice(sliceIndex+1,coursRowId.length);
 			    				    	
 			    				    	//suppression de l'element
-
 			    				    	coursCursusModel.load(coursRowId,
 			    				    	{
 			    						  scope: this,
 			    						  callback: function(record, operation) 
 			    						  {
-			    							  console.log(record);
-			    							  record.erase();
-//					    				      arbre2.getView().getSelectedNodes()[0].collapse();
+			    							record.erase();
+
+			    							//Retrait du panel
+			    							switchview.remove(panelTemplate);
+			    							
+			    							var cursusTree = cursusModel.load(storeUniteFormations.getRoot().get('curId'),
+	    									{
+	    									 // Arborescence complete du cursus récupérée	
+	    									  success: function(record, operation) 
+	    									  {
+	    									      storeUniteFormations.removeAll();
+	    									      storeUniteFormations.setRoot(record);
+	    									      arbre2.expandPath(recordPath);
+	    									  }
+	    									});
+			    							
+			    							
 			    						  }
 			    				    	});
 			    				    }
@@ -364,16 +428,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				//Ajout du panel
 				switchview.add(panelTemplate);
 		       
-		       
 		       break;
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
 		        
 		        
 		        
@@ -381,14 +436,161 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		    
 		       console.log('Affichage Cours');
 		       
-		       if(switchview)
+		       
+		    	var savoirModel = this.getReferentielSavoirModel();
+		    	
+		    	
+		       if(switchview.getChildEls())
 	    	   {
 		    	   switchview.removeAll();
 	    	   }
 		       switchview.add({xtype : 'cursus-DetailCours'});
 		       
+		       
 		       var detailView = Ext.ComponentQuery.query('form')[0];
-		       detailView.loadRecord(record);
+		       
+		       //Chargement du cours et de son module associé dans le formulaire
+		       var recordIncomplet = record;
+		       
+				var coursCursusModel = this.getCursusCoursCursusModelModel();
+				coursCursusModel.load(record.get('cocId'),
+				{
+				  scope: this,
+				  callback: function(record, operation) 
+				  {
+					  recordIncomplet.data.moduleCursus = record.data.moduleCursus;
+				  }
+				});
+
+				detailView.loadRecord(recordIncomplet);
+		       
+
+				//Preparation du panel pour les elements "enfants"
+				var panelTemplate = Ext.create('Ext.panel.Panel', {
+				    title: 'Glisser des savoirs dans cette zone',
+				    bodyPadding: 10,
+				    itemId : 'TemplateSavoirs',
+				    
+				    tpl : new Ext.XTemplate
+				    (
+			    		'<tpl for=".">',
+								'<div class="savoir-row" id="savoir-{savId}">',
+									'Savoir : {savLibelle}',
+								'</div>',
+						'</tpl>'
+					),
+					
+					
+				    listeners: {
+				    	
+				        'afterrender': function () 
+				        {
+				        	
+				            this.dropZone = Ext.create('Ext.dd.DropTarget', this.getEl(), {
+				            	ddGroup: 'groupCoursSavoir',
+				                panel: this,
+				                
+				                notifyDrop : function(source, e, data) 
+				                {
+				                    var nouveauSavoir =  data.records[0];
+				                    
+				                    var savId = nouveauSavoir.get('savId');
+				                    
+		    				    	savoirModel.load(savId,
+		    				    	{
+		    						  scope: this,
+		    						  callback: function(record, operation) 
+		    						  {
+						                 var arrayCoursCursuses = record.get('coursCursuses');
+						                 if(arrayCoursCursuses == null) { arrayCoursCursuses = new Array() }
+						                  
+						                 var coursCursus = detailView.getRecord().getData({persist: true});
+						                 arrayCoursCursuses.push(coursCursus);
+						                  
+						                 console.log(arrayCoursCursuses);
+						                  
+						                 arrayCoursCursuses.forEach(function(cours) 
+										 {
+						                	  cleanTreeFields(cours);
+						                	  cours.savoirs = null;
+										 });
+						                  
+		    							record.save();
+		    						  }
+		    				    	});
+				                    
+				                    return true;
+				                }          
+				            });  
+				            
+				            
+				            
+				            
+				            var renderSelector = Ext.query('div.savoir-row'); 
+			                for(var i in renderSelector)
+			                {
+			                	var renderRow = renderSelector[i];
+			                	
+			                	new Ext.Button(
+			                	{
+			    					text:' X ',
+			    					renderTo: renderRow,
+			    				    handler: function(bouton) 
+			    				    {
+			    				    	var savoirRowId = bouton.renderTo.id;
+			    				    	var sliceIndex = savoirRowId.indexOf('-');
+			    				    	savoirRowId = savoirRowId.slice(sliceIndex+1,savoirRowId.length);
+			    				    	
+			    				    	
+			    				    	//suppression de l'element
+			    				    	
+			    				    	savoirModel.load(savoirRowId,
+			    				    	{
+			    						  scope: this,
+			    						  callback: function(record, operation) 
+			    						  {
+			    							  var arrayCoursCursuses = record.get('coursCursuses');
+			    							  
+								              var coursCursus = detailView.getRecord().getData();
+								              var coursCursusId = coursCursus.cocId;
+								              
+							                 arrayCoursCursuses.forEach(function(cours) 
+											 {
+							                	 if(coursCursusId == cours.cocId)
+							                	 {
+							                		 Ext.Array.remove(arrayCoursCursuses, cours);
+							                     }
+											 });
+								              
+			    							 record.save();
+			    							 
+			    							//Retrait du panel
+			    							switchview.remove(panelTemplate);
+				    							
+			    							var cursusTree = cursusModel.load(storeUniteFormations.getRoot().get('curId'),
+	    									{
+	    									 // Arborescence complete du cursus récupérée	
+	    									  success: function(record, operation) 
+	    									  {
+	    									      storeUniteFormations.removeAll();
+	    									      storeUniteFormations.setRoot(record);
+	    									      arbre2.expandPath(recordPath);
+	    									  }
+		    									});
+			    						  }
+			    				    	});
+			    				    }
+			    				});
+			                }    
+				            
+				            
+				        }
+				    } 
+				});
+				
+				//Ajout des elements "enfants" au panel
+				panelTemplate.setData(record.get('savoirs'));
+		       switchview.add(panelTemplate);
 		       
 		       
 		       break;	

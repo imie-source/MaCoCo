@@ -10,18 +10,21 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
     [
         {
         	itemId : 'detailModuleNom',
-            xtype : 'textfield',
+            xtype : 'textareafield',
             name : 'text',
-            fieldLabel : 'Intitule'
+            fieldLabel : 'Intitule',
+            width : 500,
         },
         {
-            xtype : 'textfield',
+            xtype : 'textareafield',
             name : 'mocObjectifs',
-            fieldLabel : 'Objectifs'
+            fieldLabel : 'Objectifs',
+            width : 500,
+            height : 100
         },
         {
             xtype : 'button',
-            text : 'Valider',
+            text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {

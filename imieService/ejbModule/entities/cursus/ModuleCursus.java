@@ -29,7 +29,7 @@ public class ModuleCursus implements Serializable {
 	private String mocObjectifs;
 
 	//bi-directional many-to-one association to CoursCursus
-	@OneToMany(mappedBy="moduleCursus", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="moduleCursus")
 	private List<CoursCursus> coursCursuses;
 
 	//bi-directional many-to-one association to UniteFormationCursus

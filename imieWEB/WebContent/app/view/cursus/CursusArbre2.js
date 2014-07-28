@@ -4,7 +4,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusArbre2',
 	xtype  : 'cursus-Arbre2',
 	title : 'Detail',
 	store: 'UniteFormationStore',
-	rootVisible: true
+	rootVisible: true,
 });
 
 

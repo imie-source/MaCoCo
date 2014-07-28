@@ -27,7 +27,7 @@ public class UniteFormationCursus implements Serializable {
 	private String ufcObjectifs;
 
 	//bi-directional many-to-one association to ModuleCursus
-	@OneToMany(mappedBy="uniteFormationCursus", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="uniteFormationCursus")
 	private List<ModuleCursus> moduleCursuses;
 
 	//bi-directional many-to-one association to Cursus

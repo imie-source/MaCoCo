@@ -10,7 +10,6 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
 	        ],
 	        
     childType : 'ExtJsMVC.model.cursus.CoursCursusModel',
-	        
 	hasMany: {model: 'ExtJsMVC.model.cursus.CoursCursusModel', name: 'coursCursuses'},
 	        
 	proxy: 
@@ -30,6 +29,7 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
                     data.parentId = undefined;
                     data.children = undefined;
                     data.text = undefined;
+                    data.coursCursuses = undefined;
                     return data;
                 },
                 scope: this

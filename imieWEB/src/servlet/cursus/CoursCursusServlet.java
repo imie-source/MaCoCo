@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import cursus.CoursCursusServiceLocal;
 import entities.cursus.CoursCursus;
+import entities.referentiel.Savoir;
 
 
 @Stateless
@@ -34,11 +35,14 @@ public class CoursCursusServlet
 	{
 		CoursCursus cours = coursCursusService.findById(id);
 		
-		cours.setRCourscursusEnseignements(null);
-		cours.setRCourscursusSavoirs(null);
-		
 		cours.getModuleCursus().setCoursCursuses(null);
 		cours.getModuleCursus().setUniteFormationCursus(null);
+
+		for (Savoir savoir : cours.getSavoirs()) 
+		{
+			savoir.setCoursCursuses(null);
+			savoir.setCompetencePro(null);
+		}
 		
 		ArrayList<CoursCursus> response = new ArrayList<CoursCursus>();
 		response.add(cours);

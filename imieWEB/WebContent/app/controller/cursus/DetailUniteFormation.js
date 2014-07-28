@@ -11,7 +11,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 	refs :
 		[
 		 	{ref : 'switchView', selector: 'viewport #switchView'},
-		 	{ref : 'arbre', selector: 'cursus-Arbre'},
+		 	{ref : 'arbre', selector: 'cursus-Arbre'}
 		],
 
 
@@ -42,15 +42,13 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 	{
 		var detailViewUF = bouton.up('cursus-DetailUniteFormation');
 		
-		
 		detailViewUF.getRecord().data.ufcNom = detailViewUF.getComponent('detailUniteFormationNom').getValue();
 		
+		console.log(detailViewUF.getRecord().data.ufcNom);
+		console.log(detailViewUF.getComponent('detailUniteFormationNom').getValue());
+		
 		detailViewUF.updateRecord();
-		
 		detailViewUF.getRecord().save();
-
-//		this.getUniteFormationStoreStore().reload();
-		
 	},	
 	
 	onAddButtonClick : function(bouton)

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import entities.referentiel.Savoir;
+
 import java.util.List;
 
 
@@ -22,13 +24,24 @@ public class CoursCursus implements Serializable {
 	@Column(name="coc_id", unique=true, nullable=false)
 	private Integer cocId;
 
-	@Column(name="coc_duree", length=25)
-	private String cocDuree;
+	@Column(name="coc_commentaires", length=2147483647)
+	private String cocCommentaires;
+
+	//bi-directional many-to-one association to ModuleCursus
+	@ManyToOne
+	@JoinColumn(name="moc_id")
+	private ModuleCursus moduleCursus;
+	
+	@Column(name="coc_cursus", length=2147483647)
+	private String cocCursus;
+
+	@Column(name="coc_duree")
+	private Integer cocDuree;
 
 	@Column(name="coc_evaluation", length=500)
 	private String cocEvaluation;
 
-	@Column(name="coc_intitule", length=25)
+	@Column(name="coc_intitule", length=2147483647)
 	private String cocIntitule;
 
 	@Column(name="coc_objectifs", length=500)
@@ -36,22 +49,10 @@ public class CoursCursus implements Serializable {
 
 	@Column(name="coc_type", length=25)
 	private String cocType;
-	
-	@Column(name="coc_commentaires")
-	private String cocCommentaires;
 
-	//bi-directional many-to-one association to ModuleCursus
-	@ManyToOne
-	@JoinColumn(name="moc_id")
-	private ModuleCursus moduleCursus;
-
-	//bi-directional many-to-one association to RCourscursusEnseignement
-	@OneToMany(mappedBy="coursCursus", cascade=CascadeType.REMOVE)
-	private List<RCourscursusEnseignement> RCourscursusEnseignements;
-
-	//bi-directional many-to-one association to RCourscursusSavoir
-	@OneToMany(mappedBy="coursCursus", cascade=CascadeType.REMOVE)
-	private List<RCourscursusSavoir> RCourscursusSavoirs;
+	//bi-directional many-to-many association to Savoir
+	@ManyToMany(mappedBy="coursCursuses")
+	private List<Savoir> savoirs;
 
 	public CoursCursus() {
 	}
@@ -64,11 +65,27 @@ public class CoursCursus implements Serializable {
 		this.cocId = cocId;
 	}
 
-	public String getCocDuree() {
+	public String getCocCommentaires() {
+		return this.cocCommentaires;
+	}
+
+	public void setCocCommentaires(String cocCommentaires) {
+		this.cocCommentaires = cocCommentaires;
+	}
+
+	public String getCocCursus() {
+		return this.cocCursus;
+	}
+
+	public void setCocCursus(String cocCursus) {
+		this.cocCursus = cocCursus;
+	}
+
+	public Integer getCocDuree() {
 		return this.cocDuree;
 	}
 
-	public void setCocDuree(String cocDuree) {
+	public void setCocDuree(Integer cocDuree) {
 		this.cocDuree = cocDuree;
 	}
 
@@ -103,7 +120,7 @@ public class CoursCursus implements Serializable {
 	public void setCocType(String cocType) {
 		this.cocType = cocType;
 	}
-
+	
 	public ModuleCursus getModuleCursus() {
 		return this.moduleCursus;
 	}
@@ -112,56 +129,12 @@ public class CoursCursus implements Serializable {
 		this.moduleCursus = moduleCursus;
 	}
 
-	public List<RCourscursusEnseignement> getRCourscursusEnseignements() {
-		return this.RCourscursusEnseignements;
+	public List<Savoir> getSavoirs() {
+		return this.savoirs;
 	}
 
-	public void setRCourscursusEnseignements(List<RCourscursusEnseignement> RCourscursusEnseignements) {
-		this.RCourscursusEnseignements = RCourscursusEnseignements;
-	}
-
-	public RCourscursusEnseignement addRCourscursusEnseignement(RCourscursusEnseignement RCourscursusEnseignement) {
-		getRCourscursusEnseignements().add(RCourscursusEnseignement);
-		RCourscursusEnseignement.setCoursCursus(this);
-
-		return RCourscursusEnseignement;
-	}
-
-	public RCourscursusEnseignement removeRCourscursusEnseignement(RCourscursusEnseignement RCourscursusEnseignement) {
-		getRCourscursusEnseignements().remove(RCourscursusEnseignement);
-		RCourscursusEnseignement.setCoursCursus(null);
-
-		return RCourscursusEnseignement;
-	}
-
-	public List<RCourscursusSavoir> getRCourscursusSavoirs() {
-		return this.RCourscursusSavoirs;
-	}
-
-	public void setRCourscursusSavoirs(List<RCourscursusSavoir> RCourscursusSavoirs) {
-		this.RCourscursusSavoirs = RCourscursusSavoirs;
-	}
-
-	public RCourscursusSavoir addRCourscursusSavoir(RCourscursusSavoir RCourscursusSavoir) {
-		getRCourscursusSavoirs().add(RCourscursusSavoir);
-		RCourscursusSavoir.setCoursCursus(this);
-
-		return RCourscursusSavoir;
-	}
-
-	public RCourscursusSavoir removeRCourscursusSavoir(RCourscursusSavoir RCourscursusSavoir) {
-		getRCourscursusSavoirs().remove(RCourscursusSavoir);
-		RCourscursusSavoir.setCoursCursus(null);
-
-		return RCourscursusSavoir;
-	}
-
-	public String getCocCommentaires() {
-		return cocCommentaires;
-	}
-
-	public void setCocCommentaires(String cocCommentaires) {
-		this.cocCommentaires = cocCommentaires;
+	public void setSavoirs(List<Savoir> savoirs) {
+		this.savoirs = savoirs;
 	}
 
 }

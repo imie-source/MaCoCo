@@ -4,6 +4,7 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 		fields : [
 			          {name: 'curId'}, 
 			          {name: 'text', mapping: 'curNom'}, 
+			          {name: 'refId'}, 
 			          {name: 'children', mapping: 'uniteFormationCursuses'}
 		         ],
 		childType : 'ExtJsMVC.model.cursus.UniteFormationCursusModel',
@@ -26,6 +27,7 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 	                    data.parentId = undefined;
 	                    data.children = undefined;
 	                    data.text = undefined;
+	                    data.uniteFormationCursuses = undefined;
 	                    return data;
 	                },
 	                scope: this

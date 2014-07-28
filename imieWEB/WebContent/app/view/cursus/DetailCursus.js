@@ -10,9 +10,10 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
     [
         {
         	itemId: 'detailCursusNom',
-            xtype : 'textfield',
+            xtype : 'textareafield',
             name : 'text',
-            fieldLabel : 'Nom'
+            fieldLabel : 'Nom',
+            width : 500,
         },
         {
             xtype : 'button',
@@ -23,6 +24,12 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
             xtype : 'button',
             text : 'Ajouter une UF',
             itemId : 'AddRecord'
+        }
+        ,
+        {
+            xtype : 'button',
+            text : 'Print',
+            itemId : 'Print'
         }
     ]
 });

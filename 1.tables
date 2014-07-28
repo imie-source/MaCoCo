@@ -1,0 +1,207 @@
+------------------------------------------------------------
+--        Script Postgre 
+------------------------------------------------------------
+
+
+CREATE TABLE public.Savoir(
+	sav_id SERIAL NOT NULL ,
+	com_id INT   ,
+	CONSTRAINT prk_constraint_Savoir PRIMARY KEY (sav_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Competence_Pro(
+	com_id SERIAL NOT NULL ,
+	act_id INT   ,
+	CONSTRAINT prk_constraint_Competence_Pro PRIMARY KEY (com_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Activite_Type(
+	act_id SERIAL NOT NULL ,
+	ref_id INT   ,
+	CONSTRAINT prk_constraint_Activite_Type PRIMARY KEY (act_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Referentiel(
+	ref_id  SERIAL NOT NULL ,
+	ref_nom VARCHAR (25)  ,
+	CONSTRAINT prk_constraint_Referentiel PRIMARY KEY (ref_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Cursus(
+	cur_id  SERIAL NOT NULL ,
+	cur_nom VARCHAR (25)  ,
+	ref_id  INT   ,
+	CONSTRAINT prk_constraint_Cursus PRIMARY KEY (cur_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Eleve(
+	ele_id SERIAL NOT NULL ,
+	pro_id INT   ,
+	CONSTRAINT prk_constraint_Eleve PRIMARY KEY (ele_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Promotion(
+	pro_id        SERIAL NOT NULL ,
+	pro_nom       VARCHAR (25)  ,
+	pro_duree     VARCHAR (25)  ,
+	pro_dateDebut DATE   ,
+	pro_dateFin   DATE   ,
+	cur_id        INT   ,
+	CONSTRAINT prk_constraint_Promotion PRIMARY KEY (pro_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Enseignement(
+	ent_id         SERIAL NOT NULL ,
+	ent_contenu    VARCHAR (25)  ,
+	ent_objet      VARCHAR (25)  ,
+	ent_contrainte VARCHAR (25)  ,
+	ent_materiel   VARCHAR (25)  ,
+	CONSTRAINT prk_constraint_Enseignement PRIMARY KEY (ent_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Etape(
+	eta_id         SERIAL NOT NULL ,
+	eta_contenu    VARCHAR (25)  ,
+	eta_dureeIndic VARCHAR (25)  ,
+	ent_id         INT   ,
+	CONSTRAINT prk_constraint_Etape PRIMARY KEY (eta_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Unite_Formation_Promo(
+	ufp_id        SERIAL NOT NULL ,
+	ufp_nom       VARCHAR (25)  ,
+	ufp_objectifs VARCHAR (500)  ,
+	ufc_id        INT   ,
+	pro_id        INT   ,
+	CONSTRAINT prk_constraint_Unite_Formation_Promo PRIMARY KEY (ufp_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Unite_Formation_Cursus(
+	ufc_id        SERIAL NOT NULL ,
+	ufc_nom       VARCHAR (25)  ,
+	ufc_objectifs VARCHAR (500)  ,
+	cur_id        INT   ,
+	CONSTRAINT prk_constraint_Unite_Formation_Cursus PRIMARY KEY (ufc_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Module_Promo(
+	mop_id        SERIAL NOT NULL ,
+	mop_intitule  VARCHAR (25)  ,
+	mop_objectifs VARCHAR (500)  ,
+	moc_id        INT   ,
+	ufp_id        INT   ,
+	CONSTRAINT prk_constraint_Module_Promo PRIMARY KEY (mop_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Module_Cursus(
+	moc_id        SERIAL NOT NULL ,
+	moc_intitule  VARCHAR (25)  ,
+	moc_objectifs VARCHAR (500)  ,
+	ufc_id        INT   ,
+	CONSTRAINT prk_constraint_Module_Cursus PRIMARY KEY (moc_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Cours_Cursus(
+	coc_id           SERIAL NOT NULL ,
+	coc_duree        VARCHAR (25)  ,
+	coc_intitule     VARCHAR (25)  ,
+	coc_type         VARCHAR (25)  ,
+	coc_objectifs    VARCHAR (500)  ,
+	coc_evaluation   VARCHAR (500)  ,
+	coc_commentaires VARCHAR (500)  ,
+	moc_id           INT   ,
+	CONSTRAINT prk_constraint_Cours_Cursus PRIMARY KEY (coc_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Cours_Promo(
+	cop_id           SERIAL NOT NULL ,
+	cop_duree        VARCHAR (25)  ,
+	cop_intitule     VARCHAR (25)  ,
+	cop_type         VARCHAR (25)  ,
+	cop_objectifs    VARCHAR (500)  ,
+	cop_evaluation   VARCHAR (500)  ,
+	cop_commentaires VARCHAR (500)  ,
+	coc_id           INT   ,
+	mop_id           INT   ,
+	CONSTRAINT prk_constraint_Cours_Promo PRIMARY KEY (cop_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.Enseignant(
+	ens SERIAL NOT NULL ,
+	CONSTRAINT prk_constraint_Enseignant PRIMARY KEY (ens)
+)WITHOUT OIDS;
+
+CREATE TABLE public.prerequis_enseignement(
+	ent_id              INT  NOT NULL ,
+	ent_id_Enseignement INT  NOT NULL ,
+	CONSTRAINT prk_constraint_prerequis_enseignement PRIMARY KEY (ent_id,ent_id_Enseignement)
+)WITHOUT OIDS;
+
+CREATE TABLE public.suit(
+	ele_id INT  NOT NULL ,
+	cop_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_suit PRIMARY KEY (ele_id,cop_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.enseigne(
+	ens    INT  NOT NULL ,
+	ent_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_enseigne PRIMARY KEY (ens,ent_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.r_courscursus_savoir(
+	coc_id INT  NOT NULL ,
+	sav_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_r_courscursus_savoir PRIMARY KEY (coc_id,sav_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.r_courspromo_savoir(
+	cop_id INT  NOT NULL ,
+	sav_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_r_courspromo_savoir PRIMARY KEY (cop_id,sav_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.r_courspromo_enseignement(
+	cop_id INT  NOT NULL ,
+	ent_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_r_courspromo_enseignement PRIMARY KEY (cop_id,ent_id)
+)WITHOUT OIDS;
+
+CREATE TABLE public.r_courscursus_enseignement(
+	coc_id INT  NOT NULL ,
+	ent_id INT  NOT NULL ,
+	CONSTRAINT prk_constraint_r_courscursus_enseignement PRIMARY KEY (coc_id,ent_id)
+)WITHOUT OIDS;
+
+
+
+ALTER TABLE public.Savoir ADD CONSTRAINT FK_Savoir_com_id FOREIGN KEY (com_id) REFERENCES public.Competence_Pro(com_id);
+ALTER TABLE public.Competence_Pro ADD CONSTRAINT FK_Competence_Pro_act_id FOREIGN KEY (act_id) REFERENCES public.Activite_Type(act_id);
+ALTER TABLE public.Activite_Type ADD CONSTRAINT FK_Activite_Type_ref_id FOREIGN KEY (ref_id) REFERENCES public.Referentiel(ref_id);
+ALTER TABLE public.Cursus ADD CONSTRAINT FK_Cursus_ref_id FOREIGN KEY (ref_id) REFERENCES public.Referentiel(ref_id);
+ALTER TABLE public.Eleve ADD CONSTRAINT FK_Eleve_pro_id FOREIGN KEY (pro_id) REFERENCES public.Promotion(pro_id);
+ALTER TABLE public.Promotion ADD CONSTRAINT FK_Promotion_cur_id FOREIGN KEY (cur_id) REFERENCES public.Cursus(cur_id);
+ALTER TABLE public.Etape ADD CONSTRAINT FK_Etape_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);
+ALTER TABLE public.Unite_Formation_Promo ADD CONSTRAINT FK_Unite_Formation_Promo_ufc_id FOREIGN KEY (ufc_id) REFERENCES public.Unite_Formation_Cursus(ufc_id);
+ALTER TABLE public.Unite_Formation_Promo ADD CONSTRAINT FK_Unite_Formation_Promo_pro_id FOREIGN KEY (pro_id) REFERENCES public.Promotion(pro_id);
+ALTER TABLE public.Unite_Formation_Cursus ADD CONSTRAINT FK_Unite_Formation_Cursus_cur_id FOREIGN KEY (cur_id) REFERENCES public.Cursus(cur_id);
+ALTER TABLE public.Module_Promo ADD CONSTRAINT FK_Module_Promo_moc_id FOREIGN KEY (moc_id) REFERENCES public.Module_Cursus(moc_id);
+ALTER TABLE public.Module_Promo ADD CONSTRAINT FK_Module_Promo_ufp_id FOREIGN KEY (ufp_id) REFERENCES public.Unite_Formation_Promo(ufp_id);
+ALTER TABLE public.Module_Cursus ADD CONSTRAINT FK_Module_Cursus_ufc_id FOREIGN KEY (ufc_id) REFERENCES public.Unite_Formation_Cursus(ufc_id);
+ALTER TABLE public.Cours_Cursus ADD CONSTRAINT FK_Cours_Cursus_moc_id FOREIGN KEY (moc_id) REFERENCES public.Module_Cursus(moc_id);
+ALTER TABLE public.Cours_Promo ADD CONSTRAINT FK_Cours_Promo_coc_id FOREIGN KEY (coc_id) REFERENCES public.Cours_Cursus(coc_id);
+ALTER TABLE public.Cours_Promo ADD CONSTRAINT FK_Cours_Promo_mop_id FOREIGN KEY (mop_id) REFERENCES public.Module_Promo(mop_id);
+ALTER TABLE public.prerequis_enseignement ADD CONSTRAINT FK_prerequis_enseignement_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);
+ALTER TABLE public.prerequis_enseignement ADD CONSTRAINT FK_prerequis_enseignement_ent_id_Enseignement FOREIGN KEY (ent_id_Enseignement) REFERENCES public.Enseignement(ent_id);
+ALTER TABLE public.suit ADD CONSTRAINT FK_suit_ele_id FOREIGN KEY (ele_id) REFERENCES public.Eleve(ele_id);
+ALTER TABLE public.suit ADD CONSTRAINT FK_suit_cop_id FOREIGN KEY (cop_id) REFERENCES public.Cours_Promo(cop_id);
+ALTER TABLE public.enseigne ADD CONSTRAINT FK_enseigne_ens FOREIGN KEY (ens) REFERENCES public.Enseignant(ens);
+ALTER TABLE public.enseigne ADD CONSTRAINT FK_enseigne_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);
+ALTER TABLE public.r_courscursus_savoir ADD CONSTRAINT FK_r_courscursus_savoir_coc_id FOREIGN KEY (coc_id) REFERENCES public.Cours_Cursus(coc_id);
+ALTER TABLE public.r_courscursus_savoir ADD CONSTRAINT FK_r_courscursus_savoir_sav_id FOREIGN KEY (sav_id) REFERENCES public.Savoir(sav_id);
+ALTER TABLE public.r_courspromo_savoir ADD CONSTRAINT FK_r_courspromo_savoir_cop_id FOREIGN KEY (cop_id) REFERENCES public.Cours_Promo(cop_id);
+ALTER TABLE public.r_courspromo_savoir ADD CONSTRAINT FK_r_courspromo_savoir_sav_id FOREIGN KEY (sav_id) REFERENCES public.Savoir(sav_id);
+ALTER TABLE public.r_courspromo_enseignement ADD CONSTRAINT FK_r_courspromo_enseignement_cop_id FOREIGN KEY (cop_id) REFERENCES public.Cours_Promo(cop_id);
+ALTER TABLE public.r_courspromo_enseignement ADD CONSTRAINT FK_r_courspromo_enseignement_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);
+ALTER TABLE public.r_courscursus_enseignement ADD CONSTRAINT FK_r_courscursus_enseignement_coc_id FOREIGN KEY (coc_id) REFERENCES public.Cours_Cursus(coc_id);
+ALTER TABLE public.r_courscursus_enseignement ADD CONSTRAINT FK_r_courscursus_enseignement_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);

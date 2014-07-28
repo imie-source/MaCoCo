@@ -1,0 +1,223 @@
+body 
+{
+    margin: 0;
+    padding: 0;
+}
+
+
+.bloc-titre
+{
+	border: 1px Navy solid;
+	margin-left: 1cm;
+	margin-right: 1cm;
+	font-size: 20px;
+}
+
+
+.bloc-global
+{
+	border: 1px Navy solid;
+	margin-left: 1cm;
+	margin-right: 1cm;
+}
+
+
+.bloc-reac
+{
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+	background-color: AliceBlue;
+}
+
+.entete-reac
+{
+	width: 99%;
+	background-color: LightSteelBlue;
+}
+
+.bloc-savoir
+{
+	background-color: AliceBlue;
+}
+
+
+.bloc-uf
+{
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.bloc-cours
+{
+	background-color: LightSteelBlue ;
+	display: inline-block;
+	vertical-align: top;
+	width : 59%;
+}
+
+
+.row-cours
+{
+	width: 94%;
+	background-color: AliceBlue;
+	display: inline-block;
+}
+
+.infos-cours
+{
+	width: 5%;
+	background-color: AliceBlue;
+	display: inline-block;
+}
+
+.bloc-infomodule
+{
+	background-color: AliceBlue;
+	border: 1px Teal solid;
+	display: inline-block;
+	vertical-align: top;
+	width : 39%;
+}
+
+.bloc-heure
+{
+	display: inline-block;
+	vertical-align: top;
+	width : 10%;
+}
+
+.bloc-modalite
+{
+	display: inline-block;
+	width : 44%;
+}
+
+.bloc-evaluation
+{
+	display: inline-block;
+	width : 44%;
+}
+
+
+
+
+
+
+@page 
+{
+    size: A4 landscape;
+    margin: 0;
+	padding: 0;
+}
+
+@media print 
+{
+	
+	
+	
+.bloc-uf
+{
+	page-break-inside:avoid;
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.bloc-cours
+{
+	-webkit-print-color-adjust: exact;
+	background-color: LightSteelBlue ;
+	display: inline-block;
+	vertical-align: top;
+	width : 59%;
+}
+	
+.bloc-titre
+{
+	border: 1px Navy solid;
+	margin-left: 1cm;
+	margin-right: 1cm;
+	font-size: 20px;
+}
+
+
+.bloc-global
+{
+	border: 1px Navy solid;
+	margin-left: 1cm;
+	margin-right: 1cm;
+}
+
+
+.bloc-reac
+{
+	-webkit-print-color-adjust: exact;
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+	background-color: AliceBlue;
+}
+
+.entete-reac
+{
+	-webkit-print-color-adjust: exact;
+	width: 99%;
+	background-color: LightSteelBlue;
+}
+
+.bloc-savoir
+{
+	-webkit-print-color-adjust: exact;
+	background-color: AliceBlue;
+}
+
+
+.row-cours
+{
+	-webkit-print-color-adjust: exact;
+	width: 94%;
+	background-color: AliceBlue;
+	display: inline-block;
+}
+
+.infos-cours
+{
+	-webkit-print-color-adjust: exact;
+	width: 5%;
+	background-color: AliceBlue;
+	display: inline-block;
+}
+
+.bloc-infomodule
+{
+	-webkit-print-color-adjust: exact;
+	background-color: AliceBlue;
+	border: 1px Teal solid;
+	display: inline-block;
+	vertical-align: top;
+	width : 39%;
+}
+
+.bloc-heure
+{
+	display: inline-block;
+	vertical-align: top;
+	width : 10%;
+}
+
+.bloc-modalite
+{
+	display: inline-block;
+	width : 44%;
+}
+
+.bloc-evaluation
+{
+	display: inline-block;
+	width : 44%;
+}
+	
+	
+}

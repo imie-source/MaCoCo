@@ -23,13 +23,13 @@ CREATE TABLE public.Activite_Type(
 
 CREATE TABLE public.Referentiel(
 	ref_id  SERIAL NOT NULL ,
-	ref_nom VARCHAR (25)  ,
+	ref_nom VARCHAR (250)  ,
 	CONSTRAINT prk_constraint_Referentiel PRIMARY KEY (ref_id)
 )WITHOUT OIDS;
 
 CREATE TABLE public.Cursus(
 	cur_id  SERIAL NOT NULL ,
-	cur_nom VARCHAR (25)  ,
+	cur_nom VARCHAR (250)  ,
 	ref_id  INT   ,
 	CONSTRAINT prk_constraint_Cursus PRIMARY KEY (cur_id)
 )WITHOUT OIDS;
@@ -42,7 +42,7 @@ CREATE TABLE public.Eleve(
 
 CREATE TABLE public.Promotion(
 	pro_id        SERIAL NOT NULL ,
-	pro_nom       VARCHAR (25)  ,
+	pro_nom       VARCHAR (250)  ,
 	pro_duree     VARCHAR (25)  ,
 	pro_dateDebut DATE   ,
 	pro_dateFin   DATE   ,
@@ -52,16 +52,16 @@ CREATE TABLE public.Promotion(
 
 CREATE TABLE public.Enseignement(
 	ent_id         SERIAL NOT NULL ,
-	ent_contenu    VARCHAR (25)  ,
-	ent_objet      VARCHAR (25)  ,
-	ent_contrainte VARCHAR (25)  ,
-	ent_materiel   VARCHAR (25)  ,
+	ent_contenu    VARCHAR (250)  ,
+	ent_objet      VARCHAR (500)  ,
+	ent_contrainte VARCHAR (250)  ,
+	ent_materiel   VARCHAR (250)  ,
 	CONSTRAINT prk_constraint_Enseignement PRIMARY KEY (ent_id)
 )WITHOUT OIDS;
 
 CREATE TABLE public.Etape(
 	eta_id         SERIAL NOT NULL ,
-	eta_contenu    VARCHAR (25)  ,
+	eta_contenu    VARCHAR (250)  ,
 	eta_dureeIndic VARCHAR (25)  ,
 	ent_id         INT   ,
 	CONSTRAINT prk_constraint_Etape PRIMARY KEY (eta_id)
@@ -69,7 +69,7 @@ CREATE TABLE public.Etape(
 
 CREATE TABLE public.Unite_Formation_Promo(
 	ufp_id        SERIAL NOT NULL ,
-	ufp_nom       VARCHAR (25)  ,
+	ufp_nom       VARCHAR (250)  ,
 	ufp_objectifs VARCHAR (500)  ,
 	ufc_id        INT   ,
 	pro_id        INT   ,
@@ -78,7 +78,7 @@ CREATE TABLE public.Unite_Formation_Promo(
 
 CREATE TABLE public.Unite_Formation_Cursus(
 	ufc_id        SERIAL NOT NULL ,
-	ufc_nom       VARCHAR (25)  ,
+	ufc_nom       VARCHAR (250)  ,
 	ufc_objectifs VARCHAR (500)  ,
 	cur_id        INT   ,
 	CONSTRAINT prk_constraint_Unite_Formation_Cursus PRIMARY KEY (ufc_id)
@@ -86,7 +86,7 @@ CREATE TABLE public.Unite_Formation_Cursus(
 
 CREATE TABLE public.Module_Promo(
 	mop_id        SERIAL NOT NULL ,
-	mop_intitule  VARCHAR (25)  ,
+	mop_intitule  VARCHAR (250)  ,
 	mop_objectifs VARCHAR (500)  ,
 	moc_id        INT   ,
 	ufp_id        INT   ,
@@ -95,7 +95,7 @@ CREATE TABLE public.Module_Promo(
 
 CREATE TABLE public.Module_Cursus(
 	moc_id        SERIAL NOT NULL ,
-	moc_intitule  VARCHAR (25)  ,
+	moc_intitule  VARCHAR (250)  ,
 	moc_objectifs VARCHAR (500)  ,
 	ufc_id        INT   ,
 	CONSTRAINT prk_constraint_Module_Cursus PRIMARY KEY (moc_id)
@@ -104,7 +104,7 @@ CREATE TABLE public.Module_Cursus(
 CREATE TABLE public.Cours_Cursus(
 	coc_id           SERIAL NOT NULL ,
 	coc_duree        VARCHAR (25)  ,
-	coc_intitule     VARCHAR (25)  ,
+	coc_intitule     VARCHAR (250)  ,
 	coc_type         VARCHAR (25)  ,
 	coc_objectifs    VARCHAR (500)  ,
 	coc_evaluation   VARCHAR (500)  ,
@@ -116,7 +116,7 @@ CREATE TABLE public.Cours_Cursus(
 CREATE TABLE public.Cours_Promo(
 	cop_id           SERIAL NOT NULL ,
 	cop_duree        VARCHAR (25)  ,
-	cop_intitule     VARCHAR (25)  ,
+	cop_intitule     VARCHAR (250)  ,
 	cop_type         VARCHAR (25)  ,
 	cop_objectifs    VARCHAR (500)  ,
 	cop_evaluation   VARCHAR (500)  ,

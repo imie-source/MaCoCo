@@ -1,0 +1,117 @@
+INSERT INTO referentiel(ref_id, ref_nom) VALUES (2001, 'Referentiel 1');
+INSERT INTO referentiel(ref_id, ref_nom) VALUES (2002, 'Referentiel 2');
+
+INSERT INTO activite_type(act_id, ref_id, act_libelle) VALUES (2001, 2001, 'Activite Type Numero 1');
+INSERT INTO activite_type(act_id, ref_id, act_libelle) VALUES (2002, 2001, 'Activite Type Numero 2');
+
+INSERT INTO competence_pro(com_id, act_id, com_libelle) VALUES (2001, 2001, 'Competence Pro 1');
+INSERT INTO competence_pro(com_id, act_id, com_libelle) VALUES (2002, 2001, 'Competence Pro 2');
+INSERT INTO competence_pro(com_id, act_id, com_libelle) VALUES (2003, 2002, 'Competence Pro 3');
+INSERT INTO competence_pro(com_id, act_id, com_libelle) VALUES (2004, 2002, 'Competence Pro 4');
+
+
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2001, 2001, 'Savoir 1');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2002, 2001, 'Savoir 2');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2003, 2002, 'Savoir 3');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2004, 2002, 'Savoir 4');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2005, 2003, 'Savoir 5');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2006, 2003, 'Savoir 6');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2007, 2004, 'Savoir 7');
+INSERT INTO savoir(sav_id, com_id, sav_libelle) VALUES (2008, 2004, 'Savoir 8');
+
+
+
+
+INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2001, 'Cursus 1', 2001);
+INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2002, 'Cursus 2', 2001);
+INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2003, 'Cursus 3', 2001);
+INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2004, 'Cursus 4', 2001);
+
+INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2001, 'Unite Formation 1', '', 2001);
+INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2002, 'Unite Formation 2', '', 2001);
+INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2003, 'Unite Formation 3', '', 2001);
+INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2004, 'Unite Formation 4', '', 2002);
+
+
+
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2001, 'Analyse du besoin','Lorem ipsum dolor sit amet, consectetur adipisicing elit', 2001);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2002, 'Gestion de projets','', 2001);
+
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2003, 'Environnement de travail','', 2002);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2004, 'Concevoir une application','Lorem ipsum dolor sit amet, consectetur adipisicing elit', 2002);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2005, 'Deploiement et cloud computing','objectifs', 2002);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2006, 'validation du produit','', 2002);
+
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2007, 'Développer dans un langage objet','Lorem ipsum dolor sit amet, consectetur adipisicing elit', 2003);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2008, 'Développer dans un langage procédurale','Lorem ipsum dolor sit amet, consectetur adipisicing elit', 2003);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2009, 'Gestionnaire de contenu et e-commerce','', 2003);
+INSERT INTO module_cursus(moc_id, moc_intitule, moc_objectifs, ufc_id) VALUES (2010, 'Module 4','', 2003);
+
+
+
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2001, 1, 'Analyse du besoin (exigences fonctionnelles et non-fonctionelles)', '','','evaluation projet en fin de module', 2001);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2002, 3, 'Accessibilité et ergonomie', '','','evaluation projet en fin de module', 2001);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2003, 2, '7 étapes du maquettage', '','','evaluation projet en fin de module', 2001);
+	
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2004, 3, 'mise en place du projet', '','','evaluation projet en fin de module', 2002);  
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2005, 3, 'Méthode Agile', '','','', 2002);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)   
+    VALUES (2006, 1, 'Méthodologie de travail (réseaux sociaux, veille, organisation..)', '','','', 2002);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id) 
+    VALUES (2007, 1, 'Propriété intellectuelle et licence', '','','', 2002);
+	
+	
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2008, 1, 'GIT', '','','', 2003);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2009, 1, 'IDE', '','','', 2003);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2010, 1, 'Linux', '','','evaluation projet en fin de module', 2003);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2011, 2, 'Modéliser une application en utilisant UML (14 diag)', '','','', 2004);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2012, 1, 'La qualité logicielle', '','','', 2004);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2013, 3, 'Déployer l’application ', '','','', 2005);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2014, 3, '3 types de Cloud (IAAS,PAAS,SAAS)', '','','', 2005);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2015, 4, 'Cloud au service du développeur (IAAS, data,dev)', '','','', 2005);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2016, 1, 'Déployer l’application ', '','','', 2005);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2017, 3, 'Stratégie de test et recette fonctionnelle','','','', 2006);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2018, 1, 'test unitaire & test integration','','','', 2006);
+
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2019, 3, 'Composer un modèle Objet (POO)','','','', 2007);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2020, 3, 'Programmer dans un langage Objet ','','','', 2007);
+    
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2021, 1, 'Algorithmie et programmation structurée ','','','', 2008);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2022, 1, 'les bases du PHP','','','', 2008);
+    
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2023, 1, 'Intégrer et enrichir une application e-commerce','','','', 2009);
+INSERT INTO cours_cursus(coc_id, coc_duree, coc_intitule, coc_type, coc_objectifs, coc_evaluation, moc_id)
+    VALUES (2024, 1, 'Intégrer et enrichir une application CMS ','','','', 2009);
+
+
+
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2001, 2001);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2001, 2002);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2001, 2003);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2002, 2004);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2002, 2005);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2003, 2006);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2003, 2007);
+INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2003, 2008);
+	

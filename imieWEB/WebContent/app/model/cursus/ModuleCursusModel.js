@@ -5,6 +5,7 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
 	         {name: 'mocId'},
 	         {name: 'text', mapping: 'mocIntitule'}, 
 	         {name: 'mocObjectifs'},
+	         {name: 'mocModalite'},
 	         {name: 'uniteFormationCursus'},
 	         {name: 'children', mapping: 'coursCursuses'}
 	        ],

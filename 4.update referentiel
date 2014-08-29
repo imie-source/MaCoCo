@@ -1,9 +1,0 @@
-ALTER TABLE savoir
-   ADD COLUMN sav_libelle character varying;
-
-
-ALTER TABLE activite_type 
-	ADD COLUMN act_libelle character varying;
-
-ALTER TABLE competence_pro 
-	ADD COLUMN com_libelle character varying;

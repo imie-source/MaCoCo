@@ -35,6 +35,9 @@ public class CoursCursusServlet
 	{
 		CoursCursus cours = coursCursusService.findById(id);
 		
+//		cours.setRCourscursusEnseignements(null);
+//		cours.setRCourscursusSavoirs(null);
+		
 		cours.getModuleCursus().setCoursCursuses(null);
 		cours.getModuleCursus().setUniteFormationCursus(null);
 

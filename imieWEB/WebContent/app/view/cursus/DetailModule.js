@@ -23,6 +23,13 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
             height : 100
         },
         {
+            xtype : 'textareafield',
+            name : 'mocModalite',
+            fieldLabel : 'Modalités',
+            width : 500,
+            height : 100
+        },
+        {
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'

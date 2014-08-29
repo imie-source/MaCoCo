@@ -1,5 +1,0 @@
-ALTER TABLE cours_cursus
-   ADD COLUMN coc_commentaires character varying;
-
-ALTER TABLE cours_promo
-   ADD COLUMN cop_commentaires character varying;

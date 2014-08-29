@@ -4,7 +4,11 @@ Ext.define('ExtJsMVC.view.referentiel.ArbreReferentiel',
 	xtype  : 'arbre-Referentiel',
 	title : 'Referentiel',
 	store: 'Referentiel',
-	rootVisible: true,
+	rootVisible: false,
+	
+	//TODO: Fix permettant le collapse/expand apres un setRoot
+	animate: false,
+	
     viewConfig: 
     {
 		plugins: 
@@ -13,6 +17,7 @@ Ext.define('ExtJsMVC.view.referentiel.ArbreReferentiel',
 			dragGroup: 'groupCoursSavoir'
 		}
     },
+    
     listeners: 
     {
         viewready: function(tree) 

@@ -78,4 +78,21 @@ public class CoursCursusServlet
 		coursCursusService.delete(cours);
 		return Response.ok().build();
 	}	
+	
+	
+	@GET()
+	@Path("/cursus/{id}/{string}")
+	public Response getAllByCursus(@PathParam("id") Integer id)
+	{
+		ArrayList<CoursCursus> result = (ArrayList<CoursCursus>) coursCursusService.findAllByCursus(id);
+		
+		for (CoursCursus coursCursus : result) 
+		{
+			coursCursus.getModuleCursus().setCoursCursuses(null);
+			coursCursus.getModuleCursus().setUniteFormationCursus(null);
+			coursCursus.setSavoirs(null);
+		}
+		
+	    return Response.ok(result).build();
+	}	
 }

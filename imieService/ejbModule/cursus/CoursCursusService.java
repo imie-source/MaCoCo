@@ -1,9 +1,13 @@
 package cursus;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
@@ -60,7 +64,25 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		coursCursus = em.merge(coursCursus);
 		em.remove(coursCursus);
 	}
-
+	
+	
+	public List<CoursCursus> findAllByCursus(Integer id) 
+	{
+		Query queryAllCours = em.createNamedQuery("CoursCursus.findAllByCursus");
+		queryAllCours.setParameter("idCursus", id);
+		List<CoursCursus> res = queryAllCours.getResultList();
+		
+		for (CoursCursus coursCursus : res) 
+		{
+			for (@SuppressWarnings("unused") Savoir savoir : coursCursus.getSavoirs()) 
+			{
+				//Initialisation
+			}
+		}
+		
+		return res;
+	}
+	
 
 
 //	@Override

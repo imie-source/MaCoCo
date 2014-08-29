@@ -4,7 +4,11 @@ Ext.define('ExtJsMVC.store.UniteFormationStore',
 	
 	storeId : 'UniteFormationStore',
 	
-    model : 'ExtJsMVC.model.cursus.CursusModel',
+    model : 'ExtJsMVC.model.cursus.RootCursusModel',
     
+    root : {
+    	
+    },
+	
     autoLoad : false
 });

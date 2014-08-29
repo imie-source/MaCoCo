@@ -4,7 +4,11 @@ Ext.define('ExtJsMVC.store.Referentiel',
 	
 	storeId : 'Referentiel',
 	
-    model : 'ExtJsMVC.model.referentiel.Referentiel',
+    model : 'ExtJsMVC.model.referentiel.RootReferentiel',
+    
+    root : {
+    	
+    },
     
     autoLoad : false
 });

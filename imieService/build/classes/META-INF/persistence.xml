@@ -3,6 +3,7 @@
 	<persistence-unit name="imieDB" transaction-type="JTA">
 		<jta-data-source>java:/jdbc/imieDB</jta-data-source>
 		<class>entities.cursus.CoursCursus</class>
+		<class>entities.cursus.Periode</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	</persistence-unit>
 </persistence>

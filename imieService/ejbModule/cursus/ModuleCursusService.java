@@ -64,22 +64,30 @@ public class ModuleCursusService implements ModuleCursusServiceLocal {
 //	{
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
 //
-//		CriteriaQuery<ModuleCursus> q = cb.createQuery(ModuleCursus.class);
-//		Root<ModuleCursus> c = q.from(ModuleCursus.class);
-//		Join<ModuleCursus, UniteFormationCursus> p = c.join("module", JoinType.LEFT);
+//		CriteriaQuery<ModuleCursus> queryModule = cb.createQuery(ModuleCursus.class);
+//		Root<ModuleCursus> rootModule = queryModule.from(ModuleCursus.class);
+//		Join<ModuleCursus, UniteFormationCursus> joinModule = rootModule.join("module", JoinType.LEFT);
 //
 //
 //		//initialisation de la liste de criteria
 //		List<Predicate> criteria = new ArrayList<Predicate>();
-//		criteria.add(cb.equal(p.get("ufcId"),id));
+//		criteria.add(cb.equal(joinModule.get("ufcId"),id));
 //
+	
 //		//application de la liste de criteria
-//		q.where(criteria.toArray(new Predicate[] {}));
+//		queryModule.where(criteria.toArray(new Predicate[] {}));
+	
+	
 //		//éxecution de la requête
-//		List<ModuleCursus> result = em.createQuery(q)
+//		List<ModuleCursus> result = em.createQuery(queryModule)
 //				.getResultList();
 //
 //		return result;
 //	}
+	
+	
+	
+	
+	
 
 }

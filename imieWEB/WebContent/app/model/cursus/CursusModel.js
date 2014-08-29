@@ -7,13 +7,16 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 			          {name: 'refId'}, 
 			          {name: 'children', mapping: 'uniteFormationCursuses'}
 		         ],
+		         
 		childType : 'ExtJsMVC.model.cursus.UniteFormationCursusModel',
-	    hasMany:  {model: 'ExtJsMVC.model.cursus.UniteFormationCursusModel', name: 'uniteFormationCursuses'},	
+		hasMany:  {model: 'ExtJsMVC.model.cursus.UniteFormationCursusModel', associationKey: 'uniteFormationCursuses'},	
 	   
 	    proxy: 
 		{
 	    	url: '/imieWEB/webapi/cursus/',
 	    	type : 'rest',
+	    	
+	    	//TODO: expliquer implementation writer (pollution champs arbre)
 	    	writer : 
 	    	{
 	    		nameProperty: 'mapping',
@@ -29,6 +32,37 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 	                    data.text = undefined;
 	                    data.uniteFormationCursuses = undefined;
 	                    return data;
+	                },
+	                scope: this
+	            }
+	    	},
+	    	
+	    	
+	    	//TODO: expliquer implementation reader (id unique)
+	    	reader : 
+	    	{
+	            transform: 
+	            {
+	                fn: function(data) 
+	                {
+	                	if(data.ufcId != undefined)
+	                	{
+	                		data.id = 'ufcId'.concat(data.ufcId);
+	                	}
+	                	else if(data.mocId != undefined)
+	                	{
+	                		data.id = 'mocId'.concat(data.mocId);
+	                	}
+	                	else if(data.cocId != undefined)
+	                	{
+	                		data.id = 'cocId'.concat(data.cocId);
+	                	}
+	                	else if(data.savId != undefined)
+	                	{
+	                		data.id = 'savId'.concat(data.savId);
+	                	}
+	                	
+	                	return data;
 	                },
 	                scope: this
 	            }

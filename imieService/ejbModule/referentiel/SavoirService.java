@@ -57,5 +57,4 @@ public class SavoirService implements SavoirServiceLocal {
 		
 		return result;
 	}
-
 }

@@ -2,9 +2,8 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
     extend : 'Ext.form.Panel',
     xtype  : 'cursus-DetailCursus',
     store: 'CursusStore',
-    title   : 'Detail Cursus',
-    frame   : true,
-    padding : 10,
+    title   : 'Informations',
+    bodyPadding : 10,
     
     items : 
     [
@@ -15,6 +14,21 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
             fieldLabel : 'Nom',
             width : 500,
         },
+        
+        {
+        	itemId: 'TestPeriodeDebut',
+            xtype : 'datefield',
+            fieldLabel : 'Du :',
+            format: 'd/m/y'
+        },
+        
+        {
+        	itemId: 'TestPeriodeFin',
+            xtype : 'datefield',
+            fieldLabel : 'Au :',
+            format: 'd/m/y'
+        },
+        
         {
             xtype : 'button',
             text : 'Enregistrer',
@@ -22,13 +36,13 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         {
             xtype : 'button',
-            text : 'Ajouter une UF',
+            text : 'Ajouter UF',
             itemId : 'AddRecord'
         }
         ,
         {
             xtype : 'button',
-            text : 'Print',
+            text : 'Imprimer',
             itemId : 'Print'
         }
     ]

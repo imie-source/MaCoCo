@@ -8,10 +8,9 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
 		         {name: 'cursus'}, 	
 		         {name: 'children', mapping: 'moduleCursuses'}
 		     ],
-
 		     
 	childType : 'ExtJsMVC.model.cursus.ModuleCursusModel',
-	hasMany:  {model: 'ExtJsMVC.model.cursus.ModuleCursusModel', name: 'moduleCursuses'},	
+	hasMany:  {model: 'ExtJsMVC.model.cursus.ModuleCursusModel', associationKey: 'moduleCursuses'},	
 		     
      proxy: 
      {
@@ -37,6 +36,21 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
             }
     	} 
      },
+     
+ 	reader : 
+	{
+        transform: 
+        {
+            fn: function(data) 
+            {
+            	if(data.ufcId != undefined)
+        		{
+            		data.id = 'ufcId'.concat(data.ufcId);
+        		}
+            },
+            scope: this
+        }
+	}, 
      
     pseudoWriting: function()
     {

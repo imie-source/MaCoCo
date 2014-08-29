@@ -1,7 +1,6 @@
 package servlet.referentiel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -51,9 +50,7 @@ public class ReferentielServlet
 				}
 			}
 
-		    List<Referentiel> result = new ArrayList<Referentiel>();
-		    result.add(referentiel);
-		    return Response.ok(result).build();
+		    return Response.ok(referentiel).build();
 	}
 	
 	

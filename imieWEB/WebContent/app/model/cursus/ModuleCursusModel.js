@@ -11,7 +11,7 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
 	        ],
 	        
     childType : 'ExtJsMVC.model.cursus.CoursCursusModel',
-	hasMany: {model: 'ExtJsMVC.model.cursus.CoursCursusModel', name: 'coursCursuses'},
+	hasMany: {model: 'ExtJsMVC.model.cursus.CoursCursusModel', associationKey: 'coursCursuses'},
 	        
 	proxy: 
 	{
@@ -35,9 +35,25 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
                 },
                 scope: this
             }
-    	} 
-	},	        
-	        
+    	},
+    	
+     	reader : 
+    	{
+            transform: 
+            {
+                fn: function(data) 
+                {
+                	if(data.mocId != undefined)
+            		{
+                		data.id = 'mocId'.concat(data.mocId);
+            		}
+                	return data;
+                },
+                scope: this
+            }
+    	}, 
+	},
+	
     pseudoWriting: function()
     {
     	var pseudoWriter = this.getProxy().getWriter();

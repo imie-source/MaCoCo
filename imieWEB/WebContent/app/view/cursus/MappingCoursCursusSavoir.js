@@ -15,12 +15,3 @@ Ext.define('ExtJsMVC.view.cursus.MappingCoursCursusSavoir', {
     
 
 }); 
-        
-//        Ext.create('Ext.view.View',  {
-//            cls: 'savoir-view',
-//
-//           /* store: patientStore,*/
-//            /*listeners: {
-//                render: initializePatientDragZone
-//            }*/
-//        });

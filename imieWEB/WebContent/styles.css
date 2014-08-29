@@ -49,6 +49,20 @@ body
 	vertical-align: top;
 }
 
+.entete-module
+{
+	width: 55%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+}
+
+.bloc-heure
+{
+	width : 4%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+}
+
 .bloc-cours
 {
 	background-color: LightSteelBlue ;
@@ -67,7 +81,7 @@ body
 
 .infos-cours
 {
-	width: 5%;
+	width: 6%;
 	background-color: AliceBlue;
 	display: inline-block;
 }
@@ -81,12 +95,6 @@ body
 	width : 39%;
 }
 
-.bloc-heure
-{
-	display: inline-block;
-	vertical-align: top;
-	width : 10%;
-}
 
 .bloc-modalite
 {
@@ -200,12 +208,6 @@ body
 	width : 39%;
 }
 
-.bloc-heure
-{
-	display: inline-block;
-	vertical-align: top;
-	width : 10%;
-}
 
 .bloc-modalite
 {

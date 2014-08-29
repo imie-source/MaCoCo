@@ -31,10 +31,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
             overItemCls: 'savoir-over',
             selectedItemClass: 'savoir-selected',
             singleSelect: true,
-           /* store: patientStore,*/
-            /*listeners: {
-                render: initializePatientDragZone
-            }*/
+
         }
     ]
     

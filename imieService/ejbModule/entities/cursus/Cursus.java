@@ -1,10 +1,17 @@
 package entities.cursus;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 
 /**
@@ -30,7 +37,12 @@ public class Cursus implements Serializable {
 
 	//bi-directional many-to-one association to UniteFormationCursus
 	@OneToMany(mappedBy="cursus")
+	@OrderBy("ufc_ordre ASC")
 	private List<UniteFormationCursus> uniteFormationCursuses;
+	
+	//bi-directional many-to-one association to Periode
+	@OneToMany(mappedBy="cursus")
+	private List<Periode> periodes;
 
 	public Cursus() {
 	}
@@ -81,4 +93,11 @@ public class Cursus implements Serializable {
 		return uniteFormationCursus;
 	}
 
+	public List<Periode> getPeriodes() {
+		return periodes;
+	}
+
+	public void setPeriodes(List<Periode> periodes) {
+		this.periodes = periodes;
+	}
 }

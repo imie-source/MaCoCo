@@ -38,6 +38,7 @@ public class UniteFormationCursusServlet
 		uf.setModuleCursuses(new ArrayList<ModuleCursus>());
 		
 		uf.getCursus().setUniteFormationCursuses(null);
+		uf.getCursus().setPeriodes(null);
 		
 		ArrayList<UniteFormationCursus> response = new ArrayList<UniteFormationCursus>();
 		response.add(uf);

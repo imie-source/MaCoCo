@@ -3,7 +3,7 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 	extend: 'Ext.app.Controller',
 
 	models : 
-		[
+		[	'referentiel.RootReferentiel',
 		 	'referentiel.Referentiel',
 		 	'referentiel.ActiviteType',
 		 	'referentiel.CompetencePro',
@@ -34,6 +34,7 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 	
 	init: function()
 	{
+		
 		this.control(
 		{
 			'viewport > panel': 
@@ -55,7 +56,7 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 	
 	showClick : function(grid, record)
 	{
-		console.log('Click sur ' + record.get('text') +  '  classe : ' + record.$className);
+		console.log('Click sur ' + record.get('text') +  '  classe : ' + record.entityName);
 		console.log(record);
 		
 		
@@ -322,7 +323,7 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 		
 				
 			default : 
-				break;
+				console.log('Ne correspond pas');
 		}
 	
 	

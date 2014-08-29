@@ -19,6 +19,7 @@ import cursus.CursusServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
+import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
 import entities.referentiel.Savoir;
 
@@ -53,6 +54,19 @@ public class CursusServlet
 		for (Cursus cursus : listeCursus) 
 		{
 			cursus.setUniteFormationCursuses(new ArrayList<UniteFormationCursus>());
+			
+			for (Periode periode : cursus.getPeriodes())
+			{
+				periode.setCursus(null);
+			}
+			
+			
+			for (UniteFormationCursus uf : cursus.getUniteFormationCursuses()) 
+			{
+				uf.setCursus(null);
+				uf.setModuleCursuses(null);
+			}
+			
 		}
 
 		return Response.ok(listeCursus).build();
@@ -68,10 +82,15 @@ public class CursusServlet
 
 		Cursus cursus = cursusService.findById(Integer.valueOf(id));
 
+		for (Periode periode : cursus.getPeriodes())
+		{
+			periode.setCursus(null);
+		}
+		
 		for (UniteFormationCursus uf : cursus.getUniteFormationCursuses()) 
 		{
 			uf.setCursus(null);
-
+			
 			for (ModuleCursus module : uf.getModuleCursuses()) 
 			{
 
@@ -85,22 +104,20 @@ public class CursusServlet
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
 					}
-					//cours.setRCourscursusEnseignements(new ArrayList<RCourscursusEnseignement>());
-					//cours.setRCourscursusSavoirs(new ArrayList<RCourscursusSavoir>());
 				}
 			}
 		}
-
-		List<Cursus> result = new ArrayList<Cursus>();
-		result.add(cursus);
-		return Response.ok(result).build();
+		
+		ArrayList<Cursus> reponse = new ArrayList<Cursus>();
+		reponse.add(cursus);
+		return Response.ok(reponse).build();
 	}
 
 
 
 	@PUT
 	@Path("/{string}")
-	public Response putTest(Cursus cursus) 
+	public Response update(Cursus cursus) 
 	{
 		cursusService.update(cursus);
 		ArrayList<Cursus> response = new ArrayList<Cursus>();

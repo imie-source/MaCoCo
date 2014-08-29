@@ -7,7 +7,7 @@ Ext.define('ExtJsMVC.model.referentiel.Savoir',
 			          {name: 'competencePro'}, 
 			          {name : 'leaf',  type : 'boolean', defaultValue : true}
 		         ],
-	   
+		         
 	    proxy: 
 		{
 	    	url: '/imieWEB/webapi/savoir/',
@@ -29,7 +29,23 @@ Ext.define('ExtJsMVC.model.referentiel.Savoir',
 	                },
 	                scope: this
 	            }
-	    	} 
+	    	}, 
+	    	
+		 	reader : 
+			{
+		        transform: 
+		        {
+		            fn: function(data) 
+		            {
+		            	if(data.savId != undefined)
+		        		{
+		            		data.id = 'savId'.concat(data.savId);
+		        		}
+		            	return data;
+		            },
+		            scope: this
+		        }
+			}
 	    },
 	    
 	    pseudoWriting: function()

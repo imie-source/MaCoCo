@@ -9,12 +9,13 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
 	          {name: 'cocObjectifs'}, 
 	          {name: 'cocEvaluation'},
 	          {name: 'cocCommentaires'},
+	          {name: 'cocOrdre'},
 	          {name: 'moduleCursus'},
 	          {name: 'savoirs'},
 	          {name : 'leaf',  type : 'boolean', defaultValue : true}
 	         ],
-	         
-	hasMany: {model: 'ExtJsMVC.model.referentiel.Savoir', name: 'savoirs'},
+	
+	hasMany: {model: 'ExtJsMVC.model.referentiel.Savoir', associationKey: 'savoirs'},
 
 	proxy: 
 	{
@@ -38,8 +39,25 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
                 },
                 scope: this
             }
-    	} 
+    	}, 
+	
+	 	reader : 
+		{
+	        transform: 
+	        {
+	            fn: function(data) 
+	            {
+	            	if(data.cocId != undefined)
+	        		{
+	            		data.id = 'cocId'.concat(data.cocId);
+	        		}
+	            	return data;
+	            },
+	            scope: this
+	        }
+		}, 
 	},
+
 	
     pseudoWriting: function()
     {

@@ -9,7 +9,7 @@ Ext.define('ExtJsMVC.model.referentiel.CompetencePro',
 		         ],
 		         
 		childType : 'ExtJsMVC.model.referentiel.Savoir',
-	    hasMany:  {model: 'ExtJsMVC.model.referentiel.Savoir', name: 'savoirs'},	
+	    hasMany:  {model: 'ExtJsMVC.model.referentiel.Savoir', associationKey : 'savoirs'},	
 	    proxy: 
 		{
 	    	url: '/imieWEB/webapi/competencepro/',
@@ -32,7 +32,23 @@ Ext.define('ExtJsMVC.model.referentiel.CompetencePro',
 	                },
 	                scope: this
 	            }
-	    	} 
+	    	}, 
+	    	
+		 	reader : 
+			{
+		        transform: 
+		        {
+		            fn: function(data) 
+		            {
+		            	if(data.comId != undefined)
+		        		{
+		            		data.id = 'comId'.concat(data.comId);
+		        		}
+		            	return data;
+		            },
+		            scope: this
+		        }
+			}
 	    },
 	    
 	    pseudoWriting: function()

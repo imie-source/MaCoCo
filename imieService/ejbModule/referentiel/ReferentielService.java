@@ -32,7 +32,9 @@ public class ReferentielService implements ReferentielServiceLocal {
 
 	@Override
 	public Referentiel findById(Integer id) {
+		
 		Referentiel result = em.find(Referentiel.class, id);
+		
 		for (ActiviteType activiteType : result.getActiviteTypes()) 
 		{
 			for (CompetencePro competencePro : activiteType.getCompetencePros()) 

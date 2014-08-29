@@ -15,7 +15,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="cours_cursus")
-@NamedQuery(name="CoursCursus.findAll", query="SELECT c FROM CoursCursus c")
+@NamedQuery(name="CoursCursus.findAllByCursus", 
+	query =
+	"Select c "
+	+"FROM CoursCursus c, ModuleCursus m, "
+	+"UniteFormationCursus uf, Cursus cur "
+	+"WHERE c.moduleCursus = m "
+	+"AND  m.uniteFormationCursus = uf "
+	+"AND uf.cursus = cur "
+	+"AND cur.curId = :idCursus")
+
 public class CoursCursus implements Serializable {
 	private static final long serialVersionUID = 1L;
 

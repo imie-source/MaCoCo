@@ -29,7 +29,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailUniteFormation', {
         },
         {
             xtype : 'button',
-            text : 'Ajouter',
+            text : 'Ajouter Module',
             itemId : 'AddRecord'
         }
     ]

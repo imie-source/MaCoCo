@@ -1,7 +1,9 @@
 package entities.cursus;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -28,6 +30,7 @@ public class UniteFormationCursus implements Serializable {
 
 	//bi-directional many-to-one association to ModuleCursus
 	@OneToMany(mappedBy="uniteFormationCursus")
+	@OrderBy("moc_ordre ASC")
 	private List<ModuleCursus> moduleCursuses;
 
 	//bi-directional many-to-one association to Cursus

@@ -1,5 +1,7 @@
 package cursus;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import entities.cursus.CoursCursus;
@@ -14,6 +16,8 @@ public interface CoursCursusServiceLocal {
 	CoursCursus update(CoursCursus coursCursus);
 
 	CoursCursus findById(Integer id);
+	
+	List<CoursCursus> findAllByCursus(Integer id);
 	
 //	List<CoursCursus> findByModuleId(Integer id);
 

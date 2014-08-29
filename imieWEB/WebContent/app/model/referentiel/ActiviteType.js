@@ -7,8 +7,9 @@ Ext.define('ExtJsMVC.model.referentiel.ActiviteType',
 			          {name: 'referentiel'}, 
 			          {name: 'children', mapping: 'competencePros'}
 		         ],
+		         
 		childType : 'ExtJsMVC.model.referentiel.CompetencePro',
-	    hasMany:  {model: 'ExtJsMVC.model.referentiel.CompetencePro', name: 'competencePros'},	
+	    hasMany:  {model: 'ExtJsMVC.model.referentiel.CompetencePro', associationKey : 'competencePros'},	
 	   
 	    proxy: 
 		{
@@ -32,7 +33,23 @@ Ext.define('ExtJsMVC.model.referentiel.ActiviteType',
 	                },
 	                scope: this
 	            }
-	    	} 
+	    	}, 
+	    	
+		 	reader : 
+			{
+		        transform: 
+		        {
+		            fn: function(data) 
+		            {
+		            	if(data.actId != undefined)
+		        		{
+		            		data.id = 'actId'.concat(data.actId);
+		        		}
+		            	return data;
+		            },
+		            scope: this
+		        }
+			}
 	    },
 	    
 	    pseudoWriting: function()

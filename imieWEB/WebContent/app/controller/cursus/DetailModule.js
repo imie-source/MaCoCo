@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailModule',
 	refs :
 		[
 		 	{ref : 'switchView', selector: 'viewport #switchView'},
-		 	{ref : 'arbre', selector: 'cursus-Arbre'},
+		 	{ref : 'arbre2', selector: 'cursus-Arbre2'},
 		],
 
 	stores : 
@@ -44,13 +44,30 @@ Ext.define('ExtJsMVC.controller.cursus.DetailModule',
 		
 		detailView.updateRecord();
 		detailView.getRecord().save();
+		
+		
+		var recordModule = detailView.getRecord();
+		var moduleId = recordModule.get('mocId');  
+		
+		var store = this.getUniteFormationStoreStore();
+		var moduleFound = store.getRoot().findChild('mocId', moduleId, true);
+		
+		refreshStaticTree(store, 'curId');
+		
+		var arbre2 = this.getArbre2();
+		
+		console.log(moduleFound.getPath());
+//		arbre2.expandPath('root/2001/ufcId2002');
+		arbre2.expandPath(moduleFound.getPath());
+		
+		
 	},
 	
 	onAddButtonClick : function(bouton)
 	{
 		var detailView = bouton.up('cursus-DetailModule');
 		var recordModule = detailView.getRecord();
-		
+
 		var switchview = this.getSwitchView();
 		
 		switchview.removeAll();

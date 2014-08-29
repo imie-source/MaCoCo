@@ -36,7 +36,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
         },
         {
             xtype : 'button',
-            text : 'Ajouter',
+            text : 'Ajouter Cours',
             itemId : 'AddRecord'
         }
     ]

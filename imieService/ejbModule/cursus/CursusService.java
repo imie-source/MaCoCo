@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
+import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
 import entities.referentiel.Savoir;
 
@@ -42,6 +43,19 @@ public class CursusService implements CursusServiceLocal {
 	{
 		@SuppressWarnings("unchecked")
 		List<Cursus> resultList = em.createNamedQuery("Cursus.findAll").getResultList();
+		
+		for (Cursus cursus : resultList) 
+		{
+			for (@SuppressWarnings("unused") Periode per : cursus.getPeriodes())
+			{
+				//Initialisation
+			}
+			
+			for (@SuppressWarnings("unused") UniteFormationCursus uf : cursus.getUniteFormationCursuses())
+			{
+				//Initialisation
+			}
+		}
 
 		return resultList;
 	}
@@ -55,6 +69,11 @@ public class CursusService implements CursusServiceLocal {
 	{
 		Cursus result = em.find(Cursus.class, id);
 
+		for (@SuppressWarnings("unused") Periode per : result.getPeriodes())
+		{
+			//Initialisation
+		}
+		
 		for (UniteFormationCursus uf : result.getUniteFormationCursuses()) 
 		{
 			for (ModuleCursus module : uf.getModuleCursuses()) 

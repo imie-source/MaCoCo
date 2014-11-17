@@ -91,7 +91,7 @@ CREATE TABLE public.Unite_Formation_Cursus(
 
 CREATE TABLE public.Module_Promo(
 	mop_id        SERIAL NOT NULL ,
-	mop_intitule  VARCHAR (25)  ,
+	mop_intitule  VARCHAR (80)  ,
 	mop_objectifs VARCHAR (500)  ,
 	mop_ordre     INTEGER   ,
 	moc_id        INT   ,
@@ -101,7 +101,7 @@ CREATE TABLE public.Module_Promo(
 
 CREATE TABLE public.Module_Cursus(
 	moc_id        SERIAL NOT NULL ,
-	moc_intitule  VARCHAR (25)  ,
+	moc_intitule  VARCHAR (80)  ,
 	moc_objectifs VARCHAR (500)  ,
 	moc_ordre     INTEGER   ,
 	ufc_id        INT   ,
@@ -111,7 +111,7 @@ CREATE TABLE public.Module_Cursus(
 CREATE TABLE public.Cours_Cursus(
 	coc_id           SERIAL NOT NULL ,
 	coc_duree        VARCHAR (25)  ,
-	coc_intitule     VARCHAR (25)  ,
+	coc_intitule     VARCHAR (80)  ,
 	coc_type         VARCHAR (25)  ,
 	coc_objectifs    VARCHAR (500)  ,
 	coc_evaluation   VARCHAR (500)  ,
@@ -124,7 +124,7 @@ CREATE TABLE public.Cours_Cursus(
 CREATE TABLE public.Cours_Promo(
 	cop_id           SERIAL NOT NULL ,
 	cop_duree        VARCHAR (25)  ,
-	cop_intitule     VARCHAR (25)  ,
+	cop_intitule     VARCHAR (80)  ,
 	cop_type         VARCHAR (25)  ,
 	cop_objectifs    VARCHAR (500)  ,
 	cop_evaluation   VARCHAR (500)  ,

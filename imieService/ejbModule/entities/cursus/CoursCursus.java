@@ -41,8 +41,8 @@ public class CoursCursus implements Serializable {
 	@JoinColumn(name="moc_id")
 	private ModuleCursus moduleCursus;
 	
-	@Column(name="coc_cursus", length=2147483647)
-	private String cocCursus;
+	//@Column(name="coc_cursus", length=2147483647)
+//	private String cocCursus;
 
 	@Column(name="coc_duree")
 	private Integer cocDuree;
@@ -82,13 +82,13 @@ public class CoursCursus implements Serializable {
 		this.cocCommentaires = cocCommentaires;
 	}
 
-	public String getCocCursus() {
-		return this.cocCursus;
-	}
-
-	public void setCocCursus(String cocCursus) {
-		this.cocCursus = cocCursus;
-	}
+//	public String getCocCursus() {
+//		return this.cocCursus;
+//	}
+//
+//	public void setCocCursus(String cocCursus) {
+//		this.cocCursus = cocCursus;
+//	}
 
 	public Integer getCocDuree() {
 		return this.cocDuree;

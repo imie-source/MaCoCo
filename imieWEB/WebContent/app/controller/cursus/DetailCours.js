@@ -33,6 +33,9 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCours',
 		
 		detailView.getRecord().data.cocIntitule = detailView.getComponent('detailCoursNom').getValue();
 		
+		//suppression branche modulesCursus.coursCursuses SLO risque de merge jpa destructif
+		detailView.getRecord().data.moduleCursus.coursCursuses= undefined;
+		
 		detailView.updateRecord();
 		
 		detailView.getRecord().save();

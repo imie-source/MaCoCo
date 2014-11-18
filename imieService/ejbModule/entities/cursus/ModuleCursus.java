@@ -28,8 +28,8 @@ public class ModuleCursus implements Serializable {
 	@Column(name="moc_objectifs", length=500)
 	private String mocObjectifs;
 	
-	@Column(name="moc_modalite", length=500)
-	private String mocModalite;
+//	@Column(name="moc_modalite", length=500)
+//	private String mocModalite;
 
 	//bi-directional many-to-one association to CoursCursus
 	@OneToMany(mappedBy="moduleCursus")
@@ -68,13 +68,13 @@ public class ModuleCursus implements Serializable {
 		this.mocObjectifs = mocObjectifs;
 	}
 	
-	public String getMocModalite() {
-		return this.mocModalite;
-	}
-
-	public void setMocModalite(String mocModalite) {
-		this.mocModalite = mocModalite;
-	}
+//	public String getMocModalite() {
+//		return this.mocModalite;
+//	}
+//
+//	public void setMocModalite(String mocModalite) {
+//		this.mocModalite = mocModalite;
+//	}
 
 	public List<CoursCursus> getCoursCursuses() {
 		return this.coursCursuses;

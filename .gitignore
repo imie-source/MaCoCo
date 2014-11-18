@@ -19,5 +19,7 @@ hs_err_pid*
 .project
 .settings
 .classpath
+.externalToolBuilders/
+.gradle/
 build/
 bin/

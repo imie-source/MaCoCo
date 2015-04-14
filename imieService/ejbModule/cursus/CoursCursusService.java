@@ -1,6 +1,5 @@
 package cursus;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -70,6 +69,7 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 	{
 		Query queryAllCours = em.createNamedQuery("CoursCursus.findAllByCursus");
 		queryAllCours.setParameter("idCursus", id);
+		@SuppressWarnings("unchecked")
 		List<CoursCursus> res = queryAllCours.getResultList();
 		
 		for (CoursCursus coursCursus : res) 

@@ -30,6 +30,7 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
                     data.children = undefined;
                     data.text = undefined;
                     data.moduleCursuses = undefined;
+                    data.cursus.uniteFormationCursuses = undefined;
                     return data;
                 },
                 scope: this

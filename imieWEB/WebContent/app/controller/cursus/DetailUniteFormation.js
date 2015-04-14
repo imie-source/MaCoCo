@@ -47,6 +47,9 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 		console.log(detailViewUF.getRecord().data.ufcNom);
 		console.log(detailViewUF.getComponent('detailUniteFormationNom').getValue());
 		
+		console.log("detailViewUF.getRecord().data");
+		console.log(detailViewUF.getRecord().data);
+		
 		detailViewUF.updateRecord();
 		detailViewUF.getRecord().save();
 	},	

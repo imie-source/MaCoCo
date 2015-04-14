@@ -48,7 +48,7 @@ public class UniteFormationCursusServlet
 	
 	@POST()
 	public Response add(UniteFormationCursus uf) 
-	{
+	{	
 		uniteFormationCursusService.create(uf);
 		ArrayList<UniteFormationCursus> response = new ArrayList<UniteFormationCursus>();
 		response.add(uf);

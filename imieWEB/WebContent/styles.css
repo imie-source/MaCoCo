@@ -14,7 +14,7 @@ body
 }
 
 
-.bloc-global
+.bloc-global, .bloc-columnName
 {
 	border: 1px Navy solid;
 	margin-left: 1cm;
@@ -22,9 +22,31 @@ body
 }
 
 
+.column-reac,.column-module,.column-heure,.column-infomodule
+{
+	display: inline-block;
+	vertical-align: top;
+	background-color: yellow;
+}
+.column-reac
+{
+	width: 40%;
+}
+.column-module
+{
+	width: 33%;
+}
+.column-heure
+{
+	width: 4.8%;
+}
+.column-infomodule
+{
+	width: 22.2%;
+}
 .bloc-reac
 {
-	width: 49%;
+	width: 40%;
 	display: inline-block;
 	vertical-align: top;
 	background-color: AliceBlue;
@@ -44,7 +66,7 @@ body
 
 .bloc-uf
 {
-	width: 50%;
+	width: 60%;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -58,32 +80,35 @@ body
 
 .bloc-heure
 {
-	width : 4%;
+	width : 8%;
 	background-color: LightSteelBlue;
 	display: inline-block;
+	text-align: center;
 }
 
 .bloc-cours
 {
-	background-color: LightSteelBlue ;
+	/*background-color: LightSteelBlue ;*/
+	background-color: AliceBlue ;
 	display: inline-block;
 	vertical-align: top;
-	width : 59%;
+	width : 63%;
 }
 
 
 .row-cours
 {
-	width: 94%;
+	width: 88%;
 	background-color: AliceBlue;
 	display: inline-block;
 }
 
 .infos-cours
 {
-	width: 6%;
+	width: 12%;
 	background-color: AliceBlue;
 	display: inline-block;
+	text-align: center;
 }
 
 .bloc-infomodule
@@ -92,7 +117,7 @@ body
 	border: 1px Teal solid;
 	display: inline-block;
 	vertical-align: top;
-	width : 39%;
+	width : 36%;
 }
 
 
@@ -109,37 +134,53 @@ body
 }
 
 
-
+.bloc-sommeHeureTxt{
+	display: inline-block;
+	vertical-align: top;
+	width: 33%;
+	margin-left: 40%;
+	border: 1px Navy solid;
+}
+.bloc-sommeHeureNb{	
+	display: inline-block;
+	vertical-align: top;
+	width: 4.8%;
+	border: 1px Navy solid;
+}
 
 
 
 @page 
 {
     size: A4 landscape;
-    margin: 0;
+    margin: 5% 3% 5% 3%;
 	padding: 0;
 }
 
+
 @media print 
 {
+body{
+		-webkit-print-color-adjust: exact;
+		font-size: 12px;
+}
 	
-	
-	
+
 .bloc-uf
 {
 	page-break-inside:avoid;
-	width: 50%;
+	width: 60%;
 	display: inline-block;
 	vertical-align: top;
 }
 
 .bloc-cours
 {
-	-webkit-print-color-adjust: exact;
 	background-color: LightSteelBlue ;
 	display: inline-block;
 	vertical-align: top;
-	width : 59%;
+	width : 63%;
+
 }
 	
 .bloc-titre
@@ -162,7 +203,7 @@ body
 .bloc-reac
 {
 	-webkit-print-color-adjust: exact;
-	width: 49%;
+	width: 40%;
 	display: inline-block;
 	vertical-align: top;
 	background-color: AliceBlue;
@@ -173,6 +214,7 @@ body
 	-webkit-print-color-adjust: exact;
 	width: 99%;
 	background-color: LightSteelBlue;
+	font-weight: bold;
 }
 
 .bloc-savoir
@@ -185,7 +227,7 @@ body
 .row-cours
 {
 	-webkit-print-color-adjust: exact;
-	width: 94%;
+	width: 88%;
 	background-color: AliceBlue;
 	display: inline-block;
 }
@@ -193,7 +235,8 @@ body
 .infos-cours
 {
 	-webkit-print-color-adjust: exact;
-	width: 5%;
+	width:12%;
+	text-align: center;
 	background-color: AliceBlue;
 	display: inline-block;
 }
@@ -205,7 +248,7 @@ body
 	border: 1px Teal solid;
 	display: inline-block;
 	vertical-align: top;
-	width : 39%;
+	width : 36%;
 }
 
 
@@ -220,6 +263,57 @@ body
 	display: inline-block;
 	width : 44%;
 }
-	
-	
+.entete-module
+{
+	width: 55%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	font-weight: bold;
+}	
+.bloc-heure
+{
+	width : 8%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+}	
+.column-reac,.column-module,.column-heure,.column-infomodule
+{
+	-webkit-print-color-adjust: exact;
+	display: inline-block;
+	vertical-align: top;
+	background-color: yellow;
+}
+.column-reac
+{
+	width: 40%;
+}
+.column-module
+{
+	width: 33%;
+}
+.column-heure
+{
+	width: 6%;
+}
+.column-infomodule
+{
+	width: 21%;
+}
+.bloc-sommeHeureTxt{
+	display: inline-block;
+	vertical-align: top;
+	width: 32%;
+	margin-left: 40%;
+	border:1px Navy solid;
+}
+.bloc-sommeHeureNb{	
+	display: inline-block;
+	vertical-align: top;
+	width: 6%;
+	border:1px Navy solid;
+}
+
+
 }

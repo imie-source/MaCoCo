@@ -132,7 +132,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		var cursusModel = this.getCursusCursusModelModel();
 		
 		var coursByCursusModel = this.getCursusCoursByCursusModelModel();
-		
+		var uniteFormationModel = this.getCursusUniteFormationCursusModelModel();
+
 		
 		var modelName = record.entityName;
 		var switchview = this.getSwitchView();

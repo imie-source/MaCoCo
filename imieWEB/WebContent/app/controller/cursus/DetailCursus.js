@@ -97,10 +97,29 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus',
 			
 			
 			//Titre
-			var child = {tag: 'div', cls: 'bloc-titre', html: cursusData.curNom};
+			var schemaPedago = 'Schéma pédagogique : ';
+			var child = {tag: 'div', cls: 'bloc-titre', html: schemaPedago.concat(cursusData.curNom)};
 			var blocTitre = dh.append(htmlBody, child);
+			//Nom des colonnes
+			var child = {tag: 'div', cls: 'bloc-columnName'};
+			var blocColumnName = dh.append(htmlBody, child);
 			
+			var columnName = [
+			            ['Compétences Visées','column-reac'],
+			            ['Modules','column-module'],
+			            ['Jours','column-heure'],
+			            ['Commentaires','column-infomodule']
+			];
 		
+			columnName.forEach(function(element, index, array){
+				var child = {tag: 'div', cls: element[1], html :element[0]};
+				var column = dh.append(blocColumnName, child);
+			});
+			
+			//Total des heures
+			var sommeHeure =0;
+			
+			
 			//UnitesFormations
 			cursusData.uniteFormationCursuses.forEach(function(uf) 
 			{
@@ -167,7 +186,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus',
 					var blocInfoModuleEvaluation = dh.append(blocInfoModule, child);
 					
 					//Cours
-					var sommeHeures = 0;
+					var moduleHeures = 0;
 					module.coursCursuses.forEach(function(cours) 
 					{
 						
@@ -178,8 +197,8 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus',
 						var infosCours = dh.append(blocCours, child);
 						
 						
-						sommeHeures = sommeHeures + cours.cocDuree;
-
+						moduleHeures = moduleHeures + cours.cocDuree;
+						sommeHeure = sommeHeure + cours.cocDuree;
 						
 						//ajout de tous les savoirs (pas de duplication) dans la liste
 						cours.savoirs.forEach(function(savoir)
@@ -190,7 +209,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus',
 						
 					});
 					
-					dh.insertHtml('afterBegin', blocInfoModuleHeure, sommeHeures);
+					dh.insertHtml('afterBegin', blocInfoModuleHeure, moduleHeures);
 					
 				});
 				
@@ -202,8 +221,18 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus',
 					var blocSavoir = dh.append(blocReac, child);
 				});
 				
-			});
+			});	
 			
+			
+			//Total des heures
+			var sommeHeure =0;
+			//Total des heures de cours
+			var child = {tag: 'div', cls: 'bloc-sommeHeure'};
+			var blocSommeHeure = dh.append(htmlBody, child);
+			var child = {tag: 'div', cls: 'bloc-sommeHeureTxt', html: 'Total des heures de cours en centre :'};
+			var blocSommeHeureTxt = dh.append(blocSommeHeure, child);
+			var child = {tag: 'div', cls: 'bloc-sommeHeureNb', html: sommeHeure};
+			var blocSommeHeureNb = dh.append(blocSommeHeure, child);
 		};
 		
 		

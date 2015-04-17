@@ -8,6 +8,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
     items : 
     [
         {
+        	id : 'seleniumDetailCursusNom',
         	itemId: 'detailCursusNom',
             xtype : 'textareafield',
             name : 'text',
@@ -16,6 +17,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         
         {
+        	id : 'seleniumDetailCursusPerDeb',
         	itemId: 'TestPeriodeDebut',
             xtype : 'datefield',
             fieldLabel : 'Du :',
@@ -23,6 +25,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         
         {
+        	id : 'seleniumDetailCursusPerFin',
         	itemId: 'TestPeriodeFin',
             xtype : 'datefield',
             fieldLabel : 'Au :',
@@ -30,17 +33,20 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         
         {
+        	id : 'seleniumDetailCursusSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {
+        	id : 'seleniumDetailCursusAdd',
             xtype : 'button',
             text : 'Ajouter UF',
             itemId : 'AddRecord'
         }
         ,
         {
+        	id : 'seleniumDetailCursusPrint',
             xtype : 'button',
             text : 'Imprimer',
             itemId : 'Print'

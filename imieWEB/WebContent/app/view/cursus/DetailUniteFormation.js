@@ -9,6 +9,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailUniteFormation', {
     items : 
     [
         {
+        	id : 'seleniumDetailUFNom',
         	itemId: 'detailUniteFormationNom',
             xtype : 'textareafield',
             name : 'text',
@@ -16,6 +17,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailUniteFormation', {
            width : 500,
         },
         {
+        	id : 'seleniumDetailUFObj',
             xtype : 'textareafield',
             name : 'ufcObjectifs',
             fieldLabel : 'Objectifs',
@@ -23,11 +25,13 @@ Ext.define('ExtJsMVC.view.cursus.DetailUniteFormation', {
             height : 100
         },
         {
+        	id : 'seleniumDetailUFSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {
+        	id : 'seleniumDetailUFAdd',
             xtype : 'button',
             text : 'Ajouter Module',
             itemId : 'AddRecord'

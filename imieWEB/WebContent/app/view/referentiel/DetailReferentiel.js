@@ -9,6 +9,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailReferentiel', {
     items : 
     [
         {
+        	id : 'seleniumDetailReferentielNom',
         	itemId : 'detailReferentielNom',
             xtype : 'textareafield',
             name : 'text',
@@ -16,13 +17,15 @@ Ext.define('ExtJsMVC.view.referentiel.DetailReferentiel', {
             width : 500,
         },
         {
+        	id : 'seleniumDetailReferentielSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {
+        	id : 'seleniumDetailReferentielAdd',
             xtype : 'button',
-            text : 'Ajouter',
+            text : 'Ajouter AT',
             itemId : 'AddRecord'
         }
     ]

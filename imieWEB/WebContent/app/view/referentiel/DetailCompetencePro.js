@@ -10,6 +10,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailCompetencePro',
     items : 
     [
         {
+        	id : 'seleniumDetailCompetenceProNom',
         	itemId : 'detailCompetenceProNom',
             xtype : 'textareafield',
             name : 'text',
@@ -17,13 +18,15 @@ Ext.define('ExtJsMVC.view.referentiel.DetailCompetencePro',
             width : 500,
         },
         {
+        	id : 'seleniumDetailCompetenceProSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {
+        	id : 'seleniumDetailCompetenceProAdd',
             xtype : 'button',
-            text : 'Ajouter',
+            text : 'Ajouter Savoir',
             itemId : 'AddRecord'
         }
     ]

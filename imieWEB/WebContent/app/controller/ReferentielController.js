@@ -155,6 +155,8 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 				                	
 				                	new Ext.Button(
 				                	{
+				                		cls : 'SeleniumModuleSuppButton',
+				                		//id: 'SeleniumCPSuppButton'+i,
 				    					text:' X ',
 				    					renderTo: renderRow,
 				    				    handler: function(bouton) 
@@ -253,6 +255,8 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 				                	
 				                	new Ext.Button(
 				                	{
+				                		cls : 'SeleniumModuleSuppButton',
+				                		//id: 'SeleniumSavoirSuppButton'+i,
 				    					text:' X ',
 				    					renderTo: renderRow,
 				    				    handler: function(bouton) 

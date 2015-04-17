@@ -240,6 +240,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			                	
 			                	new Ext.Button(
 			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumUFSuppButton'+i,
 			    					text:' X ',
 			    					renderTo: renderRow,
 			    				    handler: function(bouton) 
@@ -344,6 +346,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			                	
 			                	new Ext.Button(
 			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumModuleSuppButton'+i,
 			    					text:' X ',
 			    					renderTo: renderRow,
 			    				    handler: function(bouton) 
@@ -431,7 +435,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				var panelTemplate = Ext.create('Ext.panel.Panel', {
 				    title: 'Cours du module',
 				    bodyPadding: 10,
-				    
+				    cls : 'SeleniumCoursByModule',
 				    tpl : new Ext.XTemplate
 				    (
 			    		'<tpl for=".">',
@@ -452,6 +456,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			                	
 			                	new Ext.Button(
 			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumCoursSuppButton'+i,
 			    					text:' X ',
 			    					renderTo: renderRow,
 			    				    handler: function(bouton) 
@@ -634,6 +640,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			                	
 			                	new Ext.Button(
 			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumSavoirCoursSuppButton'+i,
 			    					text:' X ',
 			    					renderTo: renderRow,
 			    				    handler: function(bouton) 

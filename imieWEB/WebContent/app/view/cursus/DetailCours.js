@@ -9,6 +9,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
     items : 
     [
         {
+        	id : 'seleniumDetailCoursNom',
         	itemId : 'detailCoursNom',
             xtype : 'textareafield',
             name : 'text',
@@ -16,16 +17,19 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             width : 500
         },
         {
+        	id : 'seleniumDetailCoursDuree',
             xtype : 'textfield',
             name : 'cocDuree',
             fieldLabel : 'Duree'
         },
         {
+        	id : 'seleniumDetailCoursType',
             xtype : 'textfield',
             name : 'cocType',
             fieldLabel : 'Type'
         },
         {
+        	id : 'seleniumDetailCoursObj',
             xtype : 'textareafield',
             name : 'cocObjectifs',
             fieldLabel : 'Objectifs',
@@ -33,12 +37,14 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             height : 100
         },
         {
+        	id : 'seleniumDetailCoursEval',
             xtype : 'textfield',
             name : 'cocEvaluation',
             fieldLabel : 'Evaluation',
             width : 500
         },
         {
+        	id : 'seleniumDetailCoursComm',
             xtype : 'textareafield',
             name : 'cocCommentaires',
             fieldLabel : 'Commentaires',
@@ -46,6 +52,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             height : 100
         },
         {
+        	id : 'seleniumDetailCoursSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'

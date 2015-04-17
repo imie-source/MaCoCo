@@ -28,6 +28,7 @@ Ext.define('ExtJsMVC.model.referentiel.CompetencePro',
 	                    data.children = undefined;
 	                    data.text = undefined;
 	                    data.savoirs = undefined;
+	                    data.activiteType.competencePros = undefined; 
 	                    return data;
 	                },
 	                scope: this

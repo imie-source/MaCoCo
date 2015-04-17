@@ -10,6 +10,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
     items : 
     [
         {
+        	id : 'seleniumDetailActiviteTypeNom',
         	itemId : 'detailActiviteTypeNom',
             xtype : 'textareafield',
             name : 'text',
@@ -17,13 +18,15 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
             width : 500,
         },
         {
+        	id : 'seleniumDetailActiviteTypeSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'
         },
         {
+        	id : 'seleniumDetailActiviteTypeAdd',
             xtype : 'button',
-            text : 'Ajouter',
+            text : 'Ajouter Compétence Pro',
             itemId : 'AddRecord'
         }
     ]

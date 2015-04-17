@@ -25,6 +25,7 @@ Ext.define('ExtJsMVC.model.referentiel.Savoir',
 	                    data.parentId = undefined;
 	                    data.children = undefined;
 	                    data.text = undefined;
+	                    data.competencePro.savoirs=undefined;
 	                    return data;
 	                },
 	                scope: this

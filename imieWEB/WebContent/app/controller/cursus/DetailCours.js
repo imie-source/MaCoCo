@@ -39,6 +39,22 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCours',
 		detailView.updateRecord();
 		
 		detailView.getRecord().save();
+		
+		
+		//Partie refresh static tree
+		var recordCours = detailView.getRecord();
+		var coursId = recordCours.get('cocId');  
+		
+		var store = this.getUniteFormationStoreStore();
+		var coursFound = store.getRoot().findChild('cocId', coursId, true);
+		
+		refreshStaticTree(store, 'curId');
+		
+		var arbre2 = this.getArbre2();
+		
+		console.log(coursFound.getPath());
+//		arbre2.expandPath('root/2001/ufcId2002');
+		arbre2.expandPath(coursFound.getPath());
 	}
 	
 });

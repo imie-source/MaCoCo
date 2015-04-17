@@ -10,6 +10,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
     items : 
     [
         {
+        	id : 'seleniumDetailSavoirNom',
         	itemId : 'detailSavoirNom',
             xtype : 'textareafield',
             name : 'text',
@@ -17,6 +18,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
             width : 500,
         },
         {
+        	id : 'seleniumDetailSavoirSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord'

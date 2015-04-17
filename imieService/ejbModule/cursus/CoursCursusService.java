@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
+import entities.cursus.RCourscursusSavoir;
 import entities.referentiel.Savoir;
 
 /**
@@ -61,8 +62,25 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 	public void delete(CoursCursus coursCursus) 
 	{
 		coursCursus = em.merge(coursCursus);
+		/*List<Savoir> savoirs = coursCursus.getSavoirs();
+		for (Savoir savoir : savoirs) {
+			RCourscursusSavoir rCourscursusSavoir = em.find(RCourscursusSavoir.class, savoir.getSavId());
+			deleteRCourscursusSAvoir(rCourscursusSavoir);
+		}*/
+		
+		Query queryAllRCoursSavoir= em.createNamedQuery("RCourscursusSavoir.findAll");
+		@SuppressWarnings("unchecked")
+		List<RCourscursusSavoir> rCourscursusSavoirs = queryAllRCoursSavoir.getResultList();
+		for (RCourscursusSavoir rCourscursusSavoir : rCourscursusSavoirs) {
+			if(coursCursus==rCourscursusSavoir.getCoursCursus()){
+				rCourscursusSavoir = em.merge(rCourscursusSavoir);
+				em.remove(rCourscursusSavoir);
+			}
+		}
 		em.remove(coursCursus);
 	}
+	
+	
 	
 	
 	public List<CoursCursus> findAllByCursus(Integer id) 

@@ -1,5 +1,8 @@
 package cursus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -64,6 +67,10 @@ public class UniteFormationCursusService implements UniteFormationCursusServiceL
 	public void delete(UniteFormationCursus uniteFormation) 
 	{
 		uniteFormation = em.find(UniteFormationCursus.class, uniteFormation.getUfcId());
+		List<ModuleCursus> moduleCursuses = uniteFormation.getModuleCursuses();
+		for (ModuleCursus moduleCursus : moduleCursuses) {
+			moduleCursus.setUniteFormationCursus(null);
+		}
 		em.remove(uniteFormation);
 	}
 

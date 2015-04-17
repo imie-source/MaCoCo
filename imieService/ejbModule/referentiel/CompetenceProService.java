@@ -1,5 +1,7 @@
 package referentiel;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,6 +51,10 @@ public class CompetenceProService implements CompetenceProServiceLocal {
 	public void delete(Integer id) 
 	{
 		CompetencePro competencePro = em.find(CompetencePro.class, id);
+		List<Savoir> savoirs = competencePro.getSavoirs();
+		for (Savoir savoir : savoirs) {
+			savoir.setCompetencePro(null);
+		}
 		em.remove(competencePro);
 	}
 

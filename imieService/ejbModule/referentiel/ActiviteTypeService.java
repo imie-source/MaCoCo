@@ -1,5 +1,7 @@
 package referentiel;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,6 +51,10 @@ public class ActiviteTypeService implements ActiviteTypeServiceLocal {
 	public void delete(Integer id) 
 	{
 		ActiviteType activiteType = em.find(ActiviteType.class, id);
+		List<CompetencePro> competencePros = activiteType.getCompetencePros();
+		for (CompetencePro competencePro : competencePros) {
+			competencePro.setActiviteType(null);
+		}
 		em.remove(activiteType);
 	}
 

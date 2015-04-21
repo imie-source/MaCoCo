@@ -9,7 +9,6 @@
         <script type="text/javascript" src="app/functions/patch.js"></script>
         <script type="text/javascript">
 	
-
        		
         	Ext.application({
         		
@@ -20,9 +19,9 @@
            		[
            			'referentiel.ArbreReferentiel',
            			'cursus.CursusArbre',
-           			'cursus.CursusArbre2',
+           			'cursus.CursusArbre2'//,
+           			//'AdministrationWindow'
            		],
-
         		controllers : 
         		[
         			'ReferentielController',
@@ -35,7 +34,8 @@
         			'cursus.DetailUniteFormation',
         			'cursus.DetailModule',
         			'cursus.DetailCours',
-        			'cursus.LiaisonReferentielEnseignement'
+        			'cursus.LiaisonReferentielEnseignement',
+        			'AdministrationWindowCtrl'
         		],
         		
         		launch : function() {
@@ -52,6 +52,16 @@
 		                 
 		                items : 
 		               	[
+							{
+								id : 'seleniumAdminWinOpen',
+							    xtype : 'button',
+							    text : 'open',
+							    itemId : 'openAdminWin'
+							
+								//handler: function(){
+									//popup.show();
+									//}
+							 },
 			               	
 		                     { 
 								 itemId: 'voletGauche',
@@ -73,7 +83,6 @@
 										xtype : 'cursus-Arbre2',
 										flex  : 1,
 									},
-
 				                    { 
 				                        xtype : 'arbre-Referentiel' ,
 				                        flex  : 1,
@@ -82,8 +91,6 @@
 					             ]
 		                         
 		                     },
-
-
 		                     
 		                     { 	
 		                    	 itemId : 'switchView',
@@ -95,21 +102,141 @@
 // 		                       	  	}
 		                       	 ]
 		                     },
-
-
 		                     
 		                     { 
 // 		                         xtype : 'savoir-Tree' ,
 // 		                         margin : '0 0 0 10',
 // 		                         flex  : 1
 		                     }
-
 		            	]	
    					});
+
         		}
         	
         	}); 
+        	
 
+
+        	//Test MAxime
+
+  /* var popup = new Ext.Panel({
+		floating : true,
+		modal : true,
+		width : 1000,
+		height : 800,
+
+		layout : {
+				type  : 'hbox',
+				align : 'stretch'
+		 		},
+		 items :[{
+    			id : 'seleniumAdminWinClose',
+				xtype : 'button',
+				text : 'Fermer',
+				itemId : 'CloseAdminWin',
+				handler: function(){
+				    popup.hide();
+				}
+			},
+            { 
+            	itemId: 'voletReferentiel',
+            	margin : '0 10 0 0',
+            	flex  : 1,
+            	layout : 
+            		{
+            		type  : 'vbox',
+            		align : 'stretch'
+            		},
+            		items : [ 
+	            			
+			    		{
+				    		id : 'seleniumAdminWinRef',
+				    		xtype : 'textfield',
+				    		name : '',
+				    		fieldLabel : 'Referentiels'
+			    		}, 
+			    		{
+			    			id : 'seleniumAdminWinRefSave',
+			    			xtype : 'button',
+			    			text : 'Ajouter',
+			    			itemId : 'SaveRecord'
+			    		}, 
+			    		{
+			    			id : 'seleniumAdminWinRefs',
+			    			xtype : 'textareafield',
+			    			name : '',
+			    			width : 300,
+			    			height : 200
+			    		} ]
+            	},
+            	{ 
+                	itemId: 'voletCursus',
+                	margin : '0 10 0 0',
+                	flex  : 1,
+                	layout : 
+                		{
+                		type  : 'vbox',
+                		align : 'stretch'
+                		},
+                		items : [ 
+    	            			
+    			    		{
+    				    		id : 'seleniumAdminWinCursus',
+    				    		xtype : 'textfield',
+    				    		name : '',
+    				    		fieldLabel : 'Cursus'
+    			    		}, 
+    			    		{
+    			    			id : 'seleniumAdminWinCursusSave',
+    			    			xtype : 'button',
+    			    			text : 'Ajouter',
+    			    			itemId : 'SaveRecord'
+    			    		}, 
+    			    		{
+    			    			id : 'seleniumAdminWinCursuses',
+    			    			xtype : 'textareafield',
+    			    			name : '',
+    			    			width : 300,
+    			    			height : 200
+    			    		} ]
+                	},
+                	{ 
+                    	itemId: 'voletPromo',
+                    	margin : '0 10 0 0',
+                    	flex  : 1,
+                    	layout : 
+                    		{
+                    		type  : 'vbox',
+                    		align : 'stretch'
+                    		},
+                    		items : [ 
+        	            			
+        			    		{
+        				    		id : 'seleniumAdminWinPromo',
+        				    		xtype : 'textfield',
+        				    		name : '',
+        				    		fieldLabel : 'Promotions'
+        			    		}, 
+        			    		{
+        			    			id : 'seleniumAdminWinPromoSave',
+        			    			xtype : 'button',
+        			    			text : 'Ajouter',
+        			    			itemId : 'SaveRecord'
+        			    		}, 
+        			    		{
+        			    			id : 'seleniumAdminWinPromos',
+        			    			xtype : 'textareafield',
+        			    			name : '',
+        			    			width : 300,
+        			    			height : 200
+        			    		} ]
+                    	}
+        	
+    	
+			 ]
+});*/
+        	//Test MAxime
+        	
         	
         </script>
     </head>

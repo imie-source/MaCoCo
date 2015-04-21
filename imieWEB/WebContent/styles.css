@@ -1,319 +1,470 @@
-body 
-{
-    margin: 0;
-    padding: 0;
+
+
+body{
+		-webkit-print-color-adjust: exact;
+		margin : 0;
+		padding: 0;
+}
+
+#print{
+	visibility: visible;
+	text-align: right;
+}
+
+table, thead, tr, th,td{
+	margin : 0;
+	padding: 0;
 }
 
 
 .bloc-titre
 {
-	border: 1px Navy solid;
-	margin-left: 1cm;
-	margin-right: 1cm;
-	font-size: 20px;
+	background-color : #00CCFF;
+	margin : 0px 1px 2px 0px;
+	font-size: 30px;
 }
-
-
-.bloc-global, .bloc-columnName
-{
-	border: 1px Navy solid;
-	margin-left: 1cm;
-	margin-right: 1cm;
+.bloc-columnName{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
 }
-
-
-.column-reac,.column-module,.column-heure,.column-infomodule
+.column-reac,.column-module,.column-heure,.column-infomodule,.column-infoeval
 {
+	margin : 0;
+	padding: 0;
+	margin-right : 2px;
 	display: inline-block;
 	vertical-align: top;
-	background-color: yellow;
 }
+.column-reac,.column-module,.column-heure,.column-infoeval
+{
+	margin-right : 1.75px;
+}
+
 .column-reac
 {
-	width: 40%;
+	width: 38%;	
+	background-color: #FFFF00;
 }
 .column-module
 {
 	width: 33%;
+	background-color: #FFFF00;
 }
 .column-heure
 {
-	width: 4.8%;
+	width: 5%;
+	background-color: #FFFF00;
+}
+.column-infoeval{
+	width: 10%;
+	background-color: #FFFF00;
 }
 .column-infomodule
 {
-	width: 22.2%;
+	width: 13%;
+	background-color: #FFFF00;
+}
+
+
+.bloc-global{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+	background-color: #EBFFFF;
+	
 }
 .bloc-reac
 {
-	width: 40%;
+	width: 38%;
 	display: inline-block;
 	vertical-align: top;
-	background-color: AliceBlue;
+	margin : 0px 1.75px 0px 0px;
 }
 
 .entete-reac
 {
-	width: 99%;
+	margin : 0;
+	padding : 0;
+	width: 100%;
 	background-color: LightSteelBlue;
+	height: 22px;
 }
 
 .bloc-savoir
 {
-	background-color: AliceBlue;
+	width: 100%;
 }
 
 
 .bloc-uf
 {
-	width: 60%;
+	margin : 0;
+	padding : 0;
+	width: 61.6%;
 	display: inline-block;
 	vertical-align: top;
 }
+.bloc-module
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
 
+}
 .entete-module
 {
-	width: 55%;
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 53.8%;
 	background-color: LightSteelBlue;
 	display: inline-block;
+	height: 22px;
 }
 
 .bloc-heure
 {
-	width : 8%;
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width : 8.2%;
 	background-color: LightSteelBlue;
 	display: inline-block;
 	text-align: center;
+	height: 22px;
 }
-
-.bloc-cours
-{
-	/*background-color: LightSteelBlue ;*/
-	background-color: AliceBlue ;
+.bloc-vide{	
+	margin : 0;
+	padding : 0;
 	display: inline-block;
 	vertical-align: top;
-	width : 63%;
+	width: 37.35%;
+	height: 22px;
+	background-color: LightSteelBlue;
 }
+.bloc-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 62.3%;
+}
+
 
 
 .row-cours
 {
-	width: 88%;
-	background-color: AliceBlue;
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 86.5%;
 	display: inline-block;
 }
 
 .infos-cours
 {
-	width: 12%;
-	background-color: AliceBlue;
+	margin : 0;
+	padding : 0;
+	width: 13%;
 	display: inline-block;
 	text-align: center;
 }
 
+
+
+
 .bloc-infomodule
-{
-	background-color: AliceBlue;
-	border: 1px Teal solid;
+{	margin : 0;
+	padding : 0;
 	display: inline-block;
 	vertical-align: top;
-	width : 36%;
+	width : 37%;
 }
 
-
-.bloc-modalite
-{
-	display: inline-block;
-	width : 44%;
-}
 
 .bloc-evaluation
 {
+	margin : 0;
+	padding : 0;
 	display: inline-block;
-	width : 44%;
+	width : 43%;
 }
 
+.bloc-commentaire
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	width : 56%;
+}
 
+.bloc-sommeHeure{
+	margin :10px 0px 0px 0px;
+	padding: 0;
+}
 .bloc-sommeHeureTxt{
+		margin :0px 1.75px 0px 38%;
+	padding: 0;
 	display: inline-block;
 	vertical-align: top;
 	width: 33%;
-	margin-left: 40%;
-	border: 1px Navy solid;
+	margin-left: 38.2%;
+	background-color: LightSteelBlue;
+	
 }
 .bloc-sommeHeureNb{	
+	margin :0;
+	padding: 0;
 	display: inline-block;
 	vertical-align: top;
-	width: 4.8%;
-	border: 1px Navy solid;
+	text-align : center;
+	width: 5%;
+	background-color: LightSteelBlue;
+	
 }
-
 
 
 @page 
 {
     size: A4 landscape;
-    margin: 5% 3% 5% 3%;
-	padding: 0;
+
 }
 
 
 @media print 
 {
+#print{
+	visibility: hidden;
+}
 body{
 		-webkit-print-color-adjust: exact;
-		font-size: 12px;
+		font-size: 11px;
 }
-	
-
-.bloc-uf
-{
+.bloc-tableRowData{
 	page-break-inside:avoid;
-	width: 60%;
-	display: inline-block;
-	vertical-align: top;
-}
-
-.bloc-cours
-{
-	background-color: LightSteelBlue ;
-	display: inline-block;
-	vertical-align: top;
-	width : 63%;
-
-}
 	
+}	
+.entete-reac,.entete-module,.bloc-heure,.bloc-vide{
+	height : 15px;
+}
+/*
+body{
+		-webkit-print-color-adjust: exact;
+		font-size: 11px;
+		margin : 0;
+		padding: 0;
+}
+
+table, thead, tr, th,td{
+	margin : 0;
+	padding: 0;
+}
+
+
 .bloc-titre
 {
-	border: 1px Navy solid;
-	margin-left: 1cm;
-	margin-right: 1cm;
+	background-color : #00CCFF;
+	margin : 0px 1px 2px 0px;
 	font-size: 20px;
 }
-
-
-.bloc-global
-{
-	border: 1px Navy solid;
-	margin-left: 1cm;
-	margin-right: 1cm;
+.bloc-columnName{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
 }
-
-
-.bloc-reac
+.column-reac,.column-module,.column-heure,.column-infomodule,.column-infoeval
 {
-	-webkit-print-color-adjust: exact;
-	width: 40%;
+	margin : 0;
+	padding: 0;
+	margin-right : 2px;
 	display: inline-block;
 	vertical-align: top;
-	background-color: AliceBlue;
+}
+.column-reac,.column-module,.column-heure,.column-infoeval
+{
+	margin-right : 1.75px;
+}
+
+.column-reac
+{
+	width: 38%;	
+	background-color: #FFFF00;
+}
+.column-module
+{
+	width: 33%;
+	background-color: #FFFF00;
+}
+.column-heure
+{
+	width: 5%;
+	background-color: #FFFF00;
+}
+.column-infoeval{
+	width: 10%;
+	background-color: #FFFF00;
+}
+.column-infomodule
+{
+	width: 13%;
+	background-color: #FFFF00;
+}
+.bloc-tableRowData{
+	page-break-inside:avoid;
+	
+}	
+
+.bloc-global{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+	background-color: #EBFFFF;
+	
+}
+.bloc-reac
+{
+	width: 38%;
+	display: inline-block;
+	vertical-align: top;
+	margin : 0px 1.75px 0px 0px;
 }
 
 .entete-reac
 {
-	-webkit-print-color-adjust: exact;
-	width: 99%;
+	margin : 0;
+	padding : 0;
+	width: 100%;
 	background-color: LightSteelBlue;
-	font-weight: bold;
+	height: 14px;
 }
 
 .bloc-savoir
 {
-	-webkit-print-color-adjust: exact;
-	background-color: AliceBlue;
+	width: 100%;
 }
+
+
+.bloc-uf
+{
+	margin : 0;
+	padding : 0;
+	width: 61.6%;
+	display: inline-block;
+	vertical-align: top;
+}
+.bloc-module
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+
+}
+.entete-module
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 53.8%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	height: 14px;
+}
+
+.bloc-heure
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width : 8.2%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	text-align: center;
+	height: 14px;
+}
+.bloc-vide{	
+	margin : 0;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 37.35%;
+	height: 14px;
+	background-color: LightSteelBlue;
+}
+.bloc-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 62.3%;
+}
+
 
 
 .row-cours
 {
-	-webkit-print-color-adjust: exact;
-	width: 88%;
-	background-color: AliceBlue;
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 86.5%;
 	display: inline-block;
 }
 
 .infos-cours
 {
-	-webkit-print-color-adjust: exact;
-	width:12%;
-	text-align: center;
-	background-color: AliceBlue;
+	margin : 0;
+	padding : 0;
+	width: 13%;
 	display: inline-block;
+	text-align: center;
 }
+
+
+
 
 .bloc-infomodule
-{
-	-webkit-print-color-adjust: exact;
-	background-color: AliceBlue;
-	border: 1px Teal solid;
+{	margin : 0;
+	padding : 0;
 	display: inline-block;
 	vertical-align: top;
-	width : 36%;
+	width : 37%;
 }
 
-
-.bloc-modalite
-{
-	display: inline-block;
-	width : 44%;
-}
 
 .bloc-evaluation
 {
+	margin : 0;
+	padding : 0;
 	display: inline-block;
-	width : 44%;
+	width : 43%;
 }
-.entete-module
+
+.bloc-commentaire
 {
-	width: 55%;
-	background-color: LightSteelBlue;
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
 	display: inline-block;
-	font-weight: bold;
-}	
-.bloc-heure
-{
-	width : 8%;
-	background-color: LightSteelBlue;
-	display: inline-block;
-	text-align: center;
-	font-weight: bold;
-}	
-.column-reac,.column-module,.column-heure,.column-infomodule
-{
-	-webkit-print-color-adjust: exact;
-	display: inline-block;
-	vertical-align: top;
-	background-color: yellow;
+	width : 56%;
 }
-.column-reac
-{
-	width: 40%;
-}
-.column-module
-{
-	width: 33%;
-}
-.column-heure
-{
-	width: 6%;
-}
-.column-infomodule
-{
-	width: 21%;
+
+.bloc-sommeHeure{
+	margin :10px 0px 0px 0px;
+	padding: 0;
 }
 .bloc-sommeHeureTxt{
+		margin :0px 1.75px 0px 38%;
+	padding: 0;
 	display: inline-block;
 	vertical-align: top;
-	width: 32%;
-	margin-left: 40%;
-	border:1px Navy solid;
+	width: 33%;
+	margin-left: 38.2%;
+	background-color: LightSteelBlue;
+	
 }
 .bloc-sommeHeureNb{	
+	margin :0;
+	padding: 0;
 	display: inline-block;
 	vertical-align: top;
-	width: 6%;
-	border:1px Navy solid;
-}
-
-
+	text-align : center;
+	width: 5%;
+	background-color: LightSteelBlue;
+	
+}*/
 }

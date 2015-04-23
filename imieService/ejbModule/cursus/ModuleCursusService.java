@@ -2,6 +2,7 @@ package cursus;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,6 +22,8 @@ public class ModuleCursusService implements ModuleCursusServiceLocal {
 
 	@PersistenceContext
 	EntityManager em;
+	@EJB 
+	CoursCursusServiceLocal coursCursusService;
 	
     /**
      * Default constructor. 
@@ -48,7 +51,8 @@ public class ModuleCursusService implements ModuleCursusServiceLocal {
 		module = em.find(ModuleCursus.class, module.getMocId());
 		List<CoursCursus> coursCursuses = module.getCoursCursuses();
 		for (CoursCursus coursCursus : coursCursuses) {
-			coursCursus.setModuleCursus(null);
+			//coursCursus.setModuleCursus(null);
+			coursCursusService.delete(coursCursus);
 		}
 		em.remove(module);
 		

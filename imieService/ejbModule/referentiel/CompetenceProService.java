@@ -2,6 +2,7 @@ package referentiel;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,7 +23,8 @@ public class CompetenceProService implements CompetenceProServiceLocal {
 
 	@PersistenceContext
 	EntityManager em;
-	
+	@EJB
+	SavoirServiceLocal savoirService;
     /**
      * Default constructor. 
      */
@@ -53,7 +55,7 @@ public class CompetenceProService implements CompetenceProServiceLocal {
 		CompetencePro competencePro = em.find(CompetencePro.class, id);
 		List<Savoir> savoirs = competencePro.getSavoirs();
 		for (Savoir savoir : savoirs) {
-			savoir.setCompetencePro(null);
+			savoirService.delete(savoir.getSavId());
 		}
 		em.remove(competencePro);
 	}

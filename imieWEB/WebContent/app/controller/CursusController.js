@@ -22,12 +22,13 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	[
 		'cursus.CursusArbre',
 		'cursus.CursusArbre2',
+		'administration.AdministrationWindow'
 	],
 	
 	refs :
 	[
 	 	{ref : 'switchView', selector: 'viewport #switchView'},
-	 	{ref : 'arbre2', selector: 'cursus-Arbre2'},
+	 	{ref : 'arbre2', selector: 'cursus-Arbre2'}
 	],
 
 	stores : 
@@ -43,7 +44,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	{
 		
 		this.getCursusStoreStore().load();
-		
+
 		this.control
 		({
 			'cursus-Arbre' : 
@@ -54,7 +55,12 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			'cursus-Arbre2' : 
 			{
 				itemclick : this.chargeFormulaire
+			},
+			'button#openAdminWin' : 
+			{
+				click : this.onOpenAdminWindowButtonClick
 			}
+   
 		});
 	},
 	
@@ -116,7 +122,12 @@ Ext.define('ExtJsMVC.controller.CursusController',
 //		        console.log('Ne correspond pas');
 //		} 
 	},
-	
+	//Ouverture de la fenêtre d'administration
+	onOpenAdminWindowButtonClick : function(bouton)
+	{
+		var viewAdminWindow = Ext.widget('AdministrationWindow');
+		viewAdminWindow.show();
+	},
 	
 	
 	

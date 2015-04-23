@@ -92,11 +92,71 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 					  callback: function(record, operation) 
 					  {
 						  //Chargement du referentiel sans toute son arborescence
-						  record.data.children = undefined;
-						  record.data.activiteTypes = undefined;
+						  //record.data.children = undefined;
+						  //record.data.activiteTypes = undefined;
 						  detailView.loadRecord(record);
 					  }
 					});
+					//Preparation du panel pour les elements "enfants"
+					var panelEnfants = Ext.create('Ext.panel.Panel', {
+					    title: 'Activités Types de ce Référentiel',
+	                    autoDestroy : true,
+					    bodyPadding: 10,
+					    
+					    tpl : new Ext.XTemplate
+					    (
+				    		'<tpl for=".">',
+									'<div class="activiteType-row" id="activiteType-{actId}">',
+										'Activité type : {actLibelle}',
+									'</div>',
+							'</tpl>'
+						),
+					    
+					    listeners:
+					    {
+					    	afterrender:function()
+					        {
+					    		var renderSelector = Ext.query('div.activiteType-row'); 
+				                for(var i in renderSelector)
+				                {
+				                	var renderRow = renderSelector[i];
+				                	
+				                	new Ext.Button(
+				                	{
+				                		cls : 'SeleniumActiviteTypeSuppButton',
+				                		//id: 'SeleniumCPSuppButton'+i,
+				    					text:' X ',
+				    					renderTo: renderRow,
+				    				    handler: function(bouton) 
+				    				    {
+				    				    	var childrenRowId = bouton.renderTo.id;
+				    				    	var sliceIndex = childrenRowId.indexOf('-');
+				    				    	childrenRowId = childrenRowId.slice(sliceIndex+1,childrenRowId.length);
+				    				    	
+				    				    	//suppression de l'element
+				    				    	activiteTypeModel.load(childrenRowId,
+				    				    	{
+				    						  scope: this,
+				    						  callback: function(record, operation) 
+				    						  {
+				    							  record.set('children', null);
+				    							  console.log(record);
+				    							  record.erase();
+				    						  }
+				    				    	});
+
+				    				    }
+				    				});
+				                } 
+					        }
+					    }
+					});
+					
+
+					//Ajout des elements "enfants" au panel
+					panelEnfants.setData(record.get('activiteTypes'));
+					//Ajout du panel
+					switchview.add(panelEnfants);
 				
 				break;
 				

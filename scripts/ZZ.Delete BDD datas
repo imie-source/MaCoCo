@@ -1,0 +1,10 @@
+delete from r_courscursus_savoir;
+delete from cours_cursus;
+delete from module_cursus;
+delete from unite_formation_cursus;
+delete from cursus;
+delete from savoir;
+delete from competence_pro;
+delete from activite_type;
+delete from referentiel;
+

@@ -2,6 +2,7 @@ package referentiel;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,7 +22,8 @@ public class ActiviteTypeService implements ActiviteTypeServiceLocal {
 	
 	@PersistenceContext
 	EntityManager em;
-
+	@EJB
+	CompetenceProServiceLocal competenceProService; 
     /**
      * Default constructor. 
      */
@@ -53,7 +55,7 @@ public class ActiviteTypeService implements ActiviteTypeServiceLocal {
 		ActiviteType activiteType = em.find(ActiviteType.class, id);
 		List<CompetencePro> competencePros = activiteType.getCompetencePros();
 		for (CompetencePro competencePro : competencePros) {
-			competencePro.setActiviteType(null);
+			competenceProService.delete(competencePro.getComId());
 		}
 		em.remove(activiteType);
 	}

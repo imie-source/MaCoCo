@@ -2,9 +2,9 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusGlobal', {
     extend : 'Ext.tab.Panel',
     xtype  : 'cursus-DetailCursusGlobal',
     store: 'CursusStore',
-//    title   : 'Detail Cursus Global',
+// title : 'Detail Cursus Global',
     frame   : true,
-//    padding : 5,
+// padding : 5,
     bodyPadding : 5,
     activeTab: 0,
     
@@ -24,7 +24,14 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusGlobal', {
 		    title: 'Ordonnancement',
 		    items :
 		    [
-		     	{xtype : 'cursus-Arbre-Ordo'}
+		     	{xtype : 'cursus-Arbre-Ordo'},
+		        {
+		        	id : 'seleniumDetailCursusOrdoPrint',
+		            xtype : 'button',
+		            text : 'Imprimer',
+		            itemId : 'printOrdo',
+		
+		        }
 		    ]
 		}
     ]

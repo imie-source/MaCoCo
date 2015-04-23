@@ -8,8 +8,7 @@
         <script type="text/javascript" src="app/functions/myFunctions.js"></script>
         <script type="text/javascript" src="app/functions/patch.js"></script>
         <script type="text/javascript">
-	
-       		
+	  		
         	Ext.application({
         		
         		name : 'ExtJsMVC',
@@ -19,8 +18,8 @@
            		[
            			'referentiel.ArbreReferentiel',
            			'cursus.CursusArbre',
-           			'cursus.CursusArbre2'//,
-           			//'AdministrationWindow'
+           			'cursus.CursusArbre2',
+           			'administration.CursusList'
            		],
         		controllers : 
         		[
@@ -35,7 +34,7 @@
         			'cursus.DetailModule',
         			'cursus.DetailCours',
         			'cursus.LiaisonReferentielEnseignement',
-        			'AdministrationWindowCtrl'
+        			'administration.AdministrationWindowCtrl'
         		],
         		
         		launch : function() {
@@ -57,11 +56,8 @@
 							    xtype : 'button',
 							    text : 'open',
 							    itemId : 'openAdminWin'
-							
-								//handler: function(){
-									//popup.show();
-									//}
 							 },
+							 
 			               	
 		                     { 
 								 itemId: 'voletGauche',
@@ -114,128 +110,6 @@
         		}
         	
         	}); 
-        	
-
-
-        	//Test MAxime
-
-  /* var popup = new Ext.Panel({
-		floating : true,
-		modal : true,
-		width : 1000,
-		height : 800,
-
-		layout : {
-				type  : 'hbox',
-				align : 'stretch'
-		 		},
-		 items :[{
-    			id : 'seleniumAdminWinClose',
-				xtype : 'button',
-				text : 'Fermer',
-				itemId : 'CloseAdminWin',
-				handler: function(){
-				    popup.hide();
-				}
-			},
-            { 
-            	itemId: 'voletReferentiel',
-            	margin : '0 10 0 0',
-            	flex  : 1,
-            	layout : 
-            		{
-            		type  : 'vbox',
-            		align : 'stretch'
-            		},
-            		items : [ 
-	            			
-			    		{
-				    		id : 'seleniumAdminWinRef',
-				    		xtype : 'textfield',
-				    		name : '',
-				    		fieldLabel : 'Referentiels'
-			    		}, 
-			    		{
-			    			id : 'seleniumAdminWinRefSave',
-			    			xtype : 'button',
-			    			text : 'Ajouter',
-			    			itemId : 'SaveRecord'
-			    		}, 
-			    		{
-			    			id : 'seleniumAdminWinRefs',
-			    			xtype : 'textareafield',
-			    			name : '',
-			    			width : 300,
-			    			height : 200
-			    		} ]
-            	},
-            	{ 
-                	itemId: 'voletCursus',
-                	margin : '0 10 0 0',
-                	flex  : 1,
-                	layout : 
-                		{
-                		type  : 'vbox',
-                		align : 'stretch'
-                		},
-                		items : [ 
-    	            			
-    			    		{
-    				    		id : 'seleniumAdminWinCursus',
-    				    		xtype : 'textfield',
-    				    		name : '',
-    				    		fieldLabel : 'Cursus'
-    			    		}, 
-    			    		{
-    			    			id : 'seleniumAdminWinCursusSave',
-    			    			xtype : 'button',
-    			    			text : 'Ajouter',
-    			    			itemId : 'SaveRecord'
-    			    		}, 
-    			    		{
-    			    			id : 'seleniumAdminWinCursuses',
-    			    			xtype : 'textareafield',
-    			    			name : '',
-    			    			width : 300,
-    			    			height : 200
-    			    		} ]
-                	},
-                	{ 
-                    	itemId: 'voletPromo',
-                    	margin : '0 10 0 0',
-                    	flex  : 1,
-                    	layout : 
-                    		{
-                    		type  : 'vbox',
-                    		align : 'stretch'
-                    		},
-                    		items : [ 
-        	            			
-        			    		{
-        				    		id : 'seleniumAdminWinPromo',
-        				    		xtype : 'textfield',
-        				    		name : '',
-        				    		fieldLabel : 'Promotions'
-        			    		}, 
-        			    		{
-        			    			id : 'seleniumAdminWinPromoSave',
-        			    			xtype : 'button',
-        			    			text : 'Ajouter',
-        			    			itemId : 'SaveRecord'
-        			    		}, 
-        			    		{
-        			    			id : 'seleniumAdminWinPromos',
-        			    			xtype : 'textareafield',
-        			    			name : '',
-        			    			width : 300,
-        			    			height : 200
-        			    		} ]
-                    	}
-        	
-    	
-			 ]
-});*/
-        	//Test MAxime
         	
         	
         </script>

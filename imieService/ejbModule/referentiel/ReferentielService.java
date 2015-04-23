@@ -1,5 +1,8 @@
 package referentiel;
 
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,7 +25,8 @@ public class ReferentielService implements ReferentielServiceLocal {
 	
 	@PersistenceContext
 	EntityManager em;
-
+	@EJB
+	ActiviteTypeServiceLocal activiteTypeService; 
     /**
      * Default constructor. 
      */
@@ -61,6 +65,10 @@ public class ReferentielService implements ReferentielServiceLocal {
 	public void delete(Integer id)
 	{
 		Referentiel referentiel = em.find(Referentiel.class, id);
+		List<ActiviteType> activiteTypes = referentiel.getActiviteTypes();
+		for (ActiviteType activiteType : activiteTypes) {
+			activiteTypeService.delete(activiteType.getActId());
+		}
 		em.remove(referentiel);
 	}
 

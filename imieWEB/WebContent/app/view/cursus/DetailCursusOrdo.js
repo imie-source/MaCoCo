@@ -1,5 +1,4 @@
-Ext.define('ExtJsMVC.view.cursus.DetailCursusOrdo', 
-{
+Ext.define('ExtJsMVC.view.cursus.DetailCursusOrdo', {
 	extend : 'Ext.tree.Panel',
 	xtype  : 'cursus-Arbre-Ordo',
 	title : 'Cours du cursus',

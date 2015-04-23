@@ -2,6 +2,7 @@ package cursus;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,6 +28,8 @@ public class CursusService implements CursusServiceLocal {
 
 	@PersistenceContext
 	EntityManager em;
+	@EJB 
+	UniteFormationCursusServiceLocal uniteFormationCursusService;
 
 	/**
 	 * Default constructor. 
@@ -109,7 +112,13 @@ public class CursusService implements CursusServiceLocal {
 	@Override
 	public void delete(Cursus cursus) 
 	{
+		cursus = em.find(Cursus.class, cursus.getCurId());
+		List<UniteFormationCursus> uniteFormationCursuses = cursus.getUniteFormationCursuses();
+		for (UniteFormationCursus uniteFormationCursus : uniteFormationCursuses) {
+			uniteFormationCursusService.delete(uniteFormationCursus);
+		}
 		em.remove(cursus);
+		
 	}
 
 }

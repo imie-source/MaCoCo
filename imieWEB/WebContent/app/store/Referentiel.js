@@ -6,9 +6,9 @@ Ext.define('ExtJsMVC.store.Referentiel',
 	
     model : 'ExtJsMVC.model.referentiel.RootReferentiel',
     
-    root : {
+    /*root : {
     	
-    },
+    },*/
     
     autoLoad : false
 });

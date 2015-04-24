@@ -4,21 +4,15 @@ Ext.define('ExtJsMVC.view.administration.AdministrationWindow', {
 	stores : [ 'CursusStore', 'Referentiel' ],
 
 	title : 'Console d\'administration',
-	floating : true,
-	centered : true,
-	modal : true,
-	width : Ext.getBody().getViewSize().width - 100,
-	height : Ext.getBody().getViewSize().height - 100,
+	//floating : true,
+	//centered : true,
+	//modal : true,
+	width : '100%',//Ext.getBody().getViewSize().width - 100,
 	layout : {
 		type : 'hbox',
 		align : 'stretch'
 	},
-	items : [ {
-		id : 'seleniumAdminWinClose',
-		xtype : 'button',
-		text : 'Fermer',
-		itemId : 'closeAdminWin',
-	}, {
+	items : [  {
 		itemId : 'voletReferentiel',
 
 		margin : '0 10 0 0',

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
-        <script type="text/javascript" src="js/ext-all-debug.js"></script>
-        <script type="text/javascript" src="app/proxy/TreeModelProxy.js"></script>
-        <script type="text/javascript" src="app/functions/myFunctions.js"></script>
-        <script type="text/javascript" src="app/functions/patch.js"></script>
-        <script type="text/javascript">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="css/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
+<script type="text/javascript" src="js/ext-all-debug.js"></script>
+<script type="text/javascript" src="app/proxy/TreeModelProxy.js"></script>
+<script type="text/javascript" src="app/functions/myFunctions.js"></script>
+<script type="text/javascript" src="app/functions/patch.js"></script>
+<script type="text/javascript">
 	  		
-        	Ext.application({
+        	/*Ext.application({
         		
         		name : 'ExtJsMVC',
         		appFolder : 'app',
@@ -109,10 +110,116 @@
 
         		}
         	
+        	}); */
+Ext.application({
+        		
+        		name : 'ExtJsMVC',
+        		appFolder : 'app',
+        		
+        		views : 
+           		[
+           			'referentiel.ArbreReferentiel',
+           			'cursus.CursusArbre',
+           			'cursus.CursusArbre2',
+           			'administration.CursusList',
+           			'administration.AdministrationWindow'
+           		],
+        		controllers : 
+        		[
+        			'ReferentielController',
+        			'referentiel.DetailReferentiel',
+        			'referentiel.DetailActiviteType',
+        			'referentiel.DetailCompetencePro',
+        			'referentiel.DetailSavoir',
+        			'CursusController',
+        			'cursus.DetailCursus',
+        			'cursus.DetailUniteFormation',
+        			'cursus.DetailModule',
+        			'cursus.DetailCours',
+        			'cursus.LiaisonReferentielEnseignement',
+        			'administration.AdministrationWindowCtrl'
+        		],
+        		
+        		launch : function() {
+        			
+        			console.log('Launch');
+        			
+	       			Ext.create('Ext.container.Viewport',
+   					{
+	       				width : Ext.getBody().getViewSize().width,
+		       			 layout : 
+		       			 {
+		                     type  : 'border'
+		                 },
+		                 
+		                items : 
+		               	[
+							{
+							    xtype : 'AdministrationWindow',
+							    region : 'west',
+								split : true,
+								collapsible:true,
+								collapsed : true
+							 },
+							 {
+								region : 'center',
+								split : true,
+								layout : 
+								{
+									    type  : 'hbox',
+									    align : 'stretch'
+								},
+							 
+							 	items : 
+					            [					               	
+		                     		{ 
+								 		itemId: 'voletGauche',
+								 		margin : '0 10 0 0',					 
+								 		flex  : 1,
+				       			 		layout : 
+				       			 			{
+				                     			type  : 'vbox',
+				                     			align : 'stretch'
+				                 			},
+			                     		items : 
+				                 			[
+											{
+												xtype : 'cursus-Arbre',
+												flex  : 1,
+											},
+											{
+												xtype : 'cursus-Arbre2',
+												flex  : 1,
+											},
+				                    		{ 
+				                        		xtype : 'arbre-Referentiel' ,
+				                        		flex  : 1,
+				                    		}
+					             			]	
+		                         
+		                     		},
+		                     
+		                    		{ 	
+		                    	 		itemId : 'switchView',
+		                         		flex  : 2,
+		                       	 		items :
+		                       	 			[
+			// 		                       	  	{
+			// 		                       	    	xtype : 'cursus-DetailCursus' 
+			// 		                       	  	}
+		                       	 			]
+		                     		},
+		                     	]
+							 }
+		            	]	
+   					});
+
+        		}
+        	
         	}); 
         	
         	
         </script>
-    </head>
-    <body></body>
-</html> 
+</head>
+<body></body>
+</html>

@@ -24,10 +24,6 @@ Ext.define('ExtJsMVC.controller.administration.AdministrationWindowCtrl',
 		this.control(
 		{
 
-			'AdministrationWindow #closeAdminWin' : 
-            {
-                click : this.onCloseAdminWinButtonClick
-            },
 			/*'AdministrationWindow #saveRefRecord' : 
             {
                 click : this.onSaveRefButtonClick
@@ -44,11 +40,7 @@ Ext.define('ExtJsMVC.controller.administration.AdministrationWindowCtrl',
 
 	},
 	
-	onCloseAdminWinButtonClick : function(bouton)
-	{
-		console.log('test: .close()');
-		this.getAdminWindow().close();
-	},
+
 	
 	onSaveCursusButtonClick : function(bouton)
 	{

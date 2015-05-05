@@ -22,7 +22,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	[
 		'cursus.CursusArbre',
 		'cursus.CursusArbre2',
-		'administration.AdministrationWindow'
+		//'administration.AdministrationWindow'
 	],
 	
 	refs :
@@ -56,11 +56,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			{
 				itemclick : this.chargeFormulaire
 			},
-			'button#openAdminWin' : 
-			{
-				click : this.onOpenAdminWindowButtonClick
-			}
-   
+			
 		});
 	},
 	
@@ -123,11 +119,11 @@ Ext.define('ExtJsMVC.controller.CursusController',
 //		} 
 	},
 	//Ouverture de la fenêtre d'administration
-	onOpenAdminWindowButtonClick : function(bouton)
+	/*onOpenAdminWindowButtonClick : function(bouton)
 	{
 		var viewAdminWindow = Ext.widget('AdministrationWindow');
 		viewAdminWindow.show();
-	},
+	},*/
 	
 	
 	

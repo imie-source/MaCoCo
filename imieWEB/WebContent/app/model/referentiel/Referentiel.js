@@ -67,5 +67,5 @@ Ext.define('ExtJsMVC.model.referentiel.Referentiel',
 	    	var pseudoWriter = this.getProxy().getWriter();
 	    	return pseudoWriter.getRecordData(this);
 	    }
-	    
+
 });

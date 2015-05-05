@@ -1,6 +1,7 @@
 package servlet.referentiel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import referentiel.ReferentielServiceLocal;
+import entities.cursus.Cursus;
+import entities.cursus.Periode;
+import entities.cursus.UniteFormationCursus;
 import entities.referentiel.ActiviteType;
 import entities.referentiel.CompetencePro;
 import entities.referentiel.Referentiel;
@@ -28,6 +32,25 @@ public class ReferentielServlet
 	@EJB 
 	ReferentielServiceLocal referentielService;
 
+	/**
+	 * Retourne les referentiels sans leurs descendants
+	 * @return
+	 */
+	@GET()
+	public Response getAllreferentiel() 
+	{
+		List<Referentiel> listeReferentiels = referentielService.findAllReferentiel();
+		for (Referentiel referentiel : listeReferentiels) {
+			for(ActiviteType aT : referentiel.getActiviteTypes()){
+				aT.setReferentiel(null);
+				aT.setCompetencePros(null);
+			}
+		}
+		return Response.ok(listeReferentiels).build();
+	}
+	
+	
+	
 	@GET()
 	@Path("/{id}")
 	public Response getReferentiel(@PathParam("id") Integer id ) 

@@ -74,5 +74,4 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 	    	var pseudoWriter = this.getProxy().getWriter();
 	    	return pseudoWriter.getRecordData(this);
 	    }
-	    
 });

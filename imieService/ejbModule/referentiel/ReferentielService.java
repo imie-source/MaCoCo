@@ -35,6 +35,20 @@ public class ReferentielService implements ReferentielServiceLocal {
     }
 
 	@Override
+	public List<Referentiel> findAllReferentiel() {
+		
+		 @SuppressWarnings("unchecked")
+		List<Referentiel> referentiels = em.createNamedQuery("Referentiel.findAll").getResultList();
+		 for (Referentiel referentiel : referentiels) {
+			 for (ActiviteType aT : referentiel.getActiviteTypes()){
+				 //initialisation des données
+			 }
+		}
+		
+		return referentiels;
+	}
+
+	@Override
 	public Referentiel findById(Integer id) {
 		
 		Referentiel result = em.find(Referentiel.class, id);
@@ -77,5 +91,6 @@ public class ReferentielService implements ReferentielServiceLocal {
 	{
 		return em.merge(referentiel);
 	}
+
 
 }

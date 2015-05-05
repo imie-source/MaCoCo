@@ -10,107 +10,7 @@
 <script type="text/javascript" src="app/functions/patch.js"></script>
 <script type="text/javascript">
 	  		
-        	/*Ext.application({
-        		
-        		name : 'ExtJsMVC',
-        		appFolder : 'app',
-        		
-        		views : 
-           		[
-           			'referentiel.ArbreReferentiel',
-           			'cursus.CursusArbre',
-           			'cursus.CursusArbre2',
-           			'administration.CursusList'
-           		],
-        		controllers : 
-        		[
-        			'ReferentielController',
-        			'referentiel.DetailReferentiel',
-        			'referentiel.DetailActiviteType',
-        			'referentiel.DetailCompetencePro',
-        			'referentiel.DetailSavoir',
-        			'CursusController',
-        			'cursus.DetailCursus',
-        			'cursus.DetailUniteFormation',
-        			'cursus.DetailModule',
-        			'cursus.DetailCours',
-        			'cursus.LiaisonReferentielEnseignement',
-        			'administration.AdministrationWindowCtrl'
-        		],
-        		
-        		launch : function() {
-        			
-        			console.log('Launch');
-        			
-	       			Ext.create('Ext.container.Viewport',
-   					{
-		       			 layout : 
-		       			 {
-		                     type  : 'hbox',
-		                     align : 'stretch'
-		                 },
-		                 
-		                items : 
-		               	[
-							{
-								id : 'seleniumAdminWinOpen',
-							    xtype : 'button',
-							    text : 'open',
-							    itemId : 'openAdminWin'
-							 },
-							 
-			               	
-		                     { 
-								 itemId: 'voletGauche',
-								 margin : '0 10 0 0',
-								 flex  : 1,
-				       			 layout : 
-				       			 {
-				                     type  : 'vbox',
-				                     align : 'stretch'
-				                 },
-			                     items : 
-				                 [
-									{
-										xtype : 'cursus-Arbre',
-										flex  : 1,
-									},
-									
-									{
-										xtype : 'cursus-Arbre2',
-										flex  : 1,
-									},
-				                    { 
-				                        xtype : 'arbre-Referentiel' ,
-				                        flex  : 1,
-				                    },
-									
-					             ]
-		                         
-		                     },
-		                     
-		                     { 	
-		                    	 itemId : 'switchView',
-		                         flex  : 2,
-		                       	 items :
-		                       	 [
-// 		                       	  	{
-// 		                       	    	xtype : 'cursus-DetailCursus' 
-// 		                       	  	}
-		                       	 ]
-		                     },
-		                     
-		                     { 
-// 		                         xtype : 'savoir-Tree' ,
-// 		                         margin : '0 0 0 10',
-// 		                         flex  : 1
-		                     }
-		            	]	
-   					});
-
-        		}
-        	
-        	}); */
+     	
 Ext.application({
         		
         		name : 'ExtJsMVC',
@@ -121,8 +21,9 @@ Ext.application({
            			'referentiel.ArbreReferentiel',
            			'cursus.CursusArbre',
            			'cursus.CursusArbre2',
-           			'administration.CursusList',
-           			'administration.AdministrationWindow'
+           			//'administration.CursusList',
+           			//'administration.AdministrationWindow',
+           			'home.AdministrationWindow'
            		],
         		controllers : 
         		[
@@ -137,29 +38,33 @@ Ext.application({
         			'cursus.DetailModule',
         			'cursus.DetailCours',
         			'cursus.LiaisonReferentielEnseignement',
-        			'administration.AdministrationWindowCtrl'
+        			//'administration.AdministrationWindowCtrl'
         		],
         		
         		launch : function() {
         			
         			console.log('Launch');
         			
-	       			Ext.create('Ext.container.Viewport',
+        			var viewPort = Ext.create('Ext.container.Viewport',
    					{
-	       				width : Ext.getBody().getViewSize().width,
+	       				//width : Ext.getBody().getViewSize().width,
 		       			 layout : 
 		       			 {
-		                     type  : 'border'
+		                    type  : 'border'
+		       				
 		                 },
 		                 
 		                items : 
 		               	[
 							{
-							    xtype : 'AdministrationWindow',
+							  	//xtype : 'AdministrationWindow',
+							   xtype : 'view-administrationWindow',
 							    region : 'west',
 								split : true,
 								collapsible:true,
-								collapsed : true
+								collapsed : false,
+								width : (Ext.getBody().getViewSize().width-40),
+								//height : (Ext.getBody().getViewSize().height-100),
 							 },
 							 {
 								region : 'center',
@@ -208,16 +113,67 @@ Ext.application({
 			// 		                       	    	xtype : 'cursus-DetailCursus' 
 			// 		                       	  	}
 		                       	 			]
-		                     		},
+		                     		}
 		                     	]
-							 }
+							 },
+
+								{
+								    //xtype : '',
+								    type:'vbox',
+									region : 'east',
+									split : true,
+									collapsible:true,
+									collapsed : true
+								 }
 		            	]	
    					});
+        			
+        			var curAdminForm = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
+        			//curAdminForm.hide();
+        			curAdminForm.setPagePosition(100,100,true);
+        			
+        		
 
         		}
         	
-        	}); 
         	
+        	});
+        	
+        	/*
+        		Ext.application({
+
+        		name : 'ExtJsMVC',
+        		appFolder : 'app',
+        		
+				models:[
+					'cursus.CursusModel',
+					'referentiel.Referentiel',
+									
+	    		],
+    		
+  			 	views: [
+  	        		'home.AdministrationWindow'
+  	        		
+  	    		],
+        		
+        		launch : function() {
+        			
+        			console.log('Launch');
+        			
+
+        			var viewPort = Ext.create('Ext.container.Viewport',
+        					{
+        		             
+        		             items : 
+        		             {
+            		             xtype : 'view-administrationWindow'
+                		     }
+        		                      
+        		             
+        					});
+        	   		}
+        	
+        	});*/
         	
         </script>
 </head>

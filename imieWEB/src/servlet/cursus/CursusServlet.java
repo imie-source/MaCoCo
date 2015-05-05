@@ -7,7 +7,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -113,7 +115,14 @@ public class CursusServlet
 		return Response.ok(reponse).build();
 	}
 
-
+	@POST()
+	public Response add(Cursus cursus) 
+	{	
+		cursusService.create(cursus);
+		ArrayList<Cursus> response = new ArrayList<Cursus>();
+		response.add(cursus);
+	    return Response.ok(response).build();
+	}
 
 	@PUT
 	@Path("/{string}")
@@ -125,6 +134,15 @@ public class CursusServlet
 		return Response.ok(response).build();
 	}
 
+	@DELETE
+	@Path("/{string}")
+	public Response delete(Cursus cursus) 
+	{
+		cursusService.delete(cursus);
+		ArrayList<Cursus> response = new ArrayList<Cursus>();
+		response.add(cursus);
+		return Response.ok(response).build();
+	}
 
 
 	//	

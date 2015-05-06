@@ -6,7 +6,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -76,12 +78,30 @@ public class ReferentielServlet
 		    return Response.ok(referentiel).build();
 	}
 	
+	@POST()
+	public Response add(Referentiel referentiel) 
+	{	
+		referentielService.create(referentiel);
+		ArrayList<Referentiel> response = new ArrayList<Referentiel>();
+		response.add(referentiel);
+	    return Response.ok(response).build();
+	}
 	
 	@PUT
 	@Path("/{string}")
 	public Response update(Referentiel referentiel) 
 	{
 		referentielService.update(referentiel);
+		ArrayList<Referentiel> response = new ArrayList<Referentiel>();
+		response.add(referentiel);
+		return Response.ok(response).build();
+	}
+	
+	@DELETE
+	@Path("/{string}")
+	public Response delete(Referentiel referentiel) 
+	{
+		referentielService.delete(referentiel.getRefId());
 		ArrayList<Referentiel> response = new ArrayList<Referentiel>();
 		response.add(referentiel);
 		return Response.ok(response).build();

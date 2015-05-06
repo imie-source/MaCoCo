@@ -21,8 +21,6 @@ Ext.application({
            			'referentiel.ArbreReferentiel',
            			'cursus.CursusArbre',
            			'cursus.CursusArbre2',
-           			//'administration.CursusList',
-           			//'administration.AdministrationWindow',
            			'home.AdministrationWindow'
            		],
         		controllers : 
@@ -38,7 +36,6 @@ Ext.application({
         			'cursus.DetailModule',
         			'cursus.DetailCours',
         			'cursus.LiaisonReferentielEnseignement',
-        			//'administration.AdministrationWindowCtrl'
         		],
         		
         		launch : function() {
@@ -47,7 +44,6 @@ Ext.application({
         			
         			var viewPort = Ext.create('Ext.container.Viewport',
    					{
-	       				//width : Ext.getBody().getViewSize().width,
 		       			 layout : 
 		       			 {
 		                    type  : 'border'
@@ -57,14 +53,12 @@ Ext.application({
 		                items : 
 		               	[
 							{
-							  	//xtype : 'AdministrationWindow',
-							   xtype : 'view-administrationWindow',
+							 	xtype : 'view-administrationWindow',
 							    region : 'west',
 								split : true,
 								collapsible:true,
 								collapsed : false,
 								width : (Ext.getBody().getViewSize().width-40),
-								//height : (Ext.getBody().getViewSize().height-100),
 							 },
 							 {
 								region : 'center',
@@ -129,8 +123,9 @@ Ext.application({
    					});
         			
         			var curAdminForm = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
-        			//curAdminForm.hide();
         			curAdminForm.setPagePosition(100,100,true);
+        			var refAdminForm = Ext.ComponentQuery.query('refAdminWindowForm')[0];
+        			refAdminForm.setPagePosition(Ext.getBody().getViewSize().width-600,100,true);
         			
         		
 
@@ -139,41 +134,7 @@ Ext.application({
         	
         	});
         	
-        	/*
-        		Ext.application({
-
-        		name : 'ExtJsMVC',
-        		appFolder : 'app',
-        		
-				models:[
-					'cursus.CursusModel',
-					'referentiel.Referentiel',
-									
-	    		],
-    		
-  			 	views: [
-  	        		'home.AdministrationWindow'
-  	        		
-  	    		],
-        		
-        		launch : function() {
-        			
-        			console.log('Launch');
-        			
-
-        			var viewPort = Ext.create('Ext.container.Viewport',
-        					{
-        		             
-        		             items : 
-        		             {
-            		             xtype : 'view-administrationWindow'
-                		     }
-        		                      
-        		             
-        					});
-        	   		}
         	
-        	});*/
         	
         </script>
 </head>

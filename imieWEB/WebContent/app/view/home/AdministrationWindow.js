@@ -1,5 +1,4 @@
 Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
-	//extend : 'Ext.container.Container',
 	extend : 'Ext.panel.Panel',
 	xtype : 'view-administrationWindow',
 	alias:'widget.administrationWindow',
@@ -8,7 +7,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 	            'ExtJsMVC.view.home.AdministrationWindowModel',
 	            'ExtJsMVC.view.home.AdministrationWindowGrid',
 	            'ExtJsMVC.view.home.CursusAdminWindowForm',
-	            //'ExtJsMVC.view.home.RefAdminWindowForm'
+	          'ExtJsMVC.view.home.RefAdminWindowForm'
 	],
 	
 	controller : 'administrationWindowController',
@@ -45,25 +44,25 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 				   {
 					xtype:'administrationWindowGrid',
 					height : 600,
-					title:'Referentiel Grid',
+					title:'Liste des référentiels',
 					bind:{
 						store:'{referentiels}',
-						title:'<b>{currentReferentiel.refNom}</b>'
+						title:'<b>Liste des référentiels : {currentReferentiel.refNom}</b>'
 					},
 					reference:'referentielsGrid',
 					columns:[{
 						text:'Référentiel',
 						dataIndex:'refNom',
 						flex:1.5,
-						//editor:{
-							//bind:'{currentCursus.curNom}',
-							//selectedOnFocus:true
-						//},
+						editor:{
+							bind:'{currentCursus.curNom}',
+							selectedOnFocus:true
+						},
 					}],
 				   },
 				   {
-					//	xtype:'refAdminWindowForm',
-					//	title:'Referentiel Form'
+						xtype:'refAdminWindowForm',
+						//title:'Referentiel Form'
 				   },	
 				],
      	   },
@@ -82,10 +81,10 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 				   {
 					xtype:'administrationWindowGrid',
 					height : 600,
-					title:'Cursus Grid',
+					title:'Liste des cursus',
 					bind:{
 						store:'{cursuses}',
-						title:'<b>{currentCursus.curNom}</b>'
+						title:'<b>Liste des cursus : {currentCursus.curNom}</b>'
 					},
 					reference:'cursusesGrid',
 					columns:[{
@@ -101,7 +100,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 				   {
 				
 						xtype:'cursusAdminWindowForm',
-						title:'Cursus Form'
+						//title:'Cursus Form'
 				   },		
 				],
 			},

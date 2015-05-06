@@ -4,7 +4,11 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 	requires:[
 	          'Ext.form.field.Text'
 	],
-
+	resizable : true,
+	draggable : true,
+	floating : true,
+	width : 500,
+	height : 200,
 	bodyPadding:10,
 	bind:{
 		title:'<b>{currentReferentiel.refNom}</b>'
@@ -12,7 +16,7 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 	id : 'refAdminWindowForm',
 	modelValidation:true,
 	fieldDefaults:{
-		labelWidth:70,
+		labelWidth:150,
 		labelAlign:'right',
 		selectOnFocus:true,
 		flex:1,

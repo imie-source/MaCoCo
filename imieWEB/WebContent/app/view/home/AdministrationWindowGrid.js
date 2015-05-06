@@ -10,11 +10,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 		triggerEvent:'rowfocus'
 	}],
 	modelValidation:true,
-	/*bind:{
-		store:'{cursuses}',
-		title:'<b>{currentCursus.curNom}</b>'
-	},
-	reference:'cursusesGrid',*/
+
 	autoScroll:true,
 	dockedItems:[{
 		xtype:'toolbar',
@@ -37,44 +33,25 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 		]
 		
 	}],
-/*	columns:[{
-		text:'Cursus',
-		dataIndex:'curNom',
-		flex:1.5,
-		editor:{
-			bind:'{currentCursus.curNom}',
-			selectedOnFocus:true
-		},
 
-	},
-	
-		],*/
 		listeners:{
 			rowdblclick : function(grid,record,tr,rowIndex,e,eOpts){
 				e.stopEvent();
 				this.findParentByType('administrationWindow').getController().onCollapse(grid,record,tr,rowIndex);
-				
-				//TODO: collapse la fenetre pour arriver sur l'écran principal
-				//this.findParentByType('administrationWindow').setCollapsed(true);
 			},
 			rowcontextmenu : function(grid,record,tr,rowIndex,e,eOpts){
-				//TODO: afficher une popUp de contextmenu
-				//var posi = e.getXY();
-				e.stopEvent();
-				//maPopUp.showAt(posi);
-				this.findParentByType('administrationWindow').getController().onUpdate();
+				this.findParentByType('administrationWindow').getController().onContextMenu(grid,record,tr,rowIndex,e,eOpts);
 			},
 			rowkeydown :function(grid,record,tr,rowIndex,e,eOpts){
 				console.log(e.keyCode);
 				if(e.keyCode===46){
-					this.findParentByType('administrationWindow').getController().onRemove();
+					//this.findParentByType('administrationWindow').getController().onRemove();
 				}else if(e.keyCode===113){
 					e.stopEvent();
-					this.findParentByType('administrationWindow').getController().onCommit();
-					//this.findParentByType('administrationWindow').getController().onUpdateF2(grid,rowIndex);
+					//this.findParentByType('administrationWindow').getController().onCommit();
 				}else if(e.keyCode===13){
 					e.stopEvent();
-					this.findParentByType('administrationWindow').getController().onCommit();
+					//this.findParentByType('administrationWindow').getController().onCommit();
 				}
 			},
 			

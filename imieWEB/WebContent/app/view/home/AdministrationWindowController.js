@@ -2,16 +2,45 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.administrationWindowController',
 
-    onCollapse : function(grid,record,tr,rowIndex){
+    init: function()
+	{
+
+
+		this.control
+		({
+
+			'administrationWindowGrid':{
+				rowdblclick : this.onCollapse,
+				rowcontextmenu : this.onContextMenu,
+				rowkeydown : this.onSelect
+			}
+			
+		});
+	},
+    
+    
+    onSelect : function(grid,record,tr,rowIndex,e){
+    	e.stopEvent();
+    	if(e.keyCode===13){
+			setRefFilter(grid,record);
+			
+		}else if(e.keyCode===27){
+	    	clearRefFilter();
+		}
+    },
+    
+    onCollapse : function(grid,record,tr,rowIndex,e){
+    	e.stopEvent();
     	var home = grid.up('view-administrationWindow');
-    	console.log(home);
     	home.toggleCollapse();
     },
     
     
     onReject: function (btn,e) {
     	var vm = this.getViewModel();
+    	var thisForm;
     	if(btn.up('cursusAdminWindowForm')!==undefined){
+    		thisForm =btn.up('cursusAdminWindowForm'); 
     		var cursusSelected = vm.get('currentCursus');
             cursusSelected.reject();
             
@@ -20,8 +49,9 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
             	var store = vm.getStore('cursuses');
             	store.remove(cursusSelected);
             }
-            btn.up('cursusAdminWindowForm').hide();
+           
     	}else if(btn.up('refAdminWindowForm')!==undefined){
+    		thisForm =btn.up('cursusAdminWindowForm'); 
     		var refSelected = vm.get('currentReferentiel');
     		refSelected.reject();
             
@@ -30,9 +60,9 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
             	var store = vm.getStore('referentiels');
             	store.remove(refSelected);
             }
-            btn.up('refAdminWindowForm').hide();
+            
     	}
-
+    	thisForm.hide();
     },
 
     onCommit: function (btn,e) {
@@ -41,9 +71,14 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 	    	var cususStore =this.getViewModel().getStore('cursuses');
 	    	cususStore.sync();
 	    	btn.up('cursusAdminWindowForm').hide();
+	    	
     	}else if(btn.up('refAdminWindowForm')!==undefined){
     		var refStore =this.getViewModel().getStore('referentiels');
 	    	refStore.sync();
+    		
+    		
+    		//console.log(this.getViewModel().getStore('referentiels').getModel());
+    		//refStore.save();
     		/*var referentiel = this.getViewModel().get('currentReferentiel');
     		referentiel.commit();
     		referentiel.reject();*/
@@ -94,6 +129,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
         	    	},
         		},
         		{
+        			text : 'afficher tous les cursus',
+        			handler:function(){
+        				adminCtrl.clearRefFilter();
+        	    	},
+        		},
+        		{
         			text : 'modifier le référentiel',
         			handler:function(){
         				adminCtrl.updateRef();
@@ -105,6 +146,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
         				adminCtrl.removeRef();
         	    	},
         		},
+        		{
+        			text : 'filtrer les cursus',
+        			handler:function(){
+        				adminCtrl.setRefFilter(grid,record);
+        	    	},
+        		},
         		]
         	}).showAt(e.getXY());
    	} else if (grid.up('#voletCursus')!==undefined){
@@ -114,6 +161,13 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     			handler:function(){
     				adminCtrl.addCursus();
     	    	},
+    		},
+    		{
+    			text : 'afficher tous les cursus',
+    			handler:function(){
+    				adminCtrl.clearRefFilter();
+    	    	},
+    	    	border : '0 0 2 0'
     		},
     		{
     			text : 'modifier le cursus',
@@ -220,4 +274,18 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 		formView.setTitle('Modifier le référentiel');
 		formView.show();
     },
+    setRefFilter : function(grid,record){
+    	if(grid.up('#voletRef')!==undefined){
+    		var refIdSelected = record.raw.refId;
+    		var refIdFilter = new Ext.util.Filter({
+    			property:'refId',
+    			value: refIdSelected
+    		});
+    		Ext.ComponentQuery.query('#cursusAdminWindowGrid')[0].getStore().addFilter(refIdFilter);	
+    	} 
+    },
+    clearRefFilter : function(){
+    	Ext.ComponentQuery.query('#cursusAdminWindowGrid')[0].getStore().clearFilter(false);
+    }
+    
 });

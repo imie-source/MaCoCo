@@ -22,7 +22,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	[
 		'cursus.CursusArbre',
 		'cursus.CursusArbre2',
-		//'administration.AdministrationWindow'
+		'home.AdministrationWindow',
 	],
 	
 	refs :
@@ -56,11 +56,20 @@ Ext.define('ExtJsMVC.controller.CursusController',
 			{
 				itemclick : this.chargeFormulaire
 			},
+			'administrationWindowGrid':{
+				
+				itemdblclick : this.chargeTree
+			}
 			
 		});
 	},
 	
-	
+	chargeTree : function(grid, record){
+		if (grid.up('#voletCursus')!==undefined){
+    		this.chargeSecondArbre(grid, record);
+    		this.chargeFormulaire(grid, record);
+    	}
+	},
 
 	chargeSecondArbre : function(grid, record)
 	{
@@ -104,7 +113,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		    },
 		});
 		
-		
+		//this.chargeFormulaire(grid,record);
 //		
 //
 //		var modelName = record.entityName;

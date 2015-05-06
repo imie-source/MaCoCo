@@ -43,6 +43,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 				items:[
 				   {
 					xtype:'administrationWindowGrid',
+					id:'refAdminWindowGrid',
 					height : 600,
 					title:'Liste des référentiels',
 					bind:{
@@ -54,15 +55,15 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 						text:'Référentiel',
 						dataIndex:'refNom',
 						flex:1.5,
-						editor:{
+						/*editor:{
 							bind:'{currentCursus.curNom}',
 							selectedOnFocus:true
-						},
+						},*/
 					}],
 				   },
 				   {
 						xtype:'refAdminWindowForm',
-						//title:'Referentiel Form'
+						
 				   },	
 				],
      	   },
@@ -80,6 +81,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 				items:[
 				   {
 					xtype:'administrationWindowGrid',
+					id:'cursusAdminWindowGrid',
 					height : 600,
 					title:'Liste des cursus',
 					bind:{
@@ -91,16 +93,16 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 						text:'Cursus',
 						dataIndex:'curNom',
 						flex:1.5,
-						editor:{
+						/*editor:{
 							bind:'{currentCursus.curNom}',
 							selectedOnFocus:true
-						},
+						},*/
 					}],
 				   },
 				   {
 				
 						xtype:'cursusAdminWindowForm',
-						//title:'Cursus Form'
+						
 				   },		
 				],
 			},

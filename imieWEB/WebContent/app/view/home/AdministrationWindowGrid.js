@@ -35,13 +35,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 	}],
 
 		listeners:{
-			rowdblclick : function(grid,record,tr,rowIndex,e,eOpts){
-				e.stopEvent();
-				this.findParentByType('administrationWindow').getController().onCollapse(grid,record,tr,rowIndex);
-			},
-			rowcontextmenu : function(grid,record,tr,rowIndex,e,eOpts){
-				this.findParentByType('administrationWindow').getController().onContextMenu(grid,record,tr,rowIndex,e,eOpts);
-			},
+			
 			rowkeydown :function(grid,record,tr,rowIndex,e,eOpts){
 				console.log(e.keyCode);
 				if(e.keyCode===46){

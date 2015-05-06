@@ -3,8 +3,6 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 	alias:'widget.cursusAdminWindowForm',
 	requires:[
 	          'Ext.form.field.Text',
-	          'ExtJsMVC.store.ReferentielStore'
-
 	],
 
 	resizable : true,
@@ -31,14 +29,17 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 			{
 				fieldLabel:'Sélectionner un référentiel',
 				displayField : 'refNom',
+
 				valueField : 'refId',
 				store : {
 					model:'ExtJsMVC.model.referentiel.Referentiel',
 					autoLoad:true
 				},
+
 				xtype:'combobox',
 				queryMode : 'remote',
 				bind:'{currentCursus.refId}',
+				
 
 		}
 			],

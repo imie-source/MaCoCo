@@ -12,6 +12,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
     	cursuses:{
     		model:'ExtJsMVC.model.cursus.CursusModel',
     		autoLoad:true,
+
     		//autoSync:true,
     		
     	},

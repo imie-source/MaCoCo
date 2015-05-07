@@ -29,25 +29,10 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 				text : '-',
 				itemId:'RecToolBar',
 				handler:'onRemove'
-			}
+			},
+
 		]
 		
 	}],
 
-		listeners:{
-			
-			rowkeydown :function(grid,record,tr,rowIndex,e,eOpts){
-				console.log(e.keyCode);
-				if(e.keyCode===46){
-					//this.findParentByType('administrationWindow').getController().onRemove();
-				}else if(e.keyCode===113){
-					e.stopEvent();
-					//this.findParentByType('administrationWindow').getController().onCommit();
-				}else if(e.keyCode===13){
-					e.stopEvent();
-					//this.findParentByType('administrationWindow').getController().onCommit();
-				}
-			},
-			
-		}
 } );

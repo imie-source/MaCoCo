@@ -12,7 +12,8 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 			'administrationWindowGrid':{
 				rowdblclick : this.onCollapse,
 				rowcontextmenu : this.onContextMenu,
-				rowkeydown : this.onSelect
+				rowkeydown : this.onSelect,
+				containercontextmenu : this.onGridContextMenu,
 			}
 			
 		});
@@ -22,10 +23,10 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     onSelect : function(grid,record,tr,rowIndex,e){
     	e.stopEvent();
     	if(e.keyCode===13){
-			setRefFilter(grid,record);
+			this.setRefFilter(grid,record);
 			
 		}else if(e.keyCode===27){
-	    	clearRefFilter();
+			this.clearRefFilter();
 		}
     },
     
@@ -51,7 +52,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
             }
            
     	}else if(btn.up('refAdminWindowForm')!==undefined){
-    		thisForm =btn.up('cursusAdminWindowForm'); 
+    		thisForm =btn.up('refAdminWindowForm'); 
     		var refSelected = vm.get('currentReferentiel');
     		refSelected.reject();
             
@@ -67,25 +68,19 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 
     onCommit: function (btn,e) {
     	
-    	if(btn.up('cursusAdminWindowForm')!==undefined){
-	    	var cususStore =this.getViewModel().getStore('cursuses');
-	    	cususStore.sync();
-	    	btn.up('cursusAdminWindowForm').hide();
-	    	
-    	}else if(btn.up('refAdminWindowForm')!==undefined){
+    	if(btn.up('cursusAdminWindowForm') !== undefined) {
+	    	var cursusStore = this.getViewModel().getStore('cursuses');
+	    	cursusStore.sync();  
+    		btn.up('cursusAdminWindowForm').hide();
+	    		    	
+    	}else if(btn.up('refAdminWindowForm')!==undefined) {
     		var refStore =this.getViewModel().getStore('referentiels');
-	    	refStore.sync();
-    		
-    		
-    		//console.log(this.getViewModel().getStore('referentiels').getModel());
-    		//refStore.save();
-    		/*var referentiel = this.getViewModel().get('currentReferentiel');
-    		referentiel.commit();
-    		referentiel.reject();*/
+	    	refStore.sync();    		
     		btn.up('refAdminWindowForm').hide();
     	}	
+    	
     },
-    
+
     onAdd:function(btn,e){
     	if(btn.up('#voletRef')!==undefined){
     		this.addRef();    	
@@ -122,18 +117,25 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	adminCtrl = this;
     	if(grid.up('#voletRef')!==undefined){
     		var menu = new Ext.menu.Menu({	
-        		items:[{
-        			text : 'ajouter un référentiel',
-        			handler:function(){
-        				adminCtrl.addRef();
-        	    	},
-        		},
-        		{
+        		items:[
+        		       
+        		       {
         			text : 'afficher tous les cursus',
         			handler:function(){
         				adminCtrl.clearRefFilter();
         	    	},
+        		},{
+        			text : 'ajouter un référentiel',
+        			handler:function(){
+        				adminCtrl.addRef();
+        	    	},
+        	    	border : '0 0 1 0',
+        	    	style : {
+        	    		borderColor : '#CCCCCC',
+        	    		borderStyle: 'solid'
+        	    	}
         		},
+        		
         		{
         			text : 'modifier le référentiel',
         			handler:function(){
@@ -157,17 +159,22 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
    	} else if (grid.up('#voletCursus')!==undefined){
    			var menu = new Ext.menu.Menu({
     		items:[{
-    			text : 'ajouter un cursus',
-    			handler:function(){
-    				adminCtrl.addCursus();
-    	    	},
-    		},
-    		{
     			text : 'afficher tous les cursus',
     			handler:function(){
     				adminCtrl.clearRefFilter();
     	    	},
-    	    	border : '0 0 2 0'
+    			
+    		},
+    		{
+    			text : 'ajouter un cursus',
+    			handler:function(){
+    				adminCtrl.addCursus();
+    	    	},
+    	    	border : '0 0 1 0',
+    	    	style : {
+    	    		borderColor : '#CCCCCC',
+    	    		borderStyle: 'solid'
+    	    	}
     		},
     		{
     			text : 'modifier le cursus',
@@ -187,7 +194,47 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	
     },
     
-    
+    onGridContextMenu : function(grid,e){
+    	e.stopEvent();
+    	adminCtrl = this;
+    	if(grid.up('#voletRef')!==undefined){
+    		var menu = new Ext.menu.Menu({	
+        		items:[
+        		       
+        		       {
+        			text : 'afficher tous les cursus',
+        			handler:function(){
+        				adminCtrl.clearRefFilter();
+        	    	},
+        		},{
+        			text : 'ajouter un référentiel',
+        			handler:function(){
+        				adminCtrl.addRef();
+        	    	},
+        	    	
+        		},
+        		]
+        	}).showAt(e.getXY());
+   	} else if (grid.up('#voletCursus')!==undefined){
+   			var menu = new Ext.menu.Menu({
+    		items:[{
+    			text : 'afficher tous les cursus',
+    			handler:function(){
+    				adminCtrl.clearRefFilter();
+    	    	},
+    			
+    		},
+    		{
+    			text : 'ajouter un cursus',
+    			handler:function(){
+    				adminCtrl.addCursus();
+    	    	},
+    		},
+    		]
+    	}).showAt(e.getXY());
+   	}
+    	
+    },
     
     
     
@@ -248,10 +295,10 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	var formView = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
 		formView.setTitle('Ajouter un cursus');
     	formView.show();
-    
     	var store = vm.getStore('cursuses');
     	var record = store.insert(0,{})[0];
     	vm.set('currentCursus',record);
+
     },
     addRef : function(){
     	var vm = this.getViewModel();
@@ -265,9 +312,14 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     },
     
     updateCursus : function(){
+    	var vm = this.getViewModel();
     	var formView = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
 		formView.setTitle('Modifier le cursus');
 		formView.show();
+		
+		/*var store = vm.getStore('cursuses');
+    	var record = store.getAt(0);
+    	vm.set('currentCursus',record);*/
     },
     updateRef : function(){
     	var formView = Ext.ComponentQuery.query('refAdminWindowForm')[0];

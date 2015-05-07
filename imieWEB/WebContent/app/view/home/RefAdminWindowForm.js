@@ -10,9 +10,7 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 	width : 500,
 	height : 200,
 	bodyPadding:10,
-	bind:{
-		title:'<b>{currentReferentiel.refNom}</b>'
-	},
+
 	id : 'refAdminWindowForm',
 	modelValidation:true,
 	fieldDefaults:{
@@ -24,7 +22,7 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 	},
 	items:[{
 				fieldLabel:'Référentiel',
-				bind:'{currentReferentiel.refNom}',
+				bind:'{currentReferentiel.text}',
 				xtype:'textfield'
 			
 		}],

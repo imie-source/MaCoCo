@@ -48,17 +48,13 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 					title:'Liste des référentiels',
 					bind:{
 						store:'{referentiels}',
-						title:'<b>Liste des référentiels : {currentReferentiel.refNom}</b>'
+						title:'<b>Liste des référentiels : {currentReferentiel.text}</b>'
 					},
 					reference:'referentielsGrid',
 					columns:[{
 						text:'Référentiel',
 						dataIndex:'refNom',
 						flex:1.5,
-						/*editor:{
-							bind:'{currentCursus.curNom}',
-							selectedOnFocus:true
-						},*/
 					}],
 				   },
 				   {
@@ -86,17 +82,13 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
 					title:'Liste des cursus',
 					bind:{
 						store:'{cursuses}',
-						title:'<b>Liste des cursus : {currentCursus.curNom}</b>'
+						title:'<b>Liste des cursus : {currentCursus.text}</b>'
 					},
 					reference:'cursusesGrid',
 					columns:[{
 						text:'Cursus',
 						dataIndex:'curNom',
 						flex:1.5,
-						/*editor:{
-							bind:'{currentCursus.curNom}',
-							selectedOnFocus:true
-						},*/
 					}],
 				   },
 				   {

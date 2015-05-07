@@ -23,8 +23,10 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 	},
 	items:[{
 				fieldLabel:'Cursus',
-				bind:'{currentCursus.curNom}',
-				xtype:'textfield'
+				bind:'{currentCursus.text}',
+				xtype:'textfield',
+
+
 			},
 			{
 				fieldLabel:'Sélectionner un référentiel',

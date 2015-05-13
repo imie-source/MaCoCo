@@ -12,25 +12,6 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
     	cursuses:{
     		model:'ExtJsMVC.model.cursus.CursusModel',
     		autoLoad:true,
-    	/*	listeners:{
-    			
-    			add :function(store, records){
-    				console.log('add records in store : ');
-    				//store.commitChanges();
-    			//	console.log(records.getData());
-    				//console.log(store.getAt(0).getData());
-    				//store.sync();
-    			},
-    			remove :function(store, records){
-    				console.log('remove records in store : ');
-    			},
-    			update :function(store, records){
-    				console.log('update records in store : ');
-    				console.log(store.getAt(0).getData());
-    				//store.commitChanges();
-    				//store.sync();
-    			},
-    		}*/
     	},
 
     	referentiels:{

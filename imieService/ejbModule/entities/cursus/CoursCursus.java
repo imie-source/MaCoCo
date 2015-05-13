@@ -55,6 +55,9 @@ public class CoursCursus implements Serializable {
 
 	@Column(name="coc_objectifs", length=500)
 	private String cocObjectifs;
+	
+	@Column(name="coc_ordre", length=500)
+	private Integer cocOrdre;
 
 	@Column(name="coc_type", length=25)
 	private String cocType;
@@ -120,6 +123,14 @@ public class CoursCursus implements Serializable {
 
 	public void setCocObjectifs(String cocObjectifs) {
 		this.cocObjectifs = cocObjectifs;
+	}
+	
+	public Integer getCocOrdre() {
+		return this.cocOrdre;
+	}
+
+	public void setCocOrdre(Integer cocOrdre) {
+		this.cocOrdre = cocOrdre;
 	}
 
 	public String getCocType() {

@@ -16,6 +16,3 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusOrdo', {
         }
     },
 });
-
-
-

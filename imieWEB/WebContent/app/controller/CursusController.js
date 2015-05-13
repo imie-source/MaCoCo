@@ -94,6 +94,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 					expanded: true,
 					children: recordCur
 				});
+				
 		    },
 		});
 

@@ -1,5 +1,7 @@
 package cursus;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -98,6 +100,12 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 			}
 		}
 		
+		Collections.sort(res, new Comparator<CoursCursus>() {
+			@Override
+			public int compare(CoursCursus o1, CoursCursus o2) {
+				return o1.getCocOrdre().compareTo(o2.getCocOrdre());
+			}
+		});
 		return res;
 	}
 	

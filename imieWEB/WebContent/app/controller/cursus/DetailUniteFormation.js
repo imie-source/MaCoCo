@@ -10,30 +10,32 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 	
 	refs :
 		[
-		 	{ref : 'switchView', selector: 'viewport #switchView'},
-		 	{ref : 'arbre', selector: 'cursus-Arbre'}
+		 //	{ref : 'switchView', selector: 'viewport #switchView'},
+		 {ref : 'switchView', selector: '#viewCursusView #switchView'},	
+		 {ref : 'arbre', selector: 'cursus-Arbre'}
 		],
 
-
-	stores : 
+//*************************************************************
+	/*stores : 
 	[
 		'CursusStore',
 		'UniteFormationStore'
-	],
-	
+	],*/
+
+//*************************************************************	
 	
 	init: function()
 	{
 		this.control(
 		{
-            'cursus-DetailUniteFormation > button#SaveRecord' : 
+       /*    'cursus-DetailUniteFormation > button#SaveRecord' : 
             {
                 click : this.onSaveButtonClick
             },
 	        'cursus-DetailUniteFormation > button#AddRecord' : 
 	        {
 	            click : this.onAddButtonClick
-	        }
+	        }*/
 		});
 	},
 	
@@ -41,6 +43,10 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 	onSaveButtonClick : function(bouton)
 	{
 		var detailViewUF = bouton.up('cursus-DetailUniteFormation');
+		console.log(bouton);
+		console.log(detailViewUF);
+		console.log(this.getView('cursus.DetailUniteFormation'));
+		
 		
 		detailViewUF.getRecord().data.ufcNom = detailViewUF.getComponent('detailUniteFormationNom').getValue();
 		
@@ -52,6 +58,8 @@ Ext.define('ExtJsMVC.controller.cursus.DetailUniteFormation',
 		
 		detailViewUF.updateRecord();
 		detailViewUF.getRecord().save();
+		
+
 	},	
 	
 	onAddButtonClick : function(bouton)

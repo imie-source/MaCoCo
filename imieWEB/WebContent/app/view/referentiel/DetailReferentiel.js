@@ -13,6 +13,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailReferentiel', {
         	itemId : 'detailReferentielNom',
             xtype : 'textareafield',
             name : 'text',
+            bind:'{currentRefTree.text}',
             fieldLabel : 'Intitule',
             width : 500,
         },
@@ -20,7 +21,10 @@ Ext.define('ExtJsMVC.view.referentiel.DetailReferentiel', {
         	id : 'seleniumDetailReferentielSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            bind:{
+				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+			},
         },
         {
         	id : 'seleniumDetailReferentielAdd',

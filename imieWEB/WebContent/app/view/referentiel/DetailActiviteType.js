@@ -14,6 +14,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
         	itemId : 'detailActiviteTypeNom',
             xtype : 'textareafield',
             name : 'text',
+            bind:'{currentRefTree.text}',
             fieldLabel : 'Intitule',
             width : 500,
         },
@@ -21,7 +22,10 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
         	id : 'seleniumDetailActiviteTypeSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            bind:{
+				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+			},
         },
         {
         	id : 'seleniumDetailActiviteTypeAdd',

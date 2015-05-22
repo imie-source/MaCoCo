@@ -1,0 +1,77 @@
+.heightWeekGridRow{
+	height: 129px;
+}
+/*.noOderedOrdoGridRow{
+	background-color: #66FF66
+}*/
+.x-grid-item-container .x-grid-item:nth-child(odd) tbody .heightWeekGridRow{
+	background-color: #D8D8D8
+}
+.x-grid-item-container .x-grid-item:nth-child(odd) tbody .colorOrdoGridRow{
+	background-color: #D8D8D8
+}
+
+.x-grid-item-focused .x-grid-cell-inner::before {
+    border: opx;
+}
+
+.heightOrdoGridRow1{
+	height: 25px;
+}
+.heightOrdoGridRow2{
+	height: 50px;
+}
+.heightOrdoGridRow3{
+	height: 75px;
+}
+.heightOrdoGridRow4{
+	height: 100px;
+}
+.heightOrdoGridRow5{
+	height: 125px;
+}
+.colorOrdoGridRow1{
+	background-color: #66FF66
+}
+.colorOrdoGridRow2{
+	background-color: #FFCC66
+}
+.colorOrdoGridRow3{
+	background-color: #3366CC
+}
+.colorOrdoGridRow4{
+	background-color: #FF6666
+}
+.colorOrdoGridRow5{
+	background-color: #339933
+}
+.colorOrdoGridRow6{
+	background-color: #CC66FF
+}
+.colorOrdoGridRow7{
+	background-color: #999966
+}
+.colorOrdoGridRow8{
+	background-color: #0099FF
+}
+.colorOrdoGridRow9{
+	background-color: #CCFF66
+}
+.colorOrdoGridRow10{
+	background-color: #CC9900
+}
+.colorOrdoGridRow11{
+	background-color: #FF66CC
+}
+.colorOrdoGridRow12{
+	background-color: #00FFFF
+}
+.colorOrdoGridRow13{
+	background-color: #993366
+}
+.colorOrdoGridRow14{
+	background-color: #6699FF
+}
+.colorOrdoGridRow15{
+	background-color: #669999
+}

@@ -47,20 +47,22 @@ Ext.define('ExtJsMVC.controller.CursusController',
 
 		this.control
 		({
-			'cursus-Arbre' : 
+		//*********************************************
+			/*'cursus-Arbre' : 
 			{
 				itemclick : this.chargeSecondArbre
-			},
+			},*/
 			
-			'cursus-Arbre2' : 
+		/*	'cursus-Arbre2' : 
 			{
 				itemclick : this.chargeFormulaire
 			},
+		//*********************************************
 			'administrationWindowGrid':{
 				
 				itemdblclick : this.chargeTree
 			}
-			
+			*/
 		});
 	},
 	
@@ -73,7 +75,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 
 	chargeSecondArbre : function(grid, record)
 	{
-
+		console.log('chargeSecondArbre');
 		var cursusModel = this.getCursusCursusModelModel();
 		var referentielModel = this.getReferentielReferentielModel();
 		
@@ -98,9 +100,9 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		    },
 		});
 
-		
+//*************************************************************************************		
 		//GET du referentiel concerné
-		var arboReferentiel = referentielModel.load(record.get('refId'),{
+	/*	var arboReferentiel = referentielModel.load(record.get('refId'),{
 			
 		    scope: this,
 		    success: function(recordRef, operation) 
@@ -112,7 +114,9 @@ Ext.define('ExtJsMVC.controller.CursusController',
 					children: recordRef
 				});
 		    },
-		});
+		});*/
+
+		//*************************************************************************************
 		
 		//this.chargeFormulaire(grid,record);
 //		
@@ -153,7 +157,8 @@ Ext.define('ExtJsMVC.controller.CursusController',
 
 		
 		var modelName = record.entityName;
-		var switchview = this.getSwitchView();
+		//var switchview = this.getSwitchView();
+		var switchview = Ext.ComponentQuery.query('#switchView')[0];
 		var arbre2 = this.getArbre2();
 		var storeUniteFormations = arbre2.getStore();
 		
@@ -305,9 +310,9 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		
 		
 		    //Click sur Unite de Formation    
-	    
+				   
+			/*	 
 		    case 'ExtJsMVC.model.cursus.UniteFormationCursusModel' :
-		    
 		       console.log('Affichage Unite formation');
 		       
 		       //Nettoyage de la vue centrale
@@ -317,6 +322,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 	    	   }
 		       //Ajout de la vue correspondante
 		       switchview.add({xtype : 'cursus-DetailUniteFormation'});
+		     
 		       
 		       //Recuperation du formulaire
 		       var detailView = Ext.ComponentQuery.query('form')[0];
@@ -335,7 +341,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				});
 
 				detailView.loadRecord(recordArbre);
-		       
+		      
 
 				//Preparation du panel pour les elements "enfants"
 				var panelTemplateTest = Ext.create('Ext.panel.Panel', {
@@ -413,11 +419,11 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				
 		       
 		        break;
+		       
 		        
+		        */
 		        
-		        
-		        
-		        
+		        /*
 		        
 		    case 'ExtJsMVC.model.cursus.ModuleCursusModel' :
 		    
@@ -523,10 +529,10 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				//Ajout du panel
 				switchview.add(panelTemplate);
 		       
-		       break;
+		       break;*/
 		        
 		        
-		        
+		 /*       
 		    case 'ExtJsMVC.model.cursus.CoursCursusModel' :
 		    
 		       console.log('Affichage Cours');
@@ -721,7 +727,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 		       switchview.add(panelTemplate);
 		       
 		       
-		       break;	
+		       break;	*/
 		       
 		    default:
 		        console.log('Ne correspond pas');

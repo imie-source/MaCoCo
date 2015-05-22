@@ -15,13 +15,17 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
             xtype : 'textareafield',
             name : 'text',
             fieldLabel : 'Intitule',
+            bind:'{currentRefTree.text}',
             width : 500,
         },
         {
         	id : 'seleniumDetailSavoirSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            bind:{
+				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+			},
         },
         
         {

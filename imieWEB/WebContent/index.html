@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="css/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
+<link rel="stylesheet" href="customCSS.css">
 <script type="text/javascript" src="js/ext-all-debug.js"></script>
 <script type="text/javascript" src="app/proxy/TreeModelProxy.js"></script>
 <script type="text/javascript" src="app/functions/myFunctions.js"></script>
@@ -14,13 +15,29 @@ Ext.application({
         		
         		name : 'ExtJsMVC',
         		appFolder : 'app',
-        		
+//************************************************************
+        		models:[
+    					'cursus.RootCursusModel',
+    					'cursus.CursusModel',
+    					'cursus.UniteFormationCursusModel',
+    					'cursus.PeriodeCursusModel',
+    					'cursus.ModuleCursusModel',
+    					'cursus.CoursCursusModel',
+    					'referentiel.ActiviteType',
+    					'referentiel.CompetencePro',
+    					'referentiel.Referentiel',
+    					'referentiel.RootReferentiel',
+    					'referentiel.Savoir',
+    	    		],
+//******************************************************************
         		views : 
            		[
-           			'referentiel.ArbreReferentiel',
+           			/*'referentiel.ArbreReferentiel',
+           			'cursus.ArbreReferentielBis',
            			'cursus.CursusArbre',
-           			'cursus.CursusArbre2',
-           			'home.AdministrationWindow'
+           			'cursus.CursusArbre2',*/
+           			'home.AdministrationWindow',
+           			'cursus.CursusView'
            		],
         		controllers : 
         		[
@@ -29,11 +46,11 @@ Ext.application({
         			'referentiel.DetailActiviteType',
         			'referentiel.DetailCompetencePro',
         			'referentiel.DetailSavoir',
-        			'CursusController',
+        			/*'CursusController',
         			'cursus.DetailCursus',
         			'cursus.DetailUniteFormation',
         			'cursus.DetailModule',
-        			'cursus.DetailCours',
+        			'cursus.DetailCours',*/
         			'cursus.LiaisonReferentielEnseignement',
         		],
         		
@@ -60,9 +77,12 @@ Ext.application({
 								width : (Ext.getBody().getViewSize().width-40),
 							 },
 							 {
+								//************************************
+								xtype : 'view-cursusView',
+								//************************************
 								region : 'center',
 								split : true,
-								layout : 
+							/*	layout : 
 								{
 									    type  : 'hbox',
 									    align : 'stretch'
@@ -107,7 +127,7 @@ Ext.application({
 			// 		                       	  	}
 		                       	 			]
 		                     		}
-		                     	]
+		                     	]*/
 							 },
 
 								{
@@ -121,10 +141,10 @@ Ext.application({
 		            	]	
    					});
         			
-        			var curAdminForm = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
+        			/*var curAdminForm = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
         			curAdminForm.setPagePosition(100,100,true);
         			var refAdminForm = Ext.ComponentQuery.query('refAdminWindowForm')[0];
-        			refAdminForm.setPagePosition(Ext.getBody().getViewSize().width-600,100,true);
+        			refAdminForm.setPagePosition(Ext.getBody().getViewSize().width-600,100,true);*/
         			
         		
 

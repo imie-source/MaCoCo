@@ -21,7 +21,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCours',
 		{
             'cursus-DetailCours > button#SaveRecord' : 
             {
-                click : this.onSaveButtonClick
+             //   click : this.onSaveButtonClick
             }
 		});
 	},

@@ -14,18 +14,21 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             xtype : 'textareafield',
             name : 'text',
             fieldLabel : 'Intitule',
+            bind:'{currentSecondTreeItem.text}',
             width : 500
         },
         {
         	id : 'seleniumDetailCoursDuree',
             xtype : 'textfield',
             name : 'cocDuree',
+            bind:'{currentSecondTreeItem.cocDuree}',
             fieldLabel : 'Duree'
         },
         {
         	id : 'seleniumDetailCoursType',
             xtype : 'textfield',
             name : 'cocType',
+            bind:'{currentSecondTreeItem.cocType}',
             fieldLabel : 'Type'
         },
         {
@@ -33,6 +36,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             xtype : 'textareafield',
             name : 'cocObjectifs',
             fieldLabel : 'Objectifs',
+            bind:'{currentSecondTreeItem.cocObjectifs}',
             width : 500,
             height : 100
         },
@@ -41,6 +45,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             xtype : 'textfield',
             name : 'cocEvaluation',
             fieldLabel : 'Evaluation',
+            bind:'{currentSecondTreeItem.cocEvaluation}',
             width : 500
         },
         {
@@ -48,6 +53,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
             xtype : 'textareafield',
             name : 'cocCommentaires',
             fieldLabel : 'Commentaires',
+            bind:'{currentSecondTreeItem.cocCommentaires}',
             width : 500,
             height : 100
         },
@@ -55,7 +61,12 @@ Ext.define('ExtJsMVC.view.cursus.DetailCours', {
         	id : 'seleniumDetailCoursSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            handler : 'onSaveButtonClick',
+            disabled:true,
+			bind:{
+				disabled:'{!itemStatus.dirtyAndValid}'
+			},
         },
         
 //        {

@@ -24,14 +24,14 @@ Ext.define('ExtJsMVC.controller.cursus.DetailModule',
 	{
 		this.control(
 		{
-            'cursus-DetailModule > button#SaveRecord' : 
+       /*     'cursus-DetailModule > button#SaveRecord' : 
             {
                 click : this.onSaveButtonClick
             },
 	        'cursus-DetailModule > button#AddRecord' : 
 	        {
 	            click : this.onAddButtonClick
-	        }
+	        }*/
 		});
 	},
 	

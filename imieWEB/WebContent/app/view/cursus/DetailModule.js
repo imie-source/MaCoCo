@@ -14,6 +14,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
             xtype : 'textareafield',
             name : 'text',
             fieldLabel : 'Intitule',
+            bind:'{currentSecondTreeItem.text}',
             width : 500,
         },
         {
@@ -21,6 +22,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
             xtype : 'textareafield',
             name : 'mocObjectifs',
             fieldLabel : 'Objectifs',
+            bind:'{currentSecondTreeItem.mocObjectifs}',
             width : 500,
             height : 100
         },
@@ -29,6 +31,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
             xtype : 'textareafield',
             name : 'mocModalite',
             fieldLabel : 'Modalités',
+            bind:'{currentSecondTreeItem.mocModalite}',
             width : 500,
             height : 100
         },
@@ -36,11 +39,17 @@ Ext.define('ExtJsMVC.view.cursus.DetailModule', {
         	id : 'seleniumDetailModuleSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            handler : 'onSaveButtonClick',
+            disabled:true,
+			bind:{
+				disabled:'{!itemStatus.dirtyAndValid}'
+			},
         },
         {
         	id : 'seleniumDetailModuleAdd',
             xtype : 'button',
+            handler :'onAddButtonClick',
             text : 'Ajouter Cours',
             itemId : 'AddRecord'
         }

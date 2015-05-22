@@ -103,6 +103,12 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		Collections.sort(res, new Comparator<CoursCursus>() {
 			@Override
 			public int compare(CoursCursus o1, CoursCursus o2) {
+				if(o1.getCocOrdre()==null){
+					o1.setCocOrdre(0);
+				}
+				if(o2.getCocOrdre()==null){
+					o2.setCocOrdre(0);
+				}
 				return o1.getCocOrdre().compareTo(o2.getCocOrdre());
 			}
 		});

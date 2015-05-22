@@ -1,3 +1,4 @@
+/*
 Ext.define('ExtJsMVC.view.cursus.CursusArbre2', 
 {
 	extend : 'Ext.tree.Panel',
@@ -63,6 +64,28 @@ Ext.define('ExtJsMVC.view.cursus.CursusArbre2',
 //        }
 //   },
 });
+*/
 
-
+Ext.define('ExtJsMVC.view.cursus.CursusArbre2', 
+		{
+			extend : 'Ext.tree.Panel',
+			xtype  : 'cursus-Arbre2',
+			title : 'Détail',
+			bind :{
+				store: '{rootCursuses}'
+			},
+			reference:'cursusTree',
+			loader : {
+			},
+			rootVisible: false,
+			//TODO: Fix permettant le collapse/expand apres un setRoot
+			//animate: false,
+		    viewConfig: 
+		    {
+		        plugins: 
+		        {
+		            ptype: 'treeviewdragdrop',
+		        }
+		    },
+		});
 

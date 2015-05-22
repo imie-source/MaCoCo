@@ -16,7 +16,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus', {
 
 	init : function() {
 		this.control({
-			'cursus-DetailCursus > button#SaveRecord' : {
+			/*'cursus-DetailCursus > button#SaveRecord' : {
 				click : this.onSaveButtonClick
 			},
 			'cursus-DetailCursus > button#AddRecord' : {
@@ -27,7 +27,7 @@ Ext.define('ExtJsMVC.controller.cursus.DetailCursus', {
 			},
 			'button#printOrdo' : {
 				click : this.onPrintOrdoClick
-			}
+			}*/
 
 		});
 	},

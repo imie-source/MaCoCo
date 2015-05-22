@@ -74,8 +74,9 @@ public class ReferentielServlet
 					}
 				}
 			}
-
-		    return Response.ok(referentiel).build();
+			ArrayList<Referentiel> reponse = new ArrayList<Referentiel>();
+			reponse.add(referentiel);
+		    return Response.ok(reponse).build();
 	}
 	
 	@POST()

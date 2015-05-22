@@ -29,11 +29,19 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 			this.clearRefFilter();
 		}
     },
+        
     
     onCollapse : function(grid,record,tr,rowIndex,e){
     	e.stopEvent();
+    	if (grid.up('#voletCursus')!==undefined){
+    		var firstTree = Ext.ComponentQuery.query('cursus-Arbre')[0];
+			console.log('onCollapse');
+			console.log(record);
+			firstTree.getSelectionModel().select(record);	
+    	}
     	var home = grid.up('view-administrationWindow');
     	home.toggleCollapse();
+    	
     },
     
     
@@ -117,14 +125,8 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	adminCtrl = this;
     	if(grid.up('#voletRef')!==undefined){
     		var menu = new Ext.menu.Menu({	
-        		items:[
-        		       
-        		       {
-        			text : 'afficher tous les cursus',
-        			handler:function(){
-        				adminCtrl.clearRefFilter();
-        	    	},
-        		},{
+        		items:[       
+        		{
         			text : 'ajouter un référentiel',
         			handler:function(){
         				adminCtrl.addRef();

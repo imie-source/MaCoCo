@@ -7,6 +7,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusGlobal', {
 // padding : 5,
     bodyPadding : 5,
     activeTab: 0,
+
     
     items : 
     [

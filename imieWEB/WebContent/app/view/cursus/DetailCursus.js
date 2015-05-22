@@ -1,6 +1,9 @@
 Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
     extend : 'Ext.form.Panel',
     xtype  : 'cursus-DetailCursus',
+    /*bind :{
+		store: '{cursuses}'
+	},*/
     store: 'CursusStore',
     title   : 'Informations',
     bodyPadding : 10,
@@ -13,6 +16,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
             xtype : 'textareafield',
             name : 'text',
             fieldLabel : 'Nom',
+            bind:'{currentSecondTreeItem.text}',
             width : 500,
         },
         
@@ -36,13 +40,19 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         	id : 'seleniumDetailCursusSave',
             xtype : 'button',
             text : 'Enregistrer',
-            itemId : 'SaveRecord'
+            itemId : 'SaveRecord',
+            handler : 'onSaveButtonClick',
+            disabled:true,
+			bind:{
+				disabled:'{!itemStatus.dirtyAndValid}'
+			},
         },
         {
         	id : 'seleniumDetailCursusAdd',
             xtype : 'button',
             text : 'Ajouter UF',
-            itemId : 'AddRecord'
+            itemId : 'AddRecord',
+            handler :'onAddButtonClick',
         }
         ,
         {

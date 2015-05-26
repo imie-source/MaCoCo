@@ -67,10 +67,10 @@ public class CompetenceProServlet
 	}
 	
 	@DELETE
-	@Path("/{id}")
-	public Response remove(@PathParam("id") Integer id)
+	@Path("/{string}")
+	public Response remove(CompetencePro competencePro)
 	{
-		competenceProService.delete(id);
+		competenceProService.delete(competencePro);
 		return Response.ok().build();
 	}	
 	

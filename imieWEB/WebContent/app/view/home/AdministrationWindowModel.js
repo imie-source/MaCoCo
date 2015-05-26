@@ -3,9 +3,6 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
 
     alias: 'viewmodel.administrationWindowModel',
 
-   /* data: {
-        name: 'ExtJsMVC'
-    }*/
     
     stores: {
     	
@@ -41,12 +38,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
         		deep:true
         	},
         	get:function(cursus){
-        		var ret = {
+        		var retCursusStatus = {
         				dirty:cursus ? cursus.dirty : false,
         				valid: cursus && cursus.isModel ? cursus.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retCursusStatus.dirtyAndValid = retCursusStatus.dirty && retCursusStatus.valid;
+        		return retCursusStatus;
         	},
     	},
     	
@@ -72,12 +69,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
         		deep:true
         	},
         	get:function(referentiel){
-        		var ret = {
+        		var retRefStatus = {
         				dirty:referentiel ? referentiel.dirty : false,
         				valid: referentiel && referentiel.isModel ? referentiel.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retRefStatus.dirtyAndValid = retRefStatus.dirty && retRefStatus.valid;
+        		return retRefStatus;
         	},
     	},
     	

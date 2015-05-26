@@ -50,14 +50,14 @@ public class ActiviteTypeService implements ActiviteTypeServiceLocal {
 	}
 
 	@Override
-	public void delete(Integer id) 
+	public void delete(ActiviteType activiteType) 
 	{
-		ActiviteType activiteType = em.find(ActiviteType.class, id);
-		List<CompetencePro> competencePros = activiteType.getCompetencePros();
+		ActiviteType actType = em.find(ActiviteType.class, activiteType.getActId());
+		List<CompetencePro> competencePros = actType.getCompetencePros();
 		for (CompetencePro competencePro : competencePros) {
-			competenceProService.delete(competencePro.getComId());
+			competenceProService.delete(competencePro);
 		}
-		em.remove(activiteType);
+		em.remove(actType);
 	}
 
 	@Override

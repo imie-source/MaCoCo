@@ -50,14 +50,14 @@ public class CompetenceProService implements CompetenceProServiceLocal {
 	}
 
 	@Override
-	public void delete(Integer id) 
+	public void delete(CompetencePro competencePro) 
 	{
-		CompetencePro competencePro = em.find(CompetencePro.class, id);
-		List<Savoir> savoirs = competencePro.getSavoirs();
+		CompetencePro competenceProf = em.find(CompetencePro.class, competencePro.getComId());
+		List<Savoir> savoirs = competenceProf.getSavoirs();
 		for (Savoir savoir : savoirs) {
-			savoirService.delete(savoir.getSavId());
+			savoirService.delete(savoir);
 		}
-		em.remove(competencePro);
+		em.remove(competenceProf);
 	}
 
 	@Override

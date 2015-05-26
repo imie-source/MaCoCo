@@ -11,7 +11,7 @@ public interface CompetenceProServiceLocal
 	
 	void create(CompetencePro competencePro);
 
-	void delete(Integer id);
+	void delete(CompetencePro competencePro);
 
 	CompetencePro update(CompetencePro competencePro);
 }

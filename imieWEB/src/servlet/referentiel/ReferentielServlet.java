@@ -33,13 +33,20 @@ public class ReferentielServlet
 {
 	@EJB 
 	ReferentielServiceLocal referentielService;
-
+	
+	// Le path root correspond à la demande de tous les référentiels
+		@GET()
+		@Path("/root")
+		public Response getReferentielRoot() 
+		{
+			return getAllReferentiel();
+		}
 	/**
 	 * Retourne les referentiels sans leurs descendants
 	 * @return
 	 */
 	@GET()
-	public Response getAllreferentiel() 
+	public Response getAllReferentiel() 
 	{
 		List<Referentiel> listeReferentiels = referentielService.findAllReferentiel();
 		for (Referentiel referentiel : listeReferentiels) {

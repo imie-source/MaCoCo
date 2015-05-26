@@ -30,7 +30,7 @@ Ext.define('ExtJsMVC.controller.referentiel.DetailReferentiel',
             },
 	        'referentiel-DetailReferentiel > button#AddRecord' : 
 	        {
-	            click : this.onAddButtonClick
+	        //    click : this.onAddButtonClick
 	        }
 		});
 	},

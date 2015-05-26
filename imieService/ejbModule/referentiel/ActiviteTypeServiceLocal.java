@@ -11,7 +11,7 @@ public interface ActiviteTypeServiceLocal
 	
 	void create(ActiviteType activiteType);
 
-	void delete(Integer id);
+	void delete(ActiviteType activiteType);
 
 	ActiviteType update(ActiviteType activiteType);
 }

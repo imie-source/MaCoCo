@@ -23,8 +23,10 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
+            handler : 'onSaveRefButtonClick',
+            disabled:true,
             bind:{
-				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+				disabled:'{!refTreeStatus.dirtyAndValid}'
 			},
         },
         

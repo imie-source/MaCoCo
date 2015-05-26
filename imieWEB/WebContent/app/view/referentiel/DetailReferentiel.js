@@ -22,15 +22,18 @@ Ext.define('ExtJsMVC.view.referentiel.DetailReferentiel', {
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
+            handler : 'onSaveRefButtonClick',
+            disabled:true,
             bind:{
-				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+				disabled:'{!refTreeStatus.dirtyAndValid}'
 			},
         },
         {
         	id : 'seleniumDetailReferentielAdd',
             xtype : 'button',
             text : 'Ajouter AT',
-            itemId : 'AddRecord'
+            itemId : 'AddRecord',
+            handler : 'onAddRefButtonClick',
         }
     ]
 });

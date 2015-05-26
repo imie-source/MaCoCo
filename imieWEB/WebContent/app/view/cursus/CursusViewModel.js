@@ -73,7 +73,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	},
     	
     	
-    	savoirCursus : {
+    	savoirStore : {
     		model:'ExtJsMVC.model.referentiel.Savoir',    		
     	},
     },
@@ -99,12 +99,12 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		deep:true
         	},
         	get:function(cursus){
-        		var ret = {
+        		var retCursusStatus = {
         				dirty:cursus ? cursus.dirty : false,
         				valid: cursus && cursus.isModel ? cursus.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retCursusStatus.dirtyAndValid = retCursusStatus.dirty && retCursusStatus.valid;
+        		return retCursusStatus;
         	},
     	},
     	
@@ -130,12 +130,12 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		deep:true
         	},
         	get:function(cursus){
-        		var ret = {
+        		var retCursusSecondTreeStatus = {
         				dirty:cursus ? cursus.dirty : false,
         				valid: cursus && cursus.isModel ? cursus.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retCursusSecondTreeStatus.dirtyAndValid = retCursusSecondTreeStatus.dirty && retCursusSecondTreeStatus.valid;
+        		return retCursusSecondTreeStatus;
         	},
     	},
     	currentRefTree:{
@@ -154,21 +154,21 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         	},
     	},
     	
-    	cursusRefTreeStatus:{
+    	refTreeStatus:{
     		bind:{
         		bindTo:'{currentRefTree}',
         		deep:true
         	},
         	get:function(item){
-        		var item = {
+        		var retRefTreeStatus = {
         				dirty:item ? item.dirty : false,
         				valid: item && item.isModel ? item.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retRefTreeStatus.dirtyAndValid = retRefTreeStatus.dirty && retRefTreeStatus.valid;
+        		return retRefTreeStatus;
         	},
     	},
-
+    	
     	currentSecondTreeItem:{
     		bind:{
         		bindTo:'{cursusTree.selection}',
@@ -187,18 +187,18 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		deep:true
         	},
         	get:function(item){
-        		var ret = {
+        		var retItemStatus = {
         				dirty:item ? item.dirty : false,
         				valid: item && item.isModel ? item.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retItemStatus.dirtyAndValid = retItemStatus.dirty && retItemStatus.valid;
+        		return retItemStatus;
         	},
     	},
     	
-    	currentReferentielTree:{
+    	/*currentReferentielTree:{
     		bind:{
-        		bindTo:'{referentielsTree.selection}',
+        		bindTo:'{referentielTree.selection}',
         		deep:true
         	},
         	get:function(referentiel){
@@ -217,14 +217,14 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		deep:true
         	},
         	get:function(referentiel){
-        		var ret = {
+        		var retRefStatus = {
         				dirty:referentiel ? referentiel.dirty : false,
         				valid: referentiel && referentiel.isModel ? referentiel.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retRefStatus.dirtyAndValid = retRefStatus.dirty && retRefStatus.valid;
+        		return retRefStatus;
         	},
-    	},
+    	},*/
     	
     	currentCours:{
     		bind:{
@@ -247,12 +247,12 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		deep:true
         	},
         	get:function(cours){
-        		var ret = {
+        		var retCoursStatus = {
         				dirty:cours ? cours.dirty : false,
         				valid: cours && cours.isModel ? cours.isValid() : false
         		};
-        		ret.dirtyAndValid = ret.dirty && ret.valid;
-        		return ret;
+        		retCoursStatus.dirtyAndValid = retCoursStatus.dirty && retCoursStatus.valid;
+        		return retCoursStatus;
         	},
     	},	
     	

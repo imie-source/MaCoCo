@@ -65,10 +65,10 @@ public class ActiviteTypeServlet
 	}
 	
 	@DELETE
-	@Path("/{id}")
-	public Response remove(@PathParam("id") Integer id)
+	@Path("/{string}")
+	public Response remove(ActiviteType activiteType)
 	{
-		activiteTypeService.delete(id);
+		activiteTypeService.delete(activiteType);
 		return Response.ok().build();
 	}	
 }

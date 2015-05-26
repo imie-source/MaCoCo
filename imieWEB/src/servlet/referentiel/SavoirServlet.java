@@ -67,11 +67,18 @@ public class SavoirServlet
 	    return Response.ok(result).build();
 	}
 	
-	@DELETE
+	/*@DELETE
 	@Path("/{id}")
 	public Response remove(@PathParam("id") Integer id)
 	{
 		savoirService.delete(id);
 		return Response.ok().build();
-	}	
+	}*/
+	@DELETE
+	@Path("/{string}")
+	public Response remove(Savoir savoir)
+	{
+		savoirService.delete(savoir);
+		return Response.ok().build();
+	}
 }

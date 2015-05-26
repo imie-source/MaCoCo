@@ -35,7 +35,7 @@ Ext.define('ExtJsMVC.controller.referentiel.DetailActiviteType',
             },
 	        'referentiel-DetailActiviteType > button#AddRecord' : 
 	        {
-	            click : this.onAddButtonClick
+	          //  click : this.onAddButtonClick
 	        }
 		});
 	},

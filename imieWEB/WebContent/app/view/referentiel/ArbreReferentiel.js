@@ -51,6 +51,7 @@ Ext.define('ExtJsMVC.view.referentiel.ArbreReferentiel',
 		        plugins: 
 		        {
 		            ptype: 'treeviewdragdrop',
+		            dragGroup: 'groupCoursSavoir'
 		        }
 		    },
 		});

@@ -14,4 +14,6 @@ public interface SavoirServiceLocal {
 	void delete(Integer id);
 
 	Savoir update(Savoir savoir);
+
+	void delete(Savoir savoir);
 }

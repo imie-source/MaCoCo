@@ -32,6 +32,13 @@ public class SavoirService implements SavoirServiceLocal {
 	{
 		Savoir savoir = em.find(Savoir.class, id);
 		em.remove(savoir);
+		
+	}
+	@Override
+	public void delete(Savoir savoir) 
+	{
+		savoir = em.merge(savoir);
+		em.remove(savoir);
 	}
 
 	@Override

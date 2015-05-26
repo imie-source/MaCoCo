@@ -44,7 +44,7 @@ Ext.define('ExtJsMVC.controller.ReferentielController',
 			
 			'arbre-Referentiel' : 
 			{
-				itemclick : this.showClick
+			//	itemclick : this.showClick
 			}
 		});
 	},

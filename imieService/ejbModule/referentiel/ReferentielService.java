@@ -81,7 +81,7 @@ public class ReferentielService implements ReferentielServiceLocal {
 		Referentiel referentiel = em.find(Referentiel.class, id);
 		List<ActiviteType> activiteTypes = referentiel.getActiviteTypes();
 		for (ActiviteType activiteType : activiteTypes) {
-			activiteTypeService.delete(activiteType.getActId());
+			activiteTypeService.delete(activiteType);
 		}
 		em.remove(referentiel);
 	}

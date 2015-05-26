@@ -23,15 +23,18 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
+            handler : 'onSaveRefButtonClick',
+            disabled:true,
             bind:{
-				disabled:'{!cursusRefTreeStatus.dirtyAndValid}'
+				disabled:'{!refTreeStatus.dirtyAndValid}'
 			},
         },
         {
         	id : 'seleniumDetailActiviteTypeAdd',
             xtype : 'button',
             text : 'Ajouter Compétence Pro',
-            itemId : 'AddRecord'
+            itemId : 'AddRecord',
+            handler : 'onAddRefButtonClick',
         }
     ]
 });

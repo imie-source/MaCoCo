@@ -22,8 +22,14 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			
 			'cursus-Arbre2' : 
 			{
-				selectionchange :this.chargeFormulaire,
-				itemcontextmenu : this.onTreeContextMenu,
+				selectionchange :this.chargeSecondTreeForm,
+				itemcontextmenu : this.onSecondTreeContextMenu,
+			},
+			'arbre-Referentiel' : 
+			{
+				//selectionchange :this.chargeRefTreeForm,
+				itemclick : this.chargeRefTreeForm,
+				itemcontextmenu : this.onRefTreeContextMenu,
 			},
 			'cursus-DetailCursus > button#Print' : {
 				click : this.onPrintClick
@@ -60,9 +66,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			break;
 		
 			case 'ExtJsMVC.model.cursus.UniteFormationCursusModel' :
-				//création d'un objet "module id" à partir de l'id du module selectionné
+				//création d'un objet "unite de formation id" à partir de l'id de l'unite de formation selectionnée
 				parent = {ufcId : itemSelected.get('ufcId')};
-				//création d'un nouveau cours avec insertion du module pour garder l'arborescence
+				//création d'un nouveau module avec insertion de l'unite de formation pour garder l'arborescence
 				newChild = Ext.create('ExtJsMVC.model.cursus.ModuleCursusModel');
 				newChild.set ('uniteFormationCursus', parent);
 							
@@ -70,9 +76,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			break;
 			
 			case 'ExtJsMVC.model.cursus.CursusModel' :
-				//création d'un objet "module id" à partir de l'id du module selectionné
+				//création d'un objet "cursus id" à partir de l'id du cursus selectionné
 				parent = {curId : itemSelected.get('curId')};
-				//création d'un nouveau cours avec insertion du module pour garder l'arborescence
+				//création d'une nouvelle unite de formation avec insertion du cursus pour garder l'arborescence
 				newChild = Ext.create('ExtJsMVC.model.cursus.UniteFormationCursusModel');
 				newChild.set ('cursus', parent);
 							
@@ -82,12 +88,76 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			default:
 				console.log('Ne correspond pas');
 		} 
-		// insertion du cours dans le store;
+		// insertion de l'item dans le store;
     	var record = myStore.insert(0,newChild)[0];
 		
-    	// selection du cours en cours de création
+    	// selection de l'item en cours de création
 		var secondTree = Ext.ComponentQuery.query('cursus-Arbre2')[0];
     	secondTree.getSelectionModel().select(record);
+
+	},
+	onAddRefButtonClick : function()
+	{
+		var myStore;
+		var parent;
+		var newChild;
+		var switchview = Ext.ComponentQuery.query('#switchView')[0];
+		var vm = this.getViewModel();
+		var itemSelected =vm.get('currentRefTree');
+    	var modelName = itemSelected.entityName;
+		switch(modelName) 
+		{	
+			case 'ExtJsMVC.model.referentiel.CompetencePro' :
+				//création d'un objet "competence pro id" à partir de l'id de la competence pro selectionnée
+				parent = {comId : itemSelected.get('comId')};
+				//création d'un nouveau savoir avec insertion de la competence pro pour garder l'arborescence
+				newChild = Ext.create('ExtJsMVC.model.referentiel.Savoir');
+				newChild.set ('competencePro', parent);
+							
+				myStore = vm.getStore('savoirStore');
+				
+				switchview.removeAll();
+		    	//Ajout de la vue correspondante
+			    switchview.add({xtype : 'referentiel-DetailSavoir'});
+			break;
+		
+			case 'ExtJsMVC.model.referentiel.ActiviteType' :
+				//création d'un objet "activite type id" à partir de l'id de l'activite type selectionnée
+				parent = {actId : itemSelected.get('actId')};
+				//création d'une nouvelle competence pro avec insertion de l'activite pour garder l'arborescence
+				newChild = Ext.create('ExtJsMVC.model.referentiel.CompetencePro');
+				newChild.set ('activiteType', parent);
+							
+				myStore = vm.getStore('compProStore');
+				
+				switchview.removeAll();
+		    	//Ajout de la vue correspondante
+			    switchview.add({xtype : 'referentiel-DetailCompetencePro'});
+			break;
+			
+			case 'ExtJsMVC.model.referentiel.Referentiel' :
+				//création d'un objet "referentiel id" à partir de l'id du referentiel selectionné
+				parent = {refId : itemSelected.get('refId')};
+				//création d'une nouvelle activite type avec insertion du referentiel pour garder l'arborescence
+				newChild = Ext.create('ExtJsMVC.model.referentiel.ActiviteType');
+				newChild.set ('referentiel', parent);
+							
+				myStore = vm.getStore('actTypeStore');
+			
+				switchview.removeAll();
+		    	//Ajout de la vue correspondante
+			    switchview.add({xtype : 'referentiel-DetailActiviteType'});
+			break;
+			
+			default:
+				console.log('Ne correspond pas');
+		} 
+		// insertion de l'item dans le store;
+    	var record = myStore.insert(0,newChild)[0];
+		
+    	// selection de l'item en cours de création
+		var refTree = Ext.ComponentQuery.query('arbre-Referentiel')[0];
+    	refTree.getSelectionModel().select(record);
 
 	},
 	
@@ -112,7 +182,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 							}
 						});
 					} else{			
-						me.syncCoursStore(vm.getStore('coursByCursus'),itemSelected);
+						me.syncCoursStore(myStore,itemSelected);
 					}
 		
 
@@ -131,7 +201,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 					});
 				}
 				else{
-					me.syncModuleStore(vm.getStore('moduleStore'), itemSelected);
+					me.syncModuleStore(myStore, itemSelected);
 				}
 				
 			break;
@@ -150,7 +220,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 					});	
 				}	
 				else{
-					me.syncUfStore(vm.getStore('ufStore'), itemSelected);
+					me.syncUfStore(myStore, itemSelected);
 				}
 				
 			break;
@@ -199,6 +269,86 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		cours.set('cocCommentaires', itemSelected.get('cocCommentaires'));
 		
 		myStore.sync();		
+	},
+	
+	onSaveRefButtonClick : function()
+	{
+		var myStore;
+		var vm = this.getViewModel();
+		var itemSelected =vm.get('currentRefTree');
+		var modelName = itemSelected.entityName;
+		var me = this;
+		switch(modelName) 
+		{	
+			case 'ExtJsMVC.model.referentiel.Savoir' :
+				myStore = vm.getStore('savoirStore');
+					if(itemSelected.get('savId')!== undefined){
+						 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
+						myUrl = '/imieWEB/webapi/savoir/'.concat(itemSelected.get('savId'));	
+						myStore.load({
+							url : myUrl,
+							callback : function(records){
+								me.syncSavoirStore(myStore, itemSelected);
+								
+							}
+						});
+					} else{		
+						me.syncSavoirStore(myStore,itemSelected);
+					}
+		
+
+			break;			
+ 
+			case 'ExtJsMVC.model.referentiel.CompetencePro' :
+				myStore = vm.getStore('compProStore');
+				if(itemSelected.get('comId')!== undefined){
+				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
+					myUrl = '/imieWEB/webapi/competencepro/'.concat(itemSelected.get('comId'));	
+					myStore.load({
+						url : myUrl,
+						callback : function(records){
+							me.syncSavoirStore(myStore, itemSelected);
+						}
+					});
+				}
+				else{
+					me.syncSavoirStore(myStore, itemSelected);
+				}
+				
+			break;
+		
+			case 'ExtJsMVC.model.referentiel.ActiviteType' :
+				myStore = vm.getStore('actTypeStore');
+				
+				if(itemSelected.get('actId')!== undefined){
+				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
+					myUrl = '/imieWEB/webapi/activitetype/'.concat(itemSelected.get('actId'));	
+					myStore.load({
+						url : myUrl,
+						callback : function(records){
+							me.syncSavoirStore(myStore, itemSelected);
+						}
+					});	
+				}	
+				else{
+					me.syncSavoirStore(myStore, itemSelected);
+				}
+				
+			break;
+			
+			case 'ExtJsMVC.model.referentiel.Referentiel' :
+
+			break;
+			
+			default:
+				console.log('Ne correspond pas');
+		} 
+		
+	},
+	syncSavoirStore : function(myStore, itemSelected){
+		var item = myStore.data.items[0];
+		item.set('text', itemSelected.get('text'));
+		myStore.sync();
 	},
 	
 	dragdrop : function(node,data,overModel,dropPosition,eOpts){
@@ -280,7 +430,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		});
 	},
 	
-	chargeFormulaire : function(grid, selectedRecords, eOpts)
+	chargeSecondTreeForm : function(grid, selectedRecords, eOpts)
 	{
 		var record = selectedRecords[0];
 		var vm = this.getViewModel();
@@ -613,10 +763,10 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    	   }
 			       switchview.add({xtype : 'cursus-DetailCours'});
 			       
-			     /*  
-			       var savoirModel = this.getReferentielSavoirModel();
-					//Preparation du panel pour les elements "enfants"
-					var panelTemplate = Ext.create('Ext.panel.Panel', {
+			     //Preparation du panel pour les elements "enfants"
+			       var savoirModel = vm.getStore('savoirStore').getModel();
+			       var detailView = Ext.ComponentQuery.query('form')[0];
+			       var panelTemplate = Ext.create('Ext.panel.Panel', {
 					    title: 'Glisser des savoirs dans cette zone',
 					    bodyPadding: 10,
 					    itemId : 'TemplateSavoirs',
@@ -654,8 +804,11 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 							                 var arrayCoursCursuses = record.get('coursCursuses');
 							                 if(arrayCoursCursuses == null) { arrayCoursCursuses = new Array() }
 							                  
+							                 
 							                 //Ajout du cours a la liste des cours du savoir 
-							                 var coursCursus = detailView.getRecord().getData({persist: true});
+							                 //var coursCursus = detailView.getRecord().getData({persist: true});
+							                 
+							                 var coursCursus  = vm.get('currentCursusSecondTree').getData({persist: true});
 							                 arrayCoursCursuses.push(coursCursus);
 							                  
 							                 
@@ -729,8 +882,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				    						  {
 				    							  var arrayCoursCursuses = record.get('coursCursuses');
 				    							  
-									              var coursCursus = detailView.getRecord().getData();
-									              var coursCursusId = coursCursus.cocId;
+									              //var coursCursus = detailView.getRecord().getData();
+				    							  var coursCursus  = vm.get('currentCursusSecondTree').getData();
+				    							  var coursCursusId = coursCursus.cocId;
 									              
 								                 arrayCoursCursuses.forEach(function(cours) 
 												 {
@@ -771,7 +925,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 					//Ajout des elements "enfants" au panel
 					panelTemplate.setData(record.get('savoirs'));
 			       switchview.add(panelTemplate);
-			       */
+			       
 			       
 			       break;	
 			        
@@ -782,7 +936,273 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			} 
 	},
 	
-	onTreeContextMenu : function(tree,record,item,index,e,eOpts){
+	//chargeRefTreeForm : function(grid, selectedRecords, eOpts)
+	chargeRefTreeForm : function(grid, record)
+	{
+		//var record = selectedRecords[0];
+		var vm = this.getViewModel();
+		var switchview = Ext.ComponentQuery.query('#switchView')[0];
+		var myStore;
+		//var itemSelectedId;
+		var myUrl;
+		
+		var modelName = record.entityName;
+		switch(modelName) 
+		{	
+		case 'ExtJsMVC.model.referentiel.Referentiel' :
+			
+		       console.log('Affichage Referentiel');
+		       
+		       //Nettoyage de la vue centrale
+		       if(switchview.getChildEls())
+	    	   {
+		    	   switchview.removeAll();
+	    	   }
+		       //Ajout de la vue correspondante
+		       switchview.add({xtype : 'referentiel-DetailReferentiel'});
+		       
+				//Preparation du panel pour les elements "enfants"
+				var panelEnfants = Ext.create('Ext.panel.Panel', {
+				    title: 'Activités Types de ce Référentiel',
+                 autoDestroy : true,
+				    bodyPadding: 10,
+				    
+				    tpl : new Ext.XTemplate
+				    (
+			    		'<tpl for=".">',
+								'<div class="activiteType-row" id="activiteType-{actId}">',
+									'Activité type : {actLibelle}',
+								'</div>',
+						'</tpl>'
+					),
+				    
+				    listeners:
+				    {
+				    	afterrender:function()
+				        {
+				    		var renderSelector = Ext.query('div.activiteType-row'); 
+			                for(var i in renderSelector)
+			                {
+			                	var renderRow = renderSelector[i];
+			                	
+			                	new Ext.Button(
+			                	{
+			                		cls : 'SeleniumActiviteTypeSuppButton',
+			                		//id: 'SeleniumCPSuppButton'+i,
+			    					text:' X ',
+			    					renderTo: renderRow,
+			    				    handler: function(bouton) 
+			    				    {
+			    				    	var childrenRowId = bouton.renderTo.id;
+			    				    	var sliceIndex = childrenRowId.indexOf('-');
+			    				    	childrenRowId = childrenRowId.slice(sliceIndex+1,childrenRowId.length);
+			    				    	
+			    				    	//suppression de l'element
+			    				    	var activiteTypeModel = vm.getStore('actTypeStore').getModel();
+			    				    	activiteTypeModel.load(childrenRowId,
+			    				    	{
+			    						  scope: this,
+			    						  callback: function(record, operation) 
+			    						  {
+			    							  record.set('children', null);
+			    							  console.log(record);
+			    							  record.erase();
+			    						  }
+			    				    	});
+
+			    				    }
+			    				});
+			                } 
+				        }
+				    }
+				});
+				
+
+				//Ajout des elements "enfants" au panel
+				panelEnfants.setData(record.get('activiteTypes'));
+				//Ajout du panel
+				switchview.add(panelEnfants);
+			
+			break;
+			
+		case 'ExtJsMVC.model.referentiel.ActiviteType' :
+			
+		       console.log('Affichage Activite Type');
+		       
+		       //Nettoyage de la vue centrale
+		       if(switchview.getChildEls())
+	    	   {
+		    	   switchview.removeAll();
+	    	   }
+		       //Ajout de la vue correspondante
+		       switchview.add({xtype : 'referentiel-DetailActiviteType'});
+		       			
+				
+				//Preparation du panel pour les elements "enfants"
+				var panelEnfants = Ext.create('Ext.panel.Panel', {
+				    title: 'Competences Pros de cette Activite Type',
+                 autoDestroy : true,
+				    bodyPadding: 10,
+				    
+				    tpl : new Ext.XTemplate
+				    (
+			    		'<tpl for=".">',
+								'<div class="competencePro-row" id="competencePro-{comId}">',
+									'Competence Pro : {comLibelle}',
+								'</div>',
+						'</tpl>'
+					),
+				    
+				    listeners:
+				    {
+				    	afterrender:function()
+				        {
+				    		var renderSelector = Ext.query('div.competencePro-row'); 
+			                for(var i in renderSelector)
+			                {
+			                	var renderRow = renderSelector[i];
+			                	
+			                	new Ext.Button(
+			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumCPSuppButton'+i,
+			    					text:' X ',
+			    					renderTo: renderRow,
+			    				    handler: function(bouton) 
+			    				    {
+			    				    	var childrenRowId = bouton.renderTo.id;
+			    				    	var sliceIndex = childrenRowId.indexOf('-');
+			    				    	childrenRowId = childrenRowId.slice(sliceIndex+1,childrenRowId.length);
+			    				    	
+			    				    	//suppression de l'element
+			    				    	var competenceProModel = vm.getStore('compProStore').getModel();
+			    				    	competenceProModel.load(childrenRowId,
+			    				    	{
+			    						  scope: this,
+			    						  callback: function(record, operation) 
+			    						  {
+			    							  record.set('children', null);
+			    							  console.log(record);
+			    							  record.erase();
+			    						  }
+			    				    	});
+
+			    				    }
+			    				});
+			                } 
+				        }
+				    }
+				});
+				
+
+				//Ajout des elements "enfants" au panel
+				panelEnfants.setData(record.get('competencePros'));
+				//Ajout du panel
+				switchview.add(panelEnfants);
+
+			break;
+			
+		case 'ExtJsMVC.model.referentiel.CompetencePro' :
+			
+		       console.log('Affichage Competence Pro');
+		       
+		       //Nettoyage de la vue centrale
+		       if(switchview.getChildEls())
+	    	   {
+		    	   switchview.removeAll();
+	    	   }
+		       //Ajout de la vue correspondante
+		       switchview.add({xtype : 'referentiel-DetailCompetencePro'});
+
+				//Preparation du panel pour les elements "enfants"
+				var panelEnfants = Ext.create('Ext.panel.Panel', {
+				    title: 'Savoirs de cette competence Pro',
+                 autoDestroy : true,
+				    bodyPadding: 10,
+				    
+				    tpl : new Ext.XTemplate
+				    (
+			    		'<tpl for=".">',
+								'<div class="savoir-row" id="savoir-{savId}">',
+									'Savoir : {savLibelle}',
+								'</div>',
+						'</tpl>'
+					),
+				    
+				    listeners:
+				    {
+				    	afterrender:function()
+				        {
+				    		var renderSelector = Ext.query('div.savoir-row'); 
+			                for(var i in renderSelector)
+			                {
+			                	var renderRow = renderSelector[i];
+			                	
+			                	new Ext.Button(
+			                	{
+			                		cls : 'SeleniumModuleSuppButton',
+			                		//id: 'SeleniumSavoirSuppButton'+i,
+			    					text:' X ',
+			    					renderTo: renderRow,
+			    				    handler: function(bouton) 
+			    				    {
+			    				    	var childrenRowId = bouton.renderTo.id;
+			    				    	var sliceIndex = childrenRowId.indexOf('-');
+			    				    	childrenRowId = childrenRowId.slice(sliceIndex+1,childrenRowId.length);
+			    				    	
+			    				    	//suppression de l'element
+			    				    	var savoirModel = vm.getStore('savoirStore').getModel();
+			    				    	savoirModel.load(childrenRowId,
+			    				    	{
+			    						  scope: this,
+			    						  callback: function(record, operation) 
+			    						  {
+			    							  record.set('children', null);
+			    							  console.log(record);
+			    							  record.erase();
+			    						  }
+			    				    	});
+
+			    				    }
+			    				});
+			                } 
+				        }
+				    }
+				});
+				
+
+				//Ajout des elements "enfants" au panel
+				panelEnfants.setData(record.get('savoirs'));
+				//Ajout du panel
+				switchview.add(panelEnfants);	
+			
+			
+			break;
+			
+		case 'ExtJsMVC.model.referentiel.Savoir' :
+			
+		       console.log('Affichage Savoir');
+		       
+		       //Nettoyage de la vue centrale
+		       if(switchview.getChildEls())
+	    	   {
+		    	   switchview.removeAll();
+	    	   }
+		       //Ajout de la vue correspondante
+		       switchview.add({xtype : 'referentiel-DetailSavoir'});
+		       			
+			break;
+	
+			
+			        
+			
+			
+			default:
+				console.log('Ne correspond pas');
+		} 
+	},
+	
+	onSecondTreeContextMenu : function(tree,record,item,index,e,eOpts){
     	e.stopEvent();
     	
     	var vm = this.getViewModel();
@@ -883,6 +1303,120 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    		items:[ 
 		    		{
 		    			text : 'ajouter une unité de formation',
+		    			handler:function(){
+		    				me.onAddButtonClick();
+		    	    	},	
+		    		},
+		    		]
+		    	}).showAt(e.getXY());
+			break;
+			
+			default:
+				console.log('Ne correspond pas');
+		} 	
+    },
+    
+    onRefTreeContextMenu : function(tree,record,item,index,e,eOpts){
+    	e.stopEvent();
+    	
+    	var vm = this.getViewModel();
+    	var myStore;
+    	var me = this;
+    	var modelName = record.entityName;
+    	var menu;
+
+
+		switch(modelName) 
+		{	
+			case 'ExtJsMVC.model.referentiel.Savoir' :
+		    	menu = new Ext.menu.Menu({	
+		    		items:[ 
+		    		{
+		    			text : 'supprimer le savoir',
+		    			handler:function(){
+		    				myStore = vm.getStore('savoirStore');
+		     				myUrl = '/imieWEB/webapi/savoir/'.concat(record.get('savId'));	
+							myStore.load({
+								url : myUrl,
+								callback : function(){
+				    				myStore.removeAll();
+				    				myStore.sync();
+								}
+							});
+		    	    	},
+		    		}
+		    		]
+		    	}).showAt(e.getXY());
+			break;
+			
+			case 'ExtJsMVC.model.referentiel.CompetencePro' :
+				menu = new Ext.menu.Menu({	
+		    		items:[ 
+		    		{
+		    			text : 'supprimer la compétence pro',
+		    			handler:function(){
+		    				myStore = vm.getStore('compProStore');
+		    				myUrl = '/imieWEB/webapi/competencepro/'.concat(record.get('comId'));	
+							myStore.load({
+								url : myUrl,
+								callback : function(){
+				    				myStore.removeAll();
+				    				myStore.sync();
+								}
+							});
+		    	    	},
+		    	    	border : '0 0 1 0',
+		    	    	style : {
+		    	    		borderColor : '#CCCCCC',
+		    	    		borderStyle: 'solid'
+		    	    	}
+		    		},{
+		    			text : 'ajouter un savoir',
+		    			handler:function(){
+		    				me.onAddButtonClick();		    	    	
+		    			},	
+		    		},
+		    		]
+		    	}).showAt(e.getXY());
+			break;
+		
+			case 'ExtJsMVC.model.referentiel.ActiviteType' :
+				menu = new Ext.menu.Menu({	
+		    		items:[ 
+		    		{
+		    			text : 'supprimer l\'activité type',
+		    			handler:function(){
+		    				myStore = vm.getStore('actTypeStore');
+		    				myUrl = '/imieWEB/webapi/activitetype/'.concat(record.get('actId'));	
+							myStore.load({
+								url : myUrl,
+								callback : function(){
+				    				myStore.removeAll();
+				    				myStore.sync();
+								}
+							});
+		    				
+		    	    	},
+		    	    	border : '0 0 1 0',
+		    	    	style : {
+		    	    		borderColor : '#CCCCCC',
+		    	    		borderStyle: 'solid'
+		    	    	}
+		    		},{
+		    			text : 'ajouter une compétence pro',
+		    			handler:function(){
+		    				me.onAddButtonClick();
+		    	    	},	
+		    		},
+		    		]
+		    	}).showAt(e.getXY());
+			break;
+			
+			case 'ExtJsMVC.model.referentiel.Referentiel' :
+				menu = new Ext.menu.Menu({	
+		    		items:[ 
+		    		{
+		    			text : 'ajouter une activité type',
 		    			handler:function(){
 		    				me.onAddButtonClick();
 		    	    	},	

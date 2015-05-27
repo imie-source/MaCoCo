@@ -1,0 +1,493 @@
+
+
+body{
+		-webkit-print-color-adjust: exact;
+		margin : 0;
+		padding: 0;
+}
+
+#print{
+	visibility: visible;
+	text-align: right;
+}
+
+table, thead, tr, th,td{
+	margin : 0;
+	padding: 0;
+}
+
+
+.bloc-titre
+{
+	background-color : #00CCFF;
+	margin : 0px 1px 2px 0px;
+	font-size: 30px;
+}
+.bloc-columnName{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+}
+.column-reac,.column-module,.column-heure,.column-jour,.column-infomodule,.column-infoeval
+{
+	margin : 0;
+	padding: 0;
+	/*margin-right : 2px;*/
+	display: inline-block;
+	vertical-align: top;
+}
+.column-reac,.column-module,.column-heure,.column-jour,.column-infoeval
+{
+	margin-right : 1.75px;
+}
+
+.column-reac
+{
+	width: 34.6%;	
+	background-color: #FFFF00;
+}
+.column-module
+{
+	width: 32%;
+	background-color: #FFFF00;
+}
+.column-heure
+{
+	width: 5%;
+	background-color: #FFFF00;
+}
+.column-jour
+{
+	width: 5%;
+	background-color: #FFFF00;
+}
+.column-infoeval{
+	width: 10%;
+	background-color: #FFFF00;
+}
+.column-infomodule
+{
+	width: 13%;
+	background-color: #FFFF00;
+}
+
+
+.bloc-global{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+	background-color: #EBFFFF;
+	
+}
+.bloc-reac
+{
+	width: 34.6%;
+	display: inline-block;
+	vertical-align: top;
+	margin : 0px 1.75px 0px 0px;
+}
+
+.entete-uf
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	background-color: LightSteelBlue;
+	height: 22px;
+}
+
+.bloc-savoir
+{
+	width: 100%;
+}
+
+
+.bloc-uf
+{
+	margin : 0px 1px 0px 0px;
+	padding : 0;
+	width: 65.25%;
+	display: inline-block;
+	vertical-align: top;
+}
+.bloc-module
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+
+}
+.entete-module
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 49.2%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	height: 22px;
+}
+
+.bloc-heure
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width : 7.5%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	text-align: center;
+	height: 22px;
+}
+.bloc-jour
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width : 7.7%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	text-align: center;
+	height: 22px;
+}
+.bloc-vide{	
+	margin : 0;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 35.26%;
+	height: 22px;
+	background-color: LightSteelBlue;
+}
+.bloc-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 64.6%;
+}
+
+
+
+.row-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 76.3%;
+	display: inline-block;
+}
+
+.infos-cours
+{
+	margin : 0;
+	padding : 0;
+	width: 11.5%;
+	display: inline-block;
+	text-align: center;
+}
+
+.infos-coursHeure
+{
+	margin : 0;
+	padding : 0;
+	width: 12%;
+	display: inline-block;
+	text-align: center;
+}
+
+
+
+.bloc-infomodule
+{	margin : 0;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 35.2%;
+}
+
+
+.bloc-evaluation
+{
+	margin : 0;
+	padding : 0;
+	display: inline-block;
+	width : 43.5%;
+}
+
+.bloc-commentaire
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	width : 56%;
+}
+
+.bloc-sommeHeure{
+	margin :10px 0px 0px 0px;
+	padding: 0;
+}
+.bloc-sommeHeureTxt{
+		margin :0px 1.75px 0px 38%;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 33%;
+	margin-left: 38.2%;
+	background-color: LightSteelBlue;
+	
+}
+.bloc-sommeHeureNb{	
+	margin :0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	text-align : center;
+	width: 5%;
+	background-color: LightSteelBlue;
+	
+}
+
+
+@page 
+{
+    size: A4 landscape;
+
+}
+
+
+@media print 
+{
+#print{
+	visibility: hidden;
+}
+body{
+		-webkit-print-color-adjust: exact;
+		font-size: 11px;
+}
+.bloc-tableRowData{
+	page-break-inside:avoid;
+	
+}	
+.entete-uf,.entete-module,.bloc-heure,.bloc-vide{
+	height : 15px;
+}
+/*
+body{
+		-webkit-print-color-adjust: exact;
+		font-size: 11px;
+		margin : 0;
+		padding: 0;
+}
+
+table, thead, tr, th,td{
+	margin : 0;
+	padding: 0;
+}
+
+
+.bloc-titre
+{
+	background-color : #00CCFF;
+	margin : 0px 1px 2px 0px;
+	font-size: 20px;
+}
+.bloc-columnName{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+}
+.column-reac,.column-module,.column-heure,.column-infomodule,.column-infoeval
+{
+	margin : 0;
+	padding: 0;
+	margin-right : 2px;
+	display: inline-block;
+	vertical-align: top;
+}
+.column-reac,.column-module,.column-heure,.column-infoeval
+{
+	margin-right : 1.75px;
+}
+
+.column-reac
+{
+	width: 38%;	
+	background-color: #FFFF00;
+}
+.column-module
+{
+	width: 33%;
+	background-color: #FFFF00;
+}
+.column-heure
+{
+	width: 5%;
+	background-color: #FFFF00;
+}
+.column-infoeval{
+	width: 10%;
+	background-color: #FFFF00;
+}
+.column-infomodule
+{
+	width: 13%;
+	background-color: #FFFF00;
+}
+.bloc-tableRowData{
+	page-break-inside:avoid;
+	
+}	
+
+.bloc-global{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+	background-color: #EBFFFF;
+	
+}
+.bloc-reac
+{
+	width: 38%;
+	display: inline-block;
+	vertical-align: top;
+	margin : 0px 1.75px 0px 0px;
+}
+
+.entete-reac
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	background-color: LightSteelBlue;
+	height: 14px;
+}
+
+.bloc-savoir
+{
+	width: 100%;
+}
+
+
+.bloc-uf
+{
+	margin : 0;
+	padding : 0;
+	width: 61.6%;
+	display: inline-block;
+	vertical-align: top;
+}
+.bloc-module
+{
+	margin : 0;
+	padding : 0;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+
+}
+.entete-module
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 53.8%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	height: 14px;
+}
+
+.bloc-heure
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width : 8.2%;
+	background-color: LightSteelBlue;
+	display: inline-block;
+	text-align: center;
+	height: 14px;
+}
+.bloc-vide{	
+	margin : 0;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 37.35%;
+	height: 14px;
+	background-color: LightSteelBlue;
+}
+.bloc-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 62.3%;
+}
+
+
+
+.row-cours
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	width: 86.5%;
+	display: inline-block;
+}
+
+.infos-cours
+{
+	margin : 0;
+	padding : 0;
+	width: 13%;
+	display: inline-block;
+	text-align: center;
+}
+
+
+
+
+.bloc-infomodule
+{	margin : 0;
+	padding : 0;
+	display: inline-block;
+	vertical-align: top;
+	width : 37%;
+}
+
+
+.bloc-evaluation
+{
+	margin : 0;
+	padding : 0;
+	display: inline-block;
+	width : 43%;
+}
+
+.bloc-commentaire
+{
+	margin : 0px 1.75px 0px 0px;
+	padding : 0;
+	display: inline-block;
+	width : 56%;
+}
+
+.bloc-sommeHeure{
+	margin :10px 0px 0px 0px;
+	padding: 0;
+}
+.bloc-sommeHeureTxt{
+		margin :0px 1.75px 0px 38%;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 33%;
+	margin-left: 38.2%;
+	background-color: LightSteelBlue;
+	
+}
+.bloc-sommeHeureNb{	
+	margin :0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	text-align : center;
+	width: 5%;
+	background-color: LightSteelBlue;
+	
+}*/
+}

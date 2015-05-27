@@ -1723,7 +1723,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			var blocSommeHeureNb = dh.append(blocSommeHeure, child);
 		};
 
-		var win = window.open('print.html');
+		var win = window.open('printSchemaPedagogique.html');
 		win.onload = drawDocument;
 	},
 
@@ -1895,7 +1895,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			var blocSommeJourNb = dh.append(blocSommeJour, child);
 		};
 
-		var win = window.open('print.html');
+		var win = window.open('printRubanPedagogique.html');
 		win.onload = drawDocument;
 	}
 

@@ -1,0 +1,56 @@
+body{
+	font-family: helvetica,arial,verdana,sans-serif;	
+}
+
+.formulaire{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top : 200px;
+	width: 500px;
+	 
+}
+.titre{
+	text-align: center;
+	background-color: #157FCC;
+	border: solid #157FCC 1px;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+	width: 400px;
+	margin-bottom: 0px;
+}
+.corps{
+	text-align: right;
+	border: solid #9c9c9c 1px;
+	width: 280px;
+	font-size: 13px;
+	margin-top: 0px;
+	padding : 10 60 10 60;
+}
+.rowTextfield{
+	margin-top : 10;
+}
+.errorMessage{
+	margin-top : 10;
+	text-align: center;
+	padding: 3px;
+	background-color: #d7aaaf;
+	border: solid #8a343f 1px;
+	color: #8a343f;
+}
+
+button{
+	margin-top : 20;
+	border: solid #126DAF 1px;
+	border-radius: 3px;
+	padding: 3px;
+	color: #FFFFFF;
+	background-color: #3892D3;
+	background-image: -moz-linear-gradient(center top , #4B9CD7, #3892D3 50%, #358AC8 51%, #3892D3);
+}
+
+button:HOVER{
+	border-color: #1064A1;
+	background-color: #3386C2;
+	background-image: -moz-linear-gradient(center top , #4792C8, #3386C2 50%, #307FB8 51%, #3386C2);
+}

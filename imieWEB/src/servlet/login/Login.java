@@ -32,7 +32,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		//request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/login.html").forward(request, response);
 	}
 
 	/**
@@ -51,8 +52,8 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("connectedUser", user);
 			response.sendRedirect("");
 		} else{
-			request.setAttribute("errorMessage", "Authentification incorrecte");
-			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			//request.setAttribute("errorMessage", "Authentification incorrecte");
+			request.getRequestDispatcher("/login.html").forward(request, response);
 		}
 		
 	}

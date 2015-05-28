@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Page d'authentification</title>
+	  <link rel="stylesheet" href="loginStyleSheet.css">
+	  <script type="text/javascript" src="js/sha256.js"></script>
+	<script type="text/javascript" src="js/hashPwd.js"></script>
+	</head>
+	<body>
+		<form class = "formulaire" method="post" action="Login">
+		<div class ="titre">
+			<h3>Authentification</h3>
+		</div>
+		<div class ="corps">	
+			<div class = rowTextfield>
+				<label for="loginInput" id="loginLabel"> Login : </label>
+				<input type="text" id="loginInput" name="loginInput" placeholder="mon login"/>
+			</div>
+			<div class = rowTextfield>
+				<label for="pwdInput" id="pwdLabel"> Mot de passe : </label>
+				<input type="password" id="pwdInput" name="pwdInput" placeholder="mon mot de passe"/>
+			</div>
+			<div class = rowButton>
+				<button type="submit" onclick="hashPwd()">Se connecter</button>
+			</div>
+		</div>
+		</form>
+	</body>
+</html>

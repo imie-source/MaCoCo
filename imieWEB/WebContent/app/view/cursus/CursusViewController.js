@@ -1731,9 +1731,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		var uniteFormationStore = this.getViewModel().getStore('rootCursuses');
 		var cursus = uniteFormationStore.getRoot().getChildAt(0);
 		var cursusData = cursus.pseudoWriting();
-
-		console.log(cursusData);
-
+		var coursStore = this.getViewModel().getStore('coursByCursus');
+		var coursData = coursStore.getData().items;
+		
 		var drawDocument = function() {
 
 			var htmlBody = this.document.body;
@@ -1814,8 +1814,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			};
 			var blocTableBody = dh.append(blocTable, child);
 
-			// UnitesFormations
-			cursusData.uniteFormationCursuses.forEach(function(uf) {
+
+			coursData.forEach(function(cours) {
 				var child = {
 					tag : 'tr',
 					cls : 'bloc-tableRowData'
@@ -1835,41 +1835,46 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 
 				var child = {
 					tag : 'div',
-					cls : 'bloc-ufRp'
+					cls : 'bloc-listeCoursRp'
 				};
-				var blocUniteFormation = dh.append(blocGlobal, child);
+				var blocListeCours = dh.append(blocGlobal, child);
 
-				// Modules
-				uf.moduleCursuses.forEach(function(module) {
-
-					// Cours
-					module.coursCursuses.forEach(function(cours) {
 						var child = {
 							tag : 'div',
 							cls : 'bloc-coursRp'
 						};
-						var blocCours = dh.append(blocUniteFormation, child);
+						var blocCours = dh.append(blocListeCours, child);
+						
+						var child = {
+							tag : 'div',
+							cls : 'row-anneeRp',
+							//html : cours.getData().cocIntitule
+						};
+						var rowAnnee = dh.append(blocCours, child);
 
 						var child = {
 							tag : 'div',
+							cls : 'row-ecfRp',
+							//html : cours.getData().cocDuree
+						};
+						var rowEcf = dh.append(blocCours, child);
+						
+						var child = {
+							tag : 'div',
 							cls : 'row-coursNomRp',
-							html : cours.cocIntitule
+							html : cours.getData().cocIntitule
 						};
 						var rowCours = dh.append(blocCours, child);
 
 						var child = {
 							tag : 'div',
 							cls : 'row-coursDureeRp',
-							html : cours.cocDuree
+							html : cours.getData().cocDuree
 						};
 						var infosCours = dh.append(blocCours, child);
 
-						sommeJour = sommeJour + cours.cocDuree;
-						console.log("sommeJour : " + sommeJour);
-
-					});
-
-				});
+						sommeJour = sommeJour + cours.getData().cocDuree;
+				
 
 			});
 
@@ -1881,6 +1886,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				cls : 'bloc-sommeJourRp'
 			};
 			var blocSommeJour = dh.append(htmlBody, child);
+			
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeJourRpTxt',

@@ -1,0 +1,147 @@
+
+
+body{
+		-webkit-print-color-adjust: exact;
+		margin : 0;
+		padding: 0;
+}
+
+#print{
+	visibility: visible;
+	text-align: right;
+}
+
+table, thead, tr, th,td{
+	margin : 0;
+	padding: 0;
+	width: 100%;
+}
+
+
+.bloc-titre
+{
+	background-color : #00CCFF;
+	margin : 0px 1px 2px 0px;
+	font-size: 30px;
+}
+.bloc-columnName{
+		margin : 0px 0px 2px 0px;
+		padding: :0;
+}
+.column-anneeRp,.column-ecfRp,.column-coursRp,.column-jourRp
+{
+	margin : 0;
+	padding: 0;
+	/*margin-right : 2px;*/
+	display: inline-block;
+	vertical-align: top;
+}
+.column-anneeRp,.column-ecfRp,.column-coursRp
+{
+	margin-right : 1.75px;
+}
+
+.column-anneeRp
+{
+	width: 10%;	
+	background-color: #FFFF00;
+}
+.column-ecfRp
+{
+	width: 9.35%;
+	background-color: #FFFF00;
+}
+.column-coursRp
+{
+	width: 69%;
+	background-color: #FFFF00;
+}
+.column-jourRp
+{
+	width: 10.65%;
+	background-color: #FFFF00;
+}
+
+.bloc-ufRp, .bloc-coursRp, .bloc-listeCoursRp
+{
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+.bloc-tableRowData,.bloc-global,.bloc-ufRp, .bloc-coursRp, .bloc-listeCoursRp{
+	margin :0px 0px 0px 0px;
+	padding: 0;
+}
+.bloc-tableRowData:nth-child(odd){
+	background-color: #D8D8D8
+}
+.row-ecfRp, .row-anneeRp,.row-coursNomRp, .row-coursDureeRp 
+{
+	display: inline-block;
+	vertical-align: top;
+	margin :0px 0px 0px 0px;
+	padding: 0;
+}
+.row-coursNomRp 
+{
+
+		border-right:solid white 1px;
+	width: 69%;
+}
+
+.row-coursDureeRp, .row-ecfRp, .row-anneeRp 
+{
+
+	width: 10%;
+}
+.row-coursDureeRp
+{
+	text-align: center;
+}
+.bloc-sommeJourRp{
+	margin :10px 0px 0px 0px;
+	padding: 0;
+}
+.bloc-sommeJourRpTxt{
+	margin :0px 1.75px 0px 20%;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	width: 69%;
+	/*margin-left: 20%;*/
+	background-color: #FFFF00;
+	
+}
+.bloc-sommeJourRpNb{	
+	margin :0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	text-align : center;
+	width: 10%;
+	background-color: #FFFF00;
+	
+}
+
+
+@page 
+{
+    size: A4 portrait;
+
+}
+
+
+@media print 
+{
+
+body{
+		-webkit-print-color-adjust: exact;
+		font-size: 11px;
+}
+.bloc-tableRowData{
+	page-break-inside:avoid;
+	
+}	
+.entete-uf,.entete-module,.bloc-heure,.bloc-vide{
+	height : 15px;
+}

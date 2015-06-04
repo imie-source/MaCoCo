@@ -20,7 +20,16 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	    		'ExtJsMVC.view.referentiel.DetailReferentiel',
 	    		'ExtJsMVC.view.referentiel.DetailActiviteType',
 	    		'ExtJsMVC.view.referentiel.DetailCompetencePro',
-	    		'ExtJsMVC.view.referentiel.DetailSavoir'
+	    		'ExtJsMVC.view.referentiel.DetailSavoir',
+	            'ExtJsMVC.view.promotion.PromotionArbre2',
+	            'ExtJsMVC.view.promotion.PromotionViewGrid',
+	            'ExtJsMVC.view.promotion.DetailCoursPromo',
+	            'ExtJsMVC.view.promotion.DetailModulePromo',
+	            'ExtJsMVC.view.promotion.DetailPromo',
+	            'ExtJsMVC.view.promotion.DetailPromoGlobal',
+	            'ExtJsMVC.view.promotion.DetailPromoOrdo',
+	            'ExtJsMVC.view.promotion.DetailUniteFormationPromo',
+	            'ExtJsMVC.view.promotion.MappingCoursPromoSavoir',
 	],
 	
 	controller : 'cursusViewController',
@@ -60,7 +69,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 										
 									},
 									{
-										xtype : 'cursus-Arbre2',
+										itemId : 'secondTree',
+										//xtype : 'cursus-Arbre2',
 										flex  : 1,
 										
 									},

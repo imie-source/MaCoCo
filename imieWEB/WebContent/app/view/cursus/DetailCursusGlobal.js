@@ -2,6 +2,10 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusGlobal', {
     extend : 'Ext.tab.Panel',
     xtype  : 'cursus-DetailCursusGlobal',
     store: 'CursusStore',
+    requires : [
+  		      'ExtJsMVC.view.cursus.DetailCursusGlobalViewController', 
+  	],
+  	controller : 'DetailCursusGlobalViewController',
 // title : 'Detail Cursus Global',
     frame   : true,
 // padding : 5,
@@ -31,6 +35,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusGlobal', {
 		            xtype : 'button',
 		            text : 'Imprimer',
 		            itemId : 'printOrdo',
+		            handler : 'onPrintOrdoClick',
 		
 		        }
 		    ]

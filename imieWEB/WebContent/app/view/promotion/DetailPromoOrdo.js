@@ -1,7 +1,6 @@
-Ext.define('ExtJsMVC.view.cursus.DetailCursusOrdo', {
-	xtype  : 'cursus-Arbre-Ordo',
+Ext.define('ExtJsMVC.view.promotion.DetailPromoOrdo', {
+	xtype  : 'promo-Arbre-Ordo',
 	extend : 'Ext.panel.Panel',
-	
     height : window.innerHeight -200, 
 	autoScroll : true,
 		layout : 
@@ -12,7 +11,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursusOrdo', {
 		items : 
 			[
 				{
-					xtype : 'cursusViewGrid',
+					xtype : 'promotionViewGrid',
 		 			flex  : 5,
 					
 				},

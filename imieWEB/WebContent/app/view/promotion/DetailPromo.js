@@ -1,30 +1,29 @@
-Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
+Ext.define('ExtJsMVC.view.promotion.DetailPromo', {
     extend : 'Ext.form.Panel',
-    xtype  : 'cursus-DetailCursus',
-    /*bind :{
-		store: '{cursuses}'
-	},*/
+    xtype  : 'promo-DetailPromo',
     requires : [
-	            'ExtJsMVC.view.cursus.DetailCursusViewController', 
+	            'ExtJsMVC.view.promotion.DetailPromoViewController',
 	],
-    store: 'CursusStore',
+	
+	controller : 'DetailPromoViewController',
+    store: 'PromotionStore',
     title   : 'Informations',
     bodyPadding : 10,
-    controller : 'DetailCursusViewController',
+    
     items : 
     [
         {
-        	id : 'seleniumDetailCursusNom',
-        	itemId: 'detailCursusNom',
+        	id : 'seleniumDetailPromoNom',
+        	itemId: 'detailPromoNom',
             xtype : 'textareafield',
             name : 'text',
             fieldLabel : 'Nom',
-            bind:'{currentSecondTreeItem.text}',
+            bind:'{currentSecondPromoTreeItem.text}',
             width : 500,
         },
         
         {
-        	id : 'seleniumDetailCursusPerDeb',
+        	id : 'seleniumDetailPromoPerDeb',
         	itemId: 'TestPeriodeDebut',
             xtype : 'datefield',
             fieldLabel : 'Du :',
@@ -32,7 +31,7 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         
         {
-        	id : 'seleniumDetailCursusPerFin',
+        	id : 'seleniumDetailPromoPerFin',
         	itemId: 'TestPeriodeFin',
             xtype : 'datefield',
             fieldLabel : 'Au :',
@@ -40,29 +39,28 @@ Ext.define('ExtJsMVC.view.cursus.DetailCursus', {
         },
         
         {
-        	id : 'seleniumDetailCursusSave',
+        	id : 'seleniumDetailPromoSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
-            handler : 'onSaveButtonClick',
+         //   handler : 'onSaveUfPromoClick',
             disabled:true,
 			bind:{
-				disabled:'{!itemStatus.dirtyAndValid}'
+				disabled:'{!itemPromoStatus.dirtyAndValid}'
 			},
         },
         {
-        	id : 'seleniumDetailCursusAdd',
+        	id : 'seleniumDetailPromoAdd',
             xtype : 'button',
             text : 'Ajouter UF',
             itemId : 'AddRecord',
-            handler :'onAddButtonClick',
+            handler :'onAddUfPromoClick',
         }
         ,
         {
-        	id : 'seleniumDetailCursusPrint',
+        	id : 'seleniumDetailPromoPrint',
             xtype : 'button',
             text : 'Imprimer',
-            handler : 'onPrintClick',
             itemId : 'Print'
         }
     ]

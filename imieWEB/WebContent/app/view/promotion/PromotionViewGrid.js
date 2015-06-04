@@ -1,0 +1,38 @@
+Ext.define('ExtJsMVC.view.promotion.PromotionViewGrid',{
+	extend : 'Ext.grid.Panel',
+	alias : 'widget.promotionViewGrid',
+
+	modelValidation:true,
+	bind:{
+		store:'{coursByPromotion}',
+		
+	},
+	title:'<b>Liste des promotions</b>',
+	reference:'coursPromoOrdoGrid',
+	
+	columns:[{
+		dataIndex:'copIntitule',
+		variableRowHeight : true,
+		flex:1.5,
+		autoScroll : true,
+	},
+		],
+		viewConfig:{
+			plugins : {
+				ptype : 'gridviewdragdrop',
+				dragText : 'Réordonner les cours',
+			},
+			getRowClass : function(record,index,rowParams,store){
+				var ret = 'heightOrdoGridRow'.concat(record.get('copDuree')).concat(' colorOrdoGridRow');
+
+				if(record.get('copOrdre')==0){
+					ret = ret.concat(' noOderedOrdoGridRow')
+				}
+				return ret;
+			},
+			
+		},
+		
+
+} );
+

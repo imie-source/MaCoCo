@@ -1,21 +1,21 @@
-Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
+Ext.define('ExtJsMVC.model.promotion.UniteFormationPromotionModel',
 {
 	extend : 'Ext.data.TreeModel',
 	fields : [
-		         {name: 'ufcId'}, 
-		         {name: 'text', mapping: 'ufcNom'}, 
-		         {name: 'ufcObjectifs'}, 	
-		         {name: 'cursus'}, 	
-		         {name: 'children', mapping: 'moduleCursuses'}
+		         {name: 'ufpId'}, 
+		         {name: 'text', mapping: 'ufpNom'}, 
+		         {name: 'ufpObjectifs'}, 	
+		         {name: 'promotion'}, 	
+		         {name: 'children', mapping: 'modulePromotions'}
 		     ],
 		     
-	childType : 'ExtJsMVC.model.cursus.ModuleCursusModel',
-	hasMany:  {model: 'ExtJsMVC.model.cursus.ModuleCursusModel', associationKey: 'moduleCursuses'},	
+	childType : 'ExtJsMVC.model.promotion.ModulePromotionModel',
+	hasMany:  {model: 'ExtJsMVC.model.promotion.ModulePromotionModel', associationKey: 'modulePromotions'},	
 		     
      proxy: 
      {
          type: 'rest',
-         url: '/imieWEB/webapi/uniteformationcursus/',
+         url: '/imieWEB/webapi/uniteformationpromotion/',
     	writer : 
     	{
     		nameProperty: 'mapping',
@@ -29,9 +29,8 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
                     data.parentId = undefined;
                     data.children = undefined;
                     data.text = undefined;
-                    data.moduleCursuses = undefined;
-                    data.cursus.uniteFormationCursuses = undefined;
-                    data.cursus.promotions = undefined;
+                    data.modulePromotions = undefined;
+                    data.promotion.uniteFormationPromotions = undefined;
                     return data;
                 },
                 scope: this
@@ -45,9 +44,9 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
         {
             fn: function(data) 
             {
-            	if(data.ufcId != undefined)
+            	if(data.ufpId != undefined)
         		{
-            		data.id = 'ufcId'.concat(data.ufcId);
+            		data.id = 'ufpId'.concat(data.ufpId);
         		}
             },
             scope: this

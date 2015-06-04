@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import entities.cursus.CoursCursus;
+import entities.promotion.CoursPromotion;
 
 import java.util.List;
 
@@ -44,6 +45,19 @@ public class Savoir implements Serializable {
 			}
 		)
 	private List<CoursCursus> coursCursuses;
+	
+	//bi-directional many-to-many association to CoursPromotion
+		@ManyToMany
+		@JoinTable(
+			name="r_courspromo_savoir"
+			, joinColumns={
+				@JoinColumn(name="sav_id", nullable=false)
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="cop_id", nullable=false)
+				}
+			)
+		private List<CoursPromotion> coursPromotions;
 
 	public Savoir() {
 	}

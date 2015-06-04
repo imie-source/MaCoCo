@@ -76,6 +76,58 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	savoirStore : {
     		model:'ExtJsMVC.model.referentiel.Savoir',    		
     	},
+    	
+    	firstTreeStore : {
+    		type:'tree',
+    		model:'ExtJsMVC.model.promotion.CursusPromotionModel',
+        	root : {
+  
+       		},
+        	folderSort: true,
+        	sorters:[{
+        		property:'text',
+        		direction:'ASC'
+        	}],
+    	},
+    	
+    	promotionStore : {
+    		type:'tree',
+    		model:'ExtJsMVC.model.promotion.PromotionModel',
+        	root : {
+       		},
+        	folderSort: true,
+        	sorters:[{
+        		property:'text',
+        		direction:'ASC'
+        	}],
+    	},
+    	
+    	rootPromotion  : {
+    		type:'tree',
+    		model:'ExtJsMVC.model.promotion.RootPromotionModel',
+        	root : {
+        		expanded : true
+       		},
+        	folderSort: true,
+        	sorters:[{
+        		property:'text',
+        		direction:'ASC'
+        	}],
+    	},
+    	
+    	ufPromoStore:{
+     	    model : 'ExtJsMVC.model.promotion.UniteFormationPromotionModel',   	    
+    	},
+    	
+    	modulePromoStore:{
+     	    model : 'ExtJsMVC.model.promotion.ModulePromotionModel',   	    
+    	},
+    	
+    	
+    	coursByPromotion: {
+    		model:'ExtJsMVC.model.promotion.CoursPromotionModel',    		
+    	},
+    	
     },
     formulas:{
     	currentCursus:{
@@ -184,6 +236,34 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	itemStatus:{
     		bind:{
         		bindTo:'{currentSecondTreeItem}',
+        		deep:true
+        	},
+        	get:function(item){
+        		var retItemStatus = {
+        				dirty:item ? item.dirty : false,
+        				valid: item && item.isModel ? item.isValid() : false
+        		};
+        		retItemStatus.dirtyAndValid = retItemStatus.dirty && retItemStatus.valid;
+        		return retItemStatus;
+        	},
+    	},
+    	
+    	
+    	currentSecondPromoTreeItem:{
+    		bind:{
+        		bindTo:'{promoTree.selection}',
+        		deep:true
+        	},
+        	get:function(item){
+        		return item;
+        	},
+        	set:function(item){
+        		this.set('currentSecondPromoTreeItem',item);
+        	}
+    	},
+    	itemPromoStatus:{
+    		bind:{
+        		bindTo:'{currentSecondPromoTreeItem}',
         		deep:true
         	},
         	get:function(item){

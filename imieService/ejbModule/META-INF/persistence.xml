@@ -4,6 +4,8 @@
 		<jta-data-source>java:/jdbc/imieDB</jta-data-source>
 		<class>entities.cursus.CoursCursus</class>
 		<class>entities.cursus.Periode</class>
+		<!-- <class>entities.cursus.CoursPromotion</class>
+		<class>entities.cursus.PeriodePromotion</class>  -->
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	</persistence-unit>
 </persistence>

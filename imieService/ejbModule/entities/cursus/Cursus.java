@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import entities.promotion.Promotion;
 
 
 /**
@@ -44,6 +47,10 @@ public class Cursus implements Serializable {
 	@OneToMany(mappedBy="cursus")
 	private List<Periode> periodes;
 
+	//bi-directional many-to-one association to Promotion
+		@OneToMany(fetch = FetchType.EAGER,mappedBy="cursus")
+		private List<Promotion> promotions;
+		
 	public Cursus() {
 	}
 
@@ -99,5 +106,13 @@ public class Cursus implements Serializable {
 
 	public void setPeriodes(List<Periode> periodes) {
 		this.periodes = periodes;
+	}
+
+	public List<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
 	}
 }

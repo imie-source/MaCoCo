@@ -23,6 +23,8 @@ import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
+import entities.promotion.PeriodePromotion;
+import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
 
 @Stateless
@@ -69,6 +71,16 @@ public class CursusServlet
 				uf.setModuleCursuses(null);
 			}
 			
+			for (Promotion promo : cursus.getPromotions()) 
+			{
+				promo.setCursus(null);
+				promo.setUniteFormationPromotions(null);
+				promo.setPeriodes(new ArrayList<PeriodePromotion>());
+				for(PeriodePromotion periodePromo : promo.getPeriodes()){
+					periodePromo.setPromotion(null);
+				}
+			}
+			
 		}
 
 		return Response.ok(listeCursus).build();
@@ -87,6 +99,14 @@ public class CursusServlet
 		for (Periode periode : cursus.getPeriodes())
 		{
 			periode.setCursus(null);
+		}
+		
+		cursus.setPromotions(new ArrayList<Promotion>());
+		for (Promotion promotion : cursus.getPromotions())
+		{
+			promotion.setCursus(null);
+			promotion.setPeriodes(null);
+			promotion.setUniteFormationPromotions(null);
 		}
 		
 		for (UniteFormationCursus uf : cursus.getUniteFormationCursuses()) 

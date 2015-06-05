@@ -111,6 +111,7 @@ public class PromotionServlet
 					{
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
+						savoir.setCoursPromotions(null);
 					}
 				}
 			}
@@ -120,7 +121,12 @@ public class PromotionServlet
 		reponse.add(promotion);
 		return Response.ok(reponse).build();
 	}
-
+	@GET()
+	@Path("/{id}/root")
+	public Response getPromotionRoot(@PathParam("id") Integer id ) 
+	{
+		return this.getPromotion(id);
+	}
 	@POST()
 	public Response add(Promotion promotion) 
 	{	

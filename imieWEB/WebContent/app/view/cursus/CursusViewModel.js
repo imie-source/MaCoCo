@@ -89,6 +89,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		direction:'ASC'
         	}],
     	},
+    	firstTreePromoStore:{
+     	    model : 'ExtJsMVC.model.promotion.FirstTreePromotionModel',   	    
+    	},
     	
     	promotionStore : {
     		type:'tree',

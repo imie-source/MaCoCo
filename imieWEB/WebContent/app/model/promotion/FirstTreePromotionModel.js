@@ -4,6 +4,7 @@ Ext.define('ExtJsMVC.model.promotion.FirstTreePromotionModel',
 		fields : [
 			          {name: 'proId'}, 
 			          {name: 'text', mapping: 'proNom'}, 
+			          {name: 'cursus'},
 			          {name : 'leaf',  type : 'boolean', defaultValue : true}
 		         ],
 		            

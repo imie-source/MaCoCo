@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import referentiel.SavoirServiceLocal;
 import entities.cursus.CoursCursus;
+import entities.promotion.CoursPromotion;
 import entities.referentiel.Savoir;
 
 @Stateless
@@ -42,6 +43,12 @@ public class SavoirServlet
 		{
 			coursCursus.setSavoirs(null);
 			coursCursus.setModuleCursus(null);
+		}
+		
+		for (CoursPromotion coursPromotion : savoir.getCoursPromotions()) 
+		{
+			coursPromotion.setSavoirs(null);
+			coursPromotion.setModulePromotion(null);
 		}
 		
 	    List<Savoir> result = new ArrayList<Savoir>();

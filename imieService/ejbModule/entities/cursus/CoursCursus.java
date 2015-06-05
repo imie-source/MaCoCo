@@ -85,14 +85,6 @@ public class CoursCursus implements Serializable {
 		this.cocCommentaires = cocCommentaires;
 	}
 
-//	public String getCocCursus() {
-//		return this.cocCursus;
-//	}
-//
-//	public void setCocCursus(String cocCursus) {
-//		this.cocCursus = cocCursus;
-//	}
-
 	public Integer getCocDuree() {
 		return this.cocDuree;
 	}

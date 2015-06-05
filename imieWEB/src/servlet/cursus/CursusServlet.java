@@ -125,6 +125,7 @@ public class CursusServlet
 					{
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
+						savoir.setCoursPromotions(null);
 					}
 				}
 			}

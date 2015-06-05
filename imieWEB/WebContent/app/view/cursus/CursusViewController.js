@@ -8,23 +8,12 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		this.control
 		({
 
-			
-			'cursusViewGrid dataview' : 
-			{
-				drop : this.dragdrop,
-			
-			},
 			'cursus-Arbre' : 
 			{
 				//itemclick : this.chargeSecondArbre,
-				selectionchange : this.chargeSecondArbre
+			//	selectionchange : this.chargeSecondArbre
 			},
 			
-			'cursus-Arbre2' : 
-			{
-				selectionchange :this.chargeSecondTreeForm,
-				itemcontextmenu : this.onSecondTreeContextMenu,
-			},
 			'arbre-Referentiel' : 
 			{
 				//selectionchange :this.chargeRefTreeForm,
@@ -411,17 +400,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		myStore.sync();
 	},
 	
-	dragdrop : function(node,data,overModel,dropPosition,eOpts){
-		
-		var coursStore = this.getViewModel().getStore('coursByCursus');
-		
-		coursStore.each(function(element, index, array){
-				element.set('cocOrdre',index+1);	
-		});
-		
-		coursStore.sync(); 
-		
-	},
+	
 	
 	
 	chargeSecondArbre : function(grid, selectedRecords, eOpts)
@@ -429,7 +408,6 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		var record = selectedRecords[0];
 		var vm = this.getViewModel();
 		var modelName = record.entityName;
-		
 		if(modelName === ('ExtJsMVC.model.promotion.CursusPromotionModel') || (modelName === 'ExtJsMVC.model.cursus.CursusModel')){
 			//Chargement arbre cursus
 			var secondTree = Ext.ComponentQuery.query('#secondTree')[0];
@@ -487,7 +465,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		}	
 			
 
-		else if (modelName === 'ExtJsMVC.model.promotion.FirstTreePromotionModel'){
+		else if (modelName === 'ExtJsMVC.model.promotion.FirstTreePromotionModel' && record.get('text') !== undefined){
 			//Chargement arbre promotion
 			var secondTree = Ext.ComponentQuery.query('#secondTree')[0];
 			if(secondTree.getChildEls())

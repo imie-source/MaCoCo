@@ -94,4 +94,12 @@ public class Savoir implements Serializable {
 		this.coursCursuses = coursCursuses;
 	}
 
+	public List<CoursPromotion> getCoursPromotions() {
+		
+		return this.coursPromotions;
+	}
+	public void setCoursPromotions(List<CoursPromotion> coursPromotions) {
+		this.coursPromotions = coursPromotions;
+	}
+
 }

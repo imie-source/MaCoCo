@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
+import entities.promotion.CoursPromotion;
 import entities.referentiel.Savoir;
 
 /**
@@ -58,6 +59,11 @@ public class SavoirService implements SavoirServiceLocal {
 		Savoir result = em.find(Savoir.class, id);
 		
 		for (@SuppressWarnings("unused") CoursCursus cours : result.getCoursCursuses()) 
+		{
+			//Initialisation
+		}
+		
+		for (@SuppressWarnings("unused") CoursPromotion cours : result.getCoursPromotions()) 
 		{
 			//Initialisation
 		}

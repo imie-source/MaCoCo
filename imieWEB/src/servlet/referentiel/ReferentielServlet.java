@@ -78,6 +78,7 @@ public class ReferentielServlet
 					{
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
+						savoir.setCoursPromotions(null);
 					}
 				}
 			}

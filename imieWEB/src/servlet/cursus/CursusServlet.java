@@ -128,9 +128,11 @@ public class CursusServlet
 						savoir.setCoursCursuses(null);
 						savoir.setCoursPromotions(null);
 					}
-					for (Enseignement enseignement : cours.getEnseignements()) {
+					for (Enseignement enseignement : cours.getEnseignements()) 
+					{
 						enseignement.setCoursCursuses(null);
 						enseignement.setCoursPromotions(null);
+						enseignement.setPrerequis(null);
 					}
 				}
 			}

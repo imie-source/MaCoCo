@@ -49,11 +49,25 @@ public class EnseignementServlet {
 	public Response getAllEnseignement() 
 	{
 		List<Enseignement> listeEnseignement = enseignementService.findAllEnseignement();
-		
+		for (Enseignement enseignement : listeEnseignement) {
+			for (CoursCursus coursCursus : enseignement.getCoursCursuses()) {
+				coursCursus.setSavoirs(null);
+				coursCursus.setEnseignements(null);
+				coursCursus.setModuleCursus(null);
+			}
+			for (CoursPromotion coursPromo : enseignement.getCoursPromotions()) {
+				coursPromo.setSavoirs(null);
+				coursPromo.setEnseignements(null);
+				coursPromo.setModulePromotion(null);
+			}
+			for (Enseignement prerequis: enseignement.getPrerequis()) {
+				prerequis.setCoursCursuses(null);
+				prerequis.setCoursPromotions(null);
+				prerequis.setPrerequis(null);
+			}
+		}
 		return Response.ok(listeEnseignement).build();
 	}
-
-
 
 
 	@GET()
@@ -62,11 +76,20 @@ public class EnseignementServlet {
 	{
 
 		Enseignement enseignement = enseignementService.findById(Integer.valueOf(id));
-		for (@SuppressWarnings("unused") CoursCursus cours : enseignement.getCoursCursuses()) {
-			//initialisation
+		for (CoursCursus coursCursus : enseignement.getCoursCursuses()) {
+			coursCursus.setSavoirs(null);
+			coursCursus.setEnseignements(null);
+			coursCursus.setModuleCursus(null);
 		}
-		for (@SuppressWarnings("unused") CoursPromotion coursPromo : enseignement.getCoursPromotions()) {
-			//initialisation
+		for (CoursPromotion coursPromo : enseignement.getCoursPromotions()) {
+			coursPromo.setSavoirs(null);
+			coursPromo.setModulePromotion(null);
+			coursPromo.setEnseignements(null);
+		}
+		for (Enseignement prerequis: enseignement.getPrerequis()) {
+			prerequis.setCoursCursuses(null);
+			prerequis.setCoursPromotions(null);
+			prerequis.setPrerequis(null);
 		}
 		ArrayList<Enseignement> reponse = new ArrayList<Enseignement>();
 		reponse.add(enseignement);

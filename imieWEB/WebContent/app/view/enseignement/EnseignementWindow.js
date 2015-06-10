@@ -5,9 +5,10 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindow', {
 	requires : [
 	            'ExtJsMVC.view.enseignement.EnseignementWindowController', 
 	            'ExtJsMVC.view.enseignement.EnseignementWindowModel',
+	            'ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',
 	            'ExtJsMVC.view.enseignement.EnseignementWindowGrid',
 	            'ExtJsMVC.view.enseignement.EnseignementWindowForm',
-	            'ExtJsMVC.view.enseignement.EnseignementWindowMultiSelector'
+	            'ExtJsMVC.view.enseignement.EnseignementWindowMultiSelector',
 	],
 	
 	controller : 'enseignementWindowController',

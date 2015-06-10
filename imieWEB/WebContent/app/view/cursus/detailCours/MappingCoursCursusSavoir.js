@@ -1,16 +1,16 @@
-Ext.define('ExtJsMVC.view.cursus.detailCours.MappingCoursCursusSavoir', {
+Ext.define('ExtJsMVC.view.cursus.detailCours.MappingCoursCursusEnseignement', {
 	extend : 'Ext.form.Panel',
-	xtype : 'cursus-MappingCoursSavoir',
+	xtype : 'cursus-MappingCoursEnseignement',
 	store: 'CursusStore',
-	title : 'Liaison Cours-Savoir',
+	title : 'Liaison Cours-Enseignement',
 	frame : true,
 	padding : 10,
-    tpl:  new Ext.XTemplate('<tpl for="savoirs">' +
-			'<div class="savoir">hello</div>' +
+    tpl:  new Ext.XTemplate('<tpl for="enseignements">' +
+			'<div class="enseignement">hello</div>' +
 			'</tpl>'),
-	itemSelector: 'div.savoir',
-	overItemCls: 'savoir-over',
-	selectedItemClass: 'savoir-selected',
+	itemSelector: 'div.enseignement',
+	overItemCls: 'enseignement-over',
+	selectedItemClass: 'enseignement-selected',
 	singleSelect: true
     
 

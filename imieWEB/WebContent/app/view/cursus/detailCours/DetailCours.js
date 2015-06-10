@@ -73,73 +73,13 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCours', {
 				disabled:'{!itemStatus.dirtyAndValid}'
 			},
         },
-        
-//        {
-//		    title: 'Glisser des savoirs dans cet espace',
-//		    bodyPadding: 10,
-//		    itemId : 'Template',
-//		    
-//		    tpl : new Ext.XTemplate
-//		    (
-//	    		'<tpl for="savoirs">',
-//	    			'<div>hello</div>',
-//						'<div class="savoir-row" id="savoir-{savId}">',
-//							'Savoir : {savLibelle}',
-//						'</div>',
-//				'</tpl>'
-//			),
-//			
-//		    listeners: {
-//		        'afterrender': function () 
-//		        {
-//		            this.dropZone = Ext.create('Ext.dd.DropTarget', this.getEl(), {
-//		            	ddGroup: 'groupCoursSavoir',
-//		                panel: this,
-//		                
-//		                notifyDrop : function(source, e, data) 
-//		                {
-//		                    console.log('drop');
-//		                    return true;
-//		                }          
-//		            });  
-//		            
-//		            
-//		            
-//		            
-//		            var renderSelector = Ext.query('div.savoir-row'); 
-//	                for(var i in renderSelector)
-//	                {
-//	                	var renderRow = renderSelector[i];
-//	                	
-//	                	new Ext.Button(
-//	                	{
-//	    					text:' X ',
-//	    					renderTo: renderRow,
-//	    				    handler: function(bouton) 
-//	    				    {
-//	    				    	var savoirRowId = bouton.renderTo.id;
-//	    				    	var sliceIndex = savoirRowId.indexOf('-');
-//	    				    	savoirRowId = savoirRowId.slice(sliceIndex+1,savoirRowId.length);
-//	    				    	
-//	    				    	//suppression de l'element
-//	    				    	
-//	    				    	var savoirModel = this.getReferentielSavoirModel();
-//	    				    	savoirModel.load(savoirRowId,
-//	    				    	{
-//	    						  scope: this,
-//	    						  callback: function(record, operation) 
-//	    						  {
-//	    							  console.log(record);
-//	    							  record.erase();
-//	    						  }
-//	    				    	});
-//	    				    }
-//	    				});
-//	                }    
-//		            
-//		            
-//		        }
-//		    } 
-//		}
-    ]
+        {
+        	itemId : 'detailBottomView',
+        	layout : 
+  			{
+        		type  : 'hbox'
+    
+  			},
+        }
+        ],
 });

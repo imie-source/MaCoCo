@@ -121,6 +121,7 @@ public class PromotionServlet
 					for (Enseignement enseignement : cours.getEnseignements()) {
 						enseignement.setCoursCursuses(null);
 						enseignement.setCoursPromotions(null);
+						enseignement.setPrerequis(null);
 					}
 				}
 			}

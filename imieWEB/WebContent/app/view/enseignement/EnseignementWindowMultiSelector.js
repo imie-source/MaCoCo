@@ -3,7 +3,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowMultiSelector', {
 
     xtype: 'multi-selector',
     alias : 'widget.enseignementWindowMultiSelector',
-
+    id : 'multiselectorId',
     requires: [
         'Ext.view.MultiSelector'
     ],
@@ -26,12 +26,16 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowMultiSelector', {
         },
 
         search: {
-            field: 'entNom',
-
-            store: {
-				model:'ExtJsMVC.model.enseignement.EnseignementModel',
-				autoLoad:true
-			},
+            field: 'entSearch',
+        	store: {
+        		model:'ExtJsMVC.model.enseignement.EnseignementModel',
+        		autoLoad:true
+        	},
+        	//xtype : 'enseignementWindowMultiSelector',
+            //selType: 'checkboxmodel',
+            width : 300,
+            height : 400,
+           
         }
         
     }]

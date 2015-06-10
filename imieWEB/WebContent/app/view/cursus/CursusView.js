@@ -29,8 +29,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailPromoGlobal',
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailPromoOrdo',
 	            'ExtJsMVC.view.promotion.detailUf.DetailUniteFormationPromo',
-	            'ExtJsMVC.view.promotion.detailCours.MappingCoursPromoSavoir',
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo',
+	            
 	],
 	
 	controller : 'cursusViewController',

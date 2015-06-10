@@ -66,11 +66,14 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
     	var vm = this.getViewModel()
     	
     	var enseignementSelected = vm.get('currentEnseignement');
+    	
     	var multiSelector = Ext.ComponentQuery.query('#prerequisMultiselector')[0];
-    	var prerequis = multiSelector.getData();
+    	
     	console.log(multiSelector);
-    	console.log(prerequis);
-    	console.log(Ext.getCmp('prerequisMultiselector'));
+
+    	console.log(Ext.getCmp('prerequisMultiselector').getValue());
+    	console.log(Ext.getCmp('multiselectorId').getValue());
+    	
     	var enseignementStore = vm.getStore('enseignementStore');
     	enseignementStore.sync();  
     	this.switchFormToGrid();

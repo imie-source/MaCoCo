@@ -131,6 +131,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     		model:'ExtJsMVC.model.promotion.CoursPromotionModel',    		
     	},
     	
+    	enseignementStore:{
+    		model:'ExtJsMVC.model.enseignement.EnseignementModel',
+    	},
     },
     formulas:{
     	currentCursus:{

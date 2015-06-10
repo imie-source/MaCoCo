@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import cursus.CoursCursusServiceLocal;
 import entities.cursus.CoursCursus;
+import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
 
 
@@ -45,7 +46,13 @@ public class CoursCursusServlet
 		for (Savoir savoir : cours.getSavoirs()) 
 		{
 			savoir.setCoursCursuses(null);
+			savoir.setCoursPromotions(null);
 			savoir.setCompetencePro(null);
+		}
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			enseignement.setPrerequis(null);
 		}
 		
 		ArrayList<CoursCursus> response = new ArrayList<CoursCursus>();
@@ -92,6 +99,7 @@ public class CoursCursusServlet
 			coursCursus.getModuleCursus().setCoursCursuses(null);
 			coursCursus.getModuleCursus().setUniteFormationCursus(null);
 			coursCursus.setSavoirs(null);
+			coursCursus.setEnseignements(null);
 		}
 		
 	    return Response.ok(result).build();

@@ -52,20 +52,15 @@ public class EnseignementService implements EnseignementServiceLocal{
 	@Override
 	public Enseignement findById(Integer id) {
 		Enseignement result = em.find(Enseignement.class, id);
-		
-		for (@SuppressWarnings("unused") CoursCursus cours : result.getCoursCursuses()) 
-		{
-			//Initialisation
+		for (@SuppressWarnings("unused") CoursCursus coursCursus : result.getCoursCursuses()) {
+			// initialisation
 		}
-		
-		for (@SuppressWarnings("unused") CoursPromotion cours : result.getCoursPromotions()) 
-		{
-			//Initialisation
+		for (@SuppressWarnings("unused") CoursPromotion coursPromo : result.getCoursPromotions()) {
+			// initialisation
 		}
 		for (@SuppressWarnings("unused") Enseignement prerequis: result.getPrerequis()) {
 			// initialisation
 		}
-		
 		return result;
 	
 	}

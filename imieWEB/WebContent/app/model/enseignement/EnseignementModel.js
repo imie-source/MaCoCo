@@ -26,6 +26,12 @@ Ext.define('ExtJsMVC.model.enseignement.EnseignementModel',
 	                {
 	                    data.id = undefined;
 	                    data.entSearch = undefined;
+	                    data.coursCursuses.forEach(function(element){
+	                    	element.savoirs = undefined;
+	                    });
+	                    data.coursPromotions.forEach(function(element){
+	                    	element.savoirs = undefined;
+	                    });
 	                    return data;
 	                },
 	                scope: this
@@ -44,7 +50,7 @@ Ext.define('ExtJsMVC.model.enseignement.EnseignementModel',
 		        		}
 		            	if(data.entContenu != undefined)
 		        		{
-		            		data.entSearch = data.entNom.concat(data.entContenu);
+		            		data.entSearch = data.entNom.concat(' : ').concat(data.entContenu);
 		        		}else{
 		        			data.entSearch = data.entNom;
 		        		}

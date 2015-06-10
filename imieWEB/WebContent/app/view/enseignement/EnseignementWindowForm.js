@@ -43,7 +43,10 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowForm',{
 			},
 			{
 				xtype:'enseignementWindowMultiSelector',
-				
+				/*xtype:'enseignementWindowSimpleGrid',
+				selType: 'checkboxmodel',
+				height : 200,*/
+				//bind:'{currentEnseignement.prerequis}',
 			},
 			],
 		

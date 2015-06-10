@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import promotion.CoursPromotionServiceLocal;
+import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
 import entities.referentiel.Savoir;
 
@@ -42,9 +43,14 @@ public class CoursPromotionServlet
 		for (Savoir savoir : cours.getSavoirs()) 
 		{
 			savoir.setCoursCursuses(null);
+			savoir.setCoursPromotions(null);
 			savoir.setCompetencePro(null);
 		}
-		
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			enseignement.setPrerequis(null);
+		}
 		ArrayList<CoursPromotion> response = new ArrayList<CoursPromotion>();
 		response.add(cours);
 	    return Response.ok(response).build();
@@ -89,6 +95,7 @@ public class CoursPromotionServlet
 			coursPromotion.getModulePromotion().setCoursPromotions(null);
 			coursPromotion.getModulePromotion().setUniteFormationPromotion(null);
 			coursPromotion.setSavoirs(null);
+			coursPromotion.setEnseignements(null);
 		}
 		
 	    return Response.ok(result).build();

@@ -1,3 +1,8 @@
+delete from r_courspromo_savoir;
+delete from cours_promo;
+delete from module_promo;
+delete from unite_formation_promo;
+delete from promotion;
 delete from r_courscursus_savoir;
 delete from cours_cursus;
 delete from module_cursus;

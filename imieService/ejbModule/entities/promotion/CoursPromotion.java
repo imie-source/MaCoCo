@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
 
 import java.util.List;
@@ -67,6 +68,10 @@ public class CoursPromotion implements Serializable {
 	//bi-directional many-to-many association to Savoir
 	@ManyToMany(mappedBy="coursPromotions")
 	private List<Savoir> savoirs;
+	
+	//bi-directional many-to-many association to Enseignement
+	@ManyToMany(mappedBy="coursPromotions")
+	private List<Enseignement> enseignements;
 
 	public CoursPromotion() {
 	}
@@ -161,6 +166,14 @@ public class CoursPromotion implements Serializable {
 
 	public void setSavoirs(List<Savoir> savoirs) {
 		this.savoirs = savoirs;
+	}
+
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
 	}
 
 }

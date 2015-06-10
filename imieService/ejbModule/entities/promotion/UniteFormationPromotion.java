@@ -27,6 +27,10 @@ public class UniteFormationPromotion implements Serializable {
 
 	@Column(name="ufp_objectifs", length=500)
 	private String ufpObjectifs;
+	
+	@Column(name="ufc_id")
+	private Integer ufcId;
+
 
 	//bi-directional many-to-one association to ModulePromotion
 	@OneToMany(mappedBy="uniteFormationPromotion")
@@ -65,6 +69,13 @@ public class UniteFormationPromotion implements Serializable {
 		this.ufpObjectifs = ufpObjectifs;
 	}
 
+	public Integer getUfcId() {
+		return ufcId;
+	}
+
+	public void setUfcId(Integer ufcId) {
+		this.ufcId = ufcId;
+	}
 	public List<ModulePromotion> getModulePromotions() {
 		return modulePromotions;
 	}

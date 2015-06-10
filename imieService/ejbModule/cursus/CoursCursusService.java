@@ -12,7 +12,10 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
+import entities.cursus.RCourscursusEnseignement;
 import entities.cursus.RCourscursusSavoir;
+import entities.enseignement.Enseignement;
+import entities.promotion.RCourspromotionSavoir;
 import entities.referentiel.Savoir;
 
 /**
@@ -44,7 +47,10 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		{
 			//Initialisation
 		}
-		
+		for (@SuppressWarnings("unused") Enseignement enseignement : result.getEnseignements()) 
+		{
+			//Initialisation
+		}
 		return result;
 	}
 
@@ -79,6 +85,15 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 				em.remove(rCourscursusSavoir);
 			}
 		}
+		Query queryAllRCoursEnseignement= em.createNamedQuery("RCourscursusEnseignement.findAll");
+		@SuppressWarnings("unchecked")
+		List<RCourscursusEnseignement> rCourscursusEnseignements = queryAllRCoursEnseignement.getResultList();
+		for (RCourscursusEnseignement rCourscursusEnseignement : rCourscursusEnseignements) {
+			if(coursCursus==rCourscursusEnseignement.getCoursCursus()){
+				rCourscursusEnseignement = em.merge(rCourscursusEnseignement);
+				em.remove(rCourscursusEnseignement);
+			}
+		}
 		em.remove(coursCursus);
 	}
 	
@@ -95,6 +110,10 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		for (CoursCursus coursCursus : res) 
 		{
 			for (@SuppressWarnings("unused") Savoir savoir : coursCursus.getSavoirs()) 
+			{
+				//Initialisation
+			}
+			for (@SuppressWarnings("unused") Enseignement enseignement : coursCursus.getEnseignements()) 
 			{
 				//Initialisation
 			}

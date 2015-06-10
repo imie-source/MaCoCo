@@ -14,6 +14,7 @@ import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
+import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
 
 
@@ -84,6 +85,10 @@ public class CursusService implements CursusServiceLocal {
 				for (CoursCursus cours : module.getCoursCursuses()) 
 				{
 					for (@SuppressWarnings("unused") Savoir savoir : cours.getSavoirs()) 
+					{
+						//Initialisation
+					}
+					for (@SuppressWarnings("unused") Enseignement enseignement : cours.getEnseignements()) 
 					{
 						//Initialisation
 					}

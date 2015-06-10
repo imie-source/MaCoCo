@@ -1,12 +1,21 @@
 package entities.cursus;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
-import entities.referentiel.Savoir;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import entities.enseignement.Enseignement;
+import entities.referentiel.Savoir;
 
 
 /**
@@ -65,6 +74,10 @@ public class CoursCursus implements Serializable {
 	//bi-directional many-to-many association to Savoir
 	@ManyToMany(mappedBy="coursCursuses")
 	private List<Savoir> savoirs;
+
+	//bi-directional many-to-many association to Enseignement
+	@ManyToMany(mappedBy="coursCursuses")
+	private List<Enseignement> enseignements;
 
 	public CoursCursus() {
 	}
@@ -147,6 +160,14 @@ public class CoursCursus implements Serializable {
 
 	public void setSavoirs(List<Savoir> savoirs) {
 		this.savoirs = savoirs;
+	}
+
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
 	}
 
 }

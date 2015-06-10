@@ -11,7 +11,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import entities.cursus.RCourscursusEnseignement;
+import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
+import entities.promotion.RCourspromoEnseignement;
 import entities.promotion.RCourspromotionSavoir;
 import entities.referentiel.Savoir;
 
@@ -44,7 +47,10 @@ public class CoursPromotionService implements CoursPromotionServiceLocal {
 		{
 			//Initialisation
 		}
-		
+		for (@SuppressWarnings("unused") Enseignement enseignement : result.getEnseignements()) 
+		{
+			//Initialisation
+		}
 		return result;
 	}
 
@@ -74,6 +80,15 @@ public class CoursPromotionService implements CoursPromotionServiceLocal {
 				em.remove(rCourspromotionSavoir);
 			}
 		}
+		Query queryAllRCoursPromoEnseignement= em.createNamedQuery("RCourspromoEnseignement.findAll");
+		@SuppressWarnings("unchecked")
+		List<RCourspromoEnseignement> rCourspromoEnseignements = queryAllRCoursPromoEnseignement.getResultList();
+		for (RCourspromoEnseignement rCourspromoEnseignement : rCourspromoEnseignements) {
+			if(coursPromotion==rCourspromoEnseignement.getCoursPromo()){
+				rCourspromoEnseignement = em.merge(rCourspromoEnseignement);
+				em.remove(rCourspromoEnseignement);
+			}
+		}
 		em.remove(coursPromotion);
 	}
 	
@@ -92,7 +107,12 @@ public class CoursPromotionService implements CoursPromotionServiceLocal {
 			for (@SuppressWarnings("unused") Savoir savoir : coursPromotion.getSavoirs()) 
 			{
 				//Initialisation
+			}	
+			for (@SuppressWarnings("unused") Enseignement enseignement : coursPromotion.getEnseignements()) 
+			{
+				//Initialisation
 			}
+		
 		}
 		
 		Collections.sort(res, new Comparator<CoursPromotion>() {

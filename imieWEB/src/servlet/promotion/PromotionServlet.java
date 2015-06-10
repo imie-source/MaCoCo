@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import promotion.PromotionServiceLocal;
 import entities.cursus.Cursus;
+import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
 import entities.promotion.ModulePromotion;
 import entities.promotion.PeriodePromotion;
@@ -63,13 +64,16 @@ public class PromotionServlet
 				periode.setPromotion(null);
 			}
 			
-			
 			for (UniteFormationPromotion uf : promotion.getUniteFormationPromotions()) 
 			{
 				uf.setPromotion(null);
 				uf.setModulePromotions(null);
 			}
-			
+			Cursus cursus = promotion.getCursus();
+			cursus.setPromotions(null);
+			cursus.setRefId(null);
+			cursus.setUniteFormationCursuses(null);
+			cursus.setPeriodes(null);
 		}
 
 		return Response.ok(listePromotion).build();
@@ -94,6 +98,7 @@ public class PromotionServlet
 		cursus.setPeriodes(null);
 		cursus.setPromotions(null);
 		cursus.setUniteFormationCursuses(null);
+		cursus.setRefId(null);
 		
 		for (UniteFormationPromotion uf : promotion.getUniteFormationPromotions()) 
 		{
@@ -112,6 +117,10 @@ public class PromotionServlet
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
 						savoir.setCoursPromotions(null);
+					}
+					for (Enseignement enseignement : cours.getEnseignements()) {
+						enseignement.setCoursCursuses(null);
+						enseignement.setCoursPromotions(null);
 					}
 				}
 			}

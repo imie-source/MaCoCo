@@ -4,6 +4,7 @@ Ext.define('ExtJsMVC.model.promotion.CoursPromotionModel',
 	fields : [
 	          {name: 'copId'}, 
 	          {name: 'text', mapping: 'copIntitule'}, 
+	          {name: 'cocId'}, 
 	          {name: 'copDuree'}, 
 	          {name: 'copType'}, 
 	          {name: 'copObjectifs'}, 

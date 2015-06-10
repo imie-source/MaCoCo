@@ -7,9 +7,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import entities.cursus.CoursCursus;
+import entities.cursus.Cursus;
 import entities.referentiel.ActiviteType;
 import entities.referentiel.CompetencePro;
 import entities.referentiel.Referentiel;
@@ -82,6 +84,14 @@ public class ReferentielService implements ReferentielServiceLocal {
 		List<ActiviteType> activiteTypes = referentiel.getActiviteTypes();
 		for (ActiviteType activiteType : activiteTypes) {
 			activiteTypeService.delete(activiteType);
+		}
+		String queryString = "SELECT c FROM Cursus c WHERE c.refId = " + referentiel.getRefId();
+		Query query = em.createQuery(queryString);
+		@SuppressWarnings("unchecked")
+		List<Cursus> cursuses = query.getResultList();
+		for (Cursus cursus : cursuses) {
+			cursus.setRefId(null);
+			em.merge(cursus);
 		}
 		em.remove(referentiel);
 	}

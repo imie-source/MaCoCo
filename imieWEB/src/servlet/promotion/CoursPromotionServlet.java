@@ -93,4 +93,7 @@ public class CoursPromotionServlet
 		
 	    return Response.ok(result).build();
 	}	
+	
+	
+	
 }

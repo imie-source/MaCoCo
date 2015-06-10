@@ -8,7 +8,9 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 
 		this.control
 		({
-
+			'view-administrationWindow':{
+				beforeexpand : this.onExpand,
+			},
 			'administrationWindowGrid':{
 				rowdblclick : this.onCollapse,
 				rowcontextmenu : this.onContextMenu,
@@ -42,6 +44,14 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	var home = grid.up('view-administrationWindow');
     	home.toggleCollapse();
     	
+    },
+    
+    onExpand : function(panel,e){
+    	var entWindow = Ext.ComponentQuery.query('view-enseignementWindow')[0];
+    	console.log(entWindow.getCollapsed());
+        if(entWindow.getCollapsed()===false){
+        	entWindow.toggleCollapse();  		
+        }
     },
     
     
@@ -247,50 +257,54 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     removeRef : function(){
     	var vm = this.getViewModel();
     	var refSelected = vm.get('currentReferentiel');
-        var refNomSelected = refSelected.getData().refNom;
-        Ext.Msg.show({
-            title:'Supprimer le référentiel',
-            message: 'Voulez vous supprimer le référentiel '+ refNomSelected +' ?',
-            buttons: Ext.Msg.YESNO,
-            buttonText:{
-            	yes : 'Oui',
-            	non : 'Non',
-            },
-            icon: Ext.Msg.QUESTION,
-            fn: function(btn) {
-                if (btn === 'yes') {
-                	refSelected.reject();
-                    console.log(refSelected.getData());
-                    var store = vm.getStore('referentiels');
-                    store.remove(refSelected);
-                    store.sync();
+    	if(refSelected !== null){
+    		var refNomSelected = refSelected.getData().refNom;
+            Ext.Msg.show({
+                title:'Supprimer le référentiel',
+                message: 'Voulez vous supprimer le référentiel '+ refNomSelected +' ?',
+                buttons: Ext.Msg.YESNO,
+                buttonText:{
+                	yes : 'Oui',
+                	non : 'Non',
+                },
+                icon: Ext.Msg.QUESTION,
+                fn: function(btn) {
+                    if (btn === 'yes') {
+                    	refSelected.reject();
+                        console.log(refSelected.getData());
+                        var store = vm.getStore('referentiels');
+                        store.remove(refSelected);
+                        store.sync();
+                    }
                 }
-            }
-        });
+            });
+    	}
     },
     removeCursus : function(){
     	var vm = this.getViewModel();
     	var cursusSelected = vm.get('currentCursus');
-        var curNomSelected = cursusSelected.getData().curNom;
-        Ext.Msg.show({
-            title:'Supprimer le cursus',
-            message: 'Voulez vous supprimer le cursus '+ curNomSelected +' ?',
-            buttons: Ext.Msg.YESNO,
-            buttonText:{
-            	yes : 'Oui',
-            	non : 'Non',
-            },
-            icon: Ext.Msg.QUESTION,
-            fn: function(btn) {
-                if (btn === 'yes') {
-                	cursusSelected.reject();
-                    console.log(cursusSelected.getData());
-                    var store = vm.getStore('cursuses');
-                    store.remove(cursusSelected);
-                    store.sync();
+        if(cursusSelected !== null){
+        	var curNomSelected = cursusSelected.getData().curNom;
+            Ext.Msg.show({
+                title:'Supprimer le cursus',
+                message: 'Voulez vous supprimer le cursus '+ curNomSelected +' ?',
+                buttons: Ext.Msg.YESNO,
+                buttonText:{
+                	yes : 'Oui',
+                	non : 'Non',
+                },
+                icon: Ext.Msg.QUESTION,
+                fn: function(btn) {
+                    if (btn === 'yes') {
+                    	cursusSelected.reject();
+                        console.log(cursusSelected.getData());
+                        var store = vm.getStore('cursuses');
+                        store.remove(cursusSelected);
+                        store.sync();
+                    }
                 }
-            }
-        });
+            });    	
+        }
     },
     addCursus : function(){
     	var vm = this.getViewModel();
@@ -315,18 +329,23 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     
     updateCursus : function(){
     	var vm = this.getViewModel();
-    	var formView = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
-		formView.setTitle('Modifier le cursus');
-		formView.show();
-		
-		/*var store = vm.getStore('cursuses');
-    	var record = store.getAt(0);
-    	vm.set('currentCursus',record);*/
+    	var cursusSelected = vm.get('currentCursus');
+    	if (cursusSelected !== null){
+    		var formView = Ext.ComponentQuery.query('cursusAdminWindowForm')[0];
+    		formView.setTitle('Modifier le cursus');
+    		formView.show();
+    			
+    	}
     },
     updateRef : function(){
-    	var formView = Ext.ComponentQuery.query('refAdminWindowForm')[0];
-		formView.setTitle('Modifier le référentiel');
-		formView.show();
+    	var vm = this.getViewModel();
+    	var refSelected = vm.get('currentReferentiel');
+    	if(refSelected !== null){
+    		var formView = Ext.ComponentQuery.query('refAdminWindowForm')[0];
+    		formView.setTitle('Modifier le référentiel');
+    		formView.show();	
+    	}
+    	
     },
     setRefFilter : function(grid,record){
     	if(grid.up('#voletRef')!==undefined){

@@ -21,6 +21,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromo', {
             bind:'{currentSecondPromoTreeItem.text}',
             width : 500
         },
+        
         {
         	id : 'seleniumDetailCoursPromoDuree',
             xtype : 'textfield',

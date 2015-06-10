@@ -120,14 +120,14 @@ public class ModulePromotion implements Serializable {
 
 
 	public CoursPromotion addCoursPromotion(CoursPromotion coursPromotion) {
-		getCoursPromotions().add(coursPromotion);
+		this.coursPromotions.add(coursPromotion);
 		coursPromotion.setModulePromotion(this);
 
 		return coursPromotion;
 	}
 
 	public CoursPromotion removeCoursCursus(CoursPromotion coursPromotion) {
-		getCoursPromotions().remove(coursPromotion);
+		this.coursPromotions.remove(coursPromotion);
 		coursPromotion.setModulePromotion(null);
 
 		return coursPromotion;

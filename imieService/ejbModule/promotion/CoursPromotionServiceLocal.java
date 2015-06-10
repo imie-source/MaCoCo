@@ -1,5 +1,6 @@
 package promotion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -18,6 +19,7 @@ public interface CoursPromotionServiceLocal {
 	CoursPromotion findById(Integer id);
 	
 	List<CoursPromotion> findAllByPromotion(Integer id);
+
 	
 
 

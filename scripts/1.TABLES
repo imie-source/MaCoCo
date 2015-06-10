@@ -52,20 +52,15 @@ CREATE TABLE public.Promotion(
 
 CREATE TABLE public.Enseignement(
 	ent_id         SERIAL NOT NULL ,
-	ent_contenu    VARCHAR (25)  ,
-	ent_objet      VARCHAR (25)  ,
-	ent_contrainte VARCHAR (25)  ,
-	ent_materiel   VARCHAR (25)  ,
-	CONSTRAINT prk_constraint_Enseignement PRIMARY KEY (ent_id)
+	ent_nom	       VARCHAR (25)  ,
+	ent_contenu    VARCHAR (500)  ,
+	ent_objet      VARCHAR (500)  ,
+	ent_contrainte VARCHAR (500)  ,
+	ent_materiel   VARCHAR (500)  ,
+	ent_idprerequis INT ,	
+CONSTRAINT prk_constraint_Enseignement PRIMARY KEY (ent_id)
 )WITHOUT OIDS;
 
-CREATE TABLE public.Etape(
-	eta_id         SERIAL NOT NULL ,
-	eta_contenu    VARCHAR (25)  ,
-	eta_dureeIndic VARCHAR (25)  ,
-	ent_id         INT   ,
-	CONSTRAINT prk_constraint_Etape PRIMARY KEY (eta_id)
-)WITHOUT OIDS;
 
 CREATE TABLE public.Unite_Formation_Promo(
 	ufp_id        SERIAL NOT NULL ,
@@ -182,13 +177,11 @@ CREATE TABLE public.r_courscursus_enseignement(
 )WITHOUT OIDS;
 
 
-
 ALTER TABLE public.Savoir ADD CONSTRAINT FK_Savoir_com_id FOREIGN KEY (com_id) REFERENCES public.Competence_Pro(com_id);
 ALTER TABLE public.Competence_Pro ADD CONSTRAINT FK_Competence_Pro_act_id FOREIGN KEY (act_id) REFERENCES public.Activite_Type(act_id);
 ALTER TABLE public.Activite_Type ADD CONSTRAINT FK_Activite_Type_ref_id FOREIGN KEY (ref_id) REFERENCES public.Referentiel(ref_id);
 ALTER TABLE public.Cursus ADD CONSTRAINT FK_Cursus_ref_id FOREIGN KEY (ref_id) REFERENCES public.Referentiel(ref_id);
 ALTER TABLE public.Promotion ADD CONSTRAINT FK_Promotion_cur_id FOREIGN KEY (cur_id) REFERENCES public.Cursus(cur_id);
-ALTER TABLE public.Etape ADD CONSTRAINT FK_Etape_ent_id FOREIGN KEY (ent_id) REFERENCES public.Enseignement(ent_id);
 ALTER TABLE public.Unite_Formation_Promo ADD CONSTRAINT FK_Unite_Formation_Promo_ufc_id FOREIGN KEY (ufc_id) REFERENCES public.Unite_Formation_Cursus(ufc_id);
 ALTER TABLE public.Unite_Formation_Promo ADD CONSTRAINT FK_Unite_Formation_Promo_pro_id FOREIGN KEY (pro_id) REFERENCES public.Promotion(pro_id);
 ALTER TABLE public.Unite_Formation_Cursus ADD CONSTRAINT FK_Unite_Formation_Cursus_cur_id FOREIGN KEY (cur_id) REFERENCES public.Cursus(cur_id);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class Promotion implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="cur_id")
 	private Cursus cursus;
-
+	
 	//bi-directional many-to-one association to UniteFormationPromotion
 	@OneToMany(mappedBy="promotion")
 	@OrderBy("ufp_ordre ASC")
@@ -93,7 +94,6 @@ public class Promotion implements Serializable {
 	public void setCursus(Cursus cursus) {
 		this.cursus = cursus;
 	}
-
 
 	public UniteFormationPromotion addUniteFormationPromotion(UniteFormationPromotion uniteFormationPromotion) {
 		getUniteFormationPromotions().add(uniteFormationPromotion);

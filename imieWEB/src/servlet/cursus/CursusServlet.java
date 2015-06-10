@@ -23,6 +23,7 @@ import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
+import entities.enseignement.Enseignement;
 import entities.promotion.PeriodePromotion;
 import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
@@ -126,6 +127,10 @@ public class CursusServlet
 						savoir.setCompetencePro(null);
 						savoir.setCoursCursuses(null);
 						savoir.setCoursPromotions(null);
+					}
+					for (Enseignement enseignement : cours.getEnseignements()) {
+						enseignement.setCoursCursuses(null);
+						enseignement.setCoursPromotions(null);
 					}
 				}
 			}

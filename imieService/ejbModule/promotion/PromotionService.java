@@ -1,5 +1,6 @@
 package promotion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,10 +10,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import cursus.CursusServiceLocal;
+import entities.cursus.CoursCursus;
+import entities.cursus.Cursus;
+import entities.cursus.ModuleCursus;
+import entities.cursus.UniteFormationCursus;
+import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
+import entities.promotion.ModulePromotion;
 import entities.promotion.PeriodePromotion;
 import entities.promotion.Promotion;
-import entities.promotion.ModulePromotion;
 import entities.promotion.UniteFormationPromotion;
 import entities.referentiel.Savoir;
 
@@ -30,7 +37,8 @@ public class PromotionService implements PromotionServiceLocal {
 	EntityManager em;
 	@EJB 
 	UniteFormationPromotionServiceLocal uniteFormationPromotionService;
-
+	@EJB
+	CursusServiceLocal cursusService;
 	/**
 	 * Default constructor. 
 	 */
@@ -87,6 +95,10 @@ public class PromotionService implements PromotionServiceLocal {
 					{
 						//Initialisation
 					}
+					for (@SuppressWarnings("unused") Enseignement enseignement : cours.getEnseignements()) 
+					{
+						//Initialisation
+					}
 				}
 			}
 		}
@@ -106,6 +118,63 @@ public class PromotionService implements PromotionServiceLocal {
 	@Override
 	public void create(Promotion promotion) 
 	{
+		promotion.setUniteFormationPromotions(new ArrayList<UniteFormationPromotion>());
+		Cursus cursus = cursusService.findById(promotion.getCursus().getCurId());
+		
+		List<UniteFormationCursus> ufCursuses = cursus.getUniteFormationCursuses();
+		if(!ufCursuses.isEmpty()){			
+			for (UniteFormationCursus ufCursus : ufCursuses) {
+				UniteFormationPromotion ufPromotion = new UniteFormationPromotion();
+				ufPromotion.setPromotion(promotion);
+				ufPromotion.setUfcId(ufCursus.getUfcId());
+				ufPromotion.setUfpNom(ufCursus.getUfcNom());
+				ufPromotion.setUfpObjectifs(ufCursus.getUfcObjectifs());
+				ufPromotion.setModulePromotions(new ArrayList<ModulePromotion>());
+				
+				List<ModuleCursus> moduleCursuses = ufCursus.getModuleCursuses();
+				if(moduleCursuses.isEmpty()){
+					promotion.addUniteFormationPromotion(ufPromotion);
+					continue;
+				}
+				for (ModuleCursus moduleCursus : moduleCursuses) {
+					ModulePromotion modulePromotion = new ModulePromotion();
+					modulePromotion.setUniteFormationPromotion(ufPromotion);
+					modulePromotion.setMocId(moduleCursus.getMocId());
+					modulePromotion.setMopIntitule(moduleCursus.getMocIntitule());
+					modulePromotion.setMopObjectifs(moduleCursus.getMocObjectifs());
+					modulePromotion.setCoursPromotions(new ArrayList<CoursPromotion>());
+					
+					List<CoursCursus> coursCursuses = moduleCursus.getCoursCursuses();
+					if(coursCursuses.isEmpty()){
+						ufPromotion.addModulePromotion(modulePromotion);
+						continue;
+					}
+					for (CoursCursus coursCursus : coursCursuses) {
+						CoursPromotion coursPromotion = new CoursPromotion();
+						coursPromotion.setModulePromotion(modulePromotion);
+						coursPromotion.setCocId(coursCursus.getCocId());
+						coursPromotion.setCopIntitule(coursCursus.getCocIntitule());
+						coursPromotion.setCopCommentaires(coursCursus.getCocCommentaires());
+						coursPromotion.setCopDuree(coursCursus.getCocDuree());
+						coursPromotion.setCopEvaluation(coursCursus.getCocEvaluation());
+						coursPromotion.setCopObjectifs(coursCursus.getCocObjectifs());
+						coursPromotion.setCopOrdre(coursCursus.getCocOrdre());
+						coursPromotion.setSavoirs(coursCursus.getSavoirs());
+						em.persist(coursPromotion);
+						coursPromotion=em.merge(coursPromotion);
+						modulePromotion.getCoursPromotions().add(coursPromotion);
+						
+						
+					}
+					em.persist(modulePromotion);
+					modulePromotion=em.merge(modulePromotion);
+					ufPromotion.getModulePromotions().add(modulePromotion);
+				}
+				em.persist(ufPromotion);
+				ufPromotion=em.merge(ufPromotion);
+				promotion.getUniteFormationPromotions().add(ufPromotion);
+			}
+		}
 		em.persist(promotion);
 	}
 

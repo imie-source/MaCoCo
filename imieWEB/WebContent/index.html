@@ -15,7 +15,7 @@ Ext.application({
         		
         		name : 'ExtJsMVC',
         		appFolder : 'app',
-//************************************************************
+
         		models:[
     					'cursus.RootCursusModel',
     					'cursus.CursusModel',
@@ -35,32 +35,15 @@ Ext.application({
     					'promotion.PeriodePromotionModel',
     					'promotion.ModulePromotionModel',
     					'promotion.CoursPromotionModel',
-    					'promotion.FirstTreePromotionModel'
+    					'promotion.FirstTreePromotionModel',
+    					'enseignement.EnseignementModel'
     	    		],
-//******************************************************************
-        		views : 
+				views : 
            		[
-           			/*'referentiel.ArbreReferentiel',
-           			'cursus.ArbreReferentielBis',
-           			'cursus.CursusArbre',
-           			'cursus.CursusArbre2',*/
            			'home.AdministrationWindow',
-           			'cursus.CursusView'
+           			'cursus.CursusView',
+           			'enseignement.EnseignementWindow'
            		],
-        		/*controllers : 
-        		[
-        			'ReferentielController',
-        			'referentiel.DetailReferentiel',
-        			'referentiel.DetailActiviteType',
-        			'referentiel.DetailCompetencePro',
-        			'referentiel.DetailSavoir',
-					'CursusController',
-        			'cursus.DetailCursus',
-        			'cursus.DetailUniteFormation',
-        			'cursus.DetailModule',
-        			'cursus.DetailCours',
-        			'cursus.LiaisonReferentielEnseignement',
-        		],*/
         		
         		launch : function() {
         			
@@ -85,67 +68,19 @@ Ext.application({
 								width : (Ext.getBody().getViewSize().width-40),
 							 },
 							 {
-								//************************************
 								xtype : 'view-cursusView',
-								//************************************
 								region : 'center',
 								split : true,
-							/*	layout : 
-								{
-									    type  : 'hbox',
-									    align : 'stretch'
-								},
-							 
-							 	items : 
-					            [					               	
-		                     		{ 
-								 		itemId: 'voletGauche',
-								 		margin : '0 10 0 0',					 
-								 		flex  : 1,
-				       			 		layout : 
-				       			 			{
-				                     			type  : 'vbox',
-				                     			align : 'stretch'
-				                 			},
-			                     		items : 
-				                 			[
-											{
-												xtype : 'cursus-Arbre',
-												flex  : 1,
-											},
-											{
-												xtype : 'cursus-Arbre2',
-												flex  : 1,
-											},
-				                    		{ 
-				                        		xtype : 'arbre-Referentiel' ,
-				                        		flex  : 1,
-				                    		}
-					             			]	
-		                         
-		                     		},
-		                     
-		                    		{ 	
-		                    	 		itemId : 'switchView',
-		                         		flex  : 2,
-		                       	 		items :
-		                       	 			[
-			// 		                       	  	{
-			// 		                       	    	xtype : 'cursus-DetailCursus' 
-			// 		                       	  	}
-		                       	 			]
-		                     		}
-		                     	]*/
 							 },
 
-								{
-								    //xtype : '',
-								    type:'vbox',
-									region : 'east',
-									split : true,
-									collapsible:true,
-									collapsed : true
-								 }
+							{
+							    xtype : 'view-enseignementWindow',
+								region : 'east',
+								split : true,
+								collapsible:true,
+								collapsed : true,
+								width : (Ext.getBody().getViewSize().width/3),
+							 }
 		            	]	
    					});
         			

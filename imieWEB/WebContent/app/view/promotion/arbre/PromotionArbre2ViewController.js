@@ -344,15 +344,16 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'promo-DetailCours'});
-			       
+			       var detailBottomView = Ext.ComponentQuery.query('#detailBottomView')[0];
 			     //Preparation du panel pour les elements "enfants"
 			       var savoirModel = vm.getStore('savoirStore').getModel();
+			       var enseignementModel = vm.getStore('enseignementStore').getModel();
 			       var detailView = Ext.ComponentQuery.query('form')[0];
 			       var panelTemplate = Ext.create('Ext.panel.Panel', {
 					    title: 'Glisser des savoirs dans cette zone',
 					    bodyPadding: 10,
 					    itemId : 'TemplateSavoirs',
-					    
+					    flex  : 1,
 					    tpl : new Ext.XTemplate
 					    (
 				    		'<tpl for=".">',
@@ -449,7 +450,7 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 				    						  scope: this,
 				    						  callback: function(record, operation) 
 				    						  {
-				    							  var arrayCoursPromotion = record.get('coursPromotion');
+				    							  var arrayCoursPromotion = record.get('coursPromotions');
 				    							  
 									              //var coursCursus = detailView.getRecord().getData();
 				    							  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
@@ -494,7 +495,169 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 					
 					//Ajout des elements "enfants" au panel
 					panelTemplate.setData(record.get('savoirs'));
-			       switchview.add(panelTemplate);
+			      // switchview.add(panelTemplate);
+			       detailBottomView.add(panelTemplate);
+					//****************************************************
+					var panelTemplateEnt = Ext.create('Ext.panel.Panel', {
+					    title: 'Glisser des enseignements dans cette zone',
+					    bodyPadding: 10,
+					    flex  : 1,
+					    
+					    itemId : 'TemplateEnseignements',
+					    
+					    tpl : new Ext.XTemplate
+					    (
+				    		'<tpl for=".">',
+									'<div class="enseignement-row" id="enseignement-{entId}">',
+										'{entNom}	',
+									'</div>',
+							'</tpl>'
+						),
+						
+						
+					    listeners: {
+					    	
+					        'afterrender': function () 
+					        {
+					        	
+					            this.dropZone = Ext.create('Ext.dd.DropTarget', this.getEl(), {
+					            	ddGroup: 'groupCoursEnseignement',
+					                panel: this,
+					                
+					                notifyDrop : function(source, e, data) 
+					                {
+					                    var nouveauEnseignement =  data.records[0];
+					                    
+					                    var entId = nouveauEnseignement.get('entId');
+					                    
+			    				    	enseignementModel.load(entId,
+			    				    	{
+			    						  scope: this,
+			    						  callback: function(record, operation) 
+			    						  {
+							                 var arrayCoursPromotions = record.get('coursPromotions');
+							                 if(arrayCoursPromotions == null) { arrayCoursPromotions = new Array() }
+							                  
+							                 
+							                 var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData({persist: true});
+							                 arrayCoursPromotions.push(coursPromotion);
+							                  
+							                 
+							                 //preparation sauvegarde enseignement
+							                 arrayCoursPromotions.forEach(function(cours) 
+											 {
+							                	  cleanTreeFields(cours);
+							                	  cours.enseignements = null;
+											 });
+							                  
+			    							record.save(
+	    									{
+	    										scope: this,
+	    										callback: function()
+	    										{
+	    											console.log('enseignement ajouté');
+	    											console.log(coursPromotion.copId);
+	    											
+	    											//TODO: rafraichir Record du panel
+	    											
+//	    											var coursCursusModel = this.getCursusCoursCursusModelModel();
+//	    											coursCursusModel.load(coursCursus.cocId),
+//	    											{
+//	    											  scope: this,
+//	    											  callback: function(record, operation) 
+//	    											  {
+//	    									l			  recordArbre.data.moduleCursus = record.data.moduleCursus;
+//	    												  
+//	    	    										  detailView.loadRecord(recordArbre);
+//	    											  }
+//	    											});
+
+//	    									       
+	    											
+	    										}
+	    									});
+			    						  }
+			    				    	});
+					                    
+					                    return true;
+					                }          
+					            });  
+					            
+					            
+					            
+					            
+					            var renderSelector = Ext.query('div.enseignement-row'); 
+				                for(var i in renderSelector)
+				                {
+				                	var renderRow = renderSelector[i];
+				                	
+				                	new Ext.Button(
+				                	{
+				                		cls : 'SeleniumModuleSuppButton',
+				                		//id: 'SeleniumEnseignementCoursSuppButton'+i,
+				    					text:' X ',
+				    					renderTo: renderRow,
+				    				    handler: function(bouton) 
+				    				    {
+				    				    	var enseignementRowId = bouton.renderTo.id;
+				    				    	var sliceIndex = enseignementRowId.indexOf('-');
+				    				    	enseignementRowId = enseignementRowId.slice(sliceIndex+1,enseignementRowId.length);
+				    				    	
+				    				    	
+				    				    	//suppression de l'element
+				    				    	
+				    				    	enseignementModel.load(enseignementRowId,
+				    				    	{
+				    						  scope: this,
+				    						  callback: function(record, operation) 
+				    						  {
+				    							  var arrayCoursPromotions = record.get('coursPromotions');
+				    							  
+									              
+				    							  var coursPromotions  = vm.get('currentSecondPromoTreeItem').getData();
+				    							  var coursPromotionId = coursPromotion.cocId;
+									              
+								                 arrayCoursPromotions.forEach(function(cours) 
+												 {
+								                	 if(coursPromotionId == cours.cocId)
+								                	 {
+								                		 Ext.Array.remove(arrayCoursPromotions, cours);
+								                     }
+												 });
+									              
+				    							 record.save();
+				    							 
+				    							//Retrait du panel
+				    							switchview.remove(panelTemplateEnt);
+					    							
+				    							
+				    							//TODO: recharger correctement
+				    							var arboCursus = cursusModel.load(storeUniteFormations.getRoot().get('proId'),
+		    									{
+		    									 // Arborescence complete du cursus récupérée	
+		    									  success: function(record, operation) 
+		    									  {
+		    									      storeUniteFormations.removeAll();
+		    									      storeUniteFormations.setRoot(record);
+		    									      arbre2.expandPath(recordPath);
+		    									  }
+			    									});
+				    						  }
+				    				    	});
+				    				    }
+				    				});
+				                }    
+					            
+					            
+					        }
+					    } 
+					});
+					
+					//Ajout des elements "enfants" au panel
+					panelTemplateEnt.setData(record.get('enseignements'));
+					//switchview.add(panelTemplateEnt);
+					detailBottomView.add(panelTemplateEnt);
+					//*****************************************************
 			       
 			       
 				

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,6 +31,7 @@ import entities.referentiel.Savoir;
 
 @Stateless
 @Path("/cursus")
+@Transactional(Transactional.TxType.REQUIRES_NEW)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class CursusServlet 

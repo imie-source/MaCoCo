@@ -73,6 +73,13 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromo', {
 				disabled:'{!itemPromoStatus.dirtyAndValid}'
 			},
         },
-        
+        {
+        	itemId : 'detailBottomView',
+        	layout : 
+  			{
+        		type  : 'hbox'
+    
+  			},
+        }
     ]
 });

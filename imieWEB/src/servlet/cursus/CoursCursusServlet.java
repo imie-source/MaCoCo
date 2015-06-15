@@ -25,7 +25,6 @@ import entities.referentiel.Savoir;
 
 @Stateless
 @Path("/courscursus")
-@Transactional(Transactional.TxType.REQUIRES_NEW)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class CoursCursusServlet 

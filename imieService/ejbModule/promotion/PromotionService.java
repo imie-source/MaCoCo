@@ -10,7 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import referentiel.SavoirServiceLocal;
 import cursus.CursusServiceLocal;
+import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
@@ -39,6 +41,11 @@ public class PromotionService implements PromotionServiceLocal {
 	UniteFormationPromotionServiceLocal uniteFormationPromotionService;
 	@EJB
 	CursusServiceLocal cursusService;
+	@EJB
+	SavoirServiceLocal savoirService;
+	@EJB
+	EnseignementServiceLocal enseignementService;
+
 	/**
 	 * Default constructor. 
 	 */
@@ -119,6 +126,7 @@ public class PromotionService implements PromotionServiceLocal {
 	public void create(Promotion promotion) 
 	{
 		promotion.setUniteFormationPromotions(new ArrayList<UniteFormationPromotion>());
+		em.persist(promotion);
 		Cursus cursus = cursusService.findById(promotion.getCursus().getCurId());
 		
 		List<UniteFormationCursus> ufCursuses = cursus.getUniteFormationCursuses();
@@ -130,10 +138,10 @@ public class PromotionService implements PromotionServiceLocal {
 				ufPromotion.setUfpNom(ufCursus.getUfcNom());
 				ufPromotion.setUfpObjectifs(ufCursus.getUfcObjectifs());
 				ufPromotion.setModulePromotions(new ArrayList<ModulePromotion>());
+				em.persist(ufPromotion);
 				
 				List<ModuleCursus> moduleCursuses = ufCursus.getModuleCursuses();
 				if(moduleCursuses.isEmpty()){
-					promotion.addUniteFormationPromotion(ufPromotion);
 					continue;
 				}
 				for (ModuleCursus moduleCursus : moduleCursuses) {
@@ -143,10 +151,10 @@ public class PromotionService implements PromotionServiceLocal {
 					modulePromotion.setMopIntitule(moduleCursus.getMocIntitule());
 					modulePromotion.setMopObjectifs(moduleCursus.getMocObjectifs());
 					modulePromotion.setCoursPromotions(new ArrayList<CoursPromotion>());
+					em.persist(modulePromotion);
 					
 					List<CoursCursus> coursCursuses = moduleCursus.getCoursCursuses();
 					if(coursCursuses.isEmpty()){
-						ufPromotion.addModulePromotion(modulePromotion);
 						continue;
 					}
 					for (CoursCursus coursCursus : coursCursuses) {
@@ -159,23 +167,31 @@ public class PromotionService implements PromotionServiceLocal {
 						coursPromotion.setCopEvaluation(coursCursus.getCocEvaluation());
 						coursPromotion.setCopObjectifs(coursCursus.getCocObjectifs());
 						coursPromotion.setCopOrdre(coursCursus.getCocOrdre());
-						coursPromotion.setSavoirs(coursCursus.getSavoirs());
 						em.persist(coursPromotion);
-						coursPromotion=em.merge(coursPromotion);
-						modulePromotion.getCoursPromotions().add(coursPromotion);
+						coursPromotion = em.merge(coursPromotion);
+						
+						
+						for (Savoir savoir : coursCursus.getSavoirs()){
+							Savoir sav = savoirService.findById(savoir.getSavId());
+							List <CoursPromotion> coursPros = sav.getCoursPromotions();
+							coursPros.add(coursPromotion);
+							sav.setCoursPromotions(coursPros);
+							sav = em.merge(sav);
+						}
+						for (Enseignement enseignement : coursCursus.getEnseignements()){
+							Enseignement ent = enseignementService.findById(enseignement.getEntId());
+							List <CoursPromotion> coursPros = ent.getCoursPromotions();
+							coursPros.add(coursPromotion);
+							ent.setCoursPromotions(coursPros);
+							ent=em.merge(ent);
+						}
 						
 						
 					}
-					em.persist(modulePromotion);
-					modulePromotion=em.merge(modulePromotion);
-					ufPromotion.getModulePromotions().add(modulePromotion);
 				}
-				em.persist(ufPromotion);
-				ufPromotion=em.merge(ufPromotion);
-				promotion.getUniteFormationPromotions().add(ufPromotion);
 			}
 		}
-		em.persist(promotion);
+		
 	}
 
 	@Override

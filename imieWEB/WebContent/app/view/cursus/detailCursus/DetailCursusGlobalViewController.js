@@ -61,7 +61,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
     	//création d'une nouvelle promotion avec insertion du cursus pour garder l'arborescence
     	var newChild = Ext.create('ExtJsMVC.model.promotion.FirstTreePromotionModel');
 		newChild.set ('cursus', parent);
-		
+		newChild.parentNode = itemSelected;
 		var myStore = vm.getStore('firstTreePromoStore');
 		
 		// insertion de l'item dans le store;

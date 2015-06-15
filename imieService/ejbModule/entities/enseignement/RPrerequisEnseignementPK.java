@@ -16,7 +16,7 @@ public class RPrerequisEnseignementPK implements Serializable {
 	private Integer entId;
 
 	@Column(name="ent_id_enseignement", insertable=false, updatable=false, unique=true, nullable=false)
-	private Integer entIdEnseignement;
+	private Integer entIdPrerequis;
 
 	public RPrerequisEnseignementPK() {
 	}
@@ -32,13 +32,13 @@ public class RPrerequisEnseignementPK implements Serializable {
 	}
 
 
-	public Integer getEntIdEnseignement() {
-		return entIdEnseignement;
+	public Integer getEntIdPrerequis() {
+		return entIdPrerequis;
 	}
 
 
-	public void setEntIdEnseignement(Integer entIdEnseignement) {
-		this.entIdEnseignement = entIdEnseignement;
+	public void setEntIdPrerequis(Integer entIdPrerequis) {
+		this.entIdPrerequis = entIdPrerequis;
 	}
 
 
@@ -51,14 +51,14 @@ public class RPrerequisEnseignementPK implements Serializable {
 		}
 		RPrerequisEnseignementPK castOther = (RPrerequisEnseignementPK)other;
 		return 
-			this.entIdEnseignement.equals(castOther.entIdEnseignement)
+			this.entIdPrerequis.equals(castOther.entIdPrerequis)
 			&& this.entId.equals(castOther.entId);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.entIdEnseignement.hashCode();
+		hash = hash * prime + this.entIdPrerequis.hashCode();
 		hash = hash * prime + this.entId.hashCode();
 		
 		return hash;

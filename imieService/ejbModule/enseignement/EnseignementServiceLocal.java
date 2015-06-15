@@ -19,7 +19,7 @@ public interface EnseignementServiceLocal {
 
 	void create(Enseignement enseignement);
 
-	Enseignement update(Enseignement enseignement);
+	Enseignement update(Enseignement enseignement) throws Exception;
 
 	void delete(Integer id);
 }

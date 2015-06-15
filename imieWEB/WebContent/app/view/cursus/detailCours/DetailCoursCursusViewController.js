@@ -40,6 +40,10 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 		var cours = myStore.data.items[0];
 		cours.set('text', itemSelected.get('text'));
 		cours.set('cocDuree', itemSelected.get('cocDuree'));
+		// Set de l'ordre à 1000 en cas de durée = 0 (prérequis)
+		if(itemSelected.get('cocDuree')==='0'){
+			cours.set('cocOrdre', 1000); 
+		}
 		cours.set('cocType', itemSelected.get('cocType'));
 		cours.set('cocObjectifs', itemSelected.get('cocObjectifs'));
 		cours.set('cocEvaluation', itemSelected.get('cocEvaluation'));

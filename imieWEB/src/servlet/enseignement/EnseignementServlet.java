@@ -16,6 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.sun.mail.imap.protocol.Status;
+
 import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.enseignement.Enseignement;
@@ -25,7 +27,6 @@ import entities.promotion.CoursPromotion;
 
 @Stateless
 @Path("/enseignement")
-@Transactional(Transactional.TxType.REQUIRES_NEW)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class EnseignementServlet {
@@ -62,11 +63,11 @@ public class EnseignementServlet {
 				coursPromo.setEnseignements(null);
 				coursPromo.setModulePromotion(null);
 			}
-			for (Enseignement prerequis: enseignement.getPrerequis()) {
+			/*for (Enseignement prerequis: enseignement.getPrerequis()) {
 				prerequis.setCoursCursuses(null);
 				prerequis.setCoursPromotions(null);
 				prerequis.setPrerequis(null);
-			}
+			}*/
 		}
 		return Response.ok(listeEnseignement).build();
 	}
@@ -89,6 +90,7 @@ public class EnseignementServlet {
 			coursPromo.setEnseignements(null);
 		}
 		for (Enseignement prerequis: enseignement.getPrerequis()) {
+			prerequis = enseignementService.findById(prerequis.getEntId());
 			prerequis.setCoursCursuses(null);
 			prerequis.setCoursPromotions(null);
 			prerequis.setPrerequis(null);
@@ -111,10 +113,24 @@ public class EnseignementServlet {
 	@Path("/{string}")
 	public Response update(Enseignement enseignement) 
 	{
-		enseignementService.update(enseignement);
 		ArrayList<Enseignement> response = new ArrayList<Enseignement>();
-		response.add(enseignement);
-		return Response.ok(response).build();
+		List <Enseignement> prerequisList = enseignement.getPrerequis();
+		if(!prerequisList.isEmpty()){
+			for (Enseignement prerequis : prerequisList){
+				prerequis = enseignementService.findById(prerequis.getEntId());
+			}
+		}
+		try {
+			enseignementService.update(enseignement);
+			response.add(enseignement);
+			return Response.ok(response).build();
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
+		}
+		
+		
+		
 	}
 
 	@DELETE

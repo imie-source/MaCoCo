@@ -50,20 +50,6 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo', {
 				disabled:'{!cursusStatus.dirtyAndValid}'
 			},
         },
-        {
-        	id : 'seleniumDetailPromoAdd',
-            xtype : 'button',
-            text : 'Ajouter UF',
-            itemId : 'AddRecord',
-            handler :'onAddUfPromoClick',
-        }
-        ,
-        {
-        	id : 'seleniumDetailPromoPrint',
-            xtype : 'button',
-            text : 'Imprimer',
-            itemId : 'Print',
-            handler :'onPrintClick',
-        }
+        
     ]
 });

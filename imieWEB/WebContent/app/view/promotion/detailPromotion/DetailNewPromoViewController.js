@@ -25,11 +25,14 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailNewPromoViewController
 		promo.set('text', itemSelected.get('text'));
 		myStore.sync({
 			callback : function(){
-				myStore.load({
+				
+				vm.getStore('firstTreeStore').load({
 					callback : function(){
-						var arbre =  Ext.ComponentQuery.query('cursus-Arbre')[0];
-						arbre.getSelectionModel().select(promo);
-						//vm.getStore('firstTreeStore').load();			
+					
+						var tree =  Ext.ComponentQuery.query('cursus-Arbre')[0];
+						tree.getSelectionModel().select(promo);
+				
+						tree.expandPath(promo.parentNode.getPath());
 					}
 				});			
 			}

@@ -358,7 +358,7 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 					    (
 				    		'<tpl for=".">',
 									'<div class="savoir-row" id="savoir-{savId}">',
-										'Savoir : {savLibelle}',
+										'{savLibelle}		',
 									'</div>',
 							'</tpl>'
 						),

@@ -1,13 +1,17 @@
-﻿delete from r_courspromo_savoir;
+delete from prerequis_enseignement;
+delete from r_courspromo_savoir;
+delete from r_courspromo_enseignement;
 delete from cours_promo;
 delete from module_promo;
 delete from unite_formation_promo;
 delete from promotion;
 delete from r_courscursus_savoir;
+delete from r_courscursus_enseignement;
 delete from cours_cursus;
 delete from module_cursus;
 delete from unite_formation_cursus;
 delete from cursus;
+delete from enseignement;
 delete from savoir;
 delete from competence_pro;
 delete from activite_type;
@@ -220,4 +224,77 @@ INSERT INTO r_courspromo_savoir(cop_id, sav_id) VALUES (2002, 2005);
 INSERT INTO r_courspromo_savoir(cop_id, sav_id) VALUES (2003, 2006);
 INSERT INTO r_courspromo_savoir(cop_id, sav_id) VALUES (2003, 2007);
 INSERT INTO r_courspromo_savoir(cop_id, sav_id) VALUES (2003, 2008);
-		
+
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2001,'WCAG', '', '', '', 'Enseignement 1');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2002,'?', '', '', '', 'Enseignement 2');	
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2003,'modélisation:
+ perimètre fonctionnel : diag use case (UML)
+ processus métier : diag activité (UML)
+ navigation et actions des écrans : diag état-transition (UML)
+documentation et suivi:
+ spécification fonctionnelle générale
+ reférentiel d exigence
+', '', '', '', 'Enseignement 3');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2004,'Habillage graphique : moodboard, style tile, mockup
+Conception ergonomique : zoning, wireframe, prototype
+', '', '', '', 'Enseignement 4');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2005,' ?
+1,5 jours de cours + 1,5 jour projet', '', '', '', 'Enseignement 5');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2006,'?', '', '', '', 'Enseignement 6');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2007,'les particularités et différences entre les cycles en cascade, V, semi-itératif (RAD) et itératif (agiité)', '', '', '', 'Enseignement 7');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2008,'manifest agile
+agile game
+ srumboard
+ planning poker
+ kanban
+ modification backlog
+ burndown
+ mesure de vélocité', '', '', '', 'Enseignement 8');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2009,'base de connaissance, veille, organisation et répartition du temps de travail', '', '', '', 'Enseignement 9');
+
+INSERT INTO enseignement(ent_id, ent_contenu, ent_objet, ent_contrainte, ent_materiel, ent_nom)
+    VALUES (2010,'?', '', '', '', 'Enseignement 10');	
+
+INSERT INTO prerequis_enseignement(ent_id, ent_id_enseignement) VALUES (2002, 2004);
+INSERT INTO prerequis_enseignement(ent_id, ent_id_enseignement) VALUES (2006, 2005);
+INSERT INTO prerequis_enseignement(ent_id, ent_id_enseignement) VALUES (2007, 2005);
+INSERT INTO prerequis_enseignement(ent_id, ent_id_enseignement) VALUES (2008, 2005);
+INSERT INTO prerequis_enseignement(ent_id, ent_id_enseignement) VALUES (2010, 2005);
+
+
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2001, 2001);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2001, 2002);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2001, 2003);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2002, 2004);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2002, 2005);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2003, 2006);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2003, 2007);
+INSERT INTO r_courscursus_enseignement(coc_id, ent_id) VALUES (2003, 2008);
+
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2001, 2001);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2001, 2002);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2001, 2003);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2002, 2004);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2002, 2005);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2003, 2006);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2003, 2007);
+INSERT INTO r_courspromo_enseignement(cop_id, ent_id) VALUES (2003, 2008);
+

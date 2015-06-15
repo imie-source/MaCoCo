@@ -18,11 +18,20 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
 			},
 			'#textfieldRecToolBar' : {
 				keyup : this.onFind,
+			},
+			'#searchEntGrid' : {
+				select : this.onSelectPrerequis
 			}
 			
 		});
 	},
     
+	onSelectPrerequis : function(Grid,record){
+		var multiSelector = Ext.ComponentQuery.query('#prerequisMultiselector')[0];
+    	var myStore = multiSelector.getStore();
+    	myStore.add(record);
+	},
+	
 	onFind : function(textfield){
 		var vm = this.getViewModel();
 		var myStore = vm.getStore('enseignementStore');
@@ -68,15 +77,29 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
     	var enseignementSelected = vm.get('currentEnseignement');
     	
     	var multiSelector = Ext.ComponentQuery.query('#prerequisMultiselector')[0];
+    	var prerequis = multiSelector.getStore().data.items;
+    	var arrayPrerequis = new Array();
+    	if(prerequis !== null){
+    		prerequis.forEach(function(element){
+    			arrayPrerequis.push({entId : element.get('entId')});
+            });	                    	
+        }
+    	enseignementSelected.set('prerequis', arrayPrerequis);
     	
-    	console.log(multiSelector);
-
-    	console.log(Ext.getCmp('prerequisMultiselector').getValue());
-    	console.log(Ext.getCmp('multiselectorId').getValue());
     	
     	var enseignementStore = vm.getStore('enseignementStore');
-    	enseignementStore.sync();  
-    	this.switchFormToGrid();
+    	var me = this;
+    	enseignementStore.sync({
+    		success : function(){
+    			me.switchFormToGrid();
+    		},
+    		failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Opération interdite : chaine sans fin', message);
+    		}
+    		
+    	});  
+    	
 	    
     },
 
@@ -180,6 +203,21 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
     		this.switchGridToForm();
     		var formView = Ext.ComponentQuery.query('enseignementWindowForm')[0];
     		formView.setTitle('Modifier l\'enseignement');
+    		var multiSelector = Ext.ComponentQuery.query('#prerequisMultiselector')[0];
+        	var myStore = multiSelector.getStore();
+        	entSelected.get('prerequis').forEach(function(prerequis) 
+			{
+        		console.log('prerequis');
+        		console.log(prerequis.entId);
+        		vm.getStore('enseignementStore').getData().items.forEach(function(enseignement) 
+        		{
+        			console.log('enseignement');
+            		console.log(enseignement.get('entId'));
+        			if(prerequis.entId === enseignement.get('entId')){
+        				myStore.add(enseignement);
+             		}
+                });
+        	});
     	}
     },
     

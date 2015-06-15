@@ -21,7 +21,6 @@ import entities.promotion.PeriodePromotion;
 
 @Stateless
 @Path("/periodepromotion")
-@Transactional(Transactional.TxType.REQUIRES_NEW)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class PeriodePromotionServlet 

@@ -39,6 +39,10 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 		var cours = myStore.data.items[0];
 		cours.set('text', itemSelected.get('text'));
 		cours.set('copDuree', itemSelected.get('copDuree'));
+		// Set de l'ordre à 1000 en cas de durée = 0 (prérequis)
+		if(itemSelected.get('copDuree')==='0'){
+			cours.set('copOrdre', 1000); 
+		}
 		cours.set('copType', itemSelected.get('copType'));
 		cours.set('copObjectifs', itemSelected.get('copObjectifs'));
 		cours.set('copEvaluation', itemSelected.get('copEvaluation'));

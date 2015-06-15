@@ -45,8 +45,8 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowForm',{
 				xtype:'enseignementWindowMultiSelector',
 				/*xtype:'enseignementWindowSimpleGrid',
 				selType: 'checkboxmodel',
-				height : 200,*/
-				//bind:'{currentEnseignement.prerequis}',
+				height : 200,
+				bind:'{currentEnseignement.prerequis}',*/
 			},
 			],
 		
@@ -54,10 +54,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowForm',{
 			text:'Enregistrer',
 			handler:'onCommit',
 			glyph:0xf00c,
-			disabled:true,
-			bind:{
-				disabled:'{!enseignementStatus.dirtyAndValid}'
-			}
+			
 		},
 		{
 			text:'Annuler',

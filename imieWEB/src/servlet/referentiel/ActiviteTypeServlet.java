@@ -23,7 +23,6 @@ import entities.referentiel.CompetencePro;
 
 @Stateless
 @Path("/activitetype")
-@Transactional(Transactional.TxType.REQUIRES_NEW)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class ActiviteTypeServlet 

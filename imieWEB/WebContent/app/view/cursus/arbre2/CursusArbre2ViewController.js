@@ -38,7 +38,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 		    	   switchview.removeAll();
 	    	   }
 		       switchview.add({xtype : 'cursus-DetailCursusGlobal'});
-		      
+		       
 				
 				//Preparation du panel pour les Periodes associees
 				var panelTemplatePeriodes = Ext.create('Ext.panel.Panel', {
@@ -173,7 +173,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 	    	   }
 		    //Ajout de la vue correspondante  
 		    switchview.add({xtype : 'cursus-DetailUniteFormation'});
-
+		    
 
 			//Preparation du panel pour les elements "enfants"
 			var panelTemplateTest = Ext.create('Ext.panel.Panel', {
@@ -262,7 +262,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'cursus-DetailModule'});
-
+			       
 					//Preparation du panel pour les elements "enfants"
 					var panelTemplate = Ext.create('Ext.panel.Panel', {
 					    title: 'Cours du module',
@@ -349,6 +349,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'cursus-DetailCours'});
+			       
 			       var detailBottomView = Ext.ComponentQuery.query('#detailBottomView')[0];
 			       
 			     //Preparation du panel pour les elements "enfants"

@@ -50,6 +50,7 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		for (@SuppressWarnings("unused") Enseignement enseignement : result.getEnseignements()) 
 		{
 			//Initialisation
+			
 		}
 		return result;
 	}

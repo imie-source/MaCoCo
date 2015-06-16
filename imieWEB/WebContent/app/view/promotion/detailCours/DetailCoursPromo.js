@@ -74,6 +74,13 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromo', {
 			},
         },
         {
+        	id : 'seleniumDetailCoursPrint',
+            xtype : 'button',
+            text : 'Imprimer',
+            handler : 'onPrintClick',
+            itemId : 'Print'
+        },
+        {
         	itemId : 'detailBottomView',
         	layout : 
   			{

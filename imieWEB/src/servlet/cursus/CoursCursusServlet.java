@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cursus.CoursCursusServiceLocal;
+import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
@@ -31,6 +31,8 @@ public class CoursCursusServlet
 {
 	@EJB 
 	CoursCursusServiceLocal coursCursusService;
+	@EJB 
+	EnseignementServiceLocal enseignementService;
 	
 	@GET()
 	@Path("/{id}")
@@ -104,5 +106,47 @@ public class CoursCursusServlet
 		}
 		
 	    return Response.ok(result).build();
-	}	
+	}
+	@GET()
+	@Path("/fichecours/{id}")
+	public Response getByIdForFC(@PathParam("id") Integer id)
+	{
+		CoursCursus cours = coursCursusService.findById(id);
+		cours.getModuleCursus().setCoursCursuses(null);
+		cours.getModuleCursus().getUniteFormationCursus().setModuleCursuses(null);
+		cours.getModuleCursus().getUniteFormationCursus().getCursus().setPeriodes(null);
+		cours.getModuleCursus().getUniteFormationCursus().getCursus().setPromotions(null);
+		cours.getModuleCursus().getUniteFormationCursus().getCursus().setUniteFormationCursuses(null);
+		
+		for (Savoir savoir : cours.getSavoirs()) 
+		{
+			savoir.setCoursCursuses(null);
+			savoir.setCoursPromotions(null);
+			savoir.setCompetencePro(null);
+		}
+		
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			Enseignement ent = enseignementService.findById(enseignement.getEntId());
+			
+			enseignement.setPrerequis(ent.getPrerequis());
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			
+			for (Enseignement prerequis : enseignement.getPrerequis()) {
+				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
+				prerequis.setCoursCursuses(ent2.getCoursCursuses());
+				prerequis.setCoursPromotions(null);
+				prerequis.setPrerequis(null);
+		
+				for (CoursCursus coursPrerequis : prerequis.getCoursCursuses()){
+					coursPrerequis.setEnseignements(null);
+					coursPrerequis.setSavoirs(null);
+					coursPrerequis.setModuleCursus(null);
+				}
+			}	
+		}
+		ArrayList<CoursCursus> response = new ArrayList<CoursCursus>();
+		response.add(cours);
+	    return Response.ok(response).build();
+	}
 }

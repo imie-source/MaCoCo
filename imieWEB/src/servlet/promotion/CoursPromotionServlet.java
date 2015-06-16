@@ -18,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import promotion.CoursPromotionServiceLocal;
+import enseignement.EnseignementServiceLocal;
+import entities.cursus.CoursCursus;
 import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
 import entities.referentiel.Savoir;
@@ -31,6 +33,9 @@ public class CoursPromotionServlet
 {
 	@EJB 
 	CoursPromotionServiceLocal coursPromotionService;
+	@EJB 
+	EnseignementServiceLocal enseignementService;
+	
 	
 	@GET()
 	@Path("/{id}")
@@ -102,6 +107,48 @@ public class CoursPromotionServlet
 	    return Response.ok(result).build();
 	}	
 	
-	
+	@GET()
+	@Path("/fichecours/{id}")
+	public Response getByIdForFC(@PathParam("id") Integer id)
+	{
+		CoursPromotion cours = coursPromotionService.findById(id);
+		cours.getModulePromotion().setCoursPromotions(null);
+		cours.getModulePromotion().getUniteFormationPromotion().setModulePromotions(null);
+		cours.getModulePromotion().getUniteFormationPromotion().getPromotion().setPeriodes(null);
+		cours.getModulePromotion().getUniteFormationPromotion().getPromotion().setUniteFormationPromotions(null);
+		cours.getModulePromotion().getUniteFormationPromotion().getPromotion().getCursus().setPeriodes(null);;
+		cours.getModulePromotion().getUniteFormationPromotion().getPromotion().getCursus().setPromotions(null);
+		cours.getModulePromotion().getUniteFormationPromotion().getPromotion().getCursus().setUniteFormationCursuses(null);
+		for (Savoir savoir : cours.getSavoirs()) 
+		{
+			savoir.setCoursCursuses(null);
+			savoir.setCoursPromotions(null);
+			savoir.setCompetencePro(null);
+		}
+		
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			Enseignement ent = enseignementService.findById(enseignement.getEntId());
+			
+			enseignement.setPrerequis(ent.getPrerequis());
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			
+			for (Enseignement prerequis : enseignement.getPrerequis()) {
+				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
+				prerequis.setCoursCursuses(ent2.getCoursCursuses());
+				prerequis.setCoursPromotions(null);
+				prerequis.setPrerequis(null);
+		
+				for (CoursPromotion coursPrerequis : prerequis.getCoursPromotions()){
+					coursPrerequis.setEnseignements(null);
+					coursPrerequis.setSavoirs(null);
+					coursPrerequis.setModulePromotion(null);
+				}
+			}	
+		}
+		ArrayList<CoursPromotion> response = new ArrayList<CoursPromotion>();
+		response.add(cours);
+	    return Response.ok(response).build();
+	}
 	
 }

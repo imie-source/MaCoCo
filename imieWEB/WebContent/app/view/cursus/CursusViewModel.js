@@ -282,35 +282,6 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         	},
     	},
     	
-    	/*currentReferentielTree:{
-    		bind:{
-        		bindTo:'{referentielTree.selection}',
-        		deep:true
-        	},
-        	get:function(referentiel){
-        		return referentiel;
-        	},
-        	set:function(referentiel){
-        		if(!cursus.isModel){
-        			referentiel = this.get('referentiels').getById(referentiel);
-        		}
-        		this.set('currentReferentiel',referentiel);
-        	}
-    	},
-    	refStatus:{
-    		bind:{
-        		bindTo:'{currentReferentiel}',
-        		deep:true
-        	},
-        	get:function(referentiel){
-        		var retRefStatus = {
-        				dirty:referentiel ? referentiel.dirty : false,
-        				valid: referentiel && referentiel.isModel ? referentiel.isValid() : false
-        		};
-        		retRefStatus.dirtyAndValid = retRefStatus.dirty && retRefStatus.valid;
-        		return retRefStatus;
-        	},
-    	},*/
     	
     	currentCours:{
     		bind:{

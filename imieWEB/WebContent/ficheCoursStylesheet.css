@@ -1,0 +1,48 @@
+body{
+	font-size : 11px;
+	background-color: grey;
+}
+.contenuFicheCours{
+	width: 60%;
+	margin-left: 20%;
+	background-color: white;
+}
+h1{
+	text-align: center;
+	font-size : 18px;
+	
+}
+
+h2{
+	color: #287590;
+	text-decoration: underline;
+	text-align: center;
+	font-size : 14px;
+}
+
+h3{
+	color: #287590;
+	font-size : 11px;
+	font-weight: bold;
+}
+.s-duree, .s-theorie, .h3-theorie, .tf-theorie, .tf-pratique{
+	display: inline;	
+}
+
+.bloc-objectif, .bloc-com, .bloc-eval{
+	padding: 2%;
+}
+.bloc-cursus, .bloc-uf, .bloc-module, .bloc-cours{
+	border: 1px solid #5d5858;
+	padding: 2%;
+}
+@media print 
+{
+	.contenuFicheCours{
+		width: 100%;
+		margin : 0%;	
+	}
+	body{
+		background-color: white;
+	}
+}

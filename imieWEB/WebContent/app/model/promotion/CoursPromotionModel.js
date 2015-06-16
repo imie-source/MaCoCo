@@ -13,10 +13,12 @@ Ext.define('ExtJsMVC.model.promotion.CoursPromotionModel',
 	          {name: 'copOrdre'},
 	          {name: 'modulePromotion'},
 	          {name: 'savoirs'},
+	          {name: 'enseignements'},
 	          {name : 'leaf',  type : 'boolean', defaultValue : true}
 	         ],
 	
 	hasMany: {model: 'ExtJsMVC.model.referentiel.Savoir', associationKey: 'savoirs'},
+	hasMany: {model: 'ExtJsMVC.model.enseignement.Enseignement', associationKey: 'prerequis'},
 
 	proxy: 
 	{

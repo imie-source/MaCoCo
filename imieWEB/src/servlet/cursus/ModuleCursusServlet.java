@@ -17,8 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cursus.ModuleCursusServiceLocal;
+import cursus.UniteFormationCursusServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.ModuleCursus;
+import entities.cursus.UniteFormationCursus;
 
 @Stateless
 @Path("/modulecursus")
@@ -28,7 +30,8 @@ public class ModuleCursusServlet
 {
 	@EJB 
 	ModuleCursusServiceLocal moduleCursusService;
-
+	@EJB 
+	UniteFormationCursusServiceLocal uniteFormationCursusService;
 	
 	@GET()
 	@Path("/{id}")
@@ -46,6 +49,24 @@ public class ModuleCursusServlet
 	    return Response.ok(response).build();
 	}
 
+	@GET()
+	@Path("/uniteformation/{id}")
+	public Response getModuleByUniteFormation(@PathParam("id") Integer id)
+	{
+		UniteFormationCursus uf = uniteFormationCursusService.findById(id);
+		ArrayList<ModuleCursus> response = new ArrayList<ModuleCursus>();
+		for (ModuleCursus module : uf.getModuleCursuses()) {
+
+			module.setCoursCursuses(new ArrayList<CoursCursus>());
+			
+			module.getUniteFormationCursus().setModuleCursuses(null);
+			module.getUniteFormationCursus().setCursus(null);
+
+			response.add(module);
+		    		
+		}
+		return Response.ok(response).build();
+	}
 	
 	@POST()
 	public Response add(ModuleCursus module) 

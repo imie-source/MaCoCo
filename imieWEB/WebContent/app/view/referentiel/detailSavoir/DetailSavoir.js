@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.view.referentiel.DetailSavoir', 
+Ext.define('ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir', 
 {
     extend : 'Ext.form.Panel',
     xtype : 'referentiel-DetailSavoir',
@@ -6,7 +6,12 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
     title : 'Detail Savoir',
     frame : true,
     padding : 10,
-    
+    requires : [
+	            'ExtJsMVC.view.referentiel.detailSavoir.DetailSavoirViewController'
+	],
+	
+	controller : 'DetailSavoirViewController',
+   
     items : 
     [
         {
@@ -23,7 +28,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailSavoir',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
-            handler : 'onSaveRefButtonClick',
+            handler : 'onSaveSavoirClick',
             disabled:true,
             bind:{
 				disabled:'{!refTreeStatus.dirtyAndValid}'

@@ -17,8 +17,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 			'arbre-Referentiel' : 
 			{
 				//selectionchange :this.chargeRefTreeForm,
-				itemclick : this.chargeRefTreeForm,
-				itemcontextmenu : this.onRefTreeContextMenu,
+				//itemclick : this.chargeRefTreeForm,
+				//itemcontextmenu : this.onRefTreeContextMenu,
 			},
 			
             

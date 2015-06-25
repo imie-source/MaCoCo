@@ -42,23 +42,25 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindow', {
          			
 				items:[
 				   {
-					xtype:'administrationWindowGrid',
-					id:'refAdminWindowGrid',
-					height : 600,
-					title:'Liste des référentiels',
-					bind:{
-						store:'{referentiels}',
-						title:'<b>Liste des référentiels : {currentReferentiel.text}</b>'
-					},
-					reference:'referentielsGrid',
-					columns:[{
-						text:'Référentiel',
-						dataIndex:'refNom',
-						flex:1.5,
-					}],
+						xtype:'administrationWindowGrid',
+						id:'refAdminWindowGrid',
+						height : 600,
+						title:'Liste des référentiels',
+						bind:{
+							store:'{referentiels}',
+							title:'<b>Liste des référentiels : {currentReferentiel.text}</b>'
+						},
+						reference:'referentielsGrid',
+						columns:[{
+							text:'Référentiel',
+							dataIndex:'refNom',
+							flex:1.5,
+						}],
+						autoScroll : true,
 				   },
 				   {
 						xtype:'refAdminWindowForm',
+						autoScroll : true,
 						
 				   },	
 				],

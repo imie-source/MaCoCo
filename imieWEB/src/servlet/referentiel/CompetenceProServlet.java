@@ -17,8 +17,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import referentiel.ActiviteTypeServiceLocal;
 import referentiel.CompetenceProServiceLocal;
+import entities.referentiel.ActiviteType;
 import entities.referentiel.CompetencePro;
+import entities.referentiel.Referentiel;
 import entities.referentiel.Savoir;
 
 @Stateless
@@ -29,6 +32,8 @@ public class CompetenceProServlet
 {
 	@EJB 
 	CompetenceProServiceLocal competenceProService;
+	@EJB
+	ActiviteTypeServiceLocal activiteTypeService;
 	
 	
 	@GET()
@@ -44,6 +49,24 @@ public class CompetenceProServlet
 
 		    List<CompetencePro> result = new ArrayList<CompetencePro>();
 		    result.add(competencePro);
+		    return Response.ok(result).build();
+	}
+	
+	@GET()
+	@Path("/activitetype/{id}")
+	public Response getCompetenceProsByActiviteType(@PathParam("id") Integer id ) 
+	{
+		ActiviteType activiteType = activiteTypeService.findById(Integer.valueOf(id));
+			
+		    List<CompetencePro> result = new ArrayList<CompetencePro>();
+		    
+		    for (CompetencePro competencePro : activiteType.getCompetencePros()) {
+		    	competencePro.getActiviteType().setReferentiel(null);
+		    	competencePro.getActiviteType().setCompetencePros(null);
+		    	competencePro.setSavoirs(new ArrayList<Savoir>());
+		    	result.add(competencePro);	
+			}
+		    
 		    return Response.ok(result).build();
 	}
 	

@@ -64,6 +64,15 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
             text : 'Imprimer',
             handler : 'onPrintClick',
             itemId : 'Print'
-        }
+        },
+        {
+        	xtype : 'cursus-childrenGrid',
+        	itemId : 'cursusUfGrid',
+            id : 'cursusUfGrid',
+            title: 'Unité de formation',
+            bind:{
+            	store:'{ufStore}',
+			},
+        },
     ]
 });

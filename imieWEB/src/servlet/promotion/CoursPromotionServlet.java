@@ -1,11 +1,9 @@
 package servlet.promotion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,10 +16,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import promotion.CoursPromotionServiceLocal;
+import promotion.ModulePromotionServiceLocal;
 import enseignement.EnseignementServiceLocal;
-import entities.cursus.CoursCursus;
 import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
+import entities.promotion.ModulePromotion;
 import entities.referentiel.Savoir;
 
 
@@ -35,7 +34,8 @@ public class CoursPromotionServlet
 	CoursPromotionServiceLocal coursPromotionService;
 	@EJB 
 	EnseignementServiceLocal enseignementService;
-	
+	@EJB 
+	ModulePromotionServiceLocal modulePromotionService;
 	
 	@GET()
 	@Path("/{id}")
@@ -60,6 +60,24 @@ public class CoursPromotionServlet
 		ArrayList<CoursPromotion> response = new ArrayList<CoursPromotion>();
 		response.add(cours);
 	    return Response.ok(response).build();
+	}
+	
+	@GET()
+	@Path("/module/{id}")
+	public Response getCoursByModule(@PathParam("id") Integer id)
+	{
+		ModulePromotion module = modulePromotionService.findById(id);
+		ArrayList<CoursPromotion> response = new ArrayList<CoursPromotion>();
+		for (CoursPromotion cours : module.getCoursPromotions()) {
+
+			cours.getModulePromotion().setCoursPromotions(null);
+			cours.getModulePromotion().setUniteFormationPromotion(null);
+			cours.setSavoirs(null);
+			cours.setEnseignements(null);
+			response.add(cours);
+	
+		}
+		return Response.ok(response).build();
 	}
 	
 	@POST()

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,10 +16,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import promotion.CoursPromotionServiceLocal;
+import referentiel.CompetenceProServiceLocal;
 import referentiel.SavoirServiceLocal;
+import cursus.CoursCursusServiceLocal;
 import entities.cursus.CoursCursus;
-import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
+import entities.referentiel.CompetencePro;
 import entities.referentiel.Savoir;
 
 @Stateless
@@ -31,6 +33,13 @@ public class SavoirServlet
 {
 	@EJB 
 	SavoirServiceLocal savoirService;
+	@EJB 
+	CompetenceProServiceLocal competenceProService;
+	@EJB
+	CoursCursusServiceLocal coursCursusService;
+	@EJB
+	CoursPromotionServiceLocal coursPromotionService;
+	
 	
 	@GET()
 	@Path("/{id}")
@@ -58,6 +67,69 @@ public class SavoirServlet
 	    List<Savoir> result = new ArrayList<Savoir>();
 	    result.add(savoir);
 	    return Response.ok(result).build();
+	}
+	
+	@GET()
+	@Path("competencepro/{id}")
+	public Response getSavoirsByCompetencePro(@PathParam("id") Integer id ) 
+	{
+		CompetencePro competencePro = competenceProService.findById(Integer.valueOf(id));
+			
+		    List<Savoir> result = new ArrayList<Savoir>();
+		    
+		    for (Savoir savoir : competencePro.getSavoirs()) {
+
+				savoir.getCompetencePro().setSavoirs(null);
+				savoir.getCompetencePro().setActiviteType(null);
+				savoir.setCoursCursuses(null);
+				savoir.setCoursPromotions(null);
+					
+		    	result.add(savoir);	
+			}
+		    
+		    return Response.ok(result).build();
+	}
+	
+	@GET()
+	@Path("courscursus/{id}")
+	public Response getSavoirsByCoursCursus(@PathParam("id") Integer id ) 
+	{
+		CoursCursus cours = coursCursusService.findById(Integer.valueOf(id));
+			
+		    List<Savoir> result = new ArrayList<Savoir>();
+		    
+		    for (Savoir savoir : cours.getSavoirs()) {
+
+				savoir.getCompetencePro().setSavoirs(null);
+				savoir.getCompetencePro().setActiviteType(null);
+				savoir.setCoursCursuses(null);
+				savoir.setCoursPromotions(null);
+					
+		    	result.add(savoir);	
+			}
+		    
+		    return Response.ok(result).build();
+	}
+
+	@GET()
+	@Path("courspromotion/{id}")
+	public Response getSavoirsByCoursPromotion(@PathParam("id") Integer id ) 
+	{
+		CoursPromotion cours = coursPromotionService.findById(Integer.valueOf(id));
+			
+		    List<Savoir> result = new ArrayList<Savoir>();
+		    
+		    for (Savoir savoir : cours.getSavoirs()) {
+
+				savoir.getCompetencePro().setSavoirs(null);
+				savoir.getCompetencePro().setActiviteType(null);
+				savoir.setCoursCursuses(null);
+				savoir.setCoursPromotions(null);
+					
+		    	result.add(savoir);	
+			}
+		    
+		    return Response.ok(result).build();
 	}
 	
 	@POST()

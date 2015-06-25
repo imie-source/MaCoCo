@@ -1,7 +1,6 @@
 package servlet.cursus;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -17,8 +16,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cursus.CoursCursusServiceLocal;
+import cursus.ModuleCursusServiceLocal;
 import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
+import entities.cursus.ModuleCursus;
 import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
 
@@ -33,6 +34,8 @@ public class CoursCursusServlet
 	CoursCursusServiceLocal coursCursusService;
 	@EJB 
 	EnseignementServiceLocal enseignementService;
+	@EJB 
+	ModuleCursusServiceLocal moduleCursusService;
 	
 	@GET()
 	@Path("/{id}")
@@ -60,6 +63,25 @@ public class CoursCursusServlet
 		
 		ArrayList<CoursCursus> response = new ArrayList<CoursCursus>();
 		response.add(cours);
+	    return Response.ok(response).build();
+	}
+	
+	@GET()
+	@Path("/module/{id}")
+	public Response getCoursByModule(@PathParam("id") Integer id)
+	{
+		ModuleCursus module = moduleCursusService.findById(id);
+		
+		ArrayList<CoursCursus> response = new ArrayList<CoursCursus>();
+		for (CoursCursus cours : module.getCoursCursuses()) {
+			cours.getModuleCursus().setCoursCursuses(null);
+			cours.getModuleCursus().setUniteFormationCursus(null);
+			cours.setSavoirs(null);
+			cours.setEnseignements(null);
+			
+			response.add(cours);
+		}
+		
 	    return Response.ok(response).build();
 	}
 	

@@ -53,6 +53,13 @@ Ext.define('ExtJsMVC.view.cursus.arbre1.CursusArbre1ViewController', {
 			});
 			
 			//Chargement arbre référentiel
+			var refTree = Ext.ComponentQuery.query('#refTree')[0];
+			if(refTree.getChildEls())
+	    	   {
+				refTree.removeAll();
+	    	   }
+			refTree.add({xtype : 'arbre-Referentiel'});
+			
 			var storeReferentiels = vm.getStore('rootReferentiels');
 			var refModel = vm.getStore('referentiels').getModel();
 			

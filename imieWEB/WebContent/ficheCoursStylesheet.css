@@ -28,6 +28,11 @@ h3{
 .s-duree, .s-theorie, .h3-theorie, .tf-theorie, .tf-pratique{
 	display: inline;	
 }
+.tf-theorie, .tf-pratique{
+	width: 20px;
+	height: 15px;	
+	resize: none;
+}
 
 .bloc-objectif, .bloc-com, .bloc-eval{
 	padding: 2%;
@@ -35,6 +40,10 @@ h3{
 .bloc-cursus, .bloc-uf, .bloc-module, .bloc-cours{
 	border: 1px solid #5d5858;
 	padding: 2%;
+}
+
+.s-contenu, .s-contexte, .s-materiel{
+	color: #353535;
 }
 @media print 
 {
@@ -45,4 +54,7 @@ h3{
 	body{
 		background-color: white;
 	}
+	.conteneur{
+		page-break-inside:avoid;
+	}	
 }

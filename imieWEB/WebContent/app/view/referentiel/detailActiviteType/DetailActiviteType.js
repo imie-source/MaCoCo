@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType', 
+Ext.define('ExtJsMVC.view.referentiel.detailActiviteType.DetailActiviteType', 
 {
     extend : 'Ext.form.Panel',
     xtype : 'referentiel-DetailActiviteType',
@@ -6,6 +6,11 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
     title : 'Detail Activite Type',
     frame : true,
     padding : 10,
+    requires : [
+	            'ExtJsMVC.view.referentiel.detailActiviteType.DetailActiviteTypeViewController'
+	],
+	
+	controller : 'DetailActiviteTypeViewController',
     
     items : 
     [
@@ -23,10 +28,20 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',
-            handler : 'onSaveRefButtonClick',
+            handler : 'onSaveActiviteTypeClick',
             disabled:true,
             bind:{
 				disabled:'{!refTreeStatus.dirtyAndValid}'
+			},
+        },
+        {
+        	
+        	xtype : 'referentiel-childrenGrid',
+        	itemId : 'CompProGrid',
+            id : 'CompProGrid',
+            title: 'Compétence pro',
+            bind:{
+            	store:'{compProStore}',
 			},
         },
         {
@@ -34,7 +49,7 @@ Ext.define('ExtJsMVC.view.referentiel.DetailActiviteType',
             xtype : 'button',
             text : 'Ajouter Compétence Pro',
             itemId : 'AddRecord',
-            handler : 'onAddRefButtonClick',
+            handler : 'onAddCompetenceProClick',
         }
     ]
 });

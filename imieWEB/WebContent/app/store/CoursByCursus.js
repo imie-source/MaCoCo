@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.store.CoursByCursus', 
+/*Ext.define('ExtJsMVC.store.CoursByCursus', 
 {
 	extend : 'Ext.data.TreeStore',
 	
@@ -8,4 +8,4 @@ Ext.define('ExtJsMVC.store.CoursByCursus',
     
     autoLoad : false,
     
-});
+});*/

@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.store.SavoirStore', 
+/*Ext.define('ExtJsMVC.store.SavoirStore', 
 {
 	extend : 'Ext.data.TreeStore',
 	

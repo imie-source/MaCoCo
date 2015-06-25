@@ -15,7 +15,8 @@ import entities.cursus.CoursCursus;
 import entities.cursus.RCourscursusEnseignement;
 import entities.cursus.RCourscursusSavoir;
 import entities.enseignement.Enseignement;
-import entities.promotion.RCourspromotionSavoir;
+import entities.promotion.CoursPromotion;
+import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
 
 /**
@@ -95,6 +96,21 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 				em.remove(rCourscursusEnseignement);
 			}
 		}
+		
+		List<Promotion> promotions = coursCursus.getModuleCursus().getUniteFormationCursus().getCursus().getPromotions();
+		for (Promotion promotion : promotions) {
+			Query queryAllCoursPromotion = em.createNamedQuery("CoursPromotion.findAllByPromotion");
+			queryAllCoursPromotion.setParameter("idPromotion", promotion.getProId());
+			List <CoursPromotion> coursPromotions = queryAllCoursPromotion.getResultList();
+			
+			for (CoursPromotion coursPromotion : coursPromotions) {
+				if(coursCursus.getCocId()==coursPromotion.getCocId()){
+					coursPromotion = em.merge(coursPromotion);
+					em.remove(coursPromotion);
+				}
+			}	
+		}
+		
 		em.remove(coursCursus);
 	}
 	

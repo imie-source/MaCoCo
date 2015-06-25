@@ -33,6 +33,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindow', {
 	   
 	   {
 		  itemId : 'entSwitchView',
+		  autoScroll : true,
 	   }
 	],
 	

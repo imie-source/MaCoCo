@@ -8,7 +8,6 @@ Ext.define('ExtJsMVC.view.cursus.detailModule.DetailModuleCursusViewController',
 		this.control
 		({
 			
-			
 		});
 		
 	},
@@ -90,5 +89,7 @@ Ext.define('ExtJsMVC.view.cursus.detailModule.DetailModuleCursusViewController',
 			myStore.sync();
 		}
 	},
+	
+         
 	
 });

@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.store.Referentiel', 
+/*Ext.define('ExtJsMVC.store.Referentiel', 
 {
 	extend : 'Ext.data.TreeStore',
 	
@@ -6,9 +6,6 @@ Ext.define('ExtJsMVC.store.Referentiel',
 	
     model : 'ExtJsMVC.model.referentiel.RootReferentiel',
     
-    /*root : {
-    	
-    },*/
     
     autoLoad : false
-});
+});*/

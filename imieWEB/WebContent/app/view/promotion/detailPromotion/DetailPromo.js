@@ -59,6 +59,15 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
             text : 'Imprimer',
             itemId : 'Print',
             handler :'onPrintClick',
-        }
+        },
+        {
+        	xtype : 'promotion-childrenGrid',
+        	itemId : 'promoUfGrid',
+            id : 'promoUfGrid',
+            title: 'Unité de formation',
+            bind:{
+            	store:'{ufPromoStore}',
+			},
+        },
     ]
 });

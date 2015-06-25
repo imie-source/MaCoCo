@@ -16,8 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import promotion.CoursPromotionServiceLocal;
+
 import com.sun.mail.imap.protocol.Status;
 
+import cursus.CoursCursusServiceLocal;
 import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.enseignement.Enseignement;
@@ -33,6 +36,10 @@ public class EnseignementServlet {
 
 	@EJB 
 	EnseignementServiceLocal enseignementService;
+	@EJB
+	CoursCursusServiceLocal coursCursusService;
+	@EJB
+	CoursPromotionServiceLocal coursPromotionService;
 
 
 	// Le path root correspond à la demande de tous les Enseignements
@@ -63,11 +70,7 @@ public class EnseignementServlet {
 				coursPromo.setEnseignements(null);
 				coursPromo.setModulePromotion(null);
 			}
-			/*for (Enseignement prerequis: enseignement.getPrerequis()) {
-				prerequis.setCoursCursuses(null);
-				prerequis.setCoursPromotions(null);
-				prerequis.setPrerequis(null);
-			}*/
+			
 		}
 		return Response.ok(listeEnseignement).build();
 	}
@@ -99,7 +102,44 @@ public class EnseignementServlet {
 		reponse.add(enseignement);
 		return Response.ok(reponse).build();
 	}
+	
+	@GET()
+	@Path("/courscursus/{id}")
+	public Response getEnseignementByCoursCursus(@PathParam("id") Integer id ) 
+	{
+		CoursCursus cours = coursCursusService.findById(Integer.valueOf(id));
+		
+		ArrayList<Enseignement> reponse = new ArrayList<Enseignement>();
+		
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			enseignement.setPrerequis(null);
+			
+			reponse.add(enseignement);
+		}
+		
+		return Response.ok(reponse).build();
+	}
+	@GET()
+	@Path("/courspromotion/{id}")
+	public Response getEnseignementByCoursPromotion(@PathParam("id") Integer id ) 
+	{
+		CoursPromotion cours = coursPromotionService.findById(Integer.valueOf(id));
+		
+		ArrayList<Enseignement> reponse = new ArrayList<Enseignement>();
+		
+		for (Enseignement enseignement : cours.getEnseignements()) {
+			enseignement.setCoursCursuses(null);
+			enseignement.setCoursPromotions(null);
+			enseignement.setPrerequis(null);
 
+			reponse.add(enseignement);
+		}
+		
+		return Response.ok(reponse).build();
+	}
+	
 	@POST()
 	public Response add(Enseignement enseignement) 
 	{	

@@ -1,4 +1,4 @@
-Ext.define('ExtJsMVC.store.UniteFormationStore', 
+/*Ext.define('ExtJsMVC.store.UniteFormationStore', 
 {
 	extend : 'Ext.data.TreeStore',
 	
@@ -12,3 +12,4 @@ Ext.define('ExtJsMVC.store.UniteFormationStore',
 	
     autoLoad : false
 });
+*/

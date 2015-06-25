@@ -16,8 +16,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import promotion.PromotionServiceLocal;
 import promotion.UniteFormationPromotionServiceLocal;
 import entities.promotion.ModulePromotion;
+import entities.promotion.Promotion;
 import entities.promotion.UniteFormationPromotion;
 
 @Stateless
@@ -28,7 +30,8 @@ public class UniteFormationPromotionServlet
 {
 	@EJB 
 	UniteFormationPromotionServiceLocal uniteFormationPromotionService;
-
+	@EJB
+	PromotionServiceLocal promotionService;
 	
 	@GET()
 	@Path("/{id}")
@@ -44,6 +47,26 @@ public class UniteFormationPromotionServlet
 		ArrayList<UniteFormationPromotion> response = new ArrayList<UniteFormationPromotion>();
 		response.add(uf);
 	    return Response.ok(response).build();
+	}
+	@GET()
+	@Path("promotion/{id}")
+	public Response getUfByPromotion(@PathParam("id") Integer id)
+	{
+		Promotion promotion = promotionService.findById(id);
+		ArrayList<UniteFormationPromotion> response = new ArrayList<UniteFormationPromotion>();
+		for (UniteFormationPromotion uf : promotion.getUniteFormationPromotions()) {
+
+			uf.setModulePromotions(null);
+			
+			uf.getPromotion().setUniteFormationPromotions(null);
+			uf.getPromotion().setPeriodes(null);
+			uf.getPromotion().setCursus(null);
+			
+			
+			response.add(uf);
+		 	
+		}
+		   return Response.ok(response).build();
 	}
 
 	

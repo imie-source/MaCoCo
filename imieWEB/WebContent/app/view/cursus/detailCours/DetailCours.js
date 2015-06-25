@@ -5,6 +5,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCours', {
     title : 'Detail Cours',
     requires : [
 	            'ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController',
+	            'Ext.dd.DropTarget',
 	],
 	
 	controller : 'DetailCoursCursusViewController',

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,7 +15,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import cursus.CursusServiceLocal;
 import cursus.UniteFormationCursusServiceLocal;
+import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.cursus.UniteFormationCursus;
 
@@ -28,7 +29,8 @@ public class UniteFormationCursusServlet
 {
 	@EJB 
 	UniteFormationCursusServiceLocal uniteFormationCursusService;
-
+	@EJB 
+	CursusServiceLocal cursusService;
 	
 	@GET()
 	@Path("/{id}")
@@ -46,6 +48,25 @@ public class UniteFormationCursusServlet
 	    return Response.ok(response).build();
 	}
 
+	@GET()
+	@Path("/cursus/{id}")
+	public Response getUniteFormationByCursus(@PathParam("id") Integer id)
+	{
+		Cursus cursus = cursusService.findById(id);
+		ArrayList<UniteFormationCursus> response = new ArrayList<UniteFormationCursus>();
+		for (UniteFormationCursus uf : cursus.getUniteFormationCursuses()) {
+
+			uf.setModuleCursuses(new ArrayList<ModuleCursus>());
+			
+			uf.getCursus().setUniteFormationCursuses(null);
+			uf.getCursus().setPeriodes(null);
+			uf.getCursus().setPromotions(null);
+			
+			response.add(uf);
+		    	
+		}
+		return Response.ok(response).build();
+	}
 	
 	@POST()
 	public Response add(UniteFormationCursus uf) 

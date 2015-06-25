@@ -24,10 +24,10 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',{
 
         rowBodyTpl : new Ext.XTemplate(
             '<p><b>Contenu:</b> {entContenu}</p>',
-            '<p><b>Prérequis:</b></p>' ,
-            '<tpl for={entPrerequis}>',
-				'<p>  - {entPrerequis}</p>',
-			'</tpl>',
+          //  '<p><b>Prérequis:</b></p>' ,
+          //  '<tpl for={entPrerequis}>',
+		//		'<p>  - {entPrerequis}</p>',
+	//		'</tpl>',
         {
             formatChange: function(v){
                 var color = v >= 0 ? 'green' : 'red';

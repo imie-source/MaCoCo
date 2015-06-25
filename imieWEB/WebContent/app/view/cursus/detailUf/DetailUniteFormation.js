@@ -42,6 +42,15 @@ Ext.define('ExtJsMVC.view.cursus.detailUf.DetailUniteFormation', {
 			},
         },
         {
+        	xtype : 'cursus-childrenGrid',
+        	itemId : 'cursusModuleGrid',
+            id : 'cursusModuleGrid',
+            title: 'Module',
+            bind:{
+            	store:'{moduleStore}',
+			},
+        },
+        {
         	id : 'seleniumDetailUFAdd',
             xtype : 'button',
             handler :'onAddModuleCursusClick',

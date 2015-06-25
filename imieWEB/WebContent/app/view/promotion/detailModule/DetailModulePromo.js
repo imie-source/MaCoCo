@@ -52,11 +52,21 @@ Ext.define('ExtJsMVC.view.promotion.detailModule.DetailModulePromo', {
 			},
         },
         {
+        	xtype : 'promotion-childrenGrid',
+        	itemId : 'promoCoursGrid',
+            id : 'promoCoursGrid',
+            title: 'Cours',
+            bind:{
+            	store:'{coursByPromotion}',
+			},
+        },
+        {
         	id : 'seleniumDetailModulePromoAdd',
             xtype : 'button',
             handler :'onAddCoursPromoClick',
             text : 'Ajouter Cours',
             itemId : 'AddRecord'
-        }
+        },
+        
     ]
 });

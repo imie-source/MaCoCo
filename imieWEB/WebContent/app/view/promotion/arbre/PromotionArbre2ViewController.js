@@ -21,10 +21,11 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			var record = selectedRecords[0];
 
 			var vm = this.getViewModel();
+			
 			var switchview = Ext.ComponentQuery.query('#switchView')[0];
 			var myStore;
 			var promoModel = vm.getStore('promotionStore').getModel();
-			//var itemSelectedId;
+			
 			var myUrl;
 			
 			var modelName = record.entityName;
@@ -38,121 +39,15 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'promo-DetailPromoGlobal'});
-			      
-					
-					//Preparation du panel pour les Periodes associees
-					var panelTemplatePeriodes = Ext.create('Ext.panel.Panel', {
-					    title: 'Périodes',
-					    bodyPadding: 10,
-					    
-					    tpl : new Ext.XTemplate
-					    (
-				    		'<tpl for=".">',
-									'<div class="periode-row" id="periode-{perId}">',
-										'Periode du {perDebut} au {perFin} : {perNbjours} jours.',
-									'</div>',
-							'</tpl>'
-						),
-					    
-					    listeners:
-					    {
-					    	afterrender:function()
-					        {
-					    		var renderSelector = Ext.query('div.periode-row'); 
-				                for(var i in renderSelector)
-				                {
-				                	var renderRow = renderSelector[i];
-				                	
-				                	new Ext.Button(
-				                	{
-				    					text:' X ',
-				    					renderTo: renderRow,
-				    				    handler: function(bouton) 
-				    				    {
-				    				    	var periodeRowId = bouton.renderTo.id;
-				    				    	var sliceIndex = periodeRowId.indexOf('-');
-				    				    	periodeRowId = periodeRowId.slice(sliceIndex+1,periodeRowId.length);
-				    				    	
-				    				    	//suppression de l'element
-				    				    	periodeCursusModel.load(periodeRowId,
-				    				    	{
-				    						  scope: this,
-				    						  callback: function(record, operation) 
-				    						  {
-				    							  record.erase();
-				    						  }
-				    				    	});
-				    				    }
-				    				});
-				                } 
-					        }
-					    }
-					});
-					
-					//Ajout des elements "enfants" au panel
-					panelTemplatePeriodes.setData(record.get('periodes'));
-					//Ajout du panel
-					switchview.child().child('#ordoPromo').add(panelTemplatePeriodes);
-			       
-					//Preparation du panel pour les unites de formation associees
-					var panelTemplate = Ext.create('Ext.panel.Panel', {
-					    title: 'Unite Formation de la Promotion',
-					    bodyPadding: 10,
-					    
-					    tpl : new Ext.XTemplate
-					    (
-				    		'<tpl for=".">',
-									'<div class="uniteformation-row" id="uniteformation-{ufpId}">',
-										'Unite Formation : {ufpNom}',
-									'</div>',
-							'</tpl>'
-						),
-					    
-					    listeners:
-					    {
-					    	afterrender:function()
-					        {
-					    		var renderSelector = Ext.query('div.uniteformation-row'); 
-				                for(var i in renderSelector)
-				                {
-				                	var renderRow = renderSelector[i];
-				                	
-				                	new Ext.Button(
-				                	{
-				                		cls : 'SeleniumModuleSuppButton',
-				                		//id: 'SeleniumUFSuppButton'+i,
-				    					text:' X ',
-				    					renderTo: renderRow,
-				    				    handler: function(bouton) 
-				    				    {
-				    				    	var uniteFormationRowId = bouton.renderTo.id;
-				    				    	var sliceIndex = uniteFormationRowId.indexOf('-');
-				    				    	uniteFormationRowId = uniteFormationRowId.slice(sliceIndex+1,uniteFormationRowId.length);
-				    				    	
-				    				    	//suppression de l'element
-				    				    	var uniteFormationModel = vm.getStore('ufPromoStore').getModel();
-				    				    	uniteFormationModel.load(uniteFormationRowId,
-				    				    	{
-				    						  scope: this,
-				    						  callback: function(record, operation) 
-				    						  {
-				    							  record.erase();
-				    						  }
-				    				    	});
-				    				    }
-				    				});
-				                } 
-					        }
-					    }
-					});
-					
-					
-					//Ajout des elements "enfants" au panel
-					panelTemplate.setData(record.get('uniteFormationPromotions'));
-					//Ajout du panel
-					switchview.child().child('#detailPromo').add(panelTemplate);
-					
-					
+			       if(selectedRecords[0].get('proId')!== undefined){
+				       myStore = vm.getStore('ufPromoStore');
+				       myUrl = '/imieWEB/webapi/uniteformationpromotion/promotion/'.concat(record.get('proId'));	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+			       }else {
+			    	   vm.getStore('ufPromoStore').removeAll();
+				    }
 					//Ordonnancement
 					var storeOrdo = this.getViewModel().getStore('coursByPromotion');
 					var myUrl = '/imieWEB/webapi/courspromotion/promotion/'.concat(record.get('proId')).concat('/root');
@@ -171,85 +66,15 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 		    	   }
 			    //Ajout de la vue correspondante  
 			    switchview.add({xtype : 'promo-DetailUniteFormation'});
-
-
-				//Preparation du panel pour les elements "enfants"
-				var panelTemplateTest = Ext.create('Ext.panel.Panel', {
-				    title: 'Modules de cette unité de formation',
-	                autoDestroy : true,
-				    bodyPadding: 10,
-				    
-				    tpl : new Ext.XTemplate
-				    (
-			    		'<tpl for=".">',
-								'<div class="module-row" id="module-{mopId}">',
-									'Module : {mopIntitule}',
-								'</div>',
-						'</tpl>'
-					),
-				    
-				  listeners:
-				    {
-				    	afterrender:function()
-				        {
-				    		var renderSelector = Ext.query('div.module-row'); 
-			                for(var i in renderSelector)
-			                {
-			                	var renderRow = renderSelector[i];
-			                	
-			                	new Ext.Button(
-			                	{
-			                		cls : 'SeleniumModuleSuppButton',
-			                		//id: 'SeleniumModuleSuppButton'+i,
-			    					text:' X ',
-			    					renderTo: renderRow,
-			    				    handler: function(bouton) 
-			    				    {
-			    				    	var moduleRowId = bouton.renderTo.id;
-			    				    	var sliceIndex = moduleRowId.indexOf('-');
-			    				    	moduleRowId = moduleRowId.slice(sliceIndex+1,moduleRowId.length);
-			    				    	
-			    				    	//suppression de l'element
-			    				    	var modulePromoModel = vm.getStore('modulePromoStore').getModel();
-			    				    	modulePromoModel.load(moduleRowId,
-			    				    	{
-			    						  scope: this,
-			    						  callback: function(record, operation) 
-			    						  {
-			    							  record.erase();
-			    							  
-			    							//Retrait du panel
-			    							switchview.remove(panelTemplateTest);
-			    							
-			    							
-			    							//TODO: Recharger correctement
-			    							var storeUniteFormations = vm.getStore('rootPromotion');
-			    							var arboCursus = promoModel.load(storeUniteFormations.getRoot().get('proId'),
-	    									{
-	    									 // Arborescence complete du cursus récupérée	
-	    									  success: function(record, operation) 
-	    									  {
-	    									      storeUniteFormations.removeAll();
-	    									      storeUniteFormations.setRoot(record);
-	    									      arbre2.expandPath(recordPath);
-	    									  }
-	    									});
-			    						  }
-			    				    	});
-			    				    }
-			    				});
-			                } 
-				        }
-				    }
-				});
-				
-
-				//Ajout des elements "enfants" au panel
-				panelTemplateTest.setData(record.get('modulePromotions'));
-				//Ajout du panel
-				switchview.add(panelTemplateTest);
-
-
+			    if(selectedRecords[0].get('ufpId')!== undefined){
+				       myStore = vm.getStore('modulePromoStore');
+				       myUrl = '/imieWEB/webapi/modulepromotion/uniteformation/'.concat(record.get('ufpId'));	
+				       myStore.load({
+				    	   url : myUrl,
+				       });	
+				}else {
+			    	   vm.getStore('modulePromoStore').removeAll();
+			    }
 			break;
 			case 'ExtJsMVC.model.promotion.ModulePromotionModel' :
 				console.log('chargement du formulaire module promo');
@@ -259,83 +84,15 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'promo-DetailModule'});
-
-					//Preparation du panel pour les elements "enfants"
-					var panelTemplate = Ext.create('Ext.panel.Panel', {
-					    title: 'Cours du module',
-					    bodyPadding: 10,
-					    cls : 'SeleniumCoursByModule',
-					    tpl : new Ext.XTemplate
-					    (
-				    		'<tpl for=".">',
-									'<div class="cours-row" id="cours-{copId}">',
-										'Cours : {copIntitule}',
-									'</div>',
-							'</tpl>'
-						),
-					    
-					    listeners:
-					    {
-					    	afterrender:function()
-					        {
-					    		var renderSelector = Ext.query('div.cours-row'); 
-				                for(var i in renderSelector)
-				                {
-				                	var renderRow = renderSelector[i];
-				                	
-				                	new Ext.Button(
-				                	{
-				                		cls : 'SeleniumModuleSuppButton',
-				                		//id: 'SeleniumCoursSuppButton'+i,
-				    					text:' X ',
-				    					renderTo: renderRow,
-				    				    handler: function(bouton) 
-				    				    {
-				    				    	var coursRowId = bouton.renderTo.id;
-				    				    	var sliceIndex = coursRowId.indexOf('-');
-				    				    	coursRowId = coursRowId.slice(sliceIndex+1,coursRowId.length);
-				    				    	
-				    				    	//suppression de l'element
-				    				    	var coursPromoModel = vm.getStore('coursByPromotion').getModel();
-				    				    	coursPromoModel.load(coursRowId,
-				    				    	{
-				    						  scope: this,
-				    						  callback: function(record, operation) 
-				    						  {
-				    							record.erase();
-
-				    							//Retrait du panel
-				    							switchview.remove(panelTemplate);
-				    							
-				    							
-				    							//TODO: Recharger Correctement
-				    							var storeUniteFormations = vm.getStore('rootPromotion');
-				    							var arboCursus = promoModel.load(storeUniteFormations.getRoot().get('curId'),
-		    									{
-		    									 // Arborescence complete du cursus récupérée	
-		    									  success: function(record, operation) 
-		    									  {
-		    									      storeUniteFormations.removeAll();
-		    									      storeUniteFormations.setRoot(record);
-		    									      arbre2.expandPath(recordPath);
-		    									  }
-		    									});
-				    							
-				    							
-				    						  }
-				    				    	});
-				    				    }
-				    				});
-				                } 
-					        }
-					    }
-					});
-					
-					
-					//Ajout des elements "enfants" au panel
-					panelTemplate.setData(record.get('coursPromotions'));
-					//Ajout du panel
-					switchview.add(panelTemplate);
+			       if(selectedRecords[0].get('mopId')!== undefined){
+				       myStore = vm.getStore('coursByPromotion');
+				       myUrl = '/imieWEB/webapi/courspromotion/module/'.concat(record.get('mopId'));	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+			       }else {
+			    	   vm.getStore('coursByPromotion').removeAll();
+			       }
 			break;
 			case 'ExtJsMVC.model.promotion.CoursPromotionModel' :
 				console.log('chargement du formulaire cours promo');
@@ -344,30 +101,55 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			    	   switchview.removeAll();
 		    	   }
 			       switchview.add({xtype : 'promo-DetailCours'});
-			       var detailBottomView = Ext.ComponentQuery.query('#detailBottomView')[0];
-			     //Preparation du panel pour les elements "enfants"
-			       var savoirModel = vm.getStore('savoirStore').getModel();
-			       var enseignementModel = vm.getStore('enseignementStore').getModel();
-			       var detailView = Ext.ComponentQuery.query('form')[0];
-			       var panelTemplate = Ext.create('Ext.panel.Panel', {
-					    title: 'Glisser des savoirs dans cette zone',
-					    bodyPadding: 10,
-					    itemId : 'TemplateSavoirs',
-					    flex  : 1,
-					    tpl : new Ext.XTemplate
-					    (
-				    		'<tpl for=".">',
-									'<div class="savoir-row" id="savoir-{savId}">',
-										'{savLibelle}		',
-									'</div>',
-							'</tpl>'
-						),
-						
-						
-					    listeners: {
+			       
+			       if(selectedRecords[0].get('copId')!== undefined){
+				       myStore = vm.getStore('savoirStore');
+				       myUrl = '/imieWEB/webapi/savoir/courspromotion/'.concat(record.get('copId'));	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+				       
+				       var myStoreEnt = vm.getStore('enseignementStore');
+				       myUrl = '/imieWEB/webapi/enseignement/courspromotion/'.concat(record.get('copId'));	
+				       myStoreEnt.load({
+				    	   url : myUrl,
+				       });
+				       
+				       
+				       var vm = this.getViewModel();  
+				       var detailBottomView = Ext.ComponentQuery.query('#detailBottomView')[0];
+				     //Preparation du panel pour les elements "enfants"
+				       var savoirModel = vm.getStore('savoirStore').getModel();
+				       var enseignementModel = vm.getStore('enseignementStore').getModel();
+				       var detailView = Ext.ComponentQuery.query('form')[0];
+					   var gridSavoir = Ext.create('Ext.grid.Panel', {
+						   frame : true,
+						itemId : 'savoirCoursGrid',
+		                id : 'savoirCoursGrid',
+		                title: 'Glisser des savoirs dans cet zone',
+		                bind:{
+		                	store:'{savoirStore}',
+		    			},
+		    			width : '50%',
+						columns:[{
+							dataIndex : 'text',
+							width : '85%',
+						},{
+							xtype : 'actioncolumn',
+							width : '15%',
+							menuDisabled : true,
+							items :[
+							{
+								icon : 'img/delete.png',
+								tooltip : 'Supprimer',
+								handler : 'onRemoveSavoir'
+							}],
+						}],
+						listeners: {
 					    	
 					        'afterrender': function () 
 					        {
+					        	
 					        	
 					            this.dropZone = Ext.create('Ext.dd.DropTarget', this.getEl(), {
 					            	ddGroup: 'groupCoursSavoir',
@@ -375,33 +157,31 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 					                
 					                notifyDrop : function(source, e, data) 
 					                {
+					                	
 					                    var nouveauSavoir =  data.records[0];
 					                    
 					                    var savId = nouveauSavoir.get('savId');
-					                    
+					                	
+					                    var savoirModel = vm.getStore('savoirStore').getModel();
 			    				    	savoirModel.load(savId,
 			    				    	{
 			    						  scope: this,
 			    						  callback: function(record, operation) 
 			    						  {
-							                 var arrayCoursPromotion = record.get('coursPromotions');
-							                 if(arrayCoursPromotion == null) { arrayCoursPromotion = new Array() }
-							                  
-							                 
-							                 //Ajout du cours a la liste des cours du savoir 
-							                 //var coursCursus = detailView.getRecord().getData({persist: true});
+							                 var arrayCoursPromotions = record.get('coursPromotions');
+							                 if(arrayCoursPromotions == null) { arrayCoursPromotions = new Array() }
+
+							                 //Ajout du cours a la liste des cours du savoir
 							                 
 							                 var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData({persist: true});
-							                 console.log('coursPromo à ajouter');
-							                 console.log(coursPromotion);
-							                 arrayCoursPromotion.push(coursPromotion);
+							                 arrayCoursPromotions.push(coursPromotion);
 							                  
 							                 
 							                 //preparation sauvegarde savoir
-							                 arrayCoursPromotion.forEach(function(coursPromo) 
+							                 arrayCoursPromotions.forEach(function(cours) 
 											 {
-							                	  cleanTreeFields(coursPromo);
-							                	  coursPromo.savoirs = null;
+							                	  cleanTreeFields(cours);
+							                	  cours.savoirs = null;
 											 });
 							                  
 			    							record.save(
@@ -410,9 +190,13 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 	    										callback: function()
 	    										{
 	    											console.log('savoir ajouté');
-	    											console.log(coursPromotion.copId);
-	    																       
-	    											
+	    											console.log(coursPromotion.copId);  	
+	    										
+	    											var myStore = vm.getStore('savoirStore');
+	    										       myUrl = '/imieWEB/webapi/savoir/courspromotion/'.concat(coursPromotion.copId);	
+	    										       myStore.load({
+	    										    	   url : myUrl,
+	    										       });
 	    										}
 	    									});
 			    						  }
@@ -420,105 +204,43 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 					                    
 					                    return true;
 					                }          
-					            });  
-					            
-					            
-					            
-					            
-					            var renderSelector = Ext.query('div.savoir-row'); 
-				                for(var i in renderSelector)
-				                {
-				                	var renderRow = renderSelector[i];
-				                	
-				                	new Ext.Button(
-				                	{
-				                		cls : 'SeleniumModuleSuppButton',
-				                		//id: 'SeleniumSavoirCoursSuppButton'+i,
-				    					text:' X ',
-				    					renderTo: renderRow,
-				    				    handler: function(bouton) 
-				    				    {
-				    				    	var savoirRowId = bouton.renderTo.id;
-				    				    	var sliceIndex = savoirRowId.indexOf('-');
-				    				    	savoirRowId = savoirRowId.slice(sliceIndex+1,savoirRowId.length);
-				    				    	
-				    				    	
-				    				    	//suppression de l'element
-				    				    	
-				    				    	savoirModel.load(savoirRowId,
-				    				    	{
-				    						  scope: this,
-				    						  callback: function(record, operation) 
-				    						  {
-				    							  var arrayCoursPromotion = record.get('coursPromotions');
-				    							  
-									              //var coursCursus = detailView.getRecord().getData();
-				    							  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
-				    							  var coursPromotionId = coursPromotion.copId;
-									              
-								                 arrayCoursPromotion.forEach(function(promo) 
-												 {
-								                	 if(coursPromotionId == promo.copId)
-								                	 {
-								                		 Ext.Array.remove(arrayCoursPromotion, promo);
-								                     }
-												 });
-									              
-				    							 record.save();
-				    							 
-				    							//Retrait du panel
-				    							switchview.remove(panelTemplate);
-					    							
-				    							
-				    							//TODO: recharger correctement
-				    							var storeUniteFormations = vm.getStore('rootPromotion');
-				    							var arboCursus = promoModel.load(storeUniteFormations.getRoot().get('proId'),
-		    									{
-		    									 // Arborescence complete du cursus récupérée	
-		    									  success: function(record, operation) 
-		    									  {
-		    									      storeUniteFormations.removeAll();
-		    									      storeUniteFormations.setRoot(record);
-		    									      arbre2.expandPath(recordPath);
-		    									  }
-			    									});
-				    						  }
-				    				    	});
-				    				    }
-				    				});
-				                }    
-					            
-					            
+					           });
 					        }
-					    } 
-					});
-					
-					//Ajout des elements "enfants" au panel
-					panelTemplate.setData(record.get('savoirs'));
-			      // switchview.add(panelTemplate);
-			       detailBottomView.add(panelTemplate);
-					//****************************************************
-					var panelTemplateEnt = Ext.create('Ext.panel.Panel', {
-					    title: 'Glisser des enseignements dans cette zone',
-					    bodyPadding: 10,
-					    flex  : 1,
-					    
-					    itemId : 'TemplateEnseignements',
-					    
-					    tpl : new Ext.XTemplate
-					    (
-				    		'<tpl for=".">',
-									'<div class="enseignement-row" id="enseignement-{entId}">',
-										'{entNom}	',
-									'</div>',
-							'</tpl>'
-						),
-						
-						
-					    listeners: {
+						}
+			       });
+		       
+			
+				
+				detailBottomView.add(gridSavoir);
+				
+				var gridEnseignement = Ext.create('Ext.grid.Panel', {
+			    	   frame : true,
+						itemId : 'enseignementCoursGrid',
+		                id : 'enseignementCoursGrid',
+		                title: 'Glisser des enseignements dans cet zone',
+		                bind:{
+		                	store:'{enseignementStore}',
+		    			},
+		    			width : '50%',
+						columns:[{
+							dataIndex : 'entNom',
+							width : '85%',
+						},{
+							xtype : 'actioncolumn',
+							width : '15%',
+							menuDisabled : true,
+							items :[
+							{
+								icon : 'img/delete.png',
+								tooltip : 'Supprimer',
+								handler : 'onRemoveEnseignement'
+							}],
+						}],
+						listeners: {
 					    	
 					        'afterrender': function () 
 					        {
+					        	
 					        	
 					            this.dropZone = Ext.create('Ext.dd.DropTarget', this.getEl(), {
 					            	ddGroup: 'groupCoursEnseignement',
@@ -539,7 +261,10 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 							                 if(arrayCoursPromotions == null) { arrayCoursPromotions = new Array() }
 							                  
 							                 
-							                 var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData({persist: true});
+							                 //Ajout du cours a la liste des cours du enseignement 
+							                 
+							                 
+							                 var coursPromotion = vm.get('currentSecondPromoTreeItem').getData({persist: true});
 							                 arrayCoursPromotions.push(coursPromotion);
 							                  
 							                 
@@ -557,22 +282,12 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 	    										{
 	    											console.log('enseignement ajouté');
 	    											console.log(coursPromotion.copId);
-	    											
-	    											//TODO: rafraichir Record du panel
-	    											
-//	    											var coursCursusModel = this.getCursusCoursCursusModelModel();
-//	    											coursCursusModel.load(coursCursus.cocId),
-//	    											{
-//	    											  scope: this,
-//	    											  callback: function(record, operation) 
-//	    											  {
-//	    									l			  recordArbre.data.moduleCursus = record.data.moduleCursus;
-//	    												  
-//	    	    										  detailView.loadRecord(recordArbre);
-//	    											  }
-//	    											});
-
-//	    									       
+    									       
+	    											var myStore = vm.getStore('enseignementStore');
+	    										       myUrl = '/imieWEB/webapi/enseignement/courspromotion/'.concat(coursPromotion.copId);	
+	    										       myStore.load({
+	    										    	   url : myUrl,
+	    										       });
 	    											
 	    										}
 	    									});
@@ -580,87 +295,16 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 			    				    	});
 					                    
 					                    return true;
-					                }          
-					            });  
-					            
-					            
-					            
-					            
-					            var renderSelector = Ext.query('div.enseignement-row'); 
-				                for(var i in renderSelector)
-				                {
-				                	var renderRow = renderSelector[i];
-				                	
-				                	new Ext.Button(
-				                	{
-				                		cls : 'SeleniumModuleSuppButton',
-				                		//id: 'SeleniumEnseignementCoursSuppButton'+i,
-				    					text:' X ',
-				    					renderTo: renderRow,
-				    				    handler: function(bouton) 
-				    				    {
-				    				    	var enseignementRowId = bouton.renderTo.id;
-				    				    	var sliceIndex = enseignementRowId.indexOf('-');
-				    				    	enseignementRowId = enseignementRowId.slice(sliceIndex+1,enseignementRowId.length);
-				    				    	
-				    				    	
-				    				    	//suppression de l'element
-				    				    	
-				    				    	enseignementModel.load(enseignementRowId,
-				    				    	{
-				    						  scope: this,
-				    						  callback: function(record, operation) 
-				    						  {
-				    							  var arrayCoursPromotions = record.get('coursPromotions');
-				    							  
-									              
-				    							  var coursPromotions  = vm.get('currentSecondPromoTreeItem').getData();
-				    							  var coursPromotionId = coursPromotion.cocId;
-									              
-								                 arrayCoursPromotions.forEach(function(cours) 
-												 {
-								                	 if(coursPromotionId == cours.cocId)
-								                	 {
-								                		 Ext.Array.remove(arrayCoursPromotions, cours);
-								                     }
-												 });
-									              
-				    							 record.save();
-				    							 
-				    							//Retrait du panel
-				    							switchview.remove(panelTemplateEnt);
-					    							
-				    							
-				    							//TODO: recharger correctement
-				    							var arboCursus = cursusModel.load(storeUniteFormations.getRoot().get('proId'),
-		    									{
-		    									 // Arborescence complete du cursus récupérée	
-		    									  success: function(record, operation) 
-		    									  {
-		    									      storeUniteFormations.removeAll();
-		    									      storeUniteFormations.setRoot(record);
-		    									      arbre2.expandPath(recordPath);
-		    									  }
-			    									});
-				    						  }
-				    				    	});
-				    				    }
-				    				});
-				                }    
-					            
-					            
+					                }                  
+					           });
 					        }
-					    } 
-					});
-					
-					//Ajout des elements "enfants" au panel
-					panelTemplateEnt.setData(record.get('enseignements'));
-					//switchview.add(panelTemplateEnt);
-					detailBottomView.add(panelTemplateEnt);
-					//*****************************************************
-			       
-			       
+						}
+			       });
+		       
+			
 				
+				detailBottomView.add(gridEnseignement);	
+			}
 			break;	
 				        
 				

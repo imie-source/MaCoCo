@@ -52,6 +52,15 @@ Ext.define('ExtJsMVC.view.cursus.detailModule.DetailModule', {
 			},
         },
         {
+        	xtype : 'cursus-childrenGrid',
+        	itemId : 'cursusCoursGrid',
+            id : 'cursusCoursGrid',
+            title: 'Cours',
+            bind:{
+            	store:'{coursByCursus}',
+			},
+        },
+        {
         	id : 'seleniumDetailModuleAdd',
             xtype : 'button',
             handler :'onAddCoursCursusClick',

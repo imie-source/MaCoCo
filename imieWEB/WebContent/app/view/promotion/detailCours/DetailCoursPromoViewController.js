@@ -476,7 +476,94 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 		};
 		var win = window.open('printFicheCours.html');
 		win.onload = drawDocument;
-	}
+	},
+
+	onRemoveEnseignement : function(view, row, col, action, ev, record){
+		 
+		var vm = this.getViewModel();
+		
+		var enseignementModel = vm.getStore('enseignementStore').getModel();
+        
+        var entId = record.get('entId');
+        
+    	enseignementModel.load(entId,
+    	{
+		  scope: this,
+		  callback: function(record, operation) 
+		  {
+			  
+			  var arrayCoursPromotions = record.get('coursPromotions');
+			  
+			  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
+			  var coursPromotionId = coursPromotion.cocId;
+              
+             arrayCoursPromotions.forEach(function(cours) 
+			 {
+            	 if(coursPromotionId == cours.cocId)
+            	 {
+            		 Ext.Array.remove(arrayCoursPromotions, cours);
+                 }
+			 });
+
+			record.save(
+			{
+				scope: this,
+				callback: function()
+				{
+					var myStore = vm.getStore('enseignementStore');
+				       myUrl = '/imieWEB/webapi/enseignement/courspromotion/'.concat(coursPromotionId);	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+					
+				}
+			});
+		  }
+    	});
+        
+	},
+	onRemoveSavoir : function(view, row, col, action, ev, record){
+		var vm = this.getViewModel();
+		
+		var savoirModel = vm.getStore('savoirStore').getModel();
+        
+        var savId = record.get('savId');
+        
+        savoirModel.load(savId,
+    	{
+		  scope: this,
+		  callback: function(record, operation) 
+		  {
+			  
+			  var arrayCoursPromotions = record.get('coursPromotions');
+			  
+			  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
+			  var coursPromotionId = coursPromotion.cocId;
+              
+             arrayCoursPromotions.forEach(function(cours) 
+			 {
+            	 if(coursPromotionId == cours.cocId)
+            	 {
+            		 Ext.Array.remove(arrayCoursPromotions, cours);
+                 }
+			 });
+			record.save(
+			{
+				scope: this,
+				callback: function()
+				{
+					var myStore = vm.getStore('savoirStore');
+				       myUrl = '/imieWEB/webapi/savoir/courspromotion/'.concat(coursPromotionId);	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+					
+				}
+			});
+		  }
+    	});
+	},
+
 
 	
 });

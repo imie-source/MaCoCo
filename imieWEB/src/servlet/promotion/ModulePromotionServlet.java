@@ -17,8 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import promotion.ModulePromotionServiceLocal;
+import promotion.UniteFormationPromotionServiceLocal;
 import entities.promotion.CoursPromotion;
 import entities.promotion.ModulePromotion;
+import entities.promotion.UniteFormationPromotion;
 
 @Stateless
 @Path("/modulepromotion")
@@ -28,7 +30,8 @@ public class ModulePromotionServlet
 {
 	@EJB 
 	ModulePromotionServiceLocal modulePromotionService;
-
+	@EJB 
+	UniteFormationPromotionServiceLocal uniteFormationPromotionService;
 	
 	@GET()
 	@Path("/{id}")
@@ -46,6 +49,24 @@ public class ModulePromotionServlet
 	    return Response.ok(response).build();
 	}
 
+	@GET()
+	@Path("/uniteformation/{id}")
+	public Response getModulesByUniteFormation(@PathParam("id") Integer id)
+	{
+		UniteFormationPromotion uf = uniteFormationPromotionService.findById(id);
+		ArrayList<ModulePromotion> response = new ArrayList<ModulePromotion>();
+		for (ModulePromotion module : uf.getModulePromotions()) {
+
+			module.setCoursPromotions(new ArrayList<CoursPromotion>());
+			
+			module.getUniteFormationPromotion().setModulePromotions(null);
+			module.getUniteFormationPromotion().setPromotion(null);
+			
+			response.add(module);
+		    	
+		}
+		return Response.ok(response).build();
+	}
 	
 	@POST()
 	public Response add(ModulePromotion module) 

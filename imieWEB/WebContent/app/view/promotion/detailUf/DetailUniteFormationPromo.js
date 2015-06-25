@@ -42,6 +42,15 @@ Ext.define('ExtJsMVC.view.promotion.detailUf.DetailUniteFormationPromo', {
 			},
         },
         {
+        	xtype : 'promotion-childrenGrid',
+        	itemId : 'promoModuleGrid',
+            id : 'promoModuleGrid',
+            title: 'Module',
+            bind:{
+            	store:'{modulePromoStore}',
+			},
+        },
+        {
         	id : 'seleniumDetailUFPromoAdd',
             xtype : 'button',
             handler :'onAddModulePromoClick',

@@ -16,11 +16,15 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.cursus.detailUf.DetailUniteFormation',
 	            'ExtJsMVC.view.cursus.detailModule.DetailModule',
 	            'ExtJsMVC.view.cursus.detailCours.DetailCours',
-	            'ExtJsMVC.view.referentiel.ArbreReferentiel',
-	    		'ExtJsMVC.view.referentiel.DetailReferentiel',
-	    		'ExtJsMVC.view.referentiel.DetailActiviteType',
-	    		'ExtJsMVC.view.referentiel.DetailCompetencePro',
-	    		'ExtJsMVC.view.referentiel.DetailSavoir',
+	            'ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGridViewController',
+	            'ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGrid',
+	            'ExtJsMVC.view.referentiel.arbre.ArbreReferentiel',
+	    		'ExtJsMVC.view.referentiel.detailReferentiel.DetailReferentiel',
+	    		'ExtJsMVC.view.referentiel.detailActiviteType.DetailActiviteType',
+	    		'ExtJsMVC.view.referentiel.detailCompetencePro.DetailCompetencePro',
+	    		'ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir',
+	            'ExtJsMVC.view.referentiel.grilleEnfant.RefChildrenGridViewController',
+	            'ExtJsMVC.view.referentiel.grilleEnfant.RefChildrenGrid',
 	            'ExtJsMVC.view.promotion.arbre.PromotionArbre2',
 	            'ExtJsMVC.view.promotion.detailPromotion.PromotionViewGrid',
 	            'ExtJsMVC.view.promotion.detailCours.DetailCoursPromo',
@@ -30,6 +34,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailPromoOrdo',
 	            'ExtJsMVC.view.promotion.detailUf.DetailUniteFormationPromo',
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo',
+	            'ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGridViewController',
+	            'ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGrid',
+	            
 	            
 	],
 	
@@ -66,17 +73,19 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 		                 			[
 									{
 										xtype : 'cursus-Arbre',
+										autoScroll : true,
 										flex  : 1,
 										
 									},
 									{
 										itemId : 'secondTree',
-										//xtype : 'cursus-Arbre2',
+										autoScroll : true,
 										flex  : 1,
 										
 									},
 									{ 
-		                        		xtype : 'arbre-Referentiel' ,
+										itemId : 'refTree',
+										autoScroll : true,
 		                        		flex  : 1,
 		                    		}
 			             			]	
@@ -86,7 +95,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
                     		{ 	
                      			
                     	 		itemId : 'switchView',
-                         		//xtype : 'cursusViewGrid',
+                    	 		autoScroll : true,
                      			flex  : 2,
                      			
                        	 		

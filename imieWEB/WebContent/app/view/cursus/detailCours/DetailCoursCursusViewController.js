@@ -128,7 +128,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 				
 				
 				//ajout matériel
-				
+				/*
 					enseignementsData.forEach(function(enseignement){
 						var bool = false;
 						if (materielData !== null){
@@ -143,7 +143,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 						}else{
 							materielData.push(enseignement.entMateriel);
 						}				
-					});	
+					});*/	
 				}
 			}
 		});
@@ -254,24 +254,33 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 			var titreCours = dh.append(blocCours, child);
 
 			//durée
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 's-duree',
 					html : 'Durée : '
 			};
-			var sDuree = dh.append(blocCours, child);
+			var sDuree = dh.append(conteneur, child);
 			var child = {
 					tag : 'span',
 					cls : 's-duree2',
 					html : coursData.cocDuree.toString().concat('j')
 			};
-			var sDuree2 = dh.append(blocCours, child);		
+			var sDuree2 = dh.append(conteneur, child);		
 			
-			//div passage à la ligne
-			var child = {
+			var child = 
+			{
 					tag : 'div',
+					cls : 'conteneur',
 			};
-			var passageLigne = dh.append(blocCours, child);
+			var conteneur = dh.append(blocCours, child);
+			
 			//ration théorie pratique
 			
 			var child = {
@@ -279,38 +288,45 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 					cls : 'h3-theorie',
 					html : 'Répartition théorie/pratique (en %) :'
 			};
-			var h3Theorie = dh.append(blocCours, child);
+			var h3Theorie = dh.append(conteneur, child);
 			var child = {
 					tag : 'textarea',
 					cls : 'tf-theorie',
 			};
-			var tfTheorie = dh.append(blocCours, child);
+			var tfTheorie = dh.append(conteneur, child);
 			var child = {
 					tag : 'span',
 					cls : 's-theorie',
 					html : ' / '
 			};
-			var spanTheorie = dh.append(blocCours, child);
+			var spanTheorie = dh.append(conteneur, child);
 			var child = {
-					tag : 'textfield',
+					tag : 'textarea',
 					cls : 'tf-pratique',
 			};
-			var tfPratique = dh.append(blocCours, child);
+			var tfPratique = dh.append(conteneur, child);
 			
 			
 			//prerequis
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-prerequis',
 					html : 'Prérequis : '
 			};
-			var pPrerequis = dh.append(blocCours, child);
+			var pPrerequis = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-prerequis',
 			};
 			
-			var ulPrerequis = dh.append(blocCours, child);
+			var ulPrerequis = dh.append(conteneur, child);
 			
 			
 			if (prerequisData!== null){
@@ -350,31 +366,45 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 			
 
 			//objectifs
+			var child = 
+			{
+				tag : 'div',
+				cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+		
 			var child = {
 					tag : 'h3',
 					cls : 'p-objectif',
 					html : 'Objectifs : '
 			};
-			var pObj = dh.append(blocCours, child);
+			var pObj = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-objectif',
 					html : coursData.cocObjectifs
 			};
-			var blocObj = dh.append(blocCours, child);
+			var blocObj = dh.append(conteneur, child);
 
 			//contenu
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-contenu',
 					html : 'Contenu : '
 			};
-			var pContenu = dh.append(blocCours, child);
+			var pContenu = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-enseignement',
 			};
-			var ulContenu= dh.append(blocCours, child);
+			var ulContenu= dh.append(conteneur, child);
 			
 			console.log(coursData);
 			
@@ -386,22 +416,89 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 							html : enseignement.entNom
 					};
 					var liContenu = dh.append(ulContenu, child);
+					
+					//contenu
+					var child = {
+							tag : 'p',
+							cls : 'p-contenu',
+					};
+					var pContenu = dh.append(liContenu, child);
+					
+					var child = {
+							tag : 'span',
+							cls : 's-contenu',
+							html : 'Contenu : '
+					};
+					var sContenu = dh.append(pContenu, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-contenu',
+							html : enseignement.entContenu
+					};
+					var blocContenu = dh.append(pContenu, child);
+					
+					//contexte technique
+					var child = {
+							tag : 'p',
+							cls : 'p-contexte',
+					};
+					var pContexte  = dh.append(liContenu, child);
+					var child = {
+							tag : 'span',
+							cls : 's-contexte',
+							html : 'Contexte technique : '
+					};
+					var sContexte = dh.append(pContexte, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-contexte',
+							html : enseignement.entContrainte
+					};
+					var blocContexte = dh.append(pContexte, child);
+
+					//materiel
+					var child = {
+							tag : 'p',
+							cls : 'p-materiel',
+					};
+					var pMateriel = dh.append(liContenu, child);
+					
+					var child = {
+							tag : 'span',
+							cls : 's-materiel',
+							html : 'Matériels : '
+					};
+					var sMateriel = dh.append(pMateriel, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-materiel',
+							html : enseignement.entMateriel
+					};
+					var blocMateriel = dh.append(pMateriel, child);
+					
 				});
 			}
 			
 
 			//savoir
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-savoir',
 					html : 'Savoir : '
 			};
-			var pSavoir = dh.append(blocCours, child);
+			var pSavoir = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-savoir',
 			};
-			var ulSavoir = dh.append(blocCours, child);
+			var ulSavoir = dh.append(conteneur, child);
 			
 			console.log(coursData);
 			var savoirList = coursData.savoirs;
@@ -419,63 +516,140 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 			}
 			
 			//evaluation
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-eval',
 					html : 'Evalution : '
 			};
-			var pEval = dh.append(blocCours, child);
+			var pEval = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-eval',
 					html : coursData.cocEvaluation
 			};
-			var blocEval = dh.append(blocCours, child);
-			
-			//matériels
-			var child = {
-					tag : 'h3',
-					cls : 'p-materiel',
-					html : 'Matériels : '
-			};
-			var pMateriel = dh.append(blocCours, child);
-			var child = {
-					tag : 'ul',
-					cls : 'ul-materiel',
-			};
-			var ulMateriel= dh.append(blocCours, child);
+			var blocEval = dh.append(conteneur, child);
 			
 			
-			console.log('materielData');
-			console.log(materielData);
-			if(materielData !== null){
-				materielData.forEach(function(materiel) {
-					var child = {
-							tag : 'li',
-							cls : 'li-materiel',
-							html : materiel
-					};
-					var liMateriel = dh.append(ulMateriel, child);
-				});
-			}
 			//commentaire
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-com',
 					html : 'Commentaire : '
 			};
-			var pCom = dh.append(blocCours, child);
+			var pCom = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-com',
 					html : coursData.cocCommentaire
 			};
-			var blocCom = dh.append(blocCours, child);
+			var blocCom = dh.append(conteneur, child);
 			
 		};
 		var win = window.open('printFicheCours.html');
 		win.onload = drawDocument;
-	}
+	},
+	
+	
+	onRemoveEnseignement : function(view, row, col, action, ev, record){
+		 
+		var vm = this.getViewModel();
+		
+		var enseignementModel = vm.getStore('enseignementStore').getModel();
+        
+        var entId = record.get('entId');
+        
+    	enseignementModel.load(entId,
+    	{
+		  scope: this,
+		  callback: function(record, operation) 
+		  {
+			  
+			  var arrayCoursCursuses = record.get('coursCursuses');
+			  
+			  var coursCursus  = vm.get('currentCursusSecondTree').getData();
+			  var coursCursusId = coursCursus.cocId;
+              
+             arrayCoursCursuses.forEach(function(cours) 
+			 {
+            	 if(coursCursusId == cours.cocId)
+            	 {
+            		 Ext.Array.remove(arrayCoursCursuses, cours);
+                 }
+			 });
+
+			record.save(
+			{
+				scope: this,
+				callback: function()
+				{
+					var myStore = vm.getStore('enseignementStore');
+				       myUrl = '/imieWEB/webapi/enseignement/courscursus/'.concat(coursCursusId);	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+					
+				}
+			});
+		  }
+    	});
+        
+	},
+	onRemoveSavoir : function(view, row, col, action, ev, record){
+		var vm = this.getViewModel();
+		
+		var savoirModel = vm.getStore('savoirStore').getModel();
+        
+        var savId = record.get('savId');
+        
+        savoirModel.load(savId,
+    	{
+		  scope: this,
+		  callback: function(record, operation) 
+		  {
+			  
+			  var arrayCoursCursuses = record.get('coursCursuses');
+			  
+			  var coursCursus  = vm.get('currentCursusSecondTree').getData();
+			  var coursCursusId = coursCursus.cocId;
+              
+             arrayCoursCursuses.forEach(function(cours) 
+			 {
+            	 if(coursCursusId == cours.cocId)
+            	 {
+            		 Ext.Array.remove(arrayCoursCursuses, cours);
+                 }
+			 });
+
+			record.save(
+			{
+				scope: this,
+				callback: function()
+				{
+					var myStore = vm.getStore('savoirStore');
+				       myUrl = '/imieWEB/webapi/savoir/courscursus/'.concat(coursCursusId);	
+				       myStore.load({
+				    	   url : myUrl,
+				       });
+					
+				}
+			});
+		  }
+    	});
+	},
 
 	
 	

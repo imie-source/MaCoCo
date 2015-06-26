@@ -1,6 +1,7 @@
 package servlet.cursus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -19,6 +20,7 @@ import cursus.CoursCursusServiceLocal;
 import cursus.ModuleCursusServiceLocal;
 import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
+import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.enseignement.Enseignement;
 import entities.referentiel.Savoir;
@@ -150,13 +152,37 @@ public class CoursCursusServlet
 		for (Enseignement enseignement : cours.getEnseignements()) {
 			Enseignement ent = enseignementService.findById(enseignement.getEntId());
 			
-			enseignement.setPrerequis(ent.getPrerequis());
+			List<Enseignement> prerequisList = new ArrayList<Enseignement>();
+			
+			for (Enseignement prerequis : ent.getPrerequis()) {
+				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
+			
+				Cursus cursusCours = cours.getModuleCursus().getUniteFormationCursus().getCursus();
+				Boolean addEnt = false;
+				for (CoursCursus coc : ent2.getCoursCursuses()) {
+					Cursus cur = coc.getModuleCursus().getUniteFormationCursus().getCursus();
+					if ((cur.getCurId().equals(cursusCours.getCurId())) && (addEnt == false)){
+						prerequisList.add(ent2);
+						addEnt = true;
+					}
+				}
+			}
+			enseignement.setPrerequis(prerequisList);
 			enseignement.setCoursCursuses(null);
 			enseignement.setCoursPromotions(null);
 			
 			for (Enseignement prerequis : enseignement.getPrerequis()) {
 				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
-				prerequis.setCoursCursuses(ent2.getCoursCursuses());
+				
+				Cursus cursusCours = cours.getModuleCursus().getUniteFormationCursus().getCursus();
+				List<CoursCursus> coursList = new ArrayList<CoursCursus>();
+				for (CoursCursus coc : ent2.getCoursCursuses()) {
+					Cursus cur = coc.getModuleCursus().getUniteFormationCursus().getCursus();
+					if ((cur.getCurId().equals(cursusCours.getCurId()))){
+						coursList.add(coc);
+					}
+				}
+				prerequis.setCoursCursuses(coursList);
 				prerequis.setCoursPromotions(null);
 				prerequis.setPrerequis(null);
 		

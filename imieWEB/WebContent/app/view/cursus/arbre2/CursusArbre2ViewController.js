@@ -71,6 +71,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 			       myStore.load({
 			    	   url : myUrl,
 			       });
+			       console.log(myStore);
 			}else {
 	    	   vm.getStore('moduleStore').removeAll();
 		    }

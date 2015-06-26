@@ -80,6 +80,10 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 		var me = this;
 		var currentCours = this.getViewModel().get('currentSecondTreeItem');
 		
+		var theoriePratiqueTextField = Ext.ComponentQuery.query('#theoriePratiqueTextField')[0];
+		var myForm = theoriePratiqueTextField.findParentByType('form');
+		var theoriePratique = myForm.getForm().findField('theoriePratiqueTextField').getValue();
+		
 		var coursData;
 		var moduleData; 
 		var ufData;
@@ -127,23 +131,6 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 					});	
 				
 				
-				//ajout matériel
-				/*
-					enseignementsData.forEach(function(enseignement){
-						var bool = false;
-						if (materielData !== null){
-							materielData.forEach(function(materiel){
-								if(materiel[0] === enseignement.entMateriel || enseignement.entMateriel === null || enseignement.entMateriel === ""){
-									bool = true;
-								}
-							});
-							if(!bool){
-								materielData.push(enseignement.entMateriel);
-							}
-						}else{
-							materielData.push(enseignement.entMateriel);
-						}				
-					});*/	
 				}
 			}
 		});
@@ -289,22 +276,14 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCoursCursusViewController', {
 					html : 'Répartition théorie/pratique (en %) :'
 			};
 			var h3Theorie = dh.append(conteneur, child);
-			var child = {
-					tag : 'textarea',
-					cls : 'tf-theorie',
-			};
-			var tfTheorie = dh.append(conteneur, child);
+			
 			var child = {
 					tag : 'span',
-					cls : 's-theorie',
-					html : ' / '
+					cls : 'tf-theorie',
+					html : theoriePratique,
 			};
-			var spanTheorie = dh.append(conteneur, child);
-			var child = {
-					tag : 'textarea',
-					cls : 'tf-pratique',
-			};
-			var tfPratique = dh.append(conteneur, child);
+			var tfTheorie = dh.append(conteneur, child);
+			
 			
 			
 			//prerequis

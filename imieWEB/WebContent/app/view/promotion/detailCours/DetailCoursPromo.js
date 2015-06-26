@@ -30,6 +30,14 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromo', {
             fieldLabel : 'Duree'
         },
         {
+        	id : 'seleniumDetailCoursTheorie',
+        	itemId : 'theoriePratiqueTextField',
+            xtype : 'textfield',
+            emptyText : 'ex : 30/70',
+            fieldLabel : 'Répartition théorie/pratique (en %) :',
+            name : 'theoriePratiqueTextField',
+        },
+        {
         	id : 'seleniumDetailCoursPromoType',
             xtype : 'textfield',
             name : 'copType',

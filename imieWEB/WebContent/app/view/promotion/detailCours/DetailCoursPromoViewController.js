@@ -78,12 +78,17 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 	
 	onPrintClick : function(){
 		var me = this;
-		var currentCours = this.getViewModel().get('currentSecondTreeItem');
+		var currentCours = this.getViewModel().get('currentSecondPromoTreeItem');
+	
+		var theoriePratiqueTextField = Ext.ComponentQuery.query('#theoriePratiqueTextField')[0];
+		var myForm = theoriePratiqueTextField.findParentByType('form');
+		var theoriePratique = myForm.getForm().findField('theoriePratiqueTextField').getValue();
 		
 		var coursData;
 		var moduleData; 
 		var ufData;
 		var cursusData;
+		var promotionData;
 		var enseignementsData;
 		var prerequisData = new Array();
 		var materielData = new Array();
@@ -97,7 +102,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 				console.log(coursData);
 				moduleData = coursData.modulePromotion;
 				ufData = moduleData.uniteFormationPromotion;
-				promotionData = ufData.promotion
+				promotionData = ufData.promotion;
 				cursusData = promotionData.cursus;
 				enseignementsData= coursData.enseignements;
 				
@@ -128,23 +133,6 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 					});	
 				
 				
-				//ajout matériel
-				
-					enseignementsData.forEach(function(enseignement){
-						var bool = false;
-						if (materielData !== null){
-							materielData.forEach(function(materiel){
-								if(materiel[0] === enseignement.entMateriel || enseignement.entMateriel === null || enseignement.entMateriel === ""){
-									bool = true;
-								}
-							});
-							if(!bool){
-								materielData.push(enseignement.entMateriel);
-							}
-						}else{
-							materielData.push(enseignement.entMateriel);
-						}				
-					});	
 				}
 			}
 		});
@@ -166,7 +154,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'h1',
 					cls : 'titre',
-					html : titre.concat(coursData.cocIntitule)
+					html : titre.concat(coursData.copIntitule)
 				};
 			var titre = dh.append(contenuFC, child);
 			
@@ -185,6 +173,21 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			};
 			var titreCursus = dh.append(blocCursus, child);
 			
+			//ajout bloc promo
+			var child = {
+				tag : 'div',
+				cls : 'bloc-promo',
+			};
+			var blocPromo = dh.append(contenuFC, child);
+			
+			var promotion = 'Promotion : ';
+			var child = {
+				tag : 'h2',
+				cls : 'titre-promotion',
+				html : promotion.concat(promotionData.proNom)
+			};
+			var titrePromotion = dh.append(blocPromo, child);
+			
 			//ajout bloc uf
 			var child = {
 					tag : 'div',
@@ -195,7 +198,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'h2',
 					cls : 'titre-uf',
-					html : uf.concat(ufData.ufcId).concat(' - ').concat(ufData.ufcNom)
+					html : uf.concat(ufData.ufpId).concat(' - ').concat(ufData.ufpNom)
 			};
 			var titreUf = dh.append(blocUf, child);
 				
@@ -208,7 +211,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'p',
 					cls : 'bloc-objectif',
-					html : ufData.ufcObjectifs
+					html : ufData.ufpObjectifs
 			};
 			var blocObj = dh.append(blocUf, child);
 				
@@ -222,7 +225,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'h2',
 					cls : 'titre-module',
-					html : module.concat(moduleData.mocId).concat(' - ').concat(moduleData.mocIntitule)
+					html : module.concat(moduleData.mopId).concat(' - ').concat(moduleData.mopIntitule)
 			};
 			var titreModule = dh.append(blocModule, child);
 			var child = {
@@ -234,7 +237,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'p',
 					cls : 'bloc-objectif',
-					html : moduleData.mocObjectifs
+					html : moduleData.mopObjectifs
 			};
 			var blocObj = dh.append(blocModule, child);
 
@@ -250,29 +253,38 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			var child = {
 					tag : 'h2',
 					cls : 'titre-cours',
-					html : cours.concat(coursData.cocId).concat(' - ').concat(coursData.cocIntitule)
+					html : cours.concat(coursData.copId).concat(' - ').concat(coursData.copIntitule)
 			};
 			var titreCours = dh.append(blocCours, child);
 
 			//durée
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 's-duree',
 					html : 'Durée : '
 			};
-			var sDuree = dh.append(blocCours, child);
+			var sDuree = dh.append(conteneur, child);
 			var child = {
 					tag : 'span',
 					cls : 's-duree2',
-					html : coursData.cocDuree.toString().concat('j')
+					html : coursData.copDuree.toString().concat('j')
 			};
-			var sDuree2 = dh.append(blocCours, child);		
+			var sDuree2 = dh.append(conteneur, child);		
 			
-			//div passage à la ligne
-			var child = {
+			var child = 
+			{
 					tag : 'div',
+					cls : 'conteneur',
 			};
-			var passageLigne = dh.append(blocCours, child);
+			var conteneur = dh.append(blocCours, child);
+			
 			//ration théorie pratique
 			
 			var child = {
@@ -280,38 +292,37 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 					cls : 'h3-theorie',
 					html : 'Répartition théorie/pratique (en %) :'
 			};
-			var h3Theorie = dh.append(blocCours, child);
-			var child = {
-					tag : 'textarea',
-					cls : 'tf-theorie',
-			};
-			var tfTheorie = dh.append(blocCours, child);
+			var h3Theorie = dh.append(conteneur, child);
+			
 			var child = {
 					tag : 'span',
-					cls : 's-theorie',
-					html : ' / '
+					cls : 'tf-theorie',
+					html : theoriePratique,
 			};
-			var spanTheorie = dh.append(blocCours, child);
-			var child = {
-					tag : 'textfield',
-					cls : 'tf-pratique',
-			};
-			var tfPratique = dh.append(blocCours, child);
+			var tfTheorie = dh.append(conteneur, child);
+			
 			
 			
 			//prerequis
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-prerequis',
 					html : 'Prérequis : '
 			};
-			var pPrerequis = dh.append(blocCours, child);
+			var pPrerequis = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-prerequis',
 			};
 			
-			var ulPrerequis = dh.append(blocCours, child);
+			var ulPrerequis = dh.append(conteneur, child);
 			
 			
 			if (prerequisData!== null){
@@ -338,7 +349,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 						var child = {
 								tag : 'li',
 								cls : 'li-cours',
-								html : 'cours associé : '.concat(cours.cocIntitule)
+								html : 'cours associé : '.concat(cours.copIntitule)
 						};
 						var liCours = dh.append(ulCours, child);		
 					});
@@ -351,31 +362,45 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			
 
 			//objectifs
+			var child = 
+			{
+				tag : 'div',
+				cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+		
 			var child = {
 					tag : 'h3',
 					cls : 'p-objectif',
 					html : 'Objectifs : '
 			};
-			var pObj = dh.append(blocCours, child);
+			var pObj = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-objectif',
-					html : coursData.cocObjectifs
+					html : coursData.copObjectifs
 			};
-			var blocObj = dh.append(blocCours, child);
+			var blocObj = dh.append(conteneur, child);
 
 			//contenu
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-contenu',
 					html : 'Contenu : '
 			};
-			var pContenu = dh.append(blocCours, child);
+			var pContenu = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-enseignement',
 			};
-			var ulContenu= dh.append(blocCours, child);
+			var ulContenu= dh.append(conteneur, child);
 			
 			console.log(coursData);
 			
@@ -387,22 +412,89 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 							html : enseignement.entNom
 					};
 					var liContenu = dh.append(ulContenu, child);
+					
+					//contenu
+					var child = {
+							tag : 'p',
+							cls : 'p-contenu',
+					};
+					var pContenu = dh.append(liContenu, child);
+					
+					var child = {
+							tag : 'span',
+							cls : 's-contenu',
+							html : 'Contenu : '
+					};
+					var sContenu = dh.append(pContenu, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-contenu',
+							html : enseignement.entContenu
+					};
+					var blocContenu = dh.append(pContenu, child);
+					
+					//contexte technique
+					var child = {
+							tag : 'p',
+							cls : 'p-contexte',
+					};
+					var pContexte  = dh.append(liContenu, child);
+					var child = {
+							tag : 'span',
+							cls : 's-contexte',
+							html : 'Contexte technique : '
+					};
+					var sContexte = dh.append(pContexte, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-contexte',
+							html : enseignement.entContrainte
+					};
+					var blocContexte = dh.append(pContexte, child);
+
+					//materiel
+					var child = {
+							tag : 'p',
+							cls : 'p-materiel',
+					};
+					var pMateriel = dh.append(liContenu, child);
+					
+					var child = {
+							tag : 'span',
+							cls : 's-materiel',
+							html : 'Matériels : '
+					};
+					var sMateriel = dh.append(pMateriel, child);
+					var child = {
+							tag : 'span',
+							cls : 'bloc-materiel',
+							html : enseignement.entMateriel
+					};
+					var blocMateriel = dh.append(pMateriel, child);
+					
 				});
 			}
 			
 
 			//savoir
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-savoir',
 					html : 'Savoir : '
 			};
-			var pSavoir = dh.append(blocCours, child);
+			var pSavoir = dh.append(conteneur, child);
 			var child = {
 					tag : 'ul',
 					cls : 'ul-savoir',
 			};
-			var ulSavoir = dh.append(blocCours, child);
+			var ulSavoir = dh.append(conteneur, child);
 			
 			console.log(coursData);
 			var savoirList = coursData.savoirs;
@@ -420,58 +512,47 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			}
 			
 			//evaluation
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-eval',
 					html : 'Evalution : '
 			};
-			var pEval = dh.append(blocCours, child);
+			var pEval = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-eval',
-					html : coursData.cocEvaluation
+					html : coursData.copEvaluation
 			};
-			var blocEval = dh.append(blocCours, child);
-			
-			//matériels
-			var child = {
-					tag : 'h3',
-					cls : 'p-materiel',
-					html : 'Matériels : '
-			};
-			var pMateriel = dh.append(blocCours, child);
-			var child = {
-					tag : 'ul',
-					cls : 'ul-materiel',
-			};
-			var ulMateriel= dh.append(blocCours, child);
+			var blocEval = dh.append(conteneur, child);
 			
 			
-			console.log('materielData');
-			console.log(materielData);
-			if(materielData !== null){
-				materielData.forEach(function(materiel) {
-					var child = {
-							tag : 'li',
-							cls : 'li-materiel',
-							html : materiel
-					};
-					var liMateriel = dh.append(ulMateriel, child);
-				});
-			}
 			//commentaire
+			var child = 
+			{
+					tag : 'div',
+					cls : 'conteneur',
+			};
+			var conteneur = dh.append(blocCours, child);
+			
 			var child = {
 					tag : 'h3',
 					cls : 'p-com',
 					html : 'Commentaire : '
 			};
-			var pCom = dh.append(blocCours, child);
+			var pCom = dh.append(conteneur, child);
 			var child = {
 					tag : 'p',
 					cls : 'bloc-com',
-					html : coursData.cocCommentaire
+					html : coursData.copCommentaire
 			};
-			var blocCom = dh.append(blocCours, child);
+			var blocCom = dh.append(conteneur, child);
 			
 		};
 		var win = window.open('printFicheCours.html');
@@ -495,11 +576,11 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			  var arrayCoursPromotions = record.get('coursPromotions');
 			  
 			  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
-			  var coursPromotionId = coursPromotion.cocId;
+			  var coursPromotionId = coursPromotion.copId;
               
              arrayCoursPromotions.forEach(function(cours) 
 			 {
-            	 if(coursPromotionId == cours.cocId)
+            	 if(coursPromotionId == cours.copId)
             	 {
             		 Ext.Array.remove(arrayCoursPromotions, cours);
                  }
@@ -538,11 +619,11 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 			  var arrayCoursPromotions = record.get('coursPromotions');
 			  
 			  var coursPromotion  = vm.get('currentSecondPromoTreeItem').getData();
-			  var coursPromotionId = coursPromotion.cocId;
+			  var coursPromotionId = coursPromotion.copId;
               
              arrayCoursPromotions.forEach(function(cours) 
 			 {
-            	 if(coursPromotionId == cours.cocId)
+            	 if(coursPromotionId == cours.copId)
             	 {
             		 Ext.Array.remove(arrayCoursPromotions, cours);
                  }

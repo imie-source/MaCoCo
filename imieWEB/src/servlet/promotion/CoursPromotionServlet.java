@@ -1,6 +1,7 @@
 package servlet.promotion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,9 +19,12 @@ import javax.ws.rs.core.Response;
 import promotion.CoursPromotionServiceLocal;
 import promotion.ModulePromotionServiceLocal;
 import enseignement.EnseignementServiceLocal;
+import entities.cursus.CoursCursus;
+import entities.cursus.Cursus;
 import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
 import entities.promotion.ModulePromotion;
+import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
 
 
@@ -147,14 +151,41 @@ public class CoursPromotionServlet
 		for (Enseignement enseignement : cours.getEnseignements()) {
 			Enseignement ent = enseignementService.findById(enseignement.getEntId());
 			
-			enseignement.setPrerequis(ent.getPrerequis());
+			List<Enseignement> prerequisList = new ArrayList<Enseignement>();
+			
+			for (Enseignement prerequis : ent.getPrerequis()) {
+				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
+			
+				Promotion promotionCours = cours.getModulePromotion().getUniteFormationPromotion().getPromotion();
+				Boolean addEnt = false;
+				for (CoursPromotion cop : ent2.getCoursPromotions()) {
+					Promotion promo = cop.getModulePromotion().getUniteFormationPromotion().getPromotion();
+					if ((promo.getProId().equals(promotionCours.getProId())) && (addEnt == false)){
+						prerequisList.add(ent2);
+						addEnt = true;
+					}
+				}
+			}
+			
+			enseignement.setPrerequis(prerequisList);
 			enseignement.setCoursCursuses(null);
 			enseignement.setCoursPromotions(null);
 			
 			for (Enseignement prerequis : enseignement.getPrerequis()) {
 				Enseignement ent2 = enseignementService.findById(prerequis.getEntId());
-				prerequis.setCoursCursuses(ent2.getCoursCursuses());
-				prerequis.setCoursPromotions(null);
+				
+				Promotion promotionCours = cours.getModulePromotion().getUniteFormationPromotion().getPromotion();
+				List<CoursPromotion> coursList = new ArrayList<CoursPromotion>();
+				for (CoursPromotion cop : ent2.getCoursPromotions()) {
+					Promotion promo = cop.getModulePromotion().getUniteFormationPromotion().getPromotion();
+					if ((promo.getProId().equals(promotionCours.getProId()))){
+						coursList.add(cop);
+						
+					}
+				}
+				
+				prerequis.setCoursCursuses(null);
+				prerequis.setCoursPromotions(coursList);
 				prerequis.setPrerequis(null);
 		
 				for (CoursPromotion coursPrerequis : prerequis.getCoursPromotions()){

@@ -134,6 +134,10 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	enseignementStore:{
     		model:'ExtJsMVC.model.enseignement.EnseignementModel',
     	},
+    	
+    	periodeStore : {
+    		model:'ExtJsMVC.model.cursus.PeriodeCursusModel',
+    	}
     },
     formulas:{
     	currentCursus:{
@@ -311,7 +315,22 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		retCoursStatus.dirtyAndValid = retCoursStatus.dirty && retCoursStatus.valid;
         		return retCoursStatus;
         	},
-    	},	
+    	},
+    	currentPeriode:{
+    		bind:{
+        		bindTo:'{periodeGrid.selection}',
+        		deep:true
+        	},
+        	get:function(periode){
+        		return periode;
+        	},
+        	set:function(periode){
+        		if(!periode.isModel){
+        			periode = this.get('periodeStore').getById(periode);
+        		}
+        		this.set('currentPeriode',periode);
+        	}
+    	},
     	
  	
     }

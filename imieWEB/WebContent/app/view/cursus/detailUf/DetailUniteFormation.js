@@ -43,8 +43,9 @@ Ext.define('ExtJsMVC.view.cursus.detailUf.DetailUniteFormation', {
         },
         {
         	xtype : 'cursus-childrenGrid',
+        	//xtype : 'test',
         	itemId : 'cursusModuleGrid',
-            id : 'cursusModuleGrid',
+        	id : 'cursusModuleGrid',
             title: 'Module',
             bind:{
             	store:'{moduleStore}',

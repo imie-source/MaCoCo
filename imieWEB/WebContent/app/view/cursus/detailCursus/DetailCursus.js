@@ -18,22 +18,6 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
         },
         
         {
-        	id : 'seleniumDetailCursusPerDeb',
-        	itemId: 'TestPeriodeDebut',
-            xtype : 'datefield',
-            fieldLabel : 'Du :',
-            format: 'd/m/y'
-        },
-        
-        {
-        	id : 'seleniumDetailCursusPerFin',
-        	itemId: 'TestPeriodeFin',
-            xtype : 'datefield',
-            fieldLabel : 'Au :',
-            format: 'd/m/y'
-        },
-        
-        {
         	id : 'seleniumDetailCursusSave',
             xtype : 'button',
             text : 'Enregistrer',
@@ -44,13 +28,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
 				disabled:'{!itemStatus.dirtyAndValid}'
 			},
         },
-        {
-        	id : 'seleniumDetailCursusAdd',
-            xtype : 'button',
-            text : 'Ajouter UF',
-            itemId : 'AddRecord',
-            handler :'onAddUfCursusClick',
-        },
+
         {
         	id : 'seleniumDetailCursusAddPromo',
             xtype : 'button',
@@ -61,9 +39,111 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
         {
         	id : 'seleniumDetailCursusPrint',
             xtype : 'button',
-            text : 'Imprimer',
+            text : 'Imprimer schéma pédagogique',
             handler : 'onPrintClick',
             itemId : 'Print'
+        },
+        
+/*
+        {
+        	id : 'seleniumDetailCursusPerDeb',
+        	itemId: 'TestPeriodeDebut',
+            xtype : 'datefield',
+            fieldLabel : 'Du :',
+            format: 'd/m/y'
+        },
+        {
+        	id : 'seleniumDetailCursusPerFin',
+        	itemId: 'TestPeriodeFin',
+            xtype : 'datefield',
+            fieldLabel : 'Au :',
+            format: 'd/m/y'
+        },
+        {
+        	id : 'seleniumDetailCursusNbJours',
+        	itemId: 'TestNbJours',
+            xtype : 'textareafield',
+            fieldLabel : 'Nombre de jours',
+        },*/
+        {
+        	layout:{
+        		type:'hbox',
+        		align:'stretch',
+        		flex  : 1,
+        		
+        	},
+        	items : [
+        	      {
+        	    	  width : '50%',
+        	    	  layout:{
+        	    			type:'vbox',
+        	    			align:'stretch',
+        	    			flex  : 1,
+        	    			
+        	    		},
+        	    	  items : [
+        	    	       {
+        	    	        	xtype : 'cursus-periodeGrid',
+        	    	        	itemId : 'cursusPeriodeGrid',
+        	    	            id : 'cursusPeriodeGrid',
+        	    	            title: 'Periode',
+        	    	            bind:{
+        	    	            	store:'{periodeStore}',
+        	    				},
+        	    	        },
+        	    	        {
+        	    	        	id : 'seleniumDetailCursusAddPeriode',
+        	    	            xtype : 'button',
+        	    	            text : 'Ajouter Periode',
+        	    	            itemId : 'AddPeriodeRecord',
+        	    	        //    handler :'onAddPeriodeCursusClick',
+        	    	        },
+
+        	         	]
+        	      },
+        	      {
+        	    	  width : '50%',
+        	    	  layout:{
+        	    			type:'vbox',
+        	    			align:'stretch',
+        	    			flex  : 1,
+        	    		},
+        	    	  items : [
+							{
+								xtype : 'cursus-childrenGrid',
+								itemId : 'cursusUfGrid',
+							    id : 'cursusUfGrid',
+							    title: 'Unité de formation',
+							    bind:{
+							    	store:'{ufStore}',
+								},
+							},
+							{
+								id : 'seleniumDetailCursusAdd',
+							    xtype : 'button',
+							    text : 'Ajouter UF',
+							    itemId : 'AddRecord',
+							    handler :'onAddUfCursusClick',
+							},	         	     
+        	         ]
+        	      },
+        	]
+        },
+        /*{
+        	xtype : 'cursus-childrenGrid',
+        	itemId : 'cursusPeriodeGrid',
+            id : 'cursusPeriodeGrid',
+            title: 'Periode',
+            bind:{
+            	store:'{periodeStore}',
+			},
+        },
+        {
+        	id : 'seleniumDetailCursusAddPeriode',
+            xtype : 'button',
+            text : 'Ajouter Periode',
+            itemId : 'AddPeriodeRecord',
+            handler :'onAddPeriodeCursusClick',
         },
         {
         	xtype : 'cursus-childrenGrid',
@@ -74,5 +154,12 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
             	store:'{ufStore}',
 			},
         },
+        {
+        	id : 'seleniumDetailCursusAdd',
+            xtype : 'button',
+            text : 'Ajouter UF',
+            itemId : 'AddRecord',
+            handler :'onAddUfCursusClick',
+        },*/
     ]
 });

@@ -1,10 +1,10 @@
 package servlet.cursus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,7 +16,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import cursus.CursusServiceLocal;
 import cursus.PeriodeCursusServiceLocal;
+import entities.cursus.Cursus;
 import entities.cursus.Periode;
 
 @Stateless
@@ -27,6 +29,8 @@ public class PeriodeServlet
 {
 	@EJB 
 	PeriodeCursusServiceLocal periodeCursusService;
+	@EJB 
+	CursusServiceLocal cursusService;
 	
 	@GET()
 	@Path("/{id}")
@@ -36,6 +40,20 @@ public class PeriodeServlet
 		
 		periode.setCursus(null);
 	    return Response.ok(periode).build();
+	}
+	
+	@GET()
+	@Path("/cursus/{id}")
+	public Response getByCursusId(@PathParam("id") Integer id)
+	{
+		Cursus cursus = cursusService.findById(id);
+		List <Periode> periodeList = new ArrayList<Periode>();
+		for (Periode periode : cursus.getPeriodes()) {
+			periode.setCursus(null);
+			periodeList.add(periode);
+		}
+		
+	    return Response.ok(periodeList).build();
 	}
 	
 	@POST()

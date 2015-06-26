@@ -2,7 +2,6 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGrid',
 {
 	extend : 'Ext.grid.Panel',
     xtype : 'cursus-childrenGrid',
-    
     frame : true,
 
     requires : [

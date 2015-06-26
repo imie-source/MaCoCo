@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("connectedUser", user);
 			response.sendRedirect("");
 		} else{
-			//request.setAttribute("errorMessage", "Authentification incorrecte");
+			
 			request.getRequestDispatcher("/login.html").forward(request, response);
 		}
 		

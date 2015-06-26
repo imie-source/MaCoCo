@@ -33,44 +33,63 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 			
 		       console.log('Affichage Referentiel');
 		       
-		       //Nettoyage de la vue centrale
-		       if(switchview.getChildEls())
-	    	   {
-		    	   switchview.removeAll();
-	    	   }
-		       //Ajout de la vue correspondante
-		       switchview.add({xtype : 'referentiel-DetailReferentiel'});
+		      
 		       if(selectedRecords[0].get('refId')!== undefined){
 			       myStore = vm.getStore('actTypeStore');
 			       myUrl = '/imieWEB/webapi/activitetype/referentiel/'.concat(record.get('refId'));	
 			       myStore.load({
 			    	   url : myUrl,
+			    	   callback : function(){
+			    		   //Nettoyage de la vue centrale
+					       if(switchview.getChildEls())
+				    	   {
+					    	   switchview.removeAll();
+				    	   }
+					       //Ajout de la vue correspondante
+					       switchview.add({xtype : 'referentiel-DetailReferentiel'});
+			    	   }
 			       });
 		       }else {
 		    	   vm.getStore('actTypeStore').removeAll();
+		    	   //Nettoyage de la vue centrale
+			       if(switchview.getChildEls())
+		    	   {
+			    	   switchview.removeAll();
+		    	   }
+			       //Ajout de la vue correspondante
+			       switchview.add({xtype : 'referentiel-DetailReferentiel'});
 			    }
 			break;
 			
 		case 'ExtJsMVC.model.referentiel.ActiviteType' :
 			
 		       console.log('Affichage Activite Type');
-		       
-		       //Nettoyage de la vue centrale
-		       if(switchview.getChildEls())
-	    	   {
-		    	   switchview.removeAll();
-	    	   }
-		       //Ajout de la vue correspondante
-		       switchview.add({xtype : 'referentiel-DetailActiviteType'});
+		      
 		       
 		       if(selectedRecords[0].get('actId')!== undefined){
 			       myStore = vm.getStore('compProStore');
 			       myUrl = '/imieWEB/webapi/competencepro/activitetype/'.concat(record.get('actId'));	
 			       myStore.load({
 			    	   url : myUrl,
+			    	   callback : function(){
+			    		   //Nettoyage de la vue centrale
+					       if(switchview.getChildEls())
+				    	   {
+					    	   switchview.removeAll();
+				    	   }
+					       //Ajout de la vue correspondante
+					       switchview.add({xtype : 'referentiel-DetailActiviteType'});
+			    	   }
 			       });		       			
 		       }else {
 		    	   vm.getStore('compProStore').removeAll();
+		    	   //Nettoyage de la vue centrale
+			       if(switchview.getChildEls())
+		    	   {
+			    	   switchview.removeAll();
+		    	   }
+			       //Ajout de la vue correspondante
+			       switchview.add({xtype : 'referentiel-DetailActiviteType'});
 			    }
 			break;
 			
@@ -78,22 +97,32 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 			
 		       console.log('Affichage Competence Pro');
 		       
-		       //Nettoyage de la vue centrale
-		       if(switchview.getChildEls())
-	    	   {
-		    	   switchview.removeAll();
-	    	   }
-		       //Ajout de la vue correspondante
-		       switchview.add({xtype : 'referentiel-DetailCompetencePro'});
+		       
 
 		       if(selectedRecords[0].get('comId')!== undefined){
 			       myStore = vm.getStore('savoirStore');
 			       myUrl = '/imieWEB/webapi/savoir/competencepro/'.concat(record.get('comId'));	
 			       myStore.load({
 			    	   url : myUrl,
+			    	   callback : function(){
+			    		 //Nettoyage de la vue centrale
+					       if(switchview.getChildEls())
+				    	   {
+					    	   switchview.removeAll();
+				    	   }
+					       //Ajout de la vue correspondante
+					       switchview.add({xtype : 'referentiel-DetailCompetencePro'});
+			    	   }
 			       });
 		       }else {
 		    	   vm.getStore('savoirStore').removeAll();
+		    	 //Nettoyage de la vue centrale
+			       if(switchview.getChildEls())
+		    	   {
+			    	   switchview.removeAll();
+		    	   }
+			       //Ajout de la vue correspondante
+			       switchview.add({xtype : 'referentiel-DetailCompetencePro'});
 			    }
 			break;
 			

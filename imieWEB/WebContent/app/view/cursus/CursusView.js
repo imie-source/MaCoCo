@@ -15,15 +15,15 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.cursus.detailCursus.DetailCursus',
 	            'ExtJsMVC.view.cursus.detailUf.DetailUniteFormation',
 	            'ExtJsMVC.view.cursus.detailModule.DetailModule',
-	            'ExtJsMVC.view.cursus.detailCours.DetailCours',
-	            'ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGridViewController',
-	            'ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGrid',
+	            'ExtJsMVC.view.cursus.detailCours.DetailCours',	          
+	            'ExtJsMVC.view.cursus.grilleEnfant.PeriodeGrid',	            
+	            'ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGrid',	            
+	            'ExtJsMVC.view.cursus.detailPeriode.DetailPeriode',
 	            'ExtJsMVC.view.referentiel.arbre.ArbreReferentiel',
 	    		'ExtJsMVC.view.referentiel.detailReferentiel.DetailReferentiel',
 	    		'ExtJsMVC.view.referentiel.detailActiviteType.DetailActiviteType',
 	    		'ExtJsMVC.view.referentiel.detailCompetencePro.DetailCompetencePro',
-	    		'ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir',
-	            'ExtJsMVC.view.referentiel.grilleEnfant.RefChildrenGridViewController',
+	    		'ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir',	            
 	            'ExtJsMVC.view.referentiel.grilleEnfant.RefChildrenGrid',
 	            'ExtJsMVC.view.promotion.arbre.PromotionArbre2',
 	            'ExtJsMVC.view.promotion.detailPromotion.PromotionViewGrid',
@@ -34,8 +34,9 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailPromoOrdo',
 	            'ExtJsMVC.view.promotion.detailUf.DetailUniteFormationPromo',
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo',
-	            'ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGridViewController',
 	            'ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGrid',
+	            
+	            'ExtJsMVC.view.cursus.detailUf.DetailUniteFormationGridModule'
 	            
 	            
 	],

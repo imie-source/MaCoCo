@@ -1,10 +1,13 @@
 Ext.define('ExtJsMVC.model.cursus.PeriodeCursusModel',
 {
-	extend: 'Ext.data.TreeModel',
+	extend: 'Ext.data.Model',
 	fields: [
 	         {name: 'perId'},
 	         {name: 'perDebut'},
-	         {name: 'perFin'}
+	         {name: 'perFin'},
+	         {name: 'perNbjours'},
+	         {name: 'curId'},
+	         
 	        ],
 	        
 	proxy: 
@@ -20,11 +23,7 @@ Ext.define('ExtJsMVC.model.cursus.PeriodeCursusModel',
                 fn: function(data, request) 
                 {
                     data.id = undefined;
-                    data.leaf = undefined;
-                    data.parentId = undefined;
-                    data.children = undefined;
-                    data.text = undefined;
-                    data.coursCursuses = undefined;
+                    
                     return data;
                 },
                 scope: this

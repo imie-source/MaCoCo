@@ -3,8 +3,6 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
     alias: 'controller.PromotionArbre2ViewController',
     init: function()
 	{
-		//this.draggedItem;
-    	
 		this.control
 		({
 			'promo-Arbre2' : 
@@ -18,16 +16,13 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 	},
 	 chargeSecondPromoTreeForm : function(grid, selectedRecords, eOpts)
 		{
-			var record = selectedRecords[0];
-
 			var vm = this.getViewModel();
-			
+			var promoModel = vm.getStore('promotionStore').getModel();
 			var switchview = Ext.ComponentQuery.query('#switchView')[0];
 			var myStore;
-			var promoModel = vm.getStore('promotionStore').getModel();
-			
 			var myUrl;
 			
+			var record = selectedRecords[0];
 			var modelName = record.entityName;
 			switch(modelName) 
 			{	

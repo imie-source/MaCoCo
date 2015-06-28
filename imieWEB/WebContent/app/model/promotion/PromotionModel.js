@@ -9,14 +9,12 @@ Ext.define('ExtJsMVC.model.promotion.PromotionModel',
 		         ],
 		         
 		childType : 'ExtJsMVC.model.promotion.UniteFormationPromotionModel',
-		hasMany:  {model: 'ExtJsMVC.model.promotion.UniteFormationPromotionModel', associationKey: 'uniteFormationPromotions'},	
-	   
+		hasMany:  {model: 'ExtJsMVC.model.promotion.UniteFormationPromotionModel', 
+					associationKey: 'uniteFormationPromotions'},	
 	    proxy: 
 		{
 	    	url: '/imieWEB/webapi/promotion/',
 	    	type : 'rest',
-	    	
-	    	//TODO: expliquer implementation writer (pollution champs arbre)
 	    	writer : 
 	    	{
 	    		nameProperty: 'mapping',
@@ -36,9 +34,6 @@ Ext.define('ExtJsMVC.model.promotion.PromotionModel',
 	                scope: this
 	            }
 	    	},
-	    	
-	    	
-	    	//TODO: expliquer implementation reader (id unique)
 	    	reader : 
 	    	{
 	            transform: 

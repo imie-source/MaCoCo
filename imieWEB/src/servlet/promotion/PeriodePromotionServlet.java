@@ -1,10 +1,10 @@
 package servlet.promotion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,7 +17,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import promotion.PeriodePromotionServiceLocal;
+import promotion.PromotionServiceLocal;
 import entities.promotion.PeriodePromotion;
+import entities.promotion.Promotion;
 
 @Stateless
 @Path("/periodepromotion")
@@ -27,6 +29,8 @@ public class PeriodePromotionServlet
 {
 	@EJB 
 	PeriodePromotionServiceLocal periodePromotionService;
+	@EJB 
+	PromotionServiceLocal promotionService;
 	
 	@GET()
 	@Path("/{id}")
@@ -36,6 +40,19 @@ public class PeriodePromotionServlet
 		
 		periode.setPromotion(null);
 	    return Response.ok(periode).build();
+	}
+	@GET()
+	@Path("/promotion/{id}")
+	public Response getByPromotionId(@PathParam("id") Integer id)
+	{
+		Promotion promo = promotionService.findById(id);
+		List <PeriodePromotion> periodeList = new ArrayList<PeriodePromotion>();
+		for (PeriodePromotion periode : promo.getPeriodes()) {
+			periode.setPromotion(null);
+			periodeList.add(periode);
+		}
+		
+	    return Response.ok(periodeList).build();
 	}
 	
 	@POST()

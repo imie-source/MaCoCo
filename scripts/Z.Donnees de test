@@ -1,3 +1,5 @@
+delete from periode;
+delete from periode_promotion;
 delete from prerequis_enseignement;
 delete from r_courspromo_savoir;
 delete from r_courspromo_enseignement;
@@ -45,6 +47,9 @@ INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2001, 'Cursus 1', 2001);
 INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2002, 'Cursus 2', 2001);
 INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2003, 'Cursus 3', 2001);
 INSERT INTO cursus(cur_id, cur_nom, ref_id) VALUES (2004, 'Cursus 4', 2001);
+
+INSERT INTO periode(per_id, per_debut, per_fin, per_nbjours, cur_id, per_nom) VALUES (2001, '2015-05-12', '2015-10-12', 60, 2001, 'Période 1');
+INSERT INTO periode(per_id, per_debut, per_fin, per_nbjours, cur_id, per_nom) VALUES (2002, '2016-05-12', '2016-10-12', 60, 2001, 'Période 2');
 
 INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2001, 'Unite Formation 1', '', 2001);
 INSERT INTO unite_formation_cursus(ufc_id, ufc_nom, ufc_objectifs, cur_id) VALUES (2002, 'Unite Formation 2', '', 2001);
@@ -138,6 +143,8 @@ INSERT INTO r_courscursus_savoir(coc_id, sav_id) VALUES (2003, 2008);
 
 INSERT INTO promotion(pro_id, pro_nom, cur_id) VALUES (2001, 'promotion 1', 2001);
 
+INSERT INTO periode_promotion(perpro_id, perpro_debut, perpro_fin, perpro_nbjours, pro_id, perpro_nom) VALUES (2001, '2015-05-12', '2015-10-12', 60, 2001, 'Période 1');
+INSERT INTO periode_promotion(perpro_id, perpro_debut, perpro_fin, perpro_nbjours, pro_id, perpro_nom) VALUES (2002, '2016-05-12', '2016-10-12', 60, 2001, 'Période 2');
 
 INSERT INTO unite_formation_promo(ufp_id, ufp_nom, ufp_objectifs, pro_id, ufc_id) VALUES (2001, 'Unite Formation 1', '', 2001, 2001);
 INSERT INTO unite_formation_promo(ufp_id, ufp_nom, ufp_objectifs, pro_id, ufc_id) VALUES (2002, 'Unite Formation 2', '', 2001, 2002);

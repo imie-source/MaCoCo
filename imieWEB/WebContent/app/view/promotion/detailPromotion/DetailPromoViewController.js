@@ -66,6 +66,30 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 					});	
 				
 	},
+	onAddPeriodePromotionClick : function()
+	{
+		var vm = this.getViewModel();
+		var itemSelected =vm.get('currentCursus'); 
+		
+		//création d'un objet "cursus id" à partir de l'id du cursus selectionné
+    	var promotion = {proId : itemSelected.get('proId')};
+    	//création d'une nouvelle période 
+    	var newChild = Ext.create('ExtJsMVC.model.cursus.PeriodePromotionModel');
+		newChild.set ('promotion', promo);
+		
+		var myStore = vm.getStore('periodePromotionStore');
+		
+		// insertion de l'item dans le store;
+    	var record = myStore.insert(0,newChild)[0];
+    	
+    	// selection de l'item en cours de création
+		var periodeGrid = Ext.ComponentQuery.query('promotion-periodePromotionGrid')[0];
+		periodeGrid.getSelectionModel().select(record);
+		
+		var switchview = Ext.ComponentQuery.query('#switchView')[0];
+		switchview.removeAll();
+		switchview.add({xtype : 'promotion-DetailPeriode'});
+	},
 	
 	dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		

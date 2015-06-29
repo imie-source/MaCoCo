@@ -43,7 +43,7 @@ h3{
 .bloc-objectif, .bloc-com, .bloc-eval{
 	padding: 2%;
 }
-.bloc-cursus, .bloc-promo, .bloc-uf, .bloc-module, .bloc-cours{
+.bloc-uf, .bloc-module, .bloc-cours{
 	border: 1px solid #5d5858;
 	padding: 2%;
 }

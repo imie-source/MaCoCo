@@ -10,7 +10,6 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 		triggerEvent:'rowfocus'
 	}],
 	modelValidation:true,
-
 	autoScroll:true,
 	dockedItems:[{
 		xtype:'toolbar',
@@ -30,9 +29,6 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 				itemId:'RecToolBar',
 				handler:'onRemove'
 			},
-
 		]
-		
 	}],
-
-} );
+});

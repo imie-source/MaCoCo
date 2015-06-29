@@ -2,7 +2,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursusOrdo', {
 	xtype  : 'cursus-Arbre-Ordo',
 	extend : 'Ext.panel.Panel',
 	
-    height : window.innerHeight -200, 
+    height : window.innerHeight -100, 
 	autoScroll : true,
 		layout : 
 			{

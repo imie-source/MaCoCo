@@ -9,12 +9,24 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 		({
 			'cursus-Arbre2' : 
 			{
+				
 				selectionchange :this.chargeSecondTreeForm,
 				itemcontextmenu : this.onSecondTreeContextMenu,
-				
+				beforeitemclick : this.itemClick,
 			},
 		});
 		
+	},
+	
+	itemClick : function( tree, record, item, index, e, eOpts ){
+		var vm = this.getViewModel();
+		var selectedItem = vm.get('currentCursusSecondTree');
+		if (selectedItem===record){
+			console.log('selectedItem===record');	
+			var selectedRecords = new Array();
+			selectedRecords.push(record);
+			this.chargeSecondTreeForm(tree, selectedRecords, eOpts);
+		}
 	},
 	
 	chargeSecondTreeForm : function(grid, selectedRecords, eOpts)
@@ -203,6 +215,8 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 														handler : 'onRemoveSavoir'
 													}],
 												}],
+												autoScroll : true,
+												height : 140,
 												listeners: {
 											    	
 											        'afterrender': function () 
@@ -280,6 +294,8 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 								                	store:'{enseignementStore}',
 								    			},
 								    			width : '50%',
+								    			autoScroll : true,
+												height : 140,
 												columns:[{
 													dataIndex : 'entNom',
 													width : '85%',

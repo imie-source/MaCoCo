@@ -55,8 +55,8 @@ public class SecurityFilter implements Filter {
 		UserIdentity connectedUser = (UserIdentity)httpServletRequest.getSession().getAttribute("connectedUser");
 		if(!resourceAllow && connectedUser==null){
 			
-			//httpServletResponse.sendRedirect("Login");
-			httpServletRequest.getRequestDispatcher("/login.html").forward(httpServletRequest , httpServletResponse);
+			httpServletResponse.sendRedirect("Login");
+			//httpServletRequest.getRequestDispatcher("/login.html").forward(httpServletRequest , httpServletResponse);
 		}else {
 			chain.doFilter(request, response);
 		}

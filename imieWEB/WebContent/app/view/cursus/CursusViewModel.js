@@ -5,10 +5,6 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     requires : [            
            'ExtJsMVC.model.*',
     ],
-
-   /* data: {
-        name: 'ExtJsMVC'
-    }*/
     
     stores: {
     	
@@ -137,7 +133,10 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	
     	periodeStore : {
     		model:'ExtJsMVC.model.cursus.PeriodeCursusModel',
-    	}
+    	},
+    	periodePromotionStore : {
+    		model:'ExtJsMVC.model.promotion.PeriodePromotionModel',
+    	},
     },
     formulas:{
     	currentCursus:{
@@ -331,7 +330,21 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
         		this.set('currentPeriode',periode);
         	}
     	},
-    	
+    	currentPeriodePromotion:{
+    		bind:{
+        		bindTo:'{periodePromotionGrid.selection}',
+        		deep:true
+        	},
+        	get:function(periode){
+        		return periode;
+        	},
+        	set:function(periode){
+        		if(!periode.isModel){
+        			periode = this.get('periodePromotionStore').getById(periode);
+        		}
+        		this.set('currentPeriodePromotion',periode);
+        	}
+    	},
  	
     }
     

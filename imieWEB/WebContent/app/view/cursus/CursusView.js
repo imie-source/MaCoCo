@@ -35,7 +35,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            'ExtJsMVC.view.promotion.detailUf.DetailUniteFormationPromo',
 	            'ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo',
 	            'ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGrid',
-	            
+	            'ExtJsMVC.view.promotion.grilleEnfant.PeriodePromotionGrid',	                       
+	            'ExtJsMVC.view.promotion.detailPeriode.DetailPeriodePromotion',
 	            'ExtJsMVC.view.cursus.detailUf.DetailUniteFormationGridModule'
 	            
 	            

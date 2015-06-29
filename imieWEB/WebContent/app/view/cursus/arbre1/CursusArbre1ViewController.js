@@ -10,12 +10,24 @@ Ext.define('ExtJsMVC.view.cursus.arbre1.CursusArbre1ViewController', {
 
 			'cursus-Arbre' : 
 			{
-				//itemclick : this.chargeSecondArbre,
+				beforeitemclick : this.itemClick,
 				selectionchange : this.chargeSecondArbre
 			},
 		});
 		
 	},
+	
+	itemClick : function( tree, record, item, index, e, eOpts ){
+		var vm = this.getViewModel();
+		var selectedItem = vm.get('currentCursus');
+		if (selectedItem===record){
+			console.log('selectedItem===record');	
+			var selectedRecords = new Array();
+			selectedRecords.push(record);
+			this.chargeSecondArbre(tree, selectedRecords, eOpts);
+		}
+	},
+	
 	chargeSecondArbre : function(grid, selectedRecords, eOpts)
 	{
 		var record = selectedRecords[0];

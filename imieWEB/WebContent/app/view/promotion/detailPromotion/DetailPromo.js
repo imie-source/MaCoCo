@@ -19,22 +19,6 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
         },
         
         {
-        	id : 'seleniumDetailPromoPerDeb',
-        	itemId: 'TestPeriodeDebut',
-            xtype : 'datefield',
-            fieldLabel : 'Du :',
-            format: 'd/m/y'
-        },
-        
-        {
-        	id : 'seleniumDetailPromoPerFin',
-        	itemId: 'TestPeriodeFin',
-            xtype : 'datefield',
-            fieldLabel : 'Au :',
-            format: 'd/m/y'
-        },
-        
-        {
         	id : 'seleniumDetailPromoSave',
             xtype : 'button',
             text : 'Enregistrer',
@@ -45,14 +29,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
 				disabled:'{!itemPromoStatus.dirtyAndValid}'
 			},
         },
-        {
-        	id : 'seleniumDetailPromoAdd',
-            xtype : 'button',
-            text : 'Ajouter UF',
-            itemId : 'AddRecord',
-            handler :'onAddUfPromoClick',
-        }
-        ,
+        
         {
         	id : 'seleniumDetailPromoPrint',
             xtype : 'button',
@@ -60,14 +37,77 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
             itemId : 'Print',
             handler :'onPrintClick',
         },
+
         {
-        	xtype : 'promotion-childrenGrid',
-        	itemId : 'promoUfGrid',
-            id : 'promoUfGrid',
-            title: 'Unité de formation',
-            bind:{
-            	store:'{ufPromoStore}',
-			},
+        	layout:{
+        		type:'hbox',
+        		align:'stretch',
+        		flex  : 1,
+        		
+        	},
+        	items : [
+        	      {
+        	    	  width : '50%',
+        	    	  layout:{
+        	    			type:'vbox',
+        	    			align:'stretch',
+        	    			flex  : 1,
+        	    			
+        	    		},
+        	    	  items : [
+        	    	       {
+        	    	        	xtype : 'promotion-periodePromotionGrid',
+        	    	        	itemId : 'promoPeriodeGrid',
+        	    	            id : 'promoPeriodeGrid',
+        	    	            title: 'Periode',
+        	    	            bind:{
+        	    	            	store:'{periodePromotionStore}',
+        	    				},
+        	    				
+        	    				height : 180,
+        	    				autoScroll : true
+        	    	        },
+        	    	        {
+        	    	        	id : 'seleniumDetailPromoAdd',
+        	    	            xtype : 'button',
+        	    	            text : 'Ajouter UF',
+        	    	            itemId : 'AddRecord',
+        	    	            handler :'onAddPeriodePromotionClick',
+        	    	            width : 150,
+        	    	        },
+
+        	         	]
+        	      },
+        	      {
+        	    	  width : '50%',
+        	    	  layout:{
+        	    			type:'vbox',
+        	    			align:'stretch',
+        	    			flex  : 1,
+        	    		},
+        	    	  items : [
+							{
+								xtype : 'promotion-childrenGrid',
+					        	itemId : 'promoUfGrid',
+					            id : 'promoUfGrid',
+					            title: 'Unité de formation',
+					            bind:{
+					            	store:'{ufPromoStore}',
+								},
+								height : 180,
+								autoScroll : true
+							},
+							{
+								id : 'seleniumDetailCursusAdd',
+							    xtype : 'button',
+							    text : 'Ajouter UF',
+							    itemId : 'AddRecord',
+							    handler :'onAddUfCursusClick',
+							    width : 150,
+							},	         	     
+        	         ]
+        	      },
+        	]
         },
     ]
 });

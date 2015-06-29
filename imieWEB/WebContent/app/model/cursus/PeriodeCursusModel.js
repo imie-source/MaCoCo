@@ -3,10 +3,11 @@ Ext.define('ExtJsMVC.model.cursus.PeriodeCursusModel',
 	extend: 'Ext.data.Model',
 	fields: [
 	         {name: 'perId'},
+	         {name: 'perNom'},
 	         {name: 'perDebut'},
 	         {name: 'perFin'},
 	         {name: 'perNbjours'},
-	         {name: 'curId'},
+	         {name: 'cursus'},
 	         
 	        ],
 	        

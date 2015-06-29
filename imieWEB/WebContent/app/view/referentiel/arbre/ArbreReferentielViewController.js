@@ -10,12 +10,24 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 			'arbre-Referentiel' : 
 			{
 				selectionchange : this.chargeRefTreeForm,
+				beforeitemclick : this.itemClick,
 				itemclick : this.chargeSavForm,
 				itemcontextmenu : this.onRefTreeContextMenu,
 			},
 			
 		});
 		
+	},
+	
+	itemClick : function( tree, record, item, index, e, eOpts ){
+		var vm = this.getViewModel();
+		var selectedItem = vm.get('currentRefTree');
+		if (selectedItem===record){
+			console.log('selectedItem===record');	
+			var selectedRecords = new Array();
+			selectedRecords.push(record);
+			this.chargeRefTreeForm(tree, selectedRecords, eOpts);
+		}
 	},
 	chargeRefTreeForm : function(grid, selectedRecords)
 	{

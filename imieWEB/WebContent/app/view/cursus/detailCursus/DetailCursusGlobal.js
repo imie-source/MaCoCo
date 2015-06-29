@@ -6,12 +6,10 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursusGlobal', {
   		      'ExtJsMVC.view.cursus.detailCursus.DetailCursusGlobalViewController', 
   	],
   	controller : 'DetailCursusGlobalViewController',
-// title : 'Detail Cursus Global',
     frame   : true,
-// padding : 5,
     bodyPadding : 5,
     activeTab: 0,
-
+    height : (Ext.getBody().getViewSize().height-10),
     
     items : 
     [

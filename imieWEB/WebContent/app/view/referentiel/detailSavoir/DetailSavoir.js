@@ -35,7 +35,7 @@ Ext.define('ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir',
 			},
         },
         
-        {
+        /*{
             cls: 'cours-view',
             tpl: '<tpl for="savoirs">' +
                     '<div class="savoir">hello</div>' +
@@ -45,7 +45,7 @@ Ext.define('ExtJsMVC.view.referentiel.detailSavoir.DetailSavoir',
             selectedItemClass: 'savoir-selected',
             singleSelect: true,
 
-        }
+        }*/
     ]
     
 });

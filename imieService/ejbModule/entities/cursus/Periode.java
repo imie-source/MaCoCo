@@ -27,9 +27,12 @@ public class Periode implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="per_id", unique=true, nullable=false)
 	private Integer perId;
+
+	@Column(name="per_nom")
+	private String perNom;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="per_debut")
@@ -88,6 +91,14 @@ public class Periode implements Serializable {
 
 	public void setCursus(Cursus cursus) {
 		this.cursus = cursus;
+	}
+	
+	public String getPerNom() {
+		return perNom;
+	}
+
+	public void setPerNom(String perNom) {
+		this.perNom = perNom;
 	}
 
 }

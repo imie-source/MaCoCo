@@ -20,14 +20,8 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',{
 	}],
 	plugins: [{
         ptype: 'rowexpander',
-       
-
         rowBodyTpl : new Ext.XTemplate(
             '<p><b>Contenu:</b> {entContenu}</p>',
-          //  '<p><b>Prérequis:</b></p>' ,
-          //  '<tpl for={entPrerequis}>',
-		//		'<p>  - {entPrerequis}</p>',
-	//		'</tpl>',
         {
             formatChange: function(v){
                 var color = v >= 0 ? 'green' : 'red';
@@ -52,7 +46,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',{
 		    	xtype:'textfield',
 		    	enableKeyEvents : true,
 		    	id:'findWord',
-		    	placeholder : 'enseignement...',
+		    	emptyText : 'entrez votre recherche',
 				itemId:'textfieldRecToolBar',
 			},
 		]

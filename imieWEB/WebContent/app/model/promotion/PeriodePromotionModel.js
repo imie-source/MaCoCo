@@ -3,8 +3,11 @@ Ext.define('ExtJsMVC.model.promotion.PeriodePromotionModel',
 	extend: 'Ext.data.TreeModel',
 	fields: [
 	         {name: 'perId'},
+	         {name: 'perNom'},
 	         {name: 'perDebut'},
-	         {name: 'perFin'}
+	         {name: 'perFin'},
+	         {name: 'perNbjours'},
+	         {name: 'promotion'},
 	        ],
 	        
 	proxy: 

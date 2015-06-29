@@ -27,10 +27,13 @@ public class PeriodePromotion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="perpro_id", unique=true, nullable=false)
 	private Integer perproId;
 
+	@Column(name="perpro_nom")
+	private String perproNom;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="perpro_debut")
 	private Date perproDebut;
@@ -77,8 +80,8 @@ public class PeriodePromotion implements Serializable {
 	public Integer getPerproNbjours() {
 		return this.perproNbjours;
 	}
-
-	public void setPerNbjours(Integer perproNbjours) {
+	
+	public void setPerproNbjours(Integer perproNbjours) {
 		this.perproNbjours = perproNbjours;
 	}
 
@@ -89,5 +92,15 @@ public class PeriodePromotion implements Serializable {
 	public void setPromotion(Promotion promotion) {
 		this.promotion = promotion;
 	}
+
+	public String getPerproNom() {
+		return perproNom;
+	}
+
+	public void setPerproNom(String perproNom) {
+		this.perproNom = perproNom;
+	}
+
+	
 
 }

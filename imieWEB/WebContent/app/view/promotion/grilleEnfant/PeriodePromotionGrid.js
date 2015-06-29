@@ -1,28 +1,28 @@
-Ext.define('ExtJsMVC.view.cursus.grilleEnfant.PeriodeGrid', 
+Ext.define('ExtJsMVC.view.promotion.grilleEnfant.PeriodePromotionGrid', 
 {
 	extend : 'Ext.grid.Panel',
-    xtype : 'cursus-periodeGrid',
+    xtype : 'promotion-periodePromotionGrid',
     
     frame : true,
 
     requires : [
-	            'ExtJsMVC.view.cursus.grilleEnfant.PeriodeGridViewController'
+	            'ExtJsMVC.view.promotion.grilleEnfant.PeriodePromotionGridViewController'
 	],
 	
-	controller : 'PeriodeGridViewController',
-	reference : 'periodeGrid',
+	controller : 'PeriodePromotionGridViewController',
+	reference : 'periodePromotionGrid',
 	columns:[{
 		text : 'Période',
-    	dataIndex : 'perNom',
+    	dataIndex : 'perproNom',
     	width : '35%',
     },{
 		text : 'Date de début',
-    	dataIndex : 'perDebut',
+    	dataIndex : 'perproDebut',
     	width : '25%',
     },
     {
 		text : 'Date de fin',
-    	dataIndex : 'perFin',
+    	dataIndex : 'perproFin',
     	width : '25%',
     },{
     	xtype : 'actioncolumn',

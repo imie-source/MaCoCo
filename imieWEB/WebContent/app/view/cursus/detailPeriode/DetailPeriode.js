@@ -12,9 +12,15 @@ Ext.define('ExtJsMVC.view.cursus.detailPeriode.DetailPeriode', {
     padding : 10,
     
     items : 
-    [
+    [	{
+			id : 'seleniumDetailPeriodeCursusNom',
+			itemId: 'TestNom',
+			xtype : 'textfield',
+			fieldLabel : 'Intitulé',
+			bind:'{currentPeriode.perNom}',
+		},
 		{
-			id : 'seleniumDetailCursusPerDeb',
+			id : 'seleniumDetailPeriodeCursusPerDeb',
 			itemId: 'TestPeriodeDebut',
 		    xtype : 'datefield',
 		    fieldLabel : 'Du :',
@@ -22,7 +28,7 @@ Ext.define('ExtJsMVC.view.cursus.detailPeriode.DetailPeriode', {
 		    bind:'{currentPeriode.perDebut}',
 		},
 		{
-			id : 'seleniumDetailCursusPerFin',
+			id : 'seleniumDetailPeriodeCursusPerFin',
 			itemId: 'TestPeriodeFin',
 		    xtype : 'datefield',
 		    fieldLabel : 'Au :',
@@ -30,14 +36,14 @@ Ext.define('ExtJsMVC.view.cursus.detailPeriode.DetailPeriode', {
 		    bind:'{currentPeriode.perFin}',
 		},
 		{
-			id : 'seleniumDetailCursusNbJours',
+			id : 'seleniumDetailPeriodeCursusNbJours',
 			itemId: 'TestNbJours',
 		    xtype : 'textareafield',
 		    fieldLabel : 'Nombre de jours',
 		    bind:'{currentPeriode.perNbjours}',
 		},
         {
-        	id : 'seleniumDetailModuleSave',
+        	id : 'seleniumDetailPeriodeSave',
             xtype : 'button',
             text : 'Enregistrer',
             itemId : 'SaveRecord',

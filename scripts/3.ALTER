@@ -1,0 +1,43 @@
+
+ALTER TABLE periode (
+    ADD per_nom character varying(80),
+);
+
+CREATE SEQUENCE periode_per_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE periode_per_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE periode_per_id_seq OWNED BY periode.per_id;
+
+
+
+
+ALTER TABLE periode_promotion (
+    ADD perpro_nom character varying(80),
+);
+
+
+CREATE SEQUENCE periode_promotion_perpro_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE periode_promotion_perpro_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE periode_promotion_perpro_id_seq OWNED BY periode_promotion.perpro_id;
+
+
+ALTER TABLE ONLY periode ALTER COLUMN per_id SET DEFAULT nextval('periode_per_id_seq'::regclass);
+
+ALTER TABLE ONLY periode_promotion ALTER COLUMN perpro_id SET DEFAULT nextval('periode_promotion_perpro_id_seq'::regclass);
+
+
+

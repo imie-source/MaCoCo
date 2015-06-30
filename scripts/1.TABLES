@@ -128,8 +128,7 @@ CREATE TABLE public.Cours_Promo(
 )WITHOUT OIDS;
 
 CREATE TABLE public.Periode(
-	per_id      SERIAL  NOT NULL ,
-	per_nom	    VARCHAR (80) ,	
+	per_id      INTEGER NOT NULL ,	
 	per_debut   DATE   ,
 	per_fin     DATE   ,
 	per_nbjours INTEGER   ,
@@ -138,8 +137,7 @@ CREATE TABLE public.Periode(
 )WITHOUT OIDS;
 
 CREATE TABLE public.Periode_Promotion(
-	perpro_id      SERIAL  NOT NULL ,
-	perpro_nom     VARCHAR (80) ,
+	perpro_id      INTEGER  NOT NULL ,
 	perpro_debut   DATE   ,
 	perpro_fin     DATE   ,
 	perpro_nbjours INTEGER   ,

@@ -46,7 +46,8 @@ public class PromotionService implements PromotionServiceLocal {
 	SavoirServiceLocal savoirService;
 	@EJB
 	EnseignementServiceLocal enseignementService;
-
+	@EJB
+	PeriodePromotionServiceLocal periodePromotionService;
 	/**
 	 * Default constructor. 
 	 */
@@ -216,7 +217,12 @@ public class PromotionService implements PromotionServiceLocal {
 		for (UniteFormationPromotion uniteFormationPromotion : uniteFormationPromotions) {
 			uniteFormationPromotionService.delete(uniteFormationPromotion);
 		}
+		List<PeriodePromotion> periodeList = promotion.getPeriodes();
+		for (PeriodePromotion periode : periodeList) {
+			periodePromotionService.delete(periode);
+		}
 		em.remove(promotion);
+		
 		
 	}
 

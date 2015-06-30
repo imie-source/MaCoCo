@@ -74,8 +74,7 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 					var storeOrdo = this.getViewModel().getStore('coursByPromotion');
 					var myUrl = '/imieWEB/webapi/courspromotion/promotion/'.concat(record.get('proId')).concat('/root');
 					storeOrdo.load({url : myUrl});
-					console.log('storeOrdo');
-					console.log(storeOrdo);
+					
 					
 			break; 
 			case 'ExtJsMVC.model.promotion.UniteFormationPromotionModel' :
@@ -99,6 +98,12 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 				       });	
 				}else {
 			    	   vm.getStore('modulePromoStore').removeAll();
+			    	   if(switchview.getChildEls())
+			    	   {
+				    	   switchview.removeAll();
+			    	   }
+				    //Ajout de la vue correspondante  
+				    switchview.add({xtype : 'promo-DetailUniteFormation'});
 			    }
 			break;
 			case 'ExtJsMVC.model.promotion.ModulePromotionModel' :
@@ -122,6 +127,13 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 				       });
 			       }else {
 			    	   vm.getStore('coursByPromotion').removeAll();
+			    	// suppression de l'ancienne vue
+						if(switchview.getChildEls())
+				    	   {
+					    	   switchview.removeAll();
+				    	   }
+					    //Ajout de la vue correspondante  
+					    switchview.add({xtype : 'promo-DetailModule'});
 			       }
 			break;
 			case 'ExtJsMVC.model.promotion.CoursPromotionModel' :
@@ -340,6 +352,8 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 				    	   }
 				       });
 				       
+				    }else{
+				    	switchview.add({xtype : 'promo-DetailCours'});
 				    }
 			break;	
 				        

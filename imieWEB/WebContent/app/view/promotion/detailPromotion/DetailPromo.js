@@ -70,7 +70,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
         	    	        {
         	    	        	id : 'seleniumDetailPromoAdd',
         	    	            xtype : 'button',
-        	    	            text : 'Ajouter UF',
+        	    	            text : 'Ajouter Période',
         	    	            itemId : 'AddRecord',
         	    	            handler :'onAddPeriodePromotionClick',
         	    	            width : 150,
@@ -102,7 +102,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
 							    xtype : 'button',
 							    text : 'Ajouter UF',
 							    itemId : 'AddRecord',
-							    handler :'onAddUfCursusClick',
+							    handler :'onAddUfPromoClick',
 							    width : 150,
 							},	         	     
         	         ]

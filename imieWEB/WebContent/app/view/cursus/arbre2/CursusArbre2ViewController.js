@@ -455,6 +455,9 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 				       	
 				       
 			       }
+			       else{
+			    	   switchview.add({xtype : 'cursus-DetailCours'});
+				    }
 			       break;				
 			
 			default:

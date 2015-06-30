@@ -9,12 +9,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import promotion.PromotionServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
 import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
 import entities.enseignement.Enseignement;
+import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
 
 
@@ -31,7 +33,10 @@ public class CursusService implements CursusServiceLocal {
 	EntityManager em;
 	@EJB 
 	UniteFormationCursusServiceLocal uniteFormationCursusService;
-
+	@EJB
+	PromotionServiceLocal promotionService;
+	@EJB
+	PeriodeCursusServiceLocal periodeCursusService;
 	/**
 	 * Default constructor. 
 	 */
@@ -121,6 +126,14 @@ public class CursusService implements CursusServiceLocal {
 		List<UniteFormationCursus> uniteFormationCursuses = cursus.getUniteFormationCursuses();
 		for (UniteFormationCursus uniteFormationCursus : uniteFormationCursuses) {
 			uniteFormationCursusService.delete(uniteFormationCursus);
+		}
+		List<Promotion> promoList = cursus.getPromotions();
+		for (Promotion promotion : promoList) {
+			promotionService.delete(promotion);
+		}
+		List<Periode> periodeList = cursus.getPeriodes();
+		for (Periode periode : periodeList) {
+			periodeCursusService.delete(periode);
 		}
 		em.remove(cursus);
 		

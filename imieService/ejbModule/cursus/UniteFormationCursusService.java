@@ -7,10 +7,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import promotion.UniteFormationPromotionServiceLocal;
 import entities.cursus.ModuleCursus;
 import entities.cursus.UniteFormationCursus;
+import entities.enseignement.RPrerequisEnseignement;
+import entities.promotion.UniteFormationPromotion;
 
 /**
  * Session Bean implementation class UniteFormationCursusService
@@ -25,6 +29,8 @@ public class UniteFormationCursusService implements UniteFormationCursusServiceL
 	
 	@EJB 
 	ModuleCursusServiceLocal moduleCursusService;
+	@EJB 
+	UniteFormationPromotionServiceLocal ufPromotionService;
 	/**
 	 * Default constructor. 
 	 */
@@ -69,6 +75,14 @@ public class UniteFormationCursusService implements UniteFormationCursusServiceL
 	public void delete(UniteFormationCursus uniteFormation) 
 	{
 		uniteFormation = em.find(UniteFormationCursus.class, uniteFormation.getUfcId());
+
+		String queryString = "SELECT u FROM UniteFormationPromotion u WHERE u.ufcId = "
+				.concat(uniteFormation.getUfcId().toString());
+		Query query = em.createQuery(queryString);
+		List<UniteFormationPromotion> ufPromotionList = query.getResultList();
+		for (UniteFormationPromotion uniteFormationPromotion : ufPromotionList) {
+			ufPromotionService.delete(uniteFormationPromotion);
+		}
 		List<ModuleCursus> moduleCursuses = uniteFormation.getModuleCursuses();
 		for (ModuleCursus moduleCursus : moduleCursuses) {
 			moduleCursusService.delete(moduleCursus);;

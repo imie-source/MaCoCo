@@ -7,10 +7,13 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import promotion.ModulePromotionServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.ModuleCursus;
+import entities.promotion.ModulePromotion;
 
 /**
  * Session Bean implementation class ModuleCursusService
@@ -24,6 +27,8 @@ public class ModuleCursusService implements ModuleCursusServiceLocal {
 	EntityManager em;
 	@EJB 
 	CoursCursusServiceLocal coursCursusService;
+	@EJB
+	ModulePromotionServiceLocal modulePromotionService;
 	
     /**
      * Default constructor. 
@@ -48,6 +53,15 @@ public class ModuleCursusService implements ModuleCursusServiceLocal {
 	@Override
 	public void delete(ModuleCursus module) 
 	{
+		
+		String queryString = "SELECT m FROM ModulePromotion m WHERE m.mocId = "
+				.concat(module.getMocId().toString());
+		Query query = em.createQuery(queryString);
+		List<ModulePromotion> modulePromotionList = query.getResultList();
+		for (ModulePromotion modulePromotion : modulePromotionList) {
+			modulePromotionService.delete(modulePromotion);
+		}
+		
 		module = em.find(ModuleCursus.class, module.getMocId());
 		List<CoursCursus> coursCursuses = module.getCoursCursuses();
 		for (CoursCursus coursCursus : coursCursuses) {

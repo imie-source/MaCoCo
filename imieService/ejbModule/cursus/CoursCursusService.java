@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,12 +12,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import promotion.CoursPromotionServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.RCourscursusEnseignement;
 import entities.cursus.RCourscursusSavoir;
 import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
-import entities.promotion.Promotion;
 import entities.referentiel.Savoir;
 
 /**
@@ -29,6 +30,8 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 
 	@PersistenceContext
 	EntityManager em;
+	@EJB
+	CoursPromotionServiceLocal coursPromotionService;
 
 	/**
 	 * Default constructor. 
@@ -96,8 +99,16 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 				em.remove(rCourscursusEnseignement);
 			}
 		}
+		String queryString = "SELECT c FROM CoursPromotion c WHERE c.cocId = "
+				.concat(coursCursus.getCocId().toString());
+		Query query = em.createQuery(queryString);
+		List<CoursPromotion> coursPromotionList = query.getResultList();
+		for (CoursPromotion coursPromotion : coursPromotionList) {
+			coursPromotionService.delete(coursPromotion);
+		}
 		
-		List<Promotion> promotions = coursCursus.getModuleCursus().getUniteFormationCursus().getCursus().getPromotions();
+		
+		/*List<Promotion> promotions = coursCursus.getModuleCursus().getUniteFormationCursus().getCursus().getPromotions();
 		for (Promotion promotion : promotions) {
 			Query queryAllCoursPromotion = em.createNamedQuery("CoursPromotion.findAllByPromotion");
 			queryAllCoursPromotion.setParameter("idPromotion", promotion.getProId());
@@ -109,8 +120,7 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 					em.remove(coursPromotion);
 				}
 			}	
-		}
-		
+		}*/
 		em.remove(coursCursus);
 	}
 	

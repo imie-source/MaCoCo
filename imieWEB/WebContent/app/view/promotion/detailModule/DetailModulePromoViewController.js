@@ -82,8 +82,10 @@ Ext.define('ExtJsMVC.view.promotion.detailModule.DetailModulePromoViewController
 								text: 'new promo root',
 								expanded: true,
 								children: recordPromo
-							});			
+							});		
+							
 							tree.expandPath(module.parentNode.getPath());
+							
 					    },
 					});
 				}

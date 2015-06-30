@@ -82,6 +82,22 @@ table, thead, tr, th,td{
 	margin :0px 0px 0px 0px;
 	padding: 0;
 }
+.row-anneeRp1{
+	background-color: #D8D8D8;
+}
+.row-anneeRp2{
+	background-color: #ffffff;
+}
+.row-anneeRp3{
+	background-color: #D8D8D8;
+}
+.row-anneeRp4{
+	background-color: #ffffff;
+}
+.row-anneeRp5{
+	background-color: #D8D8D8;
+}
+
 .row-coursNomRp 
 {
 

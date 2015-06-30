@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.CursusViewGrid',{
 	},
 	title:'<b>Liste des cours</b>',
 	reference:'coursOrdoGrid',
-	
+	hideHeaders : true,
 	columns:[{
 		//text:'Cours',
 		dataIndex:'cocIntitule',

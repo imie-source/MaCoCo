@@ -4,9 +4,16 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.PeriodeGridViewController', {
 
 	
 	onRemove : function(view, row, col, action, ev, record){
-		var myStore = view.getStore();
-		myStore.remove(record);
-		myStore.sync();
+		var vm = this.getViewModel();
+		var myPeriodeStore = view.getStore();
+		myPeriodeStore.remove(record);
+		myPeriodeStore.sync({
+			callback : function(){
+				var myCoursStore = vm.getStore('coursByCursus');
+			    //function.myFunctions.js
+			    addNbJourWindow(myPeriodeStore.getData().items,myCoursStore.getData().items);
+			}
+		});
 			
 	},
 	

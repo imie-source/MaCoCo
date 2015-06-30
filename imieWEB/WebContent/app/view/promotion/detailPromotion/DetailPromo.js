@@ -109,5 +109,9 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
         	      },
         	]
         },
+        ,
+        {
+        	id : 'messageNbJours',
+        }
     ]
 });

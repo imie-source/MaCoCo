@@ -1,23 +1,78 @@
+#messageNbJours-body{
+	border:none;
+}
+#messageNbJoursOk-body{
+	background-color: #a5d6ae;
+	color: #026916;
+	border-color: #026916;
+	border-radius : 10px;
+	text-align: center;
+
+}
+#messageNbJoursNok-body{
+	background-color: #d6a6a5;
+	color: #92050d;
+	border-color: #92050d;
+	border-radius : 10px; 
+	text-align: center;
+}
+
+
 
 .x-btn{
 	margin: 5px;
 }
-
-.heightWeekGridRow{
-	height: 129px;
-}
 /*.noOderedOrdoGridRow{
 	background-color: #66FF66
 }*/
-.x-grid-item-container .x-grid-item:nth-child(odd) tbody .heightWeekGridRow{
-	background-color: #D8D8D8
-}
-.x-grid-item-container .x-grid-item:nth-child(odd) tbody .colorOrdoGridRow{
-	background-color: #D8D8D8
+#periodeCursusOrdoViewPanel *,#periodePromotionOrdoViewPanel *{
+	border: none;
 }
 
+#periodeCursusOrdoViewPanel-body, #periodePromotionOrdoViewPanel-body{
+	margin-top: 1px;
+}
+
+div[id*='cursusViewGrid'].x-panel-body *{
+	border: none;
+}
+div[id*='promotionViewGrid'].x-panel-body *{
+	border: none;
+}
+div[id*='weekGrid'].x-panel-body *{
+	border: none;
+}
+#periodeCursusOrdoViewPanel-body div div div:nth-child(odd) *{
+	background-color: #f8f7e0;
+}
+#periodeCursusOrdoViewPanel-body div div div:nth-child(even) *{
+	background-color: #e7e7de;
+}
+#periodePromotionOrdoViewPanel-body div div div:nth-child(odd) *{
+	background-color: #f8f7e0;
+}
+#periodePromotionOrdoViewPanel-body div div div:nth-child(even) *{
+	background-color: #e7e7de;
+}
+.x-grid-item-container .x-grid-item:nth-child(odd) tbody .heightWeekGridRow{
+	background-color: #f8f7e0;
+}
+.x-grid-item-container .x-grid-item:nth-child(even) tbody .heightWeekGridRow{
+	background-color: #e7e7de;
+}
+.x-grid-item-container .x-grid-item:nth-child(odd) tbody .colorOrdoGridRow{
+	background-color: #f8f7e0;
+}
+.x-grid-item-container .x-grid-item:nth-child(even) tbody .colorOrdoGridRow{
+	background-color: #e7e7de;
+}
 .x-grid-item-focused .x-grid-cell-inner::before {
-    border: opx;
+    border: none;
+}
+
+
+.heightWeekGridRow{
+	height: 125px;
 }
 
 .heightOrdoGridRow1{

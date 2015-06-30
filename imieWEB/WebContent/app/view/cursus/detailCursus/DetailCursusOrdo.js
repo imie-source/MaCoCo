@@ -12,14 +12,17 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursusOrdo', {
 		items : 
 			[
 				{
+					title : 'Période',
+					id : 'periodeCursusOrdoViewPanel',
+					flex  : 1,
+				},
+				{
 					xtype : 'cursusViewGrid',
 		 			flex  : 5,
-					
 				},
 				{
 					xtype : 'weekGrid',
 					flex  : 1,
-					
 				},
 		
 			],

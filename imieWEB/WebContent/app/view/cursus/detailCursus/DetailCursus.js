@@ -115,6 +115,9 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursus', {
         	      },
         	]
         },
+        {
+        	id : 'messageNbJours',
+        }
         
     ]
 });

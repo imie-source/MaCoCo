@@ -9,6 +9,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 		pluginId:'editing',
 		triggerEvent:'rowfocus'
 	}],
+	hideHeaders : true,
 	modelValidation:true,
 	autoScroll:true,
 	dockedItems:[{

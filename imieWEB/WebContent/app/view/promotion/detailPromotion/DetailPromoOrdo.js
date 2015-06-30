@@ -11,9 +11,13 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoOrdo', {
 		items : 
 			[
 				{
+					title : 'Période',
+					id : 'periodePromotionOrdoViewPanel',
+					flex  : 1,
+				},
+				{
 					xtype : 'promotionViewGrid',
-		 			flex  : 5,
-					
+		 			flex  : 5,				
 				},
 				{
 					xtype : 'weekGrid',

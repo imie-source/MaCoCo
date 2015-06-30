@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.view.referentiel.grilleEnfant.RefChildrenGrid',
 	],
 	
 	controller : 'RefChildrenGridViewController',
-	
+	hideHeaders : true,
 	columns:[{
     	dataIndex : 'text',
     	width : '85%',

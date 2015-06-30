@@ -9,7 +9,7 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGrid',
 	],
 	
 	controller : 'CursusChildrenGridViewController',
-	
+	hideHeaders : true,
 	columns:[{
     	dataIndex : 'text',
     	width : '85%',

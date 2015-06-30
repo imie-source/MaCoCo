@@ -58,6 +58,11 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 								    	   switchview.removeAll();
 							    	   }
 								       switchview.add({xtype : 'promo-DetailPromoGlobal'});
+								       
+								       var myCoursStore = vm.getStore('coursByPromotion');
+								       
+								       //function.myFunctions.js
+								       addNbJourWindow(myPeriodeStore.getData().items,myCoursStore.getData().items);
 						    	   }
 						       }); 
 				    	   }
@@ -147,6 +152,7 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 								       var detailView = Ext.ComponentQuery.query('form')[0];
 									   var gridSavoir = Ext.create('Ext.grid.Panel', {
 										   frame : true,
+										   hideHeaders : true,
 										itemId : 'savoirCoursGrid',
 						                id : 'savoirCoursGrid',
 						                title: 'Glisser des savoirs dans cet zone',
@@ -238,6 +244,7 @@ Ext.define('ExtJsMVC.view.promotion.arbre.PromotionArbre2ViewController', {
 								
 								var gridEnseignement = Ext.create('Ext.grid.Panel', {
 							    	   frame : true,
+							    	   hideHeaders : true,
 										itemId : 'enseignementCoursGrid',
 						                id : 'enseignementCoursGrid',
 						                title: 'Glisser des enseignements dans cet zone',

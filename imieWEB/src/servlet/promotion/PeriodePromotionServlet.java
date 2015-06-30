@@ -48,7 +48,9 @@ public class PeriodePromotionServlet
 		Promotion promo = promotionService.findById(id);
 		List <PeriodePromotion> periodeList = new ArrayList<PeriodePromotion>();
 		for (PeriodePromotion periode : promo.getPeriodes()) {
-			periode.setPromotion(null);
+			periode.getPromotion().setCursus(null);
+			periode.getPromotion().setPeriodes(null);
+			periode.getPromotion().setUniteFormationPromotions(null);
 			periodeList.add(periode);
 		}
 		

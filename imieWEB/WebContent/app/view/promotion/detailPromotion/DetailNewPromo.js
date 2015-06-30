@@ -24,22 +24,6 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailNewPromo', {
         },
         
         {
-        	id : 'seleniumDetailPromoPerDeb',
-        	itemId: 'TestPeriodeDebut',
-            xtype : 'datefield',
-            fieldLabel : 'Du :',
-            format: 'd/m/y'
-        },
-        
-        {
-        	id : 'seleniumDetailPromoPerFin',
-        	itemId: 'TestPeriodeFin',
-            xtype : 'datefield',
-            fieldLabel : 'Au :',
-            format: 'd/m/y'
-        },
-        
-        {
         	id : 'seleniumDetailPromoSave',
             xtype : 'button',
             text : 'Enregistrer',

@@ -8,7 +8,7 @@ Ext.define('ExtJsMVC.view.promotion.grilleEnfant.PeriodePromotionGrid',
     requires : [
 	            'ExtJsMVC.view.promotion.grilleEnfant.PeriodePromotionGridViewController'
 	],
-	
+	hideHeaders : true,
 	controller : 'PeriodePromotionGridViewController',
 	reference : 'periodePromotionGrid',
 	columns:[{

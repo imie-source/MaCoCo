@@ -9,7 +9,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.PromotionViewGrid',{
 	},
 	title:'<b>Liste des promotions</b>',
 	reference:'coursPromoOrdoGrid',
-	
+	hideHeaders : true,
 	columns:[{
 		dataIndex:'copIntitule',
 		variableRowHeight : true,

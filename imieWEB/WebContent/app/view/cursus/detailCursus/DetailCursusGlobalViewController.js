@@ -17,6 +17,9 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursusGlobalViewController',
 		
 	},
 	
+	
+
+	
 dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		
 		var coursStore = this.getViewModel().getStore('coursByCursus');
@@ -41,7 +44,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		newChild.parentNode = itemSelected;			
 			
 		var myStore = vm.getStore('ufStore');
-		console.log(myStore);
+		
 		// insertion de l'item dans le store;
     	var record = myStore.insert(0,newChild)[0];
 		
@@ -110,7 +113,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		var cursus = uniteFormationStore.getRoot().getChildAt(0);
 		var cursusData = cursus.pseudoWriting();
 
-		console.log(cursusData);
+		
 
 		var drawDocument = function() {
 
@@ -235,13 +238,6 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 				};
 				var blocUniteFormation = dh.append(blocGlobal, child);
 
-				// Reac
-			/*	var child = {
-					tag : 'div',
-					cls : 'entete-reac',
-					html : uf.ufcNom
-				};
-				var enteteReac = dh.append(blocReac, child);*/
 
 				// preparation de la liste des savoirs
 				var savoirsArray = new Array();
@@ -350,7 +346,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 						// ajout de tous les savoirs (pas de duplication) dans
 						// la liste
 						cours.savoirs.forEach(function(savoir) {
-							console.log(savoir);
+						
 							Ext.Array.include(savoirsArray, savoir);
 						});
 
@@ -401,11 +397,14 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		win.onload = drawDocument;
 	},
 	onPrintOrdoClick : function(bouton) {
-		var uniteFormationStore = this.getViewModel().getStore('rootCursuses');
+		var vm = this.getViewModel();
+		var uniteFormationStore = vm.getStore('rootCursuses');
 		var cursus = uniteFormationStore.getRoot().getChildAt(0);
 		var cursusData = cursus.pseudoWriting();
-		var coursStore = this.getViewModel().getStore('coursByCursus');
+		var coursStore = vm.getStore('coursByCursus');
 		var coursData = coursStore.getData().items;
+		var periodeStore = vm.getStore('periodeStore');
+		var periodeData = periodeStore.getData().items;
 		
 		var drawDocument = function() {
 
@@ -489,10 +488,13 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 
 
 			coursData.forEach(function(cours) {
+				sommeJour = sommeJour + cours.getData().cocDuree;
 				var child = {
 					tag : 'tr',
 					cls : 'bloc-tableRowData'
 				};
+				
+				
 				var blocTableRowData = dh.append(blocTableBody, child);
 				var child = {
 					tag : 'td',
@@ -516,12 +518,31 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 							tag : 'div',
 							cls : 'bloc-coursRp'
 						};
+						
 						var blocCours = dh.append(blocListeCours, child);
 						
+						var periodeHtml
+						var periodeClass;
+						var sommeJourPeriode = 0;
+						periodeData.forEach(function(periode, index){
+							
+							sommeJourPeriode += periode.getData().perNbjours;
+							console.log('sommeJour <= sommeJourPeriode');
+							console.log(sommeJour <= sommeJourPeriode);
+							console.log(sommeJour);
+							console.log(sommeJourPeriode);
+							if(sommeJour <= sommeJourPeriode){
+								
+								periodeClass = 'row-anneeRp row-anneeRp'.concat(index);
+								 periodeHtml = periode.getData().perNom;
+							}
+						});
+						
+					
 						var child = {
 							tag : 'div',
-							cls : 'row-anneeRp',
-							//html : cours.getData().cocIntitule
+							cls : periodeClass,
+							html : periodeHtml
 						};
 						var rowAnnee = dh.append(blocCours, child);
 
@@ -546,7 +567,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 						};
 						var infosCours = dh.append(blocCours, child);
 
-						sommeJour = sommeJour + cours.getData().cocDuree;
+						
 				
 
 			});

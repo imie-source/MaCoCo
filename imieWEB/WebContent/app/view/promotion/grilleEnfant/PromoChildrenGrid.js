@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.view.promotion.grilleEnfant.PromoChildrenGrid',
 	],
 	
 	controller : 'PromoChildrenGridViewController',
-	
+	hideHeaders : true,
 	columns:[{
     	dataIndex : 'text',
     	width : '85%',

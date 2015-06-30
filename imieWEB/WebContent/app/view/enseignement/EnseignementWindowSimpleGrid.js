@@ -10,6 +10,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',{
 	bind:{
 		store:'{enseignementStore}',
 	},
+	hideHeaders : true,
 	width : '100%',
 	height : '100%',
 	layout: 'fit',

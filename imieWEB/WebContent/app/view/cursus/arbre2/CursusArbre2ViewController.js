@@ -21,8 +21,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 	itemClick : function( tree, record, item, index, e, eOpts ){
 		var vm = this.getViewModel();
 		var selectedItem = vm.get('currentCursusSecondTree');
-		if (selectedItem===record){
-			console.log('selectedItem===record');	
+		if (selectedItem===record){	
 			var selectedRecords = new Array();
 			selectedRecords.push(record);
 			this.chargeSecondTreeForm(tree, selectedRecords, eOpts);
@@ -44,24 +43,103 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 		{	
 
 		case 'ExtJsMVC.model.cursus.CursusModel' :
-		//case 'ExtJsMVC.model.promotion.CursusPromotionModel' :  
-		       console.log('Affichage Cursus');
+		
 		       if(selectedRecords[0].get('curId')!== undefined){
 			       myStore = vm.getStore('ufStore');
 			       myUrl = '/imieWEB/webapi/uniteformationcursus/cursus/'.concat(record.get('curId'));	
 			       myStore.load({
 			    	   url : myUrl,
 			    	   callback : function(){
-			    		   myPeriodeStore = vm.getStore('periodeStore');
+			    		   var myPeriodeStore = vm.getStore('periodeStore');
 					       myUrl = '/imieWEB/webapi/periode/cursus/'.concat(record.get('curId'));	
 					       myPeriodeStore.load({
 					    	   url : myUrl,
-					    	   callback : function(){
+					    	   callback : function(){  
+					    		   myPeriodeStore.sort(
+					    		   {
+					    		       property : 'perDebut',
+					    		       direction: 'ASC'
+					    		   });
 					    		   if(switchview.getChildEls())
 						    	   {
 							    	   switchview.removeAll();
 						    	   }
 							       switchview.add({xtype : 'cursus-DetailCursusGlobal'});
+							       var myCoursStore = vm.getStore('coursByCursus');
+							       
+							       //function.myFunctions.js
+							       addNbJourWindow(myPeriodeStore.getData().items,myCoursStore.getData().items);
+							       /*
+							       var nbJoursPeriode = 0;
+								   var nbJoursCours = 0;
+								   var nbJoursRestant;
+								   
+								   myPeriodeStore.getData().items.forEach(function(periode){
+									   console.log('periode');
+									   console.log(periode);
+									   nbJoursPeriode += periode.get('perNbjours');
+								   });	   
+								   
+								   var myCoursStore = vm.getStore('coursByCursus');
+								   myCoursStore.getData().items.forEach(function(cours){
+									   console.log('cours');
+									   console.log(cours);
+									   nbJoursCours += cours.get('cocDuree');
+								   });	 
+								   
+								   nbJoursRestant = nbJoursPeriode-nbJoursCours;
+								   
+								   var html;
+								   var idMessageNbJours;
+								   if(nbJoursRestant>1){
+									   html = 'Il reste '.concat(nbJoursRestant).concat(' jours de cours disponibles.');   
+									   idMessageNbJours = 'messageNbJoursOk';
+								   }else if (nbJoursRestant>=0){
+									   html = 'Il reste '.concat(nbJoursRestant).concat(' jour de cours disponible.');
+									   idMessageNbJours = 'messageNbJoursOk';
+								   }else if (nbJoursRestant>=-1){
+									   html = 'Attention : Il y a '.concat(nbJoursRestant.toString().substring(1)).concat(' jour de cours en trop.');
+									   idMessageNbJours = 'messageNbJoursNok';
+								   }else {
+									   html = 'Attention : Il y a '.concat(nbJoursRestant.toString().substring(1)).concat(' jours de cours en trop.');
+									   idMessageNbJours = 'messageNbJoursNok';
+								   }
+								   
+							       var messageWindow = Ext.create('Ext.panel.Panel', {	  
+						                id : idMessageNbJours,  
+						                html : html,
+										height : 50,
+										width : 400,
+										padding : '10 10 10 10',
+										margin : ' 10 20 10 20'
+							       });
+							       var detailCursusView = Ext.ComponentQuery.query('#messageNbJours')[0]
+							       if(detailCursusView.getChildEls())
+						    	   {
+							    	   detailCursusView.removeAll();
+						    	   }
+							       detailCursusView.add(messageWindow);
+							       
+							       var periodeCursusOrdoViewPanel = Ext.ComponentQuery.query('#periodeCursusOrdoViewPanel')[0]
+							       if(periodeCursusOrdoViewPanel.getChildEls())
+						    	   {
+							    	   periodeCursusOrdoViewPanel.removeAll();
+						    	   }
+							       
+							       myPeriodeStore.getData().items.forEach(function(periode){
+
+								       var heightPanel = periode.get('perNbjours')*25;
+								       var htmlPanel = periode.get('perNom');
+								       var periodePanel = Ext.create('Ext.panel.Panel', {	  
+							                //cls : 'periodePanelClass',  
+							                html : htmlPanel,
+											height : heightPanel,
+											width : '100%',
+								       });
+								       
+								       periodeCursusOrdoViewPanel.add(periodePanel);   
+								   });	   
+								   */
 					    	   }
 					       }); 
 			    	   }
@@ -84,16 +162,12 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 				var storeOrdo = this.getViewModel().getStore('coursByCursus');
 				var myUrl = '/imieWEB/webapi/courscursus/cursus/'.concat(record.get('curId')).concat('/root');
 				storeOrdo.load({url : myUrl});
-				console.log('storeOrdo');
-				console.log(storeOrdo);
-				
+							
 				
 				break;
 		
 			case 'ExtJsMVC.model.cursus.UniteFormationCursusModel' :
 			
-			console.log('Affichage Unite formation');
-		    
 			
 			if(selectedRecords[0].get('ufcId')!== undefined){
 			       myStore = vm.getStore('moduleStore');
@@ -111,7 +185,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 					        		   
 			    	   }
 			       });
-			       console.log(myStore);
+			       
 			}else {
 				// création d'un nouvel uf
 	    	   vm.getStore('moduleStore').removeAll();
@@ -130,8 +204,6 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 			break;
 			
 			case 'ExtJsMVC.model.cursus.ModuleCursusModel' :
-			    
-			       console.log('Affichage Module');
 			       
 			       if(selectedRecords[0].get('mocId')!== undefined){
 				       myStore = vm.getStore('coursByCursus');
@@ -163,8 +235,6 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 			      
 			       break;
 			  case 'ExtJsMVC.model.cursus.CoursCursusModel' :
-				    
-			       console.log('Affichage Cours');
 
 			       if(switchview.getChildEls())
 		    	   {
@@ -197,6 +267,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 												itemId : 'savoirCoursGrid',
 								                id : 'savoirCoursGrid',
 								                title: 'Glisser des savoirs dans cet zone',
+								                hideHeaders : true,
 								                bind:{
 								                	store:'{savoirStore}',
 								    			},
@@ -261,9 +332,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 							    										scope: this,
 							    										callback: function()
 							    										{
-							    											console.log('savoir ajouté');
-							    											console.log(coursCursus.cocId);  	
-							    										
+							    											
 							    											var myStore = vm.getStore('savoirStore');
 							    										       myUrl = '/imieWEB/webapi/savoir/courscursus/'.concat(coursCursus.cocId);	
 							    										       myStore.load({
@@ -293,6 +362,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 								                bind:{
 								                	store:'{enseignementStore}',
 								    			},
+								    			hideHeaders : true,
 								    			width : '50%',
 								    			autoScroll : true,
 												height : 140,
@@ -354,9 +424,6 @@ Ext.define('ExtJsMVC.view.cursus.arbre2.CursusArbre2ViewController', {
 							    										scope: this,
 							    										callback: function()
 							    										{
-							    											console.log('enseignement ajouté');
-							    											console.log(coursCursus.cocId);
-						    									       
 							    											var myStore = vm.getStore('enseignementStore');
 							    										       myUrl = '/imieWEB/webapi/enseignement/courscursus/'.concat(coursCursus.cocId);	
 							    										       myStore.load({

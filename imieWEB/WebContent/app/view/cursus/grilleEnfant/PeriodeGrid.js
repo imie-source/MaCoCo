@@ -8,7 +8,7 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.PeriodeGrid',
     requires : [
 	            'ExtJsMVC.view.cursus.grilleEnfant.PeriodeGridViewController'
 	],
-	
+	hideHeaders : true,
 	controller : 'PeriodeGridViewController',
 	reference : 'periodeGrid',
 	columns:[{

@@ -49,7 +49,9 @@ public class PeriodeServlet
 		Cursus cursus = cursusService.findById(id);
 		List <Periode> periodeList = new ArrayList<Periode>();
 		for (Periode periode : cursus.getPeriodes()) {
-			periode.setCursus(null);
+			periode.getCursus().setPeriodes(null);
+			periode.getCursus().setPromotions(null);
+			periode.getCursus().setUniteFormationCursuses(null);
 			periodeList.add(periode);
 		}
 		

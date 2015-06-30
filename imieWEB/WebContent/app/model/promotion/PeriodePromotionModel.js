@@ -1,12 +1,12 @@
 Ext.define('ExtJsMVC.model.promotion.PeriodePromotionModel',
 {
-	extend: 'Ext.data.TreeModel',
+	extend: 'Ext.data.Model',
 	fields: [
-	         {name: 'perId'},
-	         {name: 'perNom'},
-	         {name: 'perDebut'},
-	         {name: 'perFin'},
-	         {name: 'perNbjours'},
+	         {name: 'perproId'},
+	         {name: 'perproNom'},
+	         {name: 'perproDebut'},
+	         {name: 'perproFin'},
+	         {name: 'perproNbjours'},
 	         {name: 'promotion'},
 	        ],
 	        
@@ -23,11 +23,6 @@ Ext.define('ExtJsMVC.model.promotion.PeriodePromotionModel',
                 fn: function(data, request) 
                 {
                     data.id = undefined;
-                    data.leaf = undefined;
-                    data.parentId = undefined;
-                    data.children = undefined;
-                    data.text = undefined;
-                    data.coursPromotions = undefined;
                     return data;
                 },
                 scope: this

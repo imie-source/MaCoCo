@@ -16,6 +16,7 @@ import enseignement.EnseignementServiceLocal;
 import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
 import entities.cursus.ModuleCursus;
+import entities.cursus.Periode;
 import entities.cursus.UniteFormationCursus;
 import entities.enseignement.Enseignement;
 import entities.promotion.CoursPromotion;
@@ -126,8 +127,21 @@ public class PromotionService implements PromotionServiceLocal {
 	public void create(Promotion promotion) 
 	{
 		promotion.setUniteFormationPromotions(new ArrayList<UniteFormationPromotion>());
+		promotion.setPeriodes(new ArrayList<PeriodePromotion>());
 		em.persist(promotion);
 		Cursus cursus = cursusService.findById(promotion.getCursus().getCurId());
+		
+		List<Periode> periodeList = cursus.getPeriodes();
+		if(!periodeList.isEmpty()){			
+			for (Periode periode : periodeList) {
+				PeriodePromotion periodePromo = new PeriodePromotion();
+				periodePromo.setPromotion(promotion);
+				periodePromo.setPerproNom(periode.getPerNom());
+				periodePromo.setPerproNbjours(periode.getPerNbjours());
+				em.persist(periodePromo);
+			}
+		}
+
 		
 		List<UniteFormationCursus> ufCursuses = cursus.getUniteFormationCursuses();
 		if(!ufCursuses.isEmpty()){			

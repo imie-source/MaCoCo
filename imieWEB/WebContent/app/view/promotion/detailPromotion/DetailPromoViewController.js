@@ -74,8 +74,8 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 		//création d'un objet "cursus id" à partir de l'id du cursus selectionné
     	var promotion = {proId : itemSelected.get('proId')};
     	//création d'une nouvelle période 
-    	var newChild = Ext.create('ExtJsMVC.model.cursus.PeriodePromotionModel');
-		newChild.set ('promotion', promo);
+    	var newChild = Ext.create('ExtJsMVC.model.promotion.PeriodePromotionModel');
+		newChild.set ('promotion', promotion);
 		
 		var myStore = vm.getStore('periodePromotionStore');
 		

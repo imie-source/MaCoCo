@@ -21,7 +21,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.WeekGrid',{
 	}),
 	title:'<b>Semaine</b>',
 	reference:'weekGrid',
-	
+	hideHeaders : true,
 	columns:[{
 		//text:'Semaine',
 		dataIndex:'n',

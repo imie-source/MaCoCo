@@ -13,8 +13,10 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGridViewController',
 		myStore.sync();
 		
 		var vm = this.getViewModel();
+		console.log('vm');
+		console.log(vm);
 		var storeCursus = vm.getStore('rootCursuses');
-		var cursusModel = vm.getStore('Cursuses').getModel();
+		var cursusModel = vm.getStore('cursuses').getModel();
 		var currentFirstCursusTree = vm.get('currentCursus');
 		
 		var arboCursus = cursusModel.load(currentFirstCursusTree.get('curId'),{	

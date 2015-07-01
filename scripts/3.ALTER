@@ -1,7 +1,5 @@
 
-ALTER TABLE periode (
-    ADD per_nom character varying(80),
-);
+ALTER TABLE periode ADD per_nom character varying(80);
 
 CREATE SEQUENCE periode_per_id_seq
     START WITH 1
@@ -14,9 +12,7 @@ CREATE SEQUENCE periode_per_id_seq
 ALTER SEQUENCE periode_per_id_seq OWNED BY periode.per_id;
 
 
-ALTER TABLE periode_promotion (
-    ADD perpro_nom character varying(80),
-);
+ALTER TABLE periode_promotion ADD perpro_nom character varying(80);
 
 
 CREATE SEQUENCE periode_promotion_perpro_id_seq

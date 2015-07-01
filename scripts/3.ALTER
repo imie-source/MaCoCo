@@ -10,11 +10,8 @@ CREATE SEQUENCE periode_per_id_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE periode_per_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE periode_per_id_seq OWNED BY periode.per_id;
-
-
 
 
 ALTER TABLE periode_promotion (
@@ -28,9 +25,6 @@ CREATE SEQUENCE periode_promotion_perpro_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE periode_promotion_perpro_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE periode_promotion_perpro_id_seq OWNED BY periode_promotion.perpro_id;
 

@@ -12,7 +12,7 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
 				beforeexpand : this.onExpand,
 			},
 			'administrationWindowGrid':{
-				rowdblclick : this.onCollapse,
+				rowdblclick : this.onDblclick,
 				rowcontextmenu : this.onContextMenu,
 				rowkeydown : this.onSelect,
 				containercontextmenu : this.onGridContextMenu,
@@ -33,16 +33,19 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     },
         
     
-    onCollapse : function(grid,record,tr,rowIndex,e){
+    onDblclick : function(grid,record,tr,rowIndex,e){
     	e.stopEvent();
     	if (grid.up('#voletCursus')!==undefined){
     		var firstTree = Ext.ComponentQuery.query('cursus-Arbre')[0];
 			console.log('onCollapse');
 			console.log(record);
-			firstTree.getSelectionModel().select(record);	
+			firstTree.getSelectionModel().select(record);
+			var home = grid.up('view-administrationWindow');
+	    	home.toggleCollapse();
+    	}else if (grid.up('#voletRef')!==undefined){
+    		this.setRefFilter(grid,record);
     	}
-    	var home = grid.up('view-administrationWindow');
-    	home.toggleCollapse();
+    	
     	
     },
     

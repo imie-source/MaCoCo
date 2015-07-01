@@ -11,6 +11,16 @@ body{
 	text-align: right;
 }
 
+.div-table1{
+	width: 20%;
+	display: inline-block;
+	vertical-align: top;
+}
+.div-table2{
+	width: 78%;
+	display: inline-block;
+	vertical-align: top;
+}
 table, thead, tr, th,td{
 	margin : 0;
 	padding: 0;
@@ -18,11 +28,12 @@ table, thead, tr, th,td{
 }
 
 
-.bloc-titre
+.bloc-title
 {
 	background-color : #00CCFF;
 	margin : 0px 1px 2px 0px;
 	font-size: 30px;
+	text-align: center;
 }
 .bloc-columnName{
 		margin : 0px 0px 2px 0px;
@@ -43,12 +54,12 @@ table, thead, tr, th,td{
 
 .column-anneeRp
 {
-	width: 10%;	
+	width: 100%;	
 	background-color: #FFFF00;
 }
 .column-ecfRp
 {
-	width: 9.35%;
+	width: 15%;
 	background-color: #FFFF00;
 }
 .column-coursRp
@@ -58,59 +69,36 @@ table, thead, tr, th,td{
 }
 .column-jourRp
 {
-	width: 10.65%;
+	width: 15%;
 	background-color: #FFFF00;
 }
 
-.bloc-ufRp, .bloc-coursRp, .bloc-listeCoursRp
-{
-	width: 100%;
-	display: inline-block;
-	vertical-align: top;
-}
-.bloc-tableRowData,.bloc-global,.bloc-ufRp, .bloc-coursRp, .bloc-listeCoursRp{
-	margin :0px 0px 0px 0px;
-	padding: 0;
-}
-.bloc-tableRowData:nth-child(odd){
+
+.cours-tableRowData:nth-child(odd), .periode-tableRowData:nth-child(odd){
 	background-color: #D8D8D8
 }
-.row-ecfRp, .row-anneeRp,.row-coursNomRp, .row-coursDureeRp 
+.cours-tableRowData:nth-child(even), .periode-tableRowData:nth-child(even){
+	background-color: #c1bebe
+}
+.td-ecf, .td-periode,.td-cours, .td-duree 
 {
 	display: inline-block;
 	vertical-align: top;
 	margin :0px 0px 0px 0px;
 	padding: 0;
 }
-.row-anneeRp1{
-	background-color: #D8D8D8;
-}
-.row-anneeRp2{
-	background-color: #ffffff;
-}
-.row-anneeRp3{
-	background-color: #D8D8D8;
-}
-.row-anneeRp4{
-	background-color: #ffffff;
-}
-.row-anneeRp5{
-	background-color: #D8D8D8;
-}
-
-.row-coursNomRp 
+.td-cours 
 {
 
-		border-right:solid white 1px;
+	border-right:solid white 1px;
 	width: 69%;
 }
 
-.row-coursDureeRp, .row-ecfRp, .row-anneeRp 
+.td-ecf, .td-duree 
 {
-
-	width: 10%;
+	width: 15%;
 }
-.row-coursDureeRp
+.td-duree
 {
 	text-align: center;
 }

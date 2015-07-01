@@ -22,7 +22,7 @@ public class UniteFormationPromotion implements Serializable {
 	@Column(name="ufp_id", unique=true, nullable=false)
 	private Integer ufpId;
 
-	@Column(name="ufp_nom", length=25)
+	@Column(name="ufp_nom", length=100)
 	private String ufpNom;
 
 	@Column(name="ufp_objectifs", length=500)

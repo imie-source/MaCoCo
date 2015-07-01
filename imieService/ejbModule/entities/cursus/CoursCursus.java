@@ -68,7 +68,7 @@ public class CoursCursus implements Serializable {
 	@Column(name="coc_ordre", length=500)
 	private Integer cocOrdre;
 
-	@Column(name="coc_type", length=25)
+	@Column(name="coc_type", length=100)
 	private String cocType;
 
 	//bi-directional many-to-many association to Savoir

@@ -37,7 +37,7 @@ public class Enseignement {
 	@Column(name="ent_id", unique=true, nullable=false)
 	private Integer entId;
 	
-	@Column(name="ent_nom", length=25)
+	@Column(name="ent_nom", length=100)
 	private String entNom;
 	
 	@Column(name="ent_contenu", length=500)

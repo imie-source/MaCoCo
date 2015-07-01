@@ -32,7 +32,7 @@ public class Cursus implements Serializable {
 	@Column(name="cur_id", unique=true, nullable=false)
 	private Integer curId;
 
-	@Column(name="cur_nom", length=25)
+	@Column(name="cur_nom", length=100)
 	private String curNom;
 
 	@Column(name="ref_id")

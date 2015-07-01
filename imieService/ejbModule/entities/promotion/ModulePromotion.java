@@ -22,7 +22,7 @@ public class ModulePromotion implements Serializable {
 	@Column(name="mop_id", unique=true, nullable=false)
 	private Integer mopId;
 
-	@Column(name="mop_intitule", length=25)
+	@Column(name="mop_intitule", length=100)
 	private String mopIntitule;
 
 	@Column(name="mop_objectifs", length=500)

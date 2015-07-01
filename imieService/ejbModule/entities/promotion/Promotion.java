@@ -34,7 +34,7 @@ public class Promotion implements Serializable {
 	@Column(name="pro_id", unique=true, nullable=false)
 	private Integer proId;
 
-	@Column(name="pro_nom", length=25)
+	@Column(name="pro_nom", length=100)
 	private String proNom;
 
 	//bi-directional many-to-one association to Cursus

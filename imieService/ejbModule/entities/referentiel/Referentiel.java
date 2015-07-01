@@ -22,7 +22,7 @@ public class Referentiel implements Serializable {
 	@Column(name="ref_id", unique=true, nullable=false)
 	private Integer refId;
 
-	@Column(name="ref_nom", length=25)
+	@Column(name="ref_nom", length=100)
 	private String refNom;
 
 	//bi-directional many-to-one association to ActiviteType

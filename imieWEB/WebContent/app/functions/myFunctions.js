@@ -104,16 +104,16 @@ var addNbJourWindow = function(periodeList, coursList){
 	   var html;
 	   var idMessageNbJours;
 	   if(nbJoursRestant>1){
-		   html = 'Il reste '.concat(nbJoursRestant).concat(' jours de cours disponibles.');   
+		   html = 'Il reste '.concat(nbJoursRestant).concat(' jours à affecter.');   
 		   idMessageNbJours = 'messageNbJoursOk';
 	   }else if (nbJoursRestant>=0){
-		   html = 'Il reste '.concat(nbJoursRestant).concat(' jour de cours disponible.');
+		   html = 'Il reste '.concat(nbJoursRestant).concat(' jour à affecter.');
 		   idMessageNbJours = 'messageNbJoursOk';
 	   }else if (nbJoursRestant>=-1){
-		   html = 'Attention : Il y a '.concat(nbJoursRestant.toString().substring(1)).concat(' jour de cours en trop.');
+		   html = 'Attention : '.concat(nbJoursRestant.toString().substring(1)).concat(' jour affecté en trop.');
 		   idMessageNbJours = 'messageNbJoursNok';
 	   }else {
-		   html = 'Attention : Il y a '.concat(nbJoursRestant.toString().substring(1)).concat(' jours de cours en trop.');
+		   html = 'Attention : '.concat(nbJoursRestant.toString().substring(1)).concat(' jours affectés en trop.');
 		   idMessageNbJours = 'messageNbJoursNok';
 	   }
 	   
@@ -129,4 +129,62 @@ var addNbJourWindow = function(periodeList, coursList){
     detailView.add(messageWindow);
 }
 
+
+var getPeriodeRowWidth = function(coursData, periodeData){
+	var rowWidthList = new Array();
+	var pxRow = 22;
+	var jourCours = 0;
+	var nbCours = 0;
+	var periodeIndex = 0;
+	coursData.forEach(function(cours, index) {
+		console.log('cours.entityName');
+		console.log(cours.entityName);
+		if (cours.entityName ==='ExtJsMVC.model.promotion.CoursPromotionModel'){
+			jourCours = jourCours + cours.getData().copDuree;
+		}else {
+			jourCours = jourCours + cours.getData().cocDuree;
+		}
+		nbCours ++;
+		console.log('**************************');
+		console.log(jourCours);
+		console.log('jourCours');
+		var jourPeriode = 0;
+		if(periodeIndex <= periodeData.length-1){
+			for(var i =0;i<=periodeIndex;i++){
+				console.log('periodeData[i].getData().entityName');
+				console.log(periodeData[i].getData().perproId);
+				if (periodeData[i].getData().perproId != undefined){
+					jourPeriode = jourPeriode + periodeData[i].getData().perproNbjours;
+				}else {
+					jourPeriode = jourPeriode + periodeData[i].getData().perNbjours;
+				}
+				
+				
+				console.log('bouclefor');
+			}
+			console.log(jourPeriode);
+			console.log('jourPeriode');
+			
+			if(jourCours === jourPeriode){
+				rowWidthList.push(nbCours*pxRow);
+				nbCours = 0;
+				periodeIndex++;
+				console.log('jourCours === jourPeriode');
+			}else if(jourCours >= jourPeriode){
+				rowWidthList.push((nbCours-1)*pxRow);
+				nbCours = 1;
+				periodeIndex++;
+				console.log('jourCours >= jourPeriode');
+			}
+		}
+		
+			
+	});	
+	if((rowWidthList.length-1)<periodeIndex){
+		rowWidthList.push((nbCours+1)*pxRow);
+	}
+	console.log(rowWidthList);
+	console.log(nbCours);
+	return rowWidthList
+}
 

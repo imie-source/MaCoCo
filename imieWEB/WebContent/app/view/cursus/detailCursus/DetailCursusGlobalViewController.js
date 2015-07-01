@@ -396,7 +396,9 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		var win = window.open('printSchemaPedagogique.html');
 		win.onload = drawDocument;
 	},
-	onPrintOrdoClick : function(bouton) {
+
+onPrintOrdoClick : function(bouton) {
+
 		var vm = this.getViewModel();
 		var uniteFormationStore = vm.getStore('rootCursuses');
 		var cursus = uniteFormationStore.getRoot().getChildAt(0);
@@ -405,6 +407,10 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		var coursData = coursStore.getData().items;
 		var periodeStore = vm.getStore('periodeStore');
 		var periodeData = periodeStore.getData().items;
+		
+		//calcul de la taille des cellules du tableau période function/myFunctions.js
+		var rowWidthList = getPeriodeRowWidth(coursData, periodeData);
+		
 		
 		var drawDocument = function() {
 
@@ -425,55 +431,113 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 					+ ' | ' + dateToday;
 			this.document.title = documentName;
 
-			// Ajout dans un tableau pour la mise en page
+			
+			var schemaPedago = 'Ruban pédagogique : ';
+			var child = {
+				tag : 'div',
+				cls : 'bloc-title',
+				html : schemaPedago.concat(cursusData.curNom),
+			};
+			var blocTableH = dh.append(htmlBody, child);
+			
+			
+			var child = {
+					tag : 'div',
+					cls : 'div-table1'
+				};
+			var divTable = dh.append(htmlBody, child);
+			
+			
 			var child = {
 				tag : 'table',
-				cls : 'bloc-table'
+				cls : 'bloc-table1'
 			};
-			var blocTable = dh.append(htmlBody, child);
+			var blocTable = dh.append(divTable, child);
+			
+				
+			
 			var child = {
 				tag : 'thead',
 				cls : 'bloc-tableHead'
 			};
 			var blocTableHead = dh.append(blocTable, child);
 			var child = {
-				tag : 'tr',
-				cls : 'bloc-tableRowHead'
-			};
-			var blocTableRowHead = dh.append(blocTableHead, child);
-			var child = {
-				tag : 'th',
-				cls : 'bloc-tableH'
-			};
-			var blocTableH = dh.append(blocTableRowHead, child);
+					tag : 'tr',
+					cls : 'periode-tableRowHead'
+				};
+				var blocTableRowHead = dh.append(blocTableHead, child);
+				
+			
+				var child = {
+					tag : 'th',
+					cls : 'column-anneeRp',
+					html : 'Année'
+				};
+				var column = dh.append(blocTableRowHead, child);
+	
 
-			// Titre
-			var schemaPedago = 'Ruban pédagogique : ';
+			// Ajout dans une balise td pour la mise en page
 			var child = {
-				tag : 'div',
-				cls : 'bloc-titre',
-				html : schemaPedago.concat(cursusData.curNom)
+				tag : 'tbody',
+				cls : 'bloc-tableBody'
 			};
-			var blocTitre = dh.append(blocTableH, child);
+			var blocTableBody = dh.append(blocTable, child);
 
-			// Nom des colonnes
+
+			periodeData.forEach(function(periode, index) {
+				
+				var child = {
+					tag : 'tr',
+					cls : 'periode-tableRowData'
+				};
+				var blocTableRowData = dh.append(blocTableBody, child);
+			
+				var child = {
+							tag : 'td',
+							cls : 'td-periode',
+							html : periode.getData().perNom,
+							height : rowWidthList[index]
+						};
+				var blocTableData = dh.append(blocTableRowData, child);
+
+			});
+			
 			var child = {
-				tag : 'div',
-				cls : 'bloc-columnName'
+					tag : 'div',
+					cls : 'div-table2'
+				};
+			var divTable = dh.append(htmlBody, child);
+			
+			
+			var child = {
+				tag : 'table',
+				cls : 'bloc-table2'
 			};
-			var blocColumnName = dh.append(blocTableH, child);
-
-			var columnName = [ [ 'Année', 'column-anneeRp' ],
+			var blocTable = dh.append(divTable, child);
+			var child = {
+				tag : 'thead',
+				cls : 'bloc-tableHead'
+			};
+			var blocTableHead = dh.append(blocTable, child);
+			
+			var child = {
+					tag : 'tr',
+					cls : 'cours-tableRowHead'
+				};
+				var blocTableRowHead = dh.append(blocTableHead, child);
+				
+			
+			var columnName = [
 					[ 'ECF', 'column-ecfRp' ], [ 'Cours', 'column-coursRp' ],
 					[ 'Jour', 'column-jourRp' ] ];
 
 			columnName.forEach(function(element, index, array) {
 				var child = {
-					tag : 'div',
+					tag : 'th',
 					cls : element[1],
 					html : element[0]
 				};
-				var column = dh.append(blocColumnName, child);
+				var column = dh.append(blocTableRowHead, child);
 			});
 
 			// Total des jours
@@ -487,87 +551,36 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 			var blocTableBody = dh.append(blocTable, child);
 
 
-			coursData.forEach(function(cours) {
+			coursData.forEach(function(cours, index) {
 				sommeJour = sommeJour + cours.getData().cocDuree;
+				
+				
 				var child = {
 					tag : 'tr',
-					cls : 'bloc-tableRowData'
+					cls : 'cours-tableRowData'
 				};
-				
-				
 				var blocTableRowData = dh.append(blocTableBody, child);
+				
+				
 				var child = {
-					tag : 'td',
-					cls : 'bloc-tableData'
-				};
+						tag : 'td',
+						cls : 'td-ecf',
+						//html :
+					};
+				var blocTableData = dh.append(blocTableRowData, child);
+				var child = {
+						tag : 'td',
+						cls : 'td-cours',
+						html : cours.getData().cocIntitule
+					};
+				var blocTableData = dh.append(blocTableRowData, child);
+				var child = {
+						tag : 'td',
+						cls : 'td-duree',
+						html : cours.getData().cocDuree
+					};
 				var blocTableData = dh.append(blocTableRowData, child);
 
-				var child = {
-					tag : 'div',
-					cls : 'bloc-global'
-				};
-				var blocGlobal = dh.append(blocTableData, child);
-
-				var child = {
-					tag : 'div',
-					cls : 'bloc-listeCoursRp'
-				};
-				var blocListeCours = dh.append(blocGlobal, child);
-
-						var child = {
-							tag : 'div',
-							cls : 'bloc-coursRp'
-						};
-						
-						var blocCours = dh.append(blocListeCours, child);
-						
-						var periodeHtml
-						var periodeClass;
-						var sommeJourPeriode = 0;
-						periodeData.forEach(function(periode, index){
-							
-							sommeJourPeriode += periode.getData().perNbjours;
-							console.log('sommeJour <= sommeJourPeriode');
-							console.log(sommeJour <= sommeJourPeriode);
-							console.log(sommeJour);
-							console.log(sommeJourPeriode);
-							if(sommeJour <= sommeJourPeriode){
-								
-								periodeClass = 'row-anneeRp row-anneeRp'.concat(index);
-								 periodeHtml = periode.getData().perNom;
-							}
-						});
-						
-					
-						var child = {
-							tag : 'div',
-							cls : periodeClass,
-							html : periodeHtml
-						};
-						var rowAnnee = dh.append(blocCours, child);
-
-						var child = {
-							tag : 'div',
-							cls : 'row-ecfRp',
-							//html : cours.getData().cocDuree
-						};
-						var rowEcf = dh.append(blocCours, child);
-						
-						var child = {
-							tag : 'div',
-							cls : 'row-coursNomRp',
-							html : cours.getData().cocIntitule
-						};
-						var rowCours = dh.append(blocCours, child);
-
-						var child = {
-							tag : 'div',
-							cls : 'row-coursDureeRp',
-							html : cours.getData().cocDuree
-						};
-						var infosCours = dh.append(blocCours, child);
-
-						
 				
 
 			});
@@ -597,7 +610,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 
 		var win = window.open('printRubanPedagogique.html');
 		win.onload = drawDocument;
-	}
+}
 
 	
 });

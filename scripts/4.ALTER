@@ -1,0 +1,45 @@
+------------------------------------------------------------
+--        Script Postgre : augmentation du nb de caractères
+------------------------------------------------------------
+
+ALTER TABLE public.Utilisateur
+	ALTER COLUMN nom_utilisateur TYPE VARCHAR (100);
+
+ALTER TABLE public.Referentiel
+	ALTER COLUMN ref_nom TYPE VARCHAR (100);
+
+ALTER TABLE public.Cursus
+	ALTER COLUMN cur_nom TYPE VARCHAR (100);
+
+ALTER TABLE public.Promotion
+	ALTER COLUMN pro_nom TYPE VARCHAR (100);
+
+
+ALTER TABLE public.Enseignement
+	ALTER COLUMN ent_nom TYPE VARCHAR (100);
+
+
+ALTER TABLE public.Unite_Formation_Promo
+	ALTER COLUMN ufp_nom  TYPE VARCHAR (100);
+
+
+ALTER TABLE public.Unite_Formation_Cursus
+	ALTER COLUMN ufc_nom TYPE VARCHAR (100);
+	
+ALTER TABLE public.Module_Promo
+	ALTER COLUMN mop_intitule TYPE VARCHAR (100);
+
+ALTER TABLE public.Module_Cursus
+	ALTER COLUMN moc_intitule TYPE VARCHAR (100);
+
+ALTER TABLE public.Cours_Cursus
+	ALTER COLUMN  coc_intitule TYPE VARCHAR (100);
+ALTER TABLE public.Cours_Cursus
+	ALTER COLUMN  coc_type  TYPE VARCHAR (100);
+
+ALTER TABLE public.Cours_Promo
+	ALTER COLUMN  cop_intitule  TYPE  VARCHAR (100);
+ALTER TABLE public.Cours_Promo	
+	ALTER COLUMN  cop_type   TYPE  VARCHAR (100);
+
+

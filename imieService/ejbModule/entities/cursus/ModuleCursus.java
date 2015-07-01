@@ -22,7 +22,7 @@ public class ModuleCursus implements Serializable {
 	@Column(name="moc_id", unique=true, nullable=false)
 	private Integer mocId;
 
-	@Column(name="moc_intitule", length=25)
+	@Column(name="moc_intitule", length=100)
 	private String mocIntitule;
 
 	@Column(name="moc_objectifs", length=500)

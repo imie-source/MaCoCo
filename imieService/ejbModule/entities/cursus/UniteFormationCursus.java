@@ -22,7 +22,7 @@ public class UniteFormationCursus implements Serializable {
 	@Column(name="ufc_id", unique=true, nullable=false)
 	private Integer ufcId;
 
-	@Column(name="ufc_nom", length=25)
+	@Column(name="ufc_nom", length=100)
 	private String ufcNom;
 
 	@Column(name="ufc_objectifs", length=500)

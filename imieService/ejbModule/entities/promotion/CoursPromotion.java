@@ -59,7 +59,7 @@ public class CoursPromotion implements Serializable {
 	@Column(name="cop_ordre", length=500)
 	private Integer copOrdre;
 
-	@Column(name="cop_type", length=25)
+	@Column(name="cop_type", length=100)
 	private String copType;
 
 	@Column(name="coc_id")

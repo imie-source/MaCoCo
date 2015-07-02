@@ -4,7 +4,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	xtype : 'view-cursusView',
 	alias:'widget.cursusView',
 	requires : [
-	            'ExtJsMVC.view.cursus.CursusViewController', 
+	            //'ExtJsMVC.view.cursus.CursusViewController', 
 	            'ExtJsMVC.view.cursus.CursusViewModel',
 	            'ExtJsMVC.view.cursus.detailCursus.WeekGrid',
 	            'ExtJsMVC.view.cursus.detailCursus.CursusViewGrid',
@@ -42,7 +42,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	            
 	],
 	
-	controller : 'cursusViewController',
+	//controller : 'cursusViewController',
 	
 	viewModel : {
 		type : 'cursusViewModel'
@@ -74,7 +74,8 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 	                     		items : 
 		                 			[
 									{
-										xtype : 'cursus-Arbre',
+										itemId : 'firstTree',
+										//xtype : 'cursus-Arbre',
 										autoScroll : true,
 										flex  : 1,
 										
@@ -82,13 +83,13 @@ Ext.define('ExtJsMVC.view.cursus.CursusView', {
 									{
 										itemId : 'secondTree',
 										autoScroll : true,
-										flex  : 1,
+										flex  : 2,
 										
 									},
 									{ 
 										itemId : 'refTree',
 										autoScroll : true,
-		                        		flex  : 1,
+		                        		flex  : 2,
 		                    		}
 			             			]	
                          

@@ -2,28 +2,27 @@
 Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowGrid',{
 	extend : 'ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',
 	alias : 'widget.enseignementWindowGrid',
-	/*requires:[
-	          'Ext.grid.plugin.CellEditing'
-	],
-	plugins:[{
-		ptype:'cellediting',
-		pluginId:'editing',
-		triggerEvent:'rowfocus'
-	}],*/
-	title:'Liste des enseignements',
+
+	//title:'Liste des enseignements',
 	reference:'enseignementsGrid',
 	width : '100%',
-    height : '100%',
+	height : window.innerHeight-100,
 	dockedItems:[{
 		xtype:'toolbar',
 		dock:'top',
 		items:[
 		    '->',
 		    {
+		    	xtype:'image',
+		    	src:'img/magGlass.png',
+		    	width : 20,
+		    	height : 20,
+			},
+		    {
 		    	xtype:'textfield',
 		    	enableKeyEvents : true,
 		    	id:'findWord',
-		    	placeholder : 'enseignement...',
+		    	emptyText : 'filtrer les enseignements',
 				itemId:'textfieldRecToolBar',
 			},
 		]

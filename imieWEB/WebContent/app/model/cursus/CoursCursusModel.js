@@ -22,7 +22,7 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/courscursus',
+	    url: './webapi/courscursus',
     	writer : 
     	{
     		nameProperty: 'mapping',
@@ -37,6 +37,7 @@ Ext.define('ExtJsMVC.model.cursus.CoursCursusModel',
                     data.children = undefined;
                     data.text = undefined;
                     data.savoirs = undefined;
+
                     return data;
                 },
                 scope: this

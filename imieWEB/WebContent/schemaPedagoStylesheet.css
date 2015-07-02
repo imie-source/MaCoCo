@@ -230,8 +230,19 @@ table, thead, tr, th,td{
 	padding: 0;
 	display: inline-block;
 	vertical-align: top;
-	width: 33%;
-	margin-left: 38.2%;
+	width: 32%;
+	margin-left: 34.7%;
+	background-color: LightSteelBlue;
+	
+}
+
+.bloc-sommeJoursNb{	
+	margin :0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: top;
+	text-align : center;
+	width: 5%;
 	background-color: LightSteelBlue;
 	
 }

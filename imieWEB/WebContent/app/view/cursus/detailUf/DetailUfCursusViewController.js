@@ -41,7 +41,7 @@ Ext.define('ExtJsMVC.view.cursus.detailUf.DetailUfCursusViewController', {
 				
 				if(itemSelected.get('ufcId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/uniteformationcursus/'.concat(itemSelected.get('ufcId'));	
+					myUrl = './webapi/uniteformationcursus/'.concat(itemSelected.get('ufcId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -60,7 +60,7 @@ Ext.define('ExtJsMVC.view.cursus.detailUf.DetailUfCursusViewController', {
 		uf.set('ufcObjectifs', itemSelected.get('ufcObjectifs'));
 		if(vm !== undefined){
 			myStore.sync({
-				callback : function(){
+				success : function(){
 					var tree =  Ext.ComponentQuery.query('cursus-Arbre2')[0];
 					tree.getSelectionModel().select(uf);
 					
@@ -81,10 +81,19 @@ Ext.define('ExtJsMVC.view.cursus.detailUf.DetailUfCursusViewController', {
 							tree.expandPath(uf.parentNode.getPath());
 					    },
 					});
-				}
+				},
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
 			});	
 		} else{
-			myStore.sync();
+			myStore.sync({
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+			});
 		}
 	},
 	

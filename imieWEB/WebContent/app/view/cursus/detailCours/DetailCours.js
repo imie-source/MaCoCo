@@ -85,7 +85,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCours.DetailCours', {
         {
         	id : 'seleniumDetailCoursPrint',
             xtype : 'button',
-            text : 'Imprimer',
+            text : 'Imprimer fiche de cours',
             handler : 'onPrintClick',
             itemId : 'Print'
         },

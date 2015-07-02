@@ -15,7 +15,7 @@ Ext.define('ExtJsMVC.model.cursus.UniteFormationCursusModel',
      proxy: 
      {
          type: 'rest',
-         url: '/imieWEB/webapi/uniteformationcursus/',
+         url: './webapi/uniteformationcursus/',
     	writer : 
     	{
     		nameProperty: 'mapping',

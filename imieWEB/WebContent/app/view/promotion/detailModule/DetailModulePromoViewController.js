@@ -46,7 +46,7 @@ Ext.define('ExtJsMVC.view.promotion.detailModule.DetailModulePromoViewController
 				
 				if(itemSelected.get('mopId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/modulepromotion/'.concat(itemSelected.get('mopId'));	
+					myUrl = './webapi/modulepromotion/'.concat(itemSelected.get('mopId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -65,7 +65,7 @@ Ext.define('ExtJsMVC.view.promotion.detailModule.DetailModulePromoViewController
 		module.set('mopObjectifs', itemSelected.get('mopObjectifs'));
 		if(vm !== undefined){
 			myStore.sync({
-				callback : function(){
+				success : function(){
 					var tree =  Ext.ComponentQuery.query('promo-Arbre2')[0];
 					tree.getSelectionModel().select(module);
 					
@@ -88,10 +88,19 @@ Ext.define('ExtJsMVC.view.promotion.detailModule.DetailModulePromoViewController
 							
 					    },
 					});
-				}
+				},
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
 			});	
 		} else{
-			myStore.sync();
+			myStore.sync({
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+			});
 		}
 	},
 	

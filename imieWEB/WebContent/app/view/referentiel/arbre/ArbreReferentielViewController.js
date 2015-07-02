@@ -12,7 +12,7 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 				selectionchange : this.chargeRefTreeForm,
 				beforeitemclick : this.itemClick,
 				itemclick : this.chargeSavForm,
-				itemcontextmenu : this.onRefTreeContextMenu,
+				//itemcontextmenu : this.onRefTreeContextMenu,
 			},
 			
 		});
@@ -48,7 +48,7 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 		      
 		       if(selectedRecords[0].get('refId')!== undefined){
 			       myStore = vm.getStore('actTypeStore');
-			       myUrl = '/imieWEB/webapi/activitetype/referentiel/'.concat(record.get('refId'));	
+			       myUrl = './webapi/activitetype/referentiel/'.concat(record.get('refId'));	
 			       myStore.load({
 			    	   url : myUrl,
 			    	   callback : function(){
@@ -80,7 +80,7 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 		       
 		       if(selectedRecords[0].get('actId')!== undefined){
 			       myStore = vm.getStore('compProStore');
-			       myUrl = '/imieWEB/webapi/competencepro/activitetype/'.concat(record.get('actId'));	
+			       myUrl = './webapi/competencepro/activitetype/'.concat(record.get('actId'));	
 			       myStore.load({
 			    	   url : myUrl,
 			    	   callback : function(){
@@ -113,7 +113,7 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 
 		       if(selectedRecords[0].get('comId')!== undefined){
 			       myStore = vm.getStore('savoirStore');
-			       myUrl = '/imieWEB/webapi/savoir/competencepro/'.concat(record.get('comId'));	
+			       myUrl = './webapi/savoir/competencepro/'.concat(record.get('comId'));	
 			       myStore.load({
 			    	   url : myUrl,
 			    	   callback : function(){
@@ -207,12 +207,17 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 		    			text : 'supprimer le savoir',
 		    			handler:function(){
 		    				myStore = vm.getStore('savoirStore');
-		     				myUrl = '/imieWEB/webapi/savoir/'.concat(record.get('savId'));	
+		     				myUrl = './webapi/savoir/'.concat(record.get('savId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
 				    				myStore.removeAll();
-				    				myStore.sync();
+				    				myStore.sync({
+				    					failure : function(batch){
+				    		    			var message = batch.operations[0].error.response.responseText;
+				    		    			Ext.Msg.alert('Erreur', message);
+				    		    		}
+				    				});
 								}
 							});
 		    	    	},
@@ -228,12 +233,17 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 		    			text : 'supprimer la compétence pro',
 		    			handler:function(){
 		    				myStore = vm.getStore('compProStore');
-		    				myUrl = '/imieWEB/webapi/competencepro/'.concat(record.get('comId'));	
+		    				myUrl = './webapi/competencepro/'.concat(record.get('comId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
 				    				myStore.removeAll();
-				    				myStore.sync();
+				    				myStore.sync({
+				    					failure : function(batch){
+				    		    			var message = batch.operations[0].error.response.responseText;
+				    		    			Ext.Msg.alert('Erreur', message);
+				    		    		}
+				    				});
 								}
 							});
 		    	    	},
@@ -259,12 +269,17 @@ Ext.define('ExtJsMVC.view.referentiel.arbre.ArbreReferentielViewController', {
 		    			text : 'supprimer l\'activité type',
 		    			handler:function(){
 		    				myStore = vm.getStore('actTypeStore');
-		    				myUrl = '/imieWEB/webapi/activitetype/'.concat(record.get('actId'));	
+		    				myUrl = './webapi/activitetype/'.concat(record.get('actId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
 				    				myStore.removeAll();
-				    				myStore.sync();
+				    				myStore.sync({
+				    					failure : function(batch){
+				    		    			var message = batch.operations[0].error.response.responseText;
+				    		    			Ext.Msg.alert('Erreur', message);
+				    		    		}
+				    				});
 								}
 							});
 		    				

@@ -12,7 +12,7 @@ Ext.define('ExtJsMVC.model.referentiel.CompetencePro',
 	    hasMany:  {model: 'ExtJsMVC.model.referentiel.Savoir', associationKey : 'savoirs'},	
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/competencepro/',
+	    	url: './webapi/competencepro/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

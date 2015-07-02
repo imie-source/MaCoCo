@@ -43,6 +43,8 @@ var addNbJourWindow = function(periodeList, coursList){
 	   coursList.forEach(function(cours){
 		if(cours.entityName === 'ExtJsMVC.model.cursus.CoursCursusModel'){
 			nbJoursCours += cours.get('cocDuree');
+			
+			
 		}else{
 			nbJoursCours += cours.get('copDuree');
 		}
@@ -99,7 +101,9 @@ var addNbJourWindow = function(periodeList, coursList){
 	
 		   });	
 	   }
-	   nbJoursRestant = nbJoursPeriode-nbJoursCours;
+	   nbJoursRestant = (nbJoursPeriode-nbJoursCours);
+	   nbJoursRestant = Math.round(nbJoursRestant*100)/100;
+	   
 	   
 	   var html;
 	   var idMessageNbJours;

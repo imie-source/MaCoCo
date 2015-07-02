@@ -8,11 +8,15 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.PeriodeGridViewController', {
 		var myPeriodeStore = view.getStore();
 		myPeriodeStore.remove(record);
 		myPeriodeStore.sync({
-			callback : function(){
+			success : function(){
 				var myCoursStore = vm.getStore('coursByCursus');
 			    //function.myFunctions.js
 			    addNbJourWindow(myPeriodeStore.getData().items,myCoursStore.getData().items);
-			}
+			},
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
 		});
 			
 	},

@@ -74,20 +74,36 @@ div[id*='weekGrid'].x-panel-body *{
 .heightWeekGridRow{
 	height: 125px;
 }
-
-.heightOrdoGridRow1{
+.heightOrdoGridRow25, .heightOrdoGridRow25 td, .heightOrdoGridRow25 td div {
+	height: 6px;
+	padding-top : 0;
+	padding-bottom : 0;
+	font-size: 3px;
+}
+.heightOrdoGridRow50, .heightOrdoGridRow50 td, .heightOrdoGridRow50 td div {
+	height: 12.5px;
+	padding-top : 0;
+	padding-bottom : 0;
+	font-size: 10px;
+}
+.heightOrdoGridRow75, .heightOrdoGridRow75 td, .heightOrdoGridRow75 td div {
+	height: 18.75px;
+	padding-top : 0;
+	padding-bottom : 0;
+}
+.heightOrdoGridRow100{
 	height: 25px;
 }
-.heightOrdoGridRow2{
+.heightOrdoGridRow200{
 	height: 50px;
 }
-.heightOrdoGridRow3{
+.heightOrdoGridRow300{
 	height: 75px;
 }
-.heightOrdoGridRow4{
+.heightOrdoGridRow400{
 	height: 100px;
 }
-.heightOrdoGridRow5{
+.heightOrdoGridRow500{
 	height: 125px;
 }
 .colorOrdoGridRow1{

@@ -28,7 +28,12 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 				element.set('cocOrdre',index+1);	
 		});
 		
-		coursStore.sync(); 
+		coursStore.sync({
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
+		}); 
 		
 	},
 	onAddUfCursusClick : function()
@@ -107,6 +112,10 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 		switchview.add({xtype : 'cursus-DetailPeriode'});
 	},
 
+	getInfo : function(view, row, col, action, ev, record){
+		console.log(record);
+	},
+	
 	onPrintClick : function(bouton) {
 
 		var uniteFormationStore = this.getViewModel().getStore('rootCursuses');
@@ -262,6 +271,13 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 					};
 					var enteteModule = dh.append(blocModule, child);
 
+					// nb jours module
+					var child = {
+						tag : 'div',
+						cls : 'bloc-jour'
+					};
+					var blocInfoModuleJour = dh.append(blocModule, child);
+					
 					// nb heures module
 					var child = {
 						tag : 'div',
@@ -269,12 +285,7 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 					};
 					var blocInfoModuleHeure = dh.append(blocModule, child);
 
-					// nb jours module
-					var child = {
-						tag : 'div',
-						cls : 'bloc-jour'
-					};
-					var blocInfoModuleJour = dh.append(blocModule, child);
+					
 					
 					// blocs vides pour rendu CSS
 					var child = {
@@ -371,9 +382,8 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 
 			});
 
-			// Total des heures
-			// var sommeHeure =0;
-			// Total des heures de cours
+			sommeJours = sommeJours.toString().concat(' j');
+			sommeHeures = sommeHeures.toString().concat(' h');
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeHeure'
@@ -382,15 +392,23 @@ dragdrop : function(node,data,overModel,dropPosition,eOpts){
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeHeureTxt',
-				html : 'Total des heures de cours en centre :'
+				html : 'Total des jours et heures de cours en centre :'
 			};
 			var blocSommeHeureTxt = dh.append(blocSommeHeure, child);
+			
 			var child = {
-				tag : 'div',
-				cls : 'bloc-sommeHeureNb',
-				html : sommeHeures
-			};
-			var blocSommeHeureNb = dh.append(blocSommeHeure, child);
+					tag : 'div',
+					cls : 'bloc-sommeJoursNb',
+					html : sommeJours
+				};
+			var blocSommeJourNb = dh.append(blocSommeHeure, child);
+			var child = {
+					tag : 'div',
+					cls : 'bloc-sommeHeureNb',
+					html : sommeHeures
+				};
+			var blocSommeJourNb = dh.append(blocSommeHeure, child);
+			
 		};
 
 		var win = window.open('printSchemaPedagogique.html');

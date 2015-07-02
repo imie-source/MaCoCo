@@ -12,7 +12,7 @@ Ext.define('ExtJsMVC.model.referentiel.Referentiel',
 	   
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/referentiel/',
+	    	url: './webapi/referentiel/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

@@ -16,7 +16,7 @@ Ext.define('ExtJsMVC.model.promotion.ModulePromotionModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/modulepromotion',
+	    url: './webapi/modulepromotion',
     	writer : 
     	{
     		nameProperty: 'mapping',

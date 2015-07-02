@@ -22,7 +22,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 				
 				if(itemSelected.get('copId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/courspromotion/'.concat(itemSelected.get('copId'));	
+					myUrl = './webapi/courspromotion/'.concat(itemSelected.get('copId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -49,7 +49,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 		cours.set('copCommentaires', itemSelected.get('copCommentaires'));
 		console.log(cours);
 		myStore.sync({
-			callback : function(){
+			success : function(){
 				var tree =  Ext.ComponentQuery.query('promo-Arbre2')[0];
 				tree.getSelectionModel().select(cours);
 				
@@ -71,7 +71,11 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 						tree.expandPath(cours.parentNode.getPath());
 				    },
 				});
-			}
+			},
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
 		});
 		
 	},
@@ -93,7 +97,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 		var prerequisData = new Array();
 		var materielData = new Array();
 		
-		var myUrl = '/imieWEB/webapi/courspromotion/fichecours/'.concat(currentCours.get('copId'));
+		var myUrl = './webapi/courspromotion/fichecours/'.concat(currentCours.get('copId'));
 		var coursStore = this.getViewModel().getStore('coursByPromotion').load({
 			url : myUrl,
 			callback : function(records){
@@ -592,7 +596,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 				callback: function()
 				{
 					var myStore = vm.getStore('enseignementStore');
-				       myUrl = '/imieWEB/webapi/enseignement/courspromotion/'.concat(coursPromotionId);	
+				       myUrl = './webapi/enseignement/courspromotion/'.concat(coursPromotionId);	
 				       myStore.load({
 				    	   url : myUrl,
 				       });
@@ -634,7 +638,7 @@ Ext.define('ExtJsMVC.view.promotion.detailCours.DetailCoursPromoViewController',
 				callback: function()
 				{
 					var myStore = vm.getStore('savoirStore');
-				       myUrl = '/imieWEB/webapi/savoir/courspromotion/'.concat(coursPromotionId);	
+				       myUrl = './webapi/savoir/courspromotion/'.concat(coursPromotionId);	
 				       myStore.load({
 				    	   url : myUrl,
 				       });

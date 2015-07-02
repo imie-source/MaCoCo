@@ -41,7 +41,7 @@ Ext.define('ExtJsMVC.view.referentiel.detailCompetencePro.DetailCompetenceProVie
 				
 				if(itemSelected.get('comId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre ref
-					myUrl = '/imieWEB/webapi/competencepro/'.concat(itemSelected.get('comId'));	
+					myUrl = './webapi/competencepro/'.concat(itemSelected.get('comId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -64,7 +64,7 @@ Ext.define('ExtJsMVC.view.referentiel.detailCompetencePro.DetailCompetenceProVie
 		
 		if(vm !== undefined){
 			myStore.sync({
-				callback : function(){
+				success : function(){
 					var tree =  Ext.ComponentQuery.query('arbre-Referentiel')[0];
 					tree.getSelectionModel().select(compPro);
 					
@@ -84,11 +84,24 @@ Ext.define('ExtJsMVC.view.referentiel.detailCompetencePro.DetailCompetenceProVie
 							});			
 							tree.expandPath(compPro.parentNode.getPath());
 					    },
+					    failure : function(batch){
+			    			var message = batch.operations[0].error.response.responseText;
+			    			Ext.Msg.alert('Erreur', message);
+			    		}
 					});
-				}
+				},
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
 			});	
 		} else{
-			myStore.sync();
+			myStore.sync({
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+			});
 		}
 	},
 	

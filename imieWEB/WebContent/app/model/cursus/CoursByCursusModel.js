@@ -5,7 +5,7 @@ Ext.define('ExtJsMVC.model.cursus.CoursByCursusModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/courscursus/cursus',
+	    url: './webapi/courscursus/cursus',
 	}
 });
 

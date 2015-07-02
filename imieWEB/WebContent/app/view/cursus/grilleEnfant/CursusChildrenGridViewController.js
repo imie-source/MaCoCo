@@ -10,7 +10,12 @@ Ext.define('ExtJsMVC.view.cursus.grilleEnfant.CursusChildrenGridViewController',
 		console.log(record);
 
 		myStore.remove(record);
-		myStore.sync();
+		myStore.sync({
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
+		});
 		
 		var vm = this.getViewModel();
 		console.log('vm');

@@ -24,18 +24,26 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailNewPromoViewController
 		var promo = myStore.data.items[0];
 		promo.set('text', itemSelected.get('text'));
 		myStore.sync({
-			callback : function(){
+			success : function(){
 				
 				vm.getStore('firstTreeStore').load({
-					callback : function(){
+					success : function(){
 					
 						var tree =  Ext.ComponentQuery.query('cursus-Arbre')[0];
 						tree.getSelectionModel().select(promo);
 				
 						tree.expandPath(promo.parentNode.getPath());
-					}
+					},
+					failure : function(batch){
+		    			var message = batch.operations[0].error.response.responseText;
+		    			Ext.Msg.alert('Erreur', message);
+		    		}
 				});			
-			}
+			},
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
 		});	
 		
 	},

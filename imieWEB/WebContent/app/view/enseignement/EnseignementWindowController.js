@@ -36,6 +36,8 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
 		var vm = this.getViewModel();
 		var myStore = vm.getStore('enseignementStore');
 		var myString = textfield.getValue();
+		console.log('myString');
+		console.log(myString);
 		var nameFilter = new Ext.util.Filter({
 		    property : 'entSearch',
 		    anyMatch : true,
@@ -95,7 +97,7 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
     		},
     		failure : function(batch){
     			var message = batch.operations[0].error.response.responseText;
-    			Ext.Msg.alert('Opération interdite : chaine sans fin', message);
+    			Ext.Msg.alert('Opération interdite', message);
     		}
     		
     	});  
@@ -177,7 +179,12 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowController', {
                         console.log(entSelected.getData());
                         var store = vm.getStore('enseignementStore');
                         store.remove(entSelected);
-                        store.sync();
+                        store.sync({
+                        	failure : function(batch){
+                    			var message = batch.operations[0].error.response.responseText;
+                    			Ext.Msg.alert('Opération interdite', message);
+                    		}
+                        });
                     }
                 }
             });	

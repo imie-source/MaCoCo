@@ -13,7 +13,7 @@ Ext.define('ExtJsMVC.model.referentiel.ActiviteType',
 	   
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/activitetype/',
+	    	url: './webapi/activitetype/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

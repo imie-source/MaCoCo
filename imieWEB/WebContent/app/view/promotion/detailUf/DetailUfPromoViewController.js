@@ -46,7 +46,7 @@ Ext.define('ExtJsMVC.view.promotion.detailUf.DetailUfPromoViewController', {
 				
 				if(itemSelected.get('ufpId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/uniteformationpromotion/'.concat(itemSelected.get('ufpId'));	
+					myUrl = './webapi/uniteformationpromotion/'.concat(itemSelected.get('ufpId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -65,7 +65,7 @@ Ext.define('ExtJsMVC.view.promotion.detailUf.DetailUfPromoViewController', {
 		uf.set('ufpObjectifs', itemSelected.get('ufpObjectifs'));
 		if(vm !== undefined){
 			myStore.sync({
-				callback : function(){
+				success : function(){
 					var tree =  Ext.ComponentQuery.query('promo-Arbre2')[0];
 					tree.getSelectionModel().select(uf);
 					
@@ -86,10 +86,19 @@ Ext.define('ExtJsMVC.view.promotion.detailUf.DetailUfPromoViewController', {
 							tree.expandPath(uf.parentNode.getPath());
 					    },
 					});
-				}
+				},
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
 			});	
 		} else{
-			myStore.sync();
+			myStore.sync({
+				failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+			});
 		}
 		
 	},

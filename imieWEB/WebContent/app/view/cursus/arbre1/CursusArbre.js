@@ -3,7 +3,7 @@ Ext.define('ExtJsMVC.view.cursus.arbre1.CursusArbre',
 		{
 			extend : 'Ext.tree.Panel',
 			xtype  : 'cursus-Arbre',
-			title : 'liste des cursus',
+			title : 'liste des promotions',
 			bind :{
 				store: '{firstTreeStore}'
 			},

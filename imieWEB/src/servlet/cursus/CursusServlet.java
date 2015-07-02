@@ -143,6 +143,42 @@ public class CursusServlet
 		reponse.add(cursus);
 		return Response.ok(reponse).build();
 	}
+	
+	@GET()
+	@Path("/{id}/{string}")
+	public Response getCursusRoot(@PathParam("id") Integer id ) 
+	{
+
+		Cursus cursus = cursusService.findById(Integer.valueOf(id));
+
+		cursus.setUniteFormationCursuses(new ArrayList<UniteFormationCursus>());
+		
+		for (Periode periode : cursus.getPeriodes())
+		{
+			periode.setCursus(null);
+		}
+		
+		
+		for (UniteFormationCursus uf : cursus.getUniteFormationCursuses()) 
+		{
+			uf.setCursus(null);
+			uf.setModuleCursuses(null);
+		}
+		
+		for (Promotion promo : cursus.getPromotions()) 
+		{
+			promo.setCursus(null);
+			promo.setUniteFormationPromotions(null);
+			promo.setPeriodes(new ArrayList<PeriodePromotion>());
+			for(PeriodePromotion periodePromo : promo.getPeriodes()){
+				periodePromo.setPromotion(null);
+			}
+		}
+		
+		ArrayList<Cursus> reponse = new ArrayList<Cursus>();
+		reponse.add(cursus);
+		return Response.ok(reponse).build();
+	}
 
 	@POST()
 	public Response add(Cursus cursus) 

@@ -9,6 +9,10 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowModel', {
     	enseignementStore:{
     		model:'ExtJsMVC.model.enseignement.EnseignementModel',
     		autoLoad:true,
+    		sorters:[{
+    			property:'entNom',
+    			direction:'ASC'
+    		}],
     	},
     },
     formulas:{

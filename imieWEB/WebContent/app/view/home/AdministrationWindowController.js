@@ -36,12 +36,32 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     onDblclick : function(grid,record,tr,rowIndex,e){
     	e.stopEvent();
     	if (grid.up('#voletCursus')!==undefined){
-    		var firstTree = Ext.ComponentQuery.query('cursus-Arbre')[0];
-			console.log('onCollapse');
-			console.log(record);
-			firstTree.getSelectionModel().select(record);
-			var home = grid.up('view-administrationWindow');
-	    	home.toggleCollapse();
+    		var globalView = Ext.ComponentQuery.query('view-cursusView')[0];
+    		
+    		
+    		var vm = globalView.getViewModel();
+    		var myStore = vm.getStore('firstTreeStore');
+    		var myUrl = './webapi/cursus/'.concat(record.get('curId'));
+    		myStore.load({
+    			url : myUrl,
+    			callback : function(){
+    				var switchview = Ext.ComponentQuery.query('#firstTree')[0];
+    	    		if(switchview.getChildEls())
+    		    	   {
+    			    	   switchview.removeAll();
+    		    	   }
+    			       switchview.add({xtype : 'cursus-Arbre'});
+    	    		var firstTree = Ext.ComponentQuery.query('cursus-Arbre')[0];
+    				console.log('onCollapse');
+    				console.log(record);
+    				firstTree.getSelectionModel().select(record);
+    				var home = grid.up('view-administrationWindow');
+    		    	home.toggleCollapse();
+    			},
+    			
+    			
+    		})
+    		
     	}else if (grid.up('#voletRef')!==undefined){
     		this.setRefFilter(grid,record);
     	}
@@ -91,12 +111,22 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
     	
     	if(btn.up('cursusAdminWindowForm') !== undefined) {
 	    	var cursusStore = this.getViewModel().getStore('cursuses');
-	    	cursusStore.sync();  
+	    	cursusStore.sync({
+	    		failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+	    	});  
     		btn.up('cursusAdminWindowForm').hide();
 	    		    	
     	}else if(btn.up('refAdminWindowForm')!==undefined) {
     		var refStore =this.getViewModel().getStore('referentiels');
-	    	refStore.sync();    		
+	    	refStore.sync({
+	    		failure : function(batch){
+	    			var message = batch.operations[0].error.response.responseText;
+	    			Ext.Msg.alert('Erreur', message);
+	    		}
+	    	});    		
     		btn.up('refAdminWindowForm').hide();
     	}	
     	
@@ -277,7 +307,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
                         console.log(refSelected.getData());
                         var store = vm.getStore('referentiels');
                         store.remove(refSelected);
-                        store.sync();
+                        store.sync({
+                        	failure : function(batch){
+                    			var message = batch.operations[0].error.response.responseText;
+                    			Ext.Msg.alert('Erreur', message);
+                    		}
+                        });
                     }
                 }
             });
@@ -303,7 +338,12 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowController', {
                         console.log(cursusSelected.getData());
                         var store = vm.getStore('cursuses');
                         store.remove(cursusSelected);
-                        store.sync();
+                        store.sync({
+                        	failure : function(batch){
+                    			var message = batch.operations[0].error.response.responseText;
+                    			Ext.Msg.alert('Erreur', message);
+                    		}
+                        });
                     }
                 }
             });    	

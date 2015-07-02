@@ -23,7 +23,7 @@ Ext.define('ExtJsMVC.model.promotion.CoursPromotionModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/courspromotion',
+	    url: './webapi/courspromotion',
     	writer : 
     	{
     		nameProperty: 'mapping',
@@ -38,6 +38,7 @@ Ext.define('ExtJsMVC.model.promotion.CoursPromotionModel',
                     data.children = undefined;
                     data.text = undefined;
                     data.savoirs = undefined;
+                   
                     return data;
                 },
                 scope: this

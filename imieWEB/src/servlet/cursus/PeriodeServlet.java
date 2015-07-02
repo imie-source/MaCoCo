@@ -18,8 +18,11 @@ import javax.ws.rs.core.Response;
 
 import cursus.CursusServiceLocal;
 import cursus.PeriodeCursusServiceLocal;
+import entities.cursus.CoursCursus;
 import entities.cursus.Cursus;
+import entities.cursus.ModuleCursus;
 import entities.cursus.Periode;
+import entities.cursus.UniteFormationCursus;
 
 @Stateless
 @Path("/periode")
@@ -52,6 +55,45 @@ public class PeriodeServlet
 			periode.getCursus().setPeriodes(null);
 			periode.getCursus().setPromotions(null);
 			periode.getCursus().setUniteFormationCursuses(null);
+			periodeList.add(periode);
+		}
+		
+	    return Response.ok(periodeList).build();
+	}
+	
+	@GET()
+	@Path("/schemapedagogique/{id}")
+	public Response getForSchemaByCursusId(@PathParam("id") Integer id)
+	{
+		Cursus cursus = cursusService.findById(id);
+		
+		
+		
+		
+		
+		List <Periode> periodeList = new ArrayList<Periode>();
+		for (Periode periode : cursus.getPeriodes()) {
+			periode.getCursus().setPeriodes(null);
+			periode.getCursus().setPromotions(null);
+			
+			List<UniteFormationCursus> ufList = new ArrayList<UniteFormationCursus>();
+			for (UniteFormationCursus uniteFormationCursus : cursus.getUniteFormationCursuses()) {
+			
+				List<ModuleCursus> moduleList = new ArrayList<ModuleCursus>();
+				for (ModuleCursus moduleCursus : uniteFormationCursus.getModuleCursuses()) {
+					
+					List<CoursCursus> coursList = new ArrayList<CoursCursus>();
+					for (CoursCursus coursCursus : moduleCursus.getCoursCursuses()) {
+						
+						
+						
+					}
+					
+				}
+				
+			}
+			
+			periode.getCursus().setUniteFormationCursuses(cursus.getUniteFormationCursuses());
 			periodeList.add(periode);
 		}
 		

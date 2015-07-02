@@ -13,7 +13,7 @@ Ext.define('ExtJsMVC.model.promotion.PromotionModel',
 					associationKey: 'uniteFormationPromotions'},	
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/promotion/',
+	    	url: './webapi/promotion/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

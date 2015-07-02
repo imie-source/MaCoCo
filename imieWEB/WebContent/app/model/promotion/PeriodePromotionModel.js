@@ -13,7 +13,7 @@ Ext.define('ExtJsMVC.model.promotion.PeriodePromotionModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/periodepromotion',
+	    url: './webapi/periodepromotion',
     	writer : 
     	{
     		nameProperty: 'mapping',

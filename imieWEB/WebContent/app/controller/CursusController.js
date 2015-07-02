@@ -298,7 +298,7 @@ Ext.define('ExtJsMVC.controller.CursusController',
 				//Ordonnancement
 				var storeOrdo = this.getCoursByCursusStore();
 				
-				var myUrl = '/imieWEB/webapi/courscursus/cursus/'.concat(record.get('curId'));
+				var myUrl = './webapi/courscursus/cursus/'.concat(record.get('curId'));
 //				var myUrl = storeOrdo.getProxy().concat(record.get('curId'));
 				storeOrdo.load({url : myUrl});
 				console.log('storeOrdo');

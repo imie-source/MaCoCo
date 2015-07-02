@@ -16,7 +16,7 @@ Ext.define('ExtJsMVC.model.cursus.ModuleCursusModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/modulecursus',
+	    url: './webapi/modulecursus',
     	writer : 
     	{
     		nameProperty: 'mapping',

@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.model.referentiel.Savoir',
 		         
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/savoir/',
+	    	url: './webapi/savoir/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

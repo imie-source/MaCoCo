@@ -209,7 +209,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				myStore = vm.getStore('coursByCursus');
 					if(itemSelected.get('cocId')!== undefined){
 						 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-						myUrl = '/imieWEB/webapi/courscursus/'.concat(itemSelected.get('cocId'));	
+						myUrl = './webapi/courscursus/'.concat(itemSelected.get('cocId'));	
 						myStore.load({
 							url : myUrl,
 							callback : function(records){
@@ -227,7 +227,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				myStore = vm.getStore('moduleStore');
 				if(itemSelected.get('mocId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/modulecursus/'.concat(itemSelected.get('mocId'));	
+					myUrl = './webapi/modulecursus/'.concat(itemSelected.get('mocId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -246,7 +246,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				
 				if(itemSelected.get('ufcId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/uniteformationcursus/'.concat(itemSelected.get('ufcId'));	
+					myUrl = './webapi/uniteformationcursus/'.concat(itemSelected.get('ufcId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -284,7 +284,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 					/*	var secondTree = Ext.ComponentQuery.query('cursus-Arbre2')[0];
 						console.log('refresh tree');
 						me.getViewModel().getStore('rootCursuses').load({
-							url : '/imieWEB/webapi/cursus/2001',
+							url : './webapi/cursus/2001',
 							callback : function(){
 								var secondTree = Ext.ComponentQuery.query('#secondTree')[0];
 								if(secondTree.getChildEls())
@@ -333,7 +333,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				myStore = vm.getStore('savoirStore');
 					if(itemSelected.get('savId')!== undefined){
 						 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-						myUrl = '/imieWEB/webapi/savoir/'.concat(itemSelected.get('savId'));	
+						myUrl = './webapi/savoir/'.concat(itemSelected.get('savId'));	
 						myStore.load({
 							url : myUrl,
 							callback : function(records){
@@ -352,7 +352,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				myStore = vm.getStore('compProStore');
 				if(itemSelected.get('comId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/competencepro/'.concat(itemSelected.get('comId'));	
+					myUrl = './webapi/competencepro/'.concat(itemSelected.get('comId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -371,7 +371,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				
 				if(itemSelected.get('actId')!== undefined){
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/activitetype/'.concat(itemSelected.get('actId'));	
+					myUrl = './webapi/activitetype/'.concat(itemSelected.get('actId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
@@ -643,7 +643,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 				
 				//Ordonnancement
 				var storeOrdo = this.getViewModel().getStore('coursByCursus');
-				var myUrl = '/imieWEB/webapi/courscursus/cursus/'.concat(record.get('curId')).concat('/root');
+				var myUrl = './webapi/courscursus/cursus/'.concat(record.get('curId')).concat('/root');
 				storeOrdo.load({url : myUrl});
 				console.log('storeOrdo');
 				console.log(storeOrdo);
@@ -1297,7 +1297,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer le cours',
 		    			handler:function(){
 		    				myStore = vm.getStore('coursByCursus');
-		    				myUrl = '/imieWEB/webapi/courscursus/'.concat(record.get('cocId'));	
+		    				myUrl = './webapi/courscursus/'.concat(record.get('cocId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
@@ -1318,7 +1318,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer le module',
 		    			handler:function(){
 		    				myStore = vm.getStore('moduleStore');
-		    				myUrl = '/imieWEB/webapi/modulecursus/'.concat(record.get('mocId'));	
+		    				myUrl = './webapi/modulecursus/'.concat(record.get('mocId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
@@ -1349,7 +1349,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer l\'unité de formation',
 		    			handler:function(){
 		    				myStore = vm.getStore('ufStore');
-		    				myUrl = '/imieWEB/webapi/uniteformationcursus/'.concat(record.get('ufcId'));	
+		    				myUrl = './webapi/uniteformationcursus/'.concat(record.get('ufcId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
@@ -1411,7 +1411,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer le savoir',
 		    			handler:function(){
 		    				myStore = vm.getStore('savoirStore');
-		     				myUrl = '/imieWEB/webapi/savoir/'.concat(record.get('savId'));	
+		     				myUrl = './webapi/savoir/'.concat(record.get('savId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
@@ -1432,7 +1432,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer la compétence pro',
 		    			handler:function(){
 		    				myStore = vm.getStore('compProStore');
-		    				myUrl = '/imieWEB/webapi/competencepro/'.concat(record.get('comId'));	
+		    				myUrl = './webapi/competencepro/'.concat(record.get('comId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){
@@ -1463,7 +1463,7 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewController', {
 		    			text : 'supprimer l\'activité type',
 		    			handler:function(){
 		    				myStore = vm.getStore('actTypeStore');
-		    				myUrl = '/imieWEB/webapi/activitetype/'.concat(record.get('actId'));	
+		    				myUrl = './webapi/activitetype/'.concat(record.get('actId'));	
 							myStore.load({
 								url : myUrl,
 								callback : function(){

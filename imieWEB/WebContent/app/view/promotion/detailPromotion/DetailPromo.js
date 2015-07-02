@@ -33,7 +33,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromo', {
         {
         	id : 'seleniumDetailPromoPrint',
             xtype : 'button',
-            text : 'Imprimer',
+            text : 'Imprimer schéma pédagogique',
             itemId : 'Print',
             handler :'onPrintClick',
         },

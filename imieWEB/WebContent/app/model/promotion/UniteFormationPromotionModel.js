@@ -15,7 +15,7 @@ Ext.define('ExtJsMVC.model.promotion.UniteFormationPromotionModel',
      proxy: 
      {
          type: 'rest',
-         url: '/imieWEB/webapi/uniteformationpromotion/',
+         url: './webapi/uniteformationpromotion/',
     	writer : 
     	{
     		nameProperty: 'mapping',

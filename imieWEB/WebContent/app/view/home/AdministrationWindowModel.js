@@ -9,11 +9,19 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowModel', {
     	cursuses:{
     		model:'ExtJsMVC.model.cursus.CursusModel',
     		autoLoad:true,
+    		sorters:[{
+    			property:'text',
+    			direction:'ASC'
+    		}],
     	},
 
     	referentiels:{
     		model:'ExtJsMVC.model.referentiel.Referentiel',
     		autoLoad:true,
+    		sorters:[{
+    			property:'text',
+    			direction:'ASC'
+    		}],
     	}
     },
     formulas:{

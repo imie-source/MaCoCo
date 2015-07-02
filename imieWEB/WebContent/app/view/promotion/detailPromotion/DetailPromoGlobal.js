@@ -33,7 +33,7 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoGlobal', {
 		        {
 		        	id : 'seleniumDetailPromoOrdoPrint',
 		            xtype : 'button',
-		            text : 'Imprimer',
+		            text : 'Imprimer ruban pédagogique',
 		            itemId : 'printOrdo',
 		            handler : 'onPrintOrdoClick'
 		

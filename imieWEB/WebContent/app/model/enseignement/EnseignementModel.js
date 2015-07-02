@@ -14,7 +14,7 @@ Ext.define('ExtJsMVC.model.enseignement.EnseignementModel',
 		hasMany:  {model: 'ExtJsMVC.model.enseignement.EnseignementModel', associationKey: 'prerequis'},
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/enseignement/',
+	    	url: './webapi/enseignement/',
 	    	type : 'rest',
 	    	writer : 
 	    	{

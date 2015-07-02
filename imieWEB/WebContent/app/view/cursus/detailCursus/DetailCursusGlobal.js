@@ -31,7 +31,7 @@ Ext.define('ExtJsMVC.view.cursus.detailCursus.DetailCursusGlobal', {
 		        {
 		        	id : 'seleniumDetailCursusOrdoPrint',
 		            xtype : 'button',
-		            text : 'Imprimer',
+		            text : 'Imprimer ruban pédagogique',
 		            itemId : 'printOrdo',
 		            handler : 'onPrintOrdoClick',
 		

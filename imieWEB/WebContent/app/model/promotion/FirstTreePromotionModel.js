@@ -10,7 +10,7 @@ Ext.define('ExtJsMVC.model.promotion.FirstTreePromotionModel',
 		            
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/promotion/',
+	    	url: './webapi/promotion/',
 	    	type : 'rest',
 	    	
 	    	//TODO: expliquer implementation writer (pollution champs arbre)

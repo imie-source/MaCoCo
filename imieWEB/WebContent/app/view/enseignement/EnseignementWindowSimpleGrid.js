@@ -6,13 +6,13 @@ Ext.define('ExtJsMVC.view.enseignement.EnseignementWindowSimpleGrid',{
 	],
 
 	modelValidation:true,
-	autoScroll:true,
+	//autoScroll:true,
 	bind:{
 		store:'{enseignementStore}',
 	},
 	hideHeaders : true,
 	width : '100%',
-	height : '100%',
+	//height : '100%',
 	layout: 'fit',
 	columns:[{
 		text:'Enseignements',

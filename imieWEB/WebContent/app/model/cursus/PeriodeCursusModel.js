@@ -14,7 +14,7 @@ Ext.define('ExtJsMVC.model.cursus.PeriodeCursusModel',
 	proxy: 
 	{
 	    type: 'rest',
-	    url: '/imieWEB/webapi/periode',
+	    url: './webapi/periode',
     	writer : 
     	{
     		nameProperty: 'mapping',

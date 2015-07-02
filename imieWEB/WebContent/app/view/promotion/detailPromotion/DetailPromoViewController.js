@@ -53,12 +53,17 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 		var myStore = vm.getStore('promotionStore'); 
 				
 				 // on charge dans le store l'item correspondant à l'item selectionné dans l'arbre 2
-					myUrl = '/imieWEB/webapi/promotion/'.concat(itemSelected.get('proId'));	
+					myUrl = './webapi/promotion/'.concat(itemSelected.get('proId'));	
 					myStore.load({
 						url : myUrl,
 						callback : function(records){
 							records[0].set('text', itemSelected.get('text'));
-							myStore.sync();
+							myStore.sync({
+								failure : function(batch){
+					    			var message = batch.operations[0].error.response.responseText;
+					    			Ext.Msg.alert('Erreur', message);
+					    		}
+							});
 							var arbre =  Ext.ComponentQuery.query('cursus-Arbre')[0];
 							arbre.getSelectionModel().select(records[0]);
 							vm.getStore('firstTreeStore').load();
@@ -99,7 +104,12 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 				element.set('copOrdre',index+1);	
 		});
 		
-		coursStore.sync(); 
+		coursStore.sync({
+			failure : function(batch){
+    			var message = batch.operations[0].error.response.responseText;
+    			Ext.Msg.alert('Erreur', message);
+    		}
+		}); 
 		
 	},
 	
@@ -264,7 +274,12 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 						html : module.mopIntitule
 					};
 					var enteteModule = dh.append(blocModule, child);
-
+					// nb jours module
+					var child = {
+						tag : 'div',
+						cls : 'bloc-jour'
+					};
+					var blocInfoModuleJour = dh.append(blocModule, child);
 					// nb heures module
 					var child = {
 						tag : 'div',
@@ -272,12 +287,6 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 					};
 					var blocInfoModuleHeure = dh.append(blocModule, child);
 
-					// nb jours module
-					var child = {
-						tag : 'div',
-						cls : 'bloc-jour'
-					};
-					var blocInfoModuleJour = dh.append(blocModule, child);
 					
 					// blocs vides pour rendu CSS
 					var child = {
@@ -374,9 +383,8 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 
 			});
 
-			// Total des heures
-			// var sommeHeure =0;
-			// Total des heures de cours
+			sommeJours = sommeJours.toString().concat(' j');
+			sommeHeures = sommeHeures.toString().concat(' h');
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeHeure'
@@ -385,9 +393,15 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeHeureTxt',
-				html : 'Total des heures de cours en centre :'
+				html : 'Total des jours et heures de cours en centre :'
 			};
 			var blocSommeHeureTxt = dh.append(blocSommeHeure, child);
+			var child = {
+					tag : 'div',
+					cls : 'bloc-sommeJoursNb',
+					html : sommeJours
+				};
+			var blocSommeJourNb = dh.append(blocSommeHeure, child);
 			var child = {
 				tag : 'div',
 				cls : 'bloc-sommeHeureNb',

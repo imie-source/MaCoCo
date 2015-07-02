@@ -13,7 +13,8 @@ Ext.define('ExtJsMVC.model.cursus.CursusModel',
 	   
 	    proxy: 
 		{
-	    	url: '/imieWEB/webapi/cursus/',
+	    	
+	    	url: './webapi/cursus/',
 	    	type : 'rest',
 	    	
 	    	//TODO: expliquer implementation writer (pollution champs arbre)

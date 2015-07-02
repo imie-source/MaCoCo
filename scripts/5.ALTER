@@ -1,5 +1,5 @@
 ALTER TABLE public.Cours_Cursus
 	ALTER COLUMN  coc_duree TYPE DOUBLE PRECISION USING (trim(coc_duree)::DOUBLE PRECISION);
 ALTER TABLE public.Cours_Promo	
-	ALTER COLUMN  cop_duree TYPE DOUBLE PRECISION USING (trim(coc_duree)::DOUBLE PRECISION);
+	ALTER COLUMN  cop_duree TYPE DOUBLE PRECISION USING (trim(cop_duree)::DOUBLE PRECISION);
 

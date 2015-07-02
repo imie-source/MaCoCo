@@ -54,7 +54,7 @@ public class CoursCursus implements Serializable {
 //	private String cocCursus;
 
 	@Column(name="coc_duree")
-	private Integer cocDuree;
+	private Double cocDuree;
 
 	@Column(name="coc_evaluation", length=500)
 	private String cocEvaluation;
@@ -98,11 +98,11 @@ public class CoursCursus implements Serializable {
 		this.cocCommentaires = cocCommentaires;
 	}
 
-	public Integer getCocDuree() {
+	public Double getCocDuree() {
 		return this.cocDuree;
 	}
 
-	public void setCocDuree(Integer cocDuree) {
+	public void setCocDuree(Double cocDuree) {
 		this.cocDuree = cocDuree;
 	}
 

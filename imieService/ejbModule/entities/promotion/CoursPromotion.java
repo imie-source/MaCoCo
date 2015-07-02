@@ -45,7 +45,7 @@ public class CoursPromotion implements Serializable {
 
 
 	@Column(name="cop_duree")
-	private Integer copDuree;
+	private Double copDuree;
 
 	@Column(name="cop_evaluation", length=500)
 	private String copEvaluation;
@@ -94,11 +94,11 @@ public class CoursPromotion implements Serializable {
 
 
 
-	public Integer getCopDuree() {
+	public Double getCopDuree() {
 		return this.copDuree;
 	}
 
-	public void setCopDuree(Integer copDuree) {
+	public void setCopDuree(Double copDuree) {
 		this.copDuree = copDuree;
 	}
 

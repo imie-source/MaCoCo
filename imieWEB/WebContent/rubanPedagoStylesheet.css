@@ -30,7 +30,8 @@ table, thead, tr, th,td{
 
 .bloc-title
 {
-	background-color : #00CCFF;
+	background-color : #48b9c7;
+	color : white;
 	margin : 0px 1px 2px 0px;
 	font-size: 30px;
 	text-align: center;
@@ -55,22 +56,22 @@ table, thead, tr, th,td{
 .column-anneeRp
 {
 	width: 100%;	
-	background-color: #FFFF00;
+	background-color: #fdb515;
 }
 .column-ecfRp
 {
 	width: 15%;
-	background-color: #FFFF00;
+	background-color: #fdb515;
 }
 .column-coursRp
 {
 	width: 69%;
-	background-color: #FFFF00;
+	background-color: #fdb515;
 }
 .column-jourRp
 {
 	width: 15%;
-	background-color: #FFFF00;
+	background-color: #fdb515;
 }
 
 

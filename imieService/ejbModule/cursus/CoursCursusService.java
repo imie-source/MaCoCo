@@ -1,5 +1,6 @@
 package cursus;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -74,12 +75,9 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 	@Override
 	public void delete(CoursCursus coursCursus) 
 	{
+		
 		coursCursus = em.merge(coursCursus);
-		/*List<Savoir> savoirs = coursCursus.getSavoirs();
-		for (Savoir savoir : savoirs) {
-			RCourscursusSavoir rCourscursusSavoir = em.find(RCourscursusSavoir.class, savoir.getSavId());
-			deleteRCourscursusSAvoir(rCourscursusSavoir);
-		}*/
+		
 		
 		Query queryAllRCoursSavoir= em.createNamedQuery("RCourscursusSavoir.findAll");
 		@SuppressWarnings("unchecked")
@@ -107,20 +105,7 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 			coursPromotionService.delete(coursPromotion);
 		}
 		
-		
-		/*List<Promotion> promotions = coursCursus.getModuleCursus().getUniteFormationCursus().getCursus().getPromotions();
-		for (Promotion promotion : promotions) {
-			Query queryAllCoursPromotion = em.createNamedQuery("CoursPromotion.findAllByPromotion");
-			queryAllCoursPromotion.setParameter("idPromotion", promotion.getProId());
-			List <CoursPromotion> coursPromotions = queryAllCoursPromotion.getResultList();
-			
-			for (CoursPromotion coursPromotion : coursPromotions) {
-				if(coursCursus.getCocId()==coursPromotion.getCocId()){
-					coursPromotion = em.merge(coursPromotion);
-					em.remove(coursPromotion);
-				}
-			}	
-		}*/
+	
 		em.remove(coursCursus);
 	}
 	
@@ -160,30 +145,5 @@ public class CoursCursusService implements CoursCursusServiceLocal {
 		});
 		return res;
 	}
-	
-
-
-//	@Override
-//	public List<CoursCursus> findByModuleId(Integer id) 
-//	{
-//		CriteriaBuilder cb = em.getCriteriaBuilder();
-//
-//		CriteriaQuery<CoursCursus> q = cb.createQuery(CoursCursus.class);
-//		Root<CoursCursus> c = q.from(CoursCursus.class);
-//		Join<CoursCursus, ModuleCursus> p = c.join("cours", JoinType.LEFT);
-//
-//
-//		//initialisation de la liste de criteria
-//		List<Predicate> criteria = new ArrayList<Predicate>();
-//		criteria.add(cb.equal(p.get("mocId"),id));
-//
-//		//application de la liste de criterial
-//		q.where(criteria.toArray(new Predicate[] {}));
-//		//éxecution de la requête
-//		List<CoursCursus> result = em.createQuery(q)
-//				.getResultList();
-//
-//		return result;
-//	}
 
 }

@@ -46,37 +46,43 @@ table, thead, tr, th,td{
 {
 	width: 34.6%;	
 	background-color: #fdb515;
+	color : white;
 }
 .column-module
 {
 	width: 32%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-heure
 {
 	width: 5%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-jour
 {
 	width: 4%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-infoeval{
 	width: 10%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-infomodule
 {
 	width: 13%;
 	background-color: #fdb515;
+	color : white;
 }
 
 
 .bloc-global{
 		margin : 0px 0px 2px 0px;
 		padding: :0;
-	background-color: #e4e1e1;
+	background-color: #f2f0f0;
 	
 }
 .bloc-reac
@@ -85,6 +91,11 @@ table, thead, tr, th,td{
 	display: inline-block;
 	vertical-align: top;
 	margin : 0px 1.75px 0px 0px;
+	background-color: #e4e1e1;
+}
+
+img{
+	margin-right: 100%;
 }
 
 .entete-uf
@@ -93,7 +104,13 @@ table, thead, tr, th,td{
 	padding : 0;
 	width: 99.7%;
 	background-color: #57BC74;
-	height: 22px;
+	color : white;
+	height: 26px;
+	font-size: 15px;
+}
+
+.span-periode{
+	margin-left: 100px;
 }
 
 .bloc-savoir
@@ -236,6 +253,7 @@ table, thead, tr, th,td{
 	width: 32%;
 	margin-left: 34.7%;
 	background-color: #57BC74;
+	color : white;
 	
 }
 
@@ -247,6 +265,7 @@ table, thead, tr, th,td{
 	text-align : center;
 	width: 5%;
 	background-color: #57BC74;
+	color : white;
 	
 }
 .bloc-sommeHeureNb{	
@@ -257,6 +276,7 @@ table, thead, tr, th,td{
 	text-align : center;
 	width: 5%;
 	background-color: #57BC74;
+	color : white;
 	
 }
 

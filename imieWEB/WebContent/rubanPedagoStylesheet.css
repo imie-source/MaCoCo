@@ -57,21 +57,25 @@ table, thead, tr, th,td{
 {
 	width: 100%;	
 	background-color: #fdb515;
+	color : white;
 }
 .column-ecfRp
 {
 	width: 15%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-coursRp
 {
 	width: 69%;
 	background-color: #fdb515;
+	color : white;
 }
 .column-jourRp
 {
 	width: 15%;
 	background-color: #fdb515;
+	color : white;
 }
 
 

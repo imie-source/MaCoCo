@@ -82,9 +82,13 @@ public class EnseignementService implements EnseignementServiceLocal {
 
 	@Override
 	public void delete(Enseignement enseignement) {
+		
+		enseignement.setPrerequis(new ArrayList<Enseignement>());
 		enseignement = em.merge(enseignement);
 
-		List<Enseignement> prerequisList = enseignement.getPrerequis();
+		//List<Enseignement> prerequisList = enseignement.getPrerequis();
+		
+	/*
 		if (prerequisList != null) {
 			RPrerequisEnseignementPK pk = new RPrerequisEnseignementPK();
 			pk.setEntId(enseignement.getEntId());
@@ -104,7 +108,7 @@ public class EnseignementService implements EnseignementServiceLocal {
 				em.remove(rPrerequisEnseignement);
 			}
 		}
-
+*/
 		em.remove(enseignement);
 	}
 

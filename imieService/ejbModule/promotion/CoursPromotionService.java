@@ -1,5 +1,6 @@
 package promotion;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -69,6 +70,7 @@ public class CoursPromotionService implements CoursPromotionServiceLocal {
 	@Override
 	public void delete(CoursPromotion coursPromotion) 
 	{
+		
 		coursPromotion = em.merge(coursPromotion);
 		
 		Query queryAllRCoursSavoir= em.createNamedQuery("RCourspromotionSavoir.findAll");

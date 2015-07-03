@@ -27,6 +27,6 @@ ear {
         description = "Maitrise des Cours et des Compétences" // defaults to project.description
         //webModule("imieWEB.war", "/imieWEB") // wouldn't deploy since my.war isn't a deploy depencency
         module("imieService-${project.version}.jar", "ejb")
-	webModule("imieWEB-${project.version}.war", "imieWEB")
+	webModule("imieWEB-${project.version}.war", "MaCoCo")
     }
 }

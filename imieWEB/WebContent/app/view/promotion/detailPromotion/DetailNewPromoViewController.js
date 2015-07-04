@@ -25,8 +25,9 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailNewPromoViewController
 		promo.set('text', itemSelected.get('text'));
 		myStore.sync({
 			success : function(){
-				
+				var myUrl = './webapi/cursus/'.concat(promo.get('cursus').curId);
 				vm.getStore('firstTreeStore').load({
+					url : myUrl,
 					success : function(){
 					
 						var tree =  Ext.ComponentQuery.query('cursus-Arbre')[0];

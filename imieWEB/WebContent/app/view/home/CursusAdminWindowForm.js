@@ -25,6 +25,7 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 				fieldLabel:'Cursus',
 				bind:'{currentCursus.text}',
 				xtype:'textfield',
+				id : 'seleniumTextCurHome'
 
 
 			},
@@ -37,6 +38,7 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 					model:'ExtJsMVC.model.referentiel.Referentiel',
 					autoLoad:true
 				},
+				id : 'seleniumComboBoxFormCurHome',
 
 				xtype:'combobox',
 				queryMode : 'remote',
@@ -53,7 +55,8 @@ Ext.define('ExtJsMVC.view.home.CursusAdminWindowForm',{
 			disabled:true,
 			bind:{
 				disabled:'{!cursusStatus.dirtyAndValid}'
-			}
+			},
+			id : 'seleniumBtnFormCurHome'
 		},
 		{
 			text:'Annuler',

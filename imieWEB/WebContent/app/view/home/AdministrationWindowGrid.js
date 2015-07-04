@@ -19,14 +19,17 @@ Ext.define('ExtJsMVC.view.home.AdministrationWindowGrid',{
 		    '->',
 		    {
 				text : '+',
+				cls : 'addRecToolBarSelenium',
 				itemId:'addRecToolBar',
 				handler:'onAdd'
 			},{
 				text : 'o',
+				cls : 'updateRecToolBarSelenium',
 				itemId:'updateRecToolBar',
 				handler:'onUpdate'
 			},{
 				text : '-',
+				cls : 'removeRecToolBarSelenium',
 				itemId:'RecToolBar',
 				handler:'onRemove'
 			},

@@ -23,7 +23,8 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 	items:[{
 				fieldLabel:'Référentiel',
 				bind:'{currentReferentiel.text}',
-				xtype:'textfield'
+				xtype:'textfield',
+				id : 'seleniumTextRefHome'
 			
 		}],
 		
@@ -34,7 +35,8 @@ Ext.define('ExtJsMVC.view.home.RefAdminWindowForm',{
 			disabled:true,
 			bind:{
 				disabled:'{!refStatus.dirtyAndValid}'
-			}
+			},
+			id : 'seleniumBtnRefFormHome'
 		},
 		{
 			text:'Annuler',

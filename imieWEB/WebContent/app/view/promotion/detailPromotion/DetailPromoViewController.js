@@ -66,7 +66,10 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.DetailPromoViewController', 
 							});
 							var arbre =  Ext.ComponentQuery.query('cursus-Arbre')[0];
 							arbre.getSelectionModel().select(records[0]);
-							vm.getStore('firstTreeStore').load();
+							var myUrl = './webapi/cursus/'.concat(records[0].get('cursus').curId);
+							vm.getStore('firstTreeStore').load({
+								url : myUrl,
+							});
 						}
 					});	
 				

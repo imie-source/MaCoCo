@@ -1,5 +1,7 @@
 package cursus;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import entities.cursus.Periode;
@@ -15,5 +17,6 @@ public interface PeriodeCursusServiceLocal
 	void create(Periode periode);
 
 	Periode update(Periode periode);
-
+	
+	List<Periode> buildSchemaPedago(Integer id);
 }

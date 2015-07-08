@@ -143,6 +143,11 @@ Ext.define('ExtJsMVC.view.cursus.CursusViewModel', {
     	periodePromotionStore : {
     		model:'ExtJsMVC.model.promotion.PeriodePromotionModel',
     	},
+    	
+    	//utiliser pour la construction du schéma 
+    	periodePromotionSchemaStore : {
+    		model:'ExtJsMVC.model.promotion.PeriodePromotionModel',
+    	},
     },
     formulas:{
     	currentCursus:{

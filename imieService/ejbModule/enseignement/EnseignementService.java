@@ -144,11 +144,11 @@ public class EnseignementService implements EnseignementServiceLocal {
 					String ent = updatedEnt.getEntNom().toString();
 					String ent2 = entTree.get(1).getEntNom()
 							.toString();
-					String message = "L'enseignement "
+					String message = "L'enseignement \""
 							.concat(ent)
-							.concat(" ne peut avoir comme prérequis l'enseignement ")
+							.concat("\" ne peut avoir comme prérequis l'enseignement \"")
 							.concat(ent2)
-							.concat(". \n")
+							.concat("\". \n")
 							.concat("Veuillez supprimer ce prérequis avant d'enregistrer.");
 					Exception e = new Exception(message);
 					throw e;

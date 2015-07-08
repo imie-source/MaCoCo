@@ -1,5 +1,7 @@
 package promotion;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import entities.promotion.PeriodePromotion;
@@ -15,5 +17,7 @@ public interface PeriodePromotionServiceLocal
 	void create(PeriodePromotion periode);
 
 	PeriodePromotion update(PeriodePromotion periode);
+
+	List<PeriodePromotion> buildSchemaPedago(Integer id);
 
 }

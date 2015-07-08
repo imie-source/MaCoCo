@@ -23,7 +23,10 @@ Ext.define('ExtJsMVC.view.promotion.detailPromotion.PromotionViewGrid',{
 				dragText : 'Réordonner les cours',
 			},
 			getRowClass : function(record,index,rowParams,store){
-				var ret = 'heightOrdoGridRow'.concat(record.get('copDuree')).concat(' colorOrdoGridRow');
+				
+				var duree = record.get('copDuree')*100;
+
+				var ret = 'heightOrdoGridRow'.concat(duree).concat(' colorOrdoGridRow');
 
 				if(record.get('copOrdre')==0){
 					ret = ret.concat(' noOderedOrdoGridRow')

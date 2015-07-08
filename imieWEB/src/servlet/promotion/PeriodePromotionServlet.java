@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import promotion.PeriodePromotionServiceLocal;
 import promotion.PromotionServiceLocal;
+import entities.cursus.Periode;
 import entities.promotion.PeriodePromotion;
 import entities.promotion.Promotion;
 
@@ -54,6 +55,14 @@ public class PeriodePromotionServlet
 			periodeList.add(periode);
 		}
 		
+	    return Response.ok(periodeList).build();
+	}
+	
+	@GET()
+	@Path("/schemapedagogique/{id}")
+	public Response getForSchemaByCursusId(@PathParam("id") Integer id)
+	{
+		List <PeriodePromotion> periodeList = periodePromotionService.buildSchemaPedago(id);
 	    return Response.ok(periodeList).build();
 	}
 	

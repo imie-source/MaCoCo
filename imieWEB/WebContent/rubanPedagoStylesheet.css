@@ -118,7 +118,7 @@ table, thead, tr, th,td{
 	vertical-align: top;
 	width: 69%;
 	/*margin-left: 20%;*/
-	background-color: #FFFF00;
+	background-color: #fdb515;
 	
 }
 .bloc-sommeJourRpNb{	
@@ -128,7 +128,7 @@ table, thead, tr, th,td{
 	vertical-align: top;
 	text-align : center;
 	width: 10%;
-	background-color: #FFFF00;
+	background-color: #fdb515;
 	
 }
 
@@ -148,7 +148,7 @@ body{
 		font-size: 11px;
 }
 .bloc-tableRowData{
-	page-break-inside:avoid;
+	page-break-inside:inherit;
 	
 }	
 .entete-uf,.entete-module,.bloc-heure,.bloc-vide{

@@ -297,7 +297,7 @@ body{
 		-webkit-print-color-adjust: exact;
 		font-size: 11px;
 }
-.bloc-tableRowData{
+.bloc-tableRowData, .bloc-table{
 	page-break-inside:avoid;
 	
 }	
